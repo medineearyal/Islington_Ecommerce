@@ -1,0 +1,46 @@
+<div class="card bg-[var(--clr-gray-00)] w-[424px] shadow-sm p-8 rounded-sm">
+    <div class="card-body">
+        <h2 class="card-title block text-[var(--clr-gray-900)] text-center font-semibold text-xl">Sign in to your
+            account</h2>
+
+        <form action="{% url 'account_login' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                <label for="{{ form.login.id_for_label }}"
+                       class="block validator">
+                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.login.label }}</span>
+
+                    {{ form.login }}
+                </label>
+
+                <p class="validator-hint hidden">
+                    Enter valid email address
+                </p>
+            </div>
+
+            <div class="mb-5">
+                <label for="{{ form.password.id_for_label }}"
+                       class="block validator mb-2">
+                    <span class="flex justify-between block text-sm text-[var(--clr-gray-900)] mb-2">
+                        {{ form.password.label }}
+                        <a href="" class="text-[var(--clr-secondary-500)]">Forget Password</a>
+                    </span>
+
+                    {{ form.password }}
+                </label>
+
+                <p class="validator-hint hidden">
+                    Must be more than 8 characters, including
+                    <br/>At least one number <br/>At least one lowercase letter <br/>At least one uppercase letter
+                </p>
+            </div>
+
+            <button class="btn btn-shop-now">LOGIN</button>
+        </form>
+
+        <div class="divider divider-color-base-100 text-[var(--clr-gray-500)]">Don't Have Account?</div>
+
+        <a class="btn btn-outline btn-primary no-icon">CREATE ACCOUNT</a>
+    </div>
+</div>

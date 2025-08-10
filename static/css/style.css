@@ -1,0 +1,206 @@
+:root {
+    /* Colors */
+    --clr-gray-00: #FFFFFF;
+    --clr-gray-50: #F2F4F5;
+    --clr-gray-100: #E4E7E9;
+    --clr-gray-200: #C9CFD2;
+    --clr-gray-300: #ADB7BC;
+    --clr-gray-400: #929FA5;
+    --clr-gray-500: #77878F;
+    --clr-gray-600: #5F6C72;
+    --clr-gray-700: #475156;
+    --clr-gray-800: #303639;
+    --clr-gray-900: #191C1F;
+
+    --clr-primary-50: #FFF3EB;
+    --clr-primary-100: #FFE7D6;
+    --clr-primary-200: #FFCEAD;
+    --clr-primary-300: #FFB685;
+    --clr-primary-400: #FF9D5C;
+    --clr-primary-500: #FA8232;
+    --clr-primary-600: #DE732D;
+    --clr-primary-700: #99501F;
+    --clr-primary-800: #663514;
+    --clr-primary-900: #331B0A;
+
+    --clr-secondary-50: #EAF6FE;
+    --clr-secondary-100: #D5EDFD;
+    --clr-secondary-200: #ABDBFA;
+    --clr-secondary-300: #81C9F8;
+    --clr-secondary-400: #57B7F5;
+    --clr-secondary-500: #2DA5F3;
+    --clr-secondary-600: #2484C2;
+    --clr-secondary-700: #1B6392;
+    --clr-secondary-800: #124261;
+    --clr-secondary-900: #092131;
+
+    --clr-success-50: #EAF7E9;
+    --clr-success-100: #D5F0D3;
+    --clr-success-200: #ABE0A7;
+    --clr-success-300: #81D17C;
+    --clr-success-400: #57C150;
+    --clr-success-500: #2DB224;
+    --clr-success-600: #248E1D;
+    --clr-success-700: #1B6B16;
+    --clr-success-800: #12470E;
+    --clr-success-900: #092407;
+
+    --clr-warning-50: #FDFAE7;
+    --clr-warning-100: #FBF4CE;
+    --clr-warning-200: #F7E99E;
+    --clr-warning-300: #F3DE6D;
+    --clr-warning-400: #EFD33D;
+    --clr-warning-500: #EBC80C;
+    --clr-warning-600: #BCA00A;
+    --clr-warning-700: #8D7807;
+    --clr-warning-800: #5E5005;
+    --clr-warning-900: #2F2802;
+
+    --clr-danger-50: #FDEEEE;
+    --clr-danger-100: #FCDEDE;
+    --clr-danger-200: #F8BCBC;
+    --clr-danger-300: #F59B9B;
+    --clr-danger-400: #F17979;
+    --clr-danger-500: #EE5858;
+    --clr-danger-600: #BE4646;
+    --clr-danger-700: #8F3535;
+    --clr-danger-800: #5F2323;
+    --clr-danger-900: #301212;
+
+    --color-primary: var(--clr-primary-600);
+    --color-primary-content: var(--clr-gray-00);
+
+    --color-secondary: var(--clr-secondary-600);
+    --color-secondary-content: var(--clr-gray-00);
+
+    --color-accent: var(--clr-danger-600);
+    --color-accent-content: var(--clr-gray-00);
+
+    --color-neutral: var(--clr-gray-900);
+    --color-neutral-content: var(--clr-gray-00);
+
+    --color-base-100: var(--clr-gray-600);
+    --color-base-200: var(--clr-gray-700);
+    --color-base-300: var(--clr-gray-800);
+    --base-content: var(--clr-gray-00);
+
+    --color-info: var(--clr-secondary-600);
+    --color-info-content: var(--clr-secondary-900);
+
+    --color-success: var(--clr-success-500);
+    --color-success-content: var(--clr-success-800);
+
+    --color-warning: var(--clr-warning-600);
+    --color-warning-content: var(--clr-primary-800);
+
+    --color-error: var(--clr-danger-400);
+    --color-error-content: var(--clr-danger-800);
+}
+
+html {
+    background: white;
+}
+
+.menu {
+    --menu-active-bg: var(--clr-gray-50);
+}
+
+.container,
+footer,
+section {
+    max-width: 1320px;
+}
+
+.divider {
+    height: 1px;
+}
+
+.sub-menu summary::after {
+    rotate: 135deg;
+}
+
+.tab {
+    --tab-bg: var(--clr-gray-00);
+}
+
+.sub-menu .tabs a {
+    width: 100%;
+    color: var(--clr-gray-600);
+    justify-content: flex-start;
+}
+
+.tab-active {
+    background-color: var(--clr-gray-50);
+    color: var(--clr-gray-900);
+}
+
+.popover-login {
+    anchor-name: --popover-login;
+}
+
+#popover-login {
+    margin-block-start: 12px;
+    inset: auto;
+    position-anchor: --popover-login;
+    position-try-fallbacks: --menu-card-overflow;
+    top: anchor(bottom);
+    right: anchor(right);
+
+    opacity: 0;
+
+    transition: display 1s, opacity 1s;
+    transition-behavior: allow-discrete;
+}
+
+#popover-cart:popover-open,
+#popover-login:popover-open {
+    display: block;
+    opacity: 1;
+
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+#popover-login .divider {
+    --divider-color: var(--clr-gray-100);
+}
+
+.no-icon::after {
+    content: unset;
+}
+
+.popover-cart {
+    anchor-name: --popover-cart;
+}
+
+#popover-cart {
+    margin-block-start: 12px;
+    inset: auto;
+    position-anchor: --popover-cart;
+    position-try-fallbacks: --menu-card-overflow;
+    top: anchor(bottom);
+    right: anchor(right);
+
+    opacity: 0;
+
+    transition: display 1s, opacity 1s;
+    transition-behavior: allow-discrete;
+}
+
+@position-try --menu-card-overflow{
+    inset: auto;
+    top: anchor(bottom);
+    right: anchor(left);
+}
+
+.carousel-indicator {
+    height: 10px;
+    width: 10px;
+    background-color: var(--clr-gray-300);
+    border-radius: 50%;
+}
+
+.carousel-indicator-active {
+    background-color: var(--clr-gray-900);
+}

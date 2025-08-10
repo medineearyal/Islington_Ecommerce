@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Islington Ecommerce - Home{% endblock %}
+
+{% block content %}
+    <section class="mx-auto py-6">
+        <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-2 rounded-md bg-[var(--clr-gray-50)]">
+                <div class="carousel relative">
+                    <div id="item1" class="carousel-item p-13 items-center gap-9">
+                        <div class="w-[356px]">
+                            <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
+                                <div class="divider bg-[var(--clr-secondary-600)] w-[10%]" style="height: 2px;"></div>
+                                THE BEST PLACE TO PLAY
+                            </span>
+
+                            <h1 class="font-semibold text-5xl text-[var(--clr-gray-900)] mb-4">Xbox Consoles</h1>
+
+                            <p class="text-[var(--clr-gray-700)] mb-6">
+                                Save up to 50% on select Xbox games. Get 3 months of PC Game Pass for $2 USD.
+                            </p>
+
+                            <a class="btn btn-primary">SHOP NOW</a>
+                        </div>
+
+                        <img
+                                src="{% static 'images/banner/banner_image_3.png' %}"
+                                alt=""
+                                class="w-[368px]"/>
+                    </div>
+
+                    <div class="flex justify-center gap-2 py-2 absolute bottom-[56px] left-[56px]">
+                        <a href="#item1" class="carousel-indicator carousel-indicator-active"></a>
+                        <a href="#item1" class="carousel-indicator"></a>
+                        <a href="#item1" class="carousel-indicator"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4 items-center">
+                {% include 'partials/banner/banner_small_1.html' %}
+
+                {% include 'partials/banner/banner_small_2.html' %}
+            </div>
+        </div>
+
+        <div class="p-4 rounded-md border border-[var(--clr-gray-00)] mt-6 flex justify-between">
+            <div class="feature-card">
+                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+
+                <div>
+                    <p>FASTEST DELIVERY</p>
+                    <span>Delivery in 24/H</span>
+                </div>
+            </div>
+
+            <div class="feature-divider"></div>
+
+            <div class="feature-card">
+                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+
+                <div>
+                    <p>24 Hours Return</p>
+                    <span>100% money-back guarantee</span>
+                </div>
+            </div>
+
+            <div class="feature-divider"></div>
+
+            <div class="feature-card">
+                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+
+                <div>
+                    <p>Secure Payment</p>
+                    <span>Your money is safe</span>
+                </div>
+            </div>
+
+            <div class="feature-divider"></div>
+
+            <div class="feature-card">
+                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+
+                <div>
+                    <p>Support 24/7</p>
+                    <span>Live contact/message</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mx-auto py-18">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                Best Deals
+                <span class="text-sm">Deal ends in <span class="text-base px-3 py-2 bg-[var(--clr-warning-300)]"> 16d: 21h: 57m: 23s</span></span>
+            </h2>
+
+            <a class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
+        </div>
+
+        <div class="grid grid-cols-12">
+            <div class="col-span-3 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-[592px] pt-0">
+                <figure class="mb-6">
+                    <img src="{% static 'images/products/product_2.png' %}" alt=""/>
+                </figure>
+
+                <div class="ratings flex items-center mb-1.5">
+                    <div class="flex gap-0.5">
+                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                    </div>
+                    <span class="text-[var(--clr-gray-500)]">(52,677)</span>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-[var(--clr-gray-900)]">Xbox Series S - 512GB SSD Console with Wireless Controller -
+                        EU Versio...</h3>
+
+                    <p class="my-3">
+                        <span class="line-through text-[var(--clr-gray-300)]">Rs. 865.99</span>
+                        <span class="text-[var(--clr-secondary-500)]">Rs. 442.12</span>
+                    </p>
+
+                    <p class="text-[var(--clr-gray-600)]">
+                        Games built using the Xbox Series X|S development kit showcase unparalleled load times, visuals.
+                    </p>
+                </div>
+
+                <div class="flex gap-2 items-center">
+                    <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                        <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt="" />
+                    </a>
+
+                    <a class="btn btn-primary no-icon rounded-[2px] h-12">
+                        <img src="{% static 'images/icons/Cart.svg' %}" alt="" />
+                        ADD TO CART
+                    </a>
+
+                    <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                        <img src="{% static 'images/icons/Eye.svg' %}" alt="" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-span-9">
+                <div class="grid grid-cols-4">
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                    {% include "partials/products/card_regular.html" %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

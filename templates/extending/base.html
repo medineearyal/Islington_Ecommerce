@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Marketplace{% endblock %}</title>
+</head>
+<body>
+    {% include 'extending/header.html' %}
+    
+    <main>
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </main>
+
+    {% include 'extending/footer.html' %}
+</body>
+</html>

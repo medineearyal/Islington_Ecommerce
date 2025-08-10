@@ -1,0 +1,49 @@
+{% load static %}
+
+<div class="card bg-[var(--clr-gray-00)] w-[424px] shadow-sm rounded-sm overflow-hidden">
+    <div class="card-body p-0">
+        <h2 class="card-title block text-[var(--clr-gray-900)] font-semibold text-sm px-6 py-4 inset-shadow-[0px_-1px_0px_var(--clr-gray-100)]">Shopping Cart <span class="text-[var(--clr-gray-600)]">(02)</span></h2>
+
+        <ul class="cart-items px-6 py-5 flex flex-col gap-4" role="list">
+            <li class="flex gap-4 items-center">
+                <img src="{% static 'images/menu/cart-1.png' %}" class="w-[80px] aspect-1/1 object-cover border border-[var(--clr-gray-100)]" alt="" />
+
+                <div>
+                    <h3 class="text-[var(--clr-gray-900)] text-sm mb-2">Canon EOS 1500D DSLR Camera Body+ 18-55 mm</h3>
+                    <p>
+                        <span class="text-[var(--clr-gray-600)]">1 x </span><span class="text-[var(--clr-secondary-500)]">Rs. 2500</span>
+                    </p>
+                </div>
+
+                <div>
+                    <img src="{% static 'images/icons/X.svg' %}" alt="" />
+                </div>
+            </li>
+
+            <li class="flex gap-4 items-center">
+                <img src="{% static 'images/menu/cart-1.png' %}" class="w-[80px] aspect-1/1 object-cover border border-[var(--clr-gray-100)]" alt="" />
+
+                <div>
+                    <h3 class="text-[var(--clr-gray-900)] text-sm mb-2">Canon EOS 1500D DSLR Camera Body+ 18-55 mm</h3>
+                    <p>
+                        <span class="text-[var(--clr-gray-600)]">1 x </span><span class="text-[var(--clr-secondary-500)]">Rs. 2500</span>
+                    </p>
+                </div>
+
+                <div>
+                    <img src="{% static 'images/icons/X.svg' %}" alt="" />
+                </div>
+            </li>
+        </ul>
+
+        <div class="px-6 py-5 border-1 border-t-[var(--clr-gray-100)]">
+            <p class="flex justify-between items-center text-[var(--clr-gray-900)] mb-5">
+                <span class="text-[var(--clr-gray-700)]">Sub-Total</span>
+                <span>Rs. 2038</span>
+            </p>
+
+            <a class="btn btn-primary w-full mb-3 rounded-none">CHECKOUT NOW</a>
+            <a class="btn btn-outline btn-primary no-icon w-full rounded-none">VIEW CART</a>
+        </div>
+    </div>
+</div>

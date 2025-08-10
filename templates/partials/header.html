@@ -1,0 +1,246 @@
+{% load static %}
+
+<header id="header" class="main-header bg-[var(--clr-secondary-800)]">
+    <div class="container flex flex-row justify-between items-center mx-auto py-4">
+        <span class="text-sm font-light ">Welcome to Islington Ecommerce</span>
+
+        <div class="flex gap-2 items-center">
+            <span class="text-sm font-light">Follow Us:</span>
+            <ul role="list" class="flex flex-row justify-center gap-2 border-r-1 border-[var(--clr-gray-00)] pr-2">
+                <li>
+                    <a href="">
+                        <img src="{% static 'images/icons/Facebook.svg' %}" alt="Facebook Link"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{% static 'images/icons/Instagram.svg' %}" alt="Instagram Link"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{% static 'images/icons/Pinterest.svg' %}" alt="Pinterest Link"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{% static 'images/icons/Reddit.svg' %}" alt="Reddit Link"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{% static 'images/icons/Twitter.svg' %}" alt="Twitter Link"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{% static 'images/icons/Youtube.svg' %}" alt="Youtube Link"/>
+                    </a>
+                </li>
+            </ul>
+
+            <form>
+                <select class="select select-ghost pl-0" name="language-change">
+                    <option>Eng</option>
+                    <option>Nep</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div class="divider m-0"></div>
+
+    <div class="container flex justify-between items-center py-5 m-auto">
+        <a href="">
+            <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
+        </a>
+
+        <form method="get" class="">
+            <label class="input w-[100%] bg-[var(--clr-gray-00)]">
+                <input type="search" class="grow text-black w-100" name="query" placeholder="Search For Anything"/>
+                <img src="{% static 'images/icons/Search.svg' %}" alt="Search Icon"/>
+            </label>
+        </form>
+
+        <ul role="list" class="flex gap-2 items-center">
+            <li>
+                <button class="popover-cart flex-outline-none cursor-pointer" popovertarget="popover-cart">
+                    <img src="{% static 'images/icons/ShoppingCartSimple.svg' %}" alt="Cart"/>
+                </button>
+            </li>
+            <li>
+                <a>
+                    <img src="{% static 'images/icons/Heart.svg' %}" alt="Favorites">
+                </a>
+            </li>
+            <li>
+                <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login" >
+                    <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bg-[var(--clr-gray-00)]">
+        <div class="container mx-auto navbar">
+            <div class="navbar">
+                <!-- TODO: Need to Make Categorys Dynamic -->
+
+                <ul class="menu menu-horizontal px-1 text-[var(--clr-gray-600)] font-normal items-center">
+                    <li>
+                        <details
+                                class="z-1 text-[var(--clr-gray-800)] text-sm font-medium bg-[var(--clr-gray-50)] py-3.5 px-6 [&[open]]:bg-[var(--clr-primary-500)] [&[open]]:text-[var(--clr-gray-00)]">
+                            <summary class="">All Category</summary>
+                            <ul class="bg-[var(--clr-gray-00)] text-[var(--clr-gray-600)] rounded-sm w-[240px] left-0 border border-[var(--clr-gray-100)]" style="padding: 12px 0;">
+                                <li>
+                                    <a class="px-4 py-2">Computer & Laptop</a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">Computer Accessories</a>
+                                </li>
+                                <li class="static group sub-menu">
+                                    <details class="[&[open]]:bg-[var(--clr-gray-50)] [&[open]]:text-[var(--clr-gray-900)]">
+                                        <summary class="px-4 py-2">
+                                            <a class="justify-between">SmartPhone</a>
+                                        </summary>
+
+                                        <div class="flex gap-6 p-5 absolute left-full top-0 bg-[var(--clr-gray-00)] rounded-sm py-3 border border-[var(--clr-gray-100)] ml-3">
+                                            <div class="tabs flex-column w-[164px] content-start" role="tablist">
+                                                <a class="tab px-4 py-2 tab-active" onclick="showTab('all')">All</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('iphone')">Iphone</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('samsung')">Samsung</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('realme')">Realme</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('xiaomi')">Xiaomi</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('oppo')">Oppo</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('vivo')">Vivo</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('oneplus')">OnePlus</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('huwawei')">Huawei</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('infinix')">Infinix</a>
+                                                <a class="tab px-4 py-2" onclick="showTab('tecno')">Tecno</a>
+                                            </div>
+
+                                            <div id="tab-content" class="flex-1 p-4">
+                                                <div id="tab-all" class="tab-pane">All Products Content...</div>
+                                                <div id="tab-iphone" class="tab-pane hidden">
+                                                    <div class="flex flex-row gap-5">
+                                                        <div>
+                                                            <h2 class="text-[var(--clr-gray-900)] font-bold text-base mb-4">
+                                                                Featured Phones
+                                                            </h2>
+
+                                                            <div class="flex flex-col gap-4">
+                                                                {% include 'partials/menu/product_card.html' %}
+                                                                {% include 'partials/menu/product_card.html' %}
+                                                                {% include 'partials/menu/product_card.html' %}
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            {% include "partials/menu/ad_card.html" %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tab-samsung" class="tab-pane hidden">Samsung Content...</div>
+                                                <div id="tab-realme" class="tab-pane hidden">Realme Content...</div>
+                                            </div>
+                                        </div>
+
+                                    </details>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        Headphone
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        Mobile Accessories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        Gaming Console
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        Camera & Photo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        TV & Home Appliances
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        Watches & Accessories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        GPS & Navigation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="px-4 py-2">
+                                        Wearable Technology
+                                    </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                        <a>
+                            <img src="{% static 'images/icons/MapPinLine.svg' %}" alt=""/>
+                            Track Order
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
+                            Compare
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>
+                            Customer Support
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>
+                            Need Help
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="navbar-end text-[var(--clr-gray-900)]">
+                <span class="flex items-center gap-2">
+                    <img src="{% static 'images/icons/Call.svg' %}" alt=""/>
+                    +1-202-555-0104
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div popover id="popover-login">
+    {% include 'partials/menu/login_card.html' with form=form %}
+</div>
+
+<div popover id="popover-cart">
+    {% include 'partials/menu/cart_card.html' %}
+</div>
+
+<script>
+    function showTab(tab) {
+        document.querySelectorAll(".tab").forEach(el => el.classList.remove("tab-active"));
+        document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add("tab-active");
+
+        document.querySelectorAll('.tab-pane').forEach(el => el.classList.add("hidden"));
+        document.getElementById(`tab-${tab}`).classList.remove("hidden");
+    }
+</script>

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
+
+@theme {
+    /* Font */
+    --default-font-family: "Public Sans", sans-serif;
+}
+
+.ad-card {
+    @apply bg-[var(--clr-warning-200)] p-8 flex flex-col gap-6 max-w-[312px] aspect-3/4;
+}
+
+.btn::after {
+    content: url("/static/images/icons/ArrowRight.svg");
+    display: flex;
+    aspect-ratio: 1/1;
+}
+
+.btn-shop-now {
+    @apply btn-primary w-full bg-[var(--clr-primary-500)] text-[var(--clr-gray-00)];
+}
+
+.feature-card {
+    @apply flex gap-4;
+    padding: 1rem;
+}
+
+.feature-card p {
+    @apply font-medium text-sm;
+    color: var(--clr-gray-900);
+}
+
+.feature-card span {
+    color: var(--clr-gray-600);
+}
+
+.feature-divider {
+    width: 1px;
+    margin: 0 26px;
+    background: var(--clr-gray-100);
+}
+
+.btn-no-bg {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.btn-no-bg::after {
+    background-color: var(--clr-secondary-500);
+    -webkit-mask: url('/static/images/icons/ArrowRight.svg') no-repeat center / contain;
+    mask: url('/static/images/icons/ArrowRight.svg') no-repeat center / contain;
+}

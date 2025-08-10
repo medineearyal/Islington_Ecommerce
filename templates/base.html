@@ -1,0 +1,49 @@
+{% load tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Islington Markteplace
+        {% endblock %}
+    </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+
+    {% tailwind_css %}
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+    {% block extra_css %}
+    {% endblock %}
+
+    <script type="module">
+        if (!("anchorName" in document.documentElement.style)) {
+            import("https://unpkg.com/@oddbird/css-anchor-positioning");
+        }
+    </script>
+</head>
+<body>
+<!-- Header -->
+{% include "partials/header.html" %}
+
+<main>
+    {% block content %}
+    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
+</main>
+
+<!-- Footer -->
+{% include "partials/footer.html" %}
+</body>
+</html>

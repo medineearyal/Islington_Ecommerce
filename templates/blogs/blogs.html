@@ -1,0 +1,9 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<h2>All Blog Posts</h2>
+<ul>
+  {% for blog in blogs %}
+    <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
