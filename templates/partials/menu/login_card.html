@@ -7,11 +7,11 @@
             {% csrf_token %}
 
             <div class="mb-4">
-                <label for="{{ form.login.id_for_label }}"
+                <label for="{{ header_form.login.id_for_label }}"
                        class="block validator">
-                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.login.label }}</span>
+                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ header_form.login.label }}</span>
 
-                    {{ form.login }}
+                    {{ header_form.login }}
                 </label>
 
                 <p class="validator-hint hidden">
@@ -23,11 +23,11 @@
                 <label for="{{ form.password.id_for_label }}"
                        class="block validator mb-2">
                     <span class="flex justify-between block text-sm text-[var(--clr-gray-900)] mb-2">
-                        {{ form.password.label }}
+                        {{ header_form.password.label }}
                         <a href="" class="text-[var(--clr-secondary-500)]">Forget Password</a>
                     </span>
 
-                    {{ form.password }}
+                    {{ header_form.password }}
                 </label>
 
                 <p class="validator-hint hidden">
@@ -41,6 +41,6 @@
 
         <div class="divider divider-color-base-100 text-[var(--clr-gray-500)]">Don't Have Account?</div>
 
-        <a class="btn btn-outline btn-primary no-icon">CREATE ACCOUNT</a>
+        <a href="{% url 'account_signup' %}" class="btn btn-outline btn-primary no-icon">CREATE ACCOUNT</a>
     </div>
 </div>

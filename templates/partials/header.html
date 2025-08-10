@@ -51,7 +51,7 @@
     <div class="divider m-0"></div>
 
     <div class="container flex justify-between items-center py-5 m-auto">
-        <a href="">
+        <a href="{% url 'home' %}">
             <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
         </a>
 
@@ -74,9 +74,15 @@
                 </a>
             </li>
             <li>
-                <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login" >
+                {% if not request.user.is_authenticated %}
+                    <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login" >
+                        <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                    </button>
+                {% else %}
+                    {{ request.user }}
                     <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
-                </button>
+                {% endif %}
+
             </li>
         </ul>
     </div>

@@ -334,6 +334,7 @@ ACCOUNT_LOGIN_METHOD = {
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_FORMS = {
     "login": "apps.users.forms.UserLoginForm",
+    "signup": "apps.users.forms.UserSignupForm",
 }
 
 # Debug Toolbar

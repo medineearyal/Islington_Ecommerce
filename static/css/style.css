@@ -187,7 +187,7 @@ section {
     transition-behavior: allow-discrete;
 }
 
-@position-try --menu-card-overflow{
+@position-try --menu-card-overflow {
     inset: auto;
     top: anchor(bottom);
     right: anchor(left);
@@ -203,8 +203,6 @@ section {
 .carousel-indicator-active {
     background-color: var(--clr-gray-900);
 }
-
-
 
 .swiper-button-prev,
 .swiper-button-next {
@@ -234,25 +232,27 @@ section {
     content: none;
 }
 
-.section-featured  .tab {
+.section-login .tab,
+.section-featured .tab {
     color: inherit;
 }
 
+.section-login .tab-active,
 .section-featured .tab-active {
     background-color: transparent;
     padding: 0;
     color: var(--clr-primary-900);
 }
 
-.section-featured .tab-active::before{
+.section-login .tab-active::before,
+.section-featured .tab-active::before {
     width: 100%;
     left: 0;
     border-color: var(--clr-primary-500);
 }
 
 .section-blogs,
-.section-newsletter
-{
+.section-newsletter {
     max-width: unset;
 }
 

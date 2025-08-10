@@ -9,5 +9,5 @@ def pages_links(request):
 
 
 def login_form(request):
-    form = UserLoginForm(request.POST or None)
-    return {"form": form}
+    form = UserLoginForm()
+    return {"header_form": form}
