@@ -1,10 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
 
-</body>
-</html>
+<footer class="bg-[var(--clr-gray-900)] pt-18">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-3 gap-6">
+            <div>
+                <img src="{% static 'images/logo.PNG' %}" alt=""/>
+
+                <p class="mb-3">
+                    <span class="text-[var(--clr-gray-500)] text-sm">Customer Support</span>
+
+                    <br/>
+
+                    <span class="font-medium">(+977) 9863784674</span>
+                </p>
+
+                <p class="text-[var(--clr-gray-500)] text-sm mb-3">
+                    SeshmatiPul, Tareshwor, Bagmati Province 3 Nepal
+                </p>
+
+                <p class="text-base font-medium">info@ing.com</p>
+            </div>
+
+            <div class="flex gap-6">
+                <div>
+                    <h3 class="text-base font-medium]">TOP CATEGORY</h3>
+
+                    <ul role="list" class="text-[var(--clr-gray-400)] text-sm font-medium">
+                        <li class="py-2">Computer & Laptop</li>
+                        <li class="py-2">SmartPhone</li>
+                        <li class="py-2">Headphone</li>
+                    </ul>
+
+                    <span class="flex items-center gap-2 font-medium text-sm">
+                        <div class="divider bg-[var(--clr-warning-500)] w-[10%]" style="height: 2px;"></div>
+                        Accessories
+                    </span>
+
+                    <ul role="list" class="text-[var(--clr-gray-400)] text-sm font-medium">
+                        <li class="py-2">Camera & Photo</li>
+                        <li class="py-2">TV & Homes</li>
+                    </ul>
+
+                    <a class="btn btn-no-bg text-[var(--clr-warning-500)] p-0">Browse All Product</a>
+                </div>
+
+                <div>
+                    <h3 class="text-base font-medium]">QUICK LINKS</h3>
+
+                    <ul role="list" class="text-[var(--clr-gray-400)] text-sm font-medium">
+                        <li class="py-2">Shop Product</li>
+                        <li class="py-2">Shoping Cart</li>
+                        <li class="py-2">Wishlist</li>
+                        <li class="py-2">Compare</li>
+                        <li class="py-2">Track Order</li>
+                        <li class="py-2">Customer Help</li>
+                        <li class="py-2">About Us</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-base font-medium]">POPULAR TAG</h3>
+
+                <div class="flex flex-wrap gap-2">
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Game</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">iPhone</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">TV</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Asus
+                        Laptops</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Macbook</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Graphics
+                        Card </a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Power
+                        Bank</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Smart
+                        TV</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Speaker</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Tablet</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Microwave</a>
+                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Samsung</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="text-center text-[var(--clr-gray-300)] py-6">
+        <p>Islington Ecommerce © <span class="copyright-date"></span></p>
+    </div>
+
+</footer>

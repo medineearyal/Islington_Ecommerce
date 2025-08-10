@@ -133,16 +133,16 @@
 
                 <div class="flex gap-2 items-center">
                     <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
-                        <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt="" />
+                        <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
                     </a>
 
                     <a class="btn btn-primary no-icon rounded-[2px] h-12">
-                        <img src="{% static 'images/icons/Cart.svg' %}" alt="" />
+                        <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
                         ADD TO CART
                     </a>
 
                     <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
-                        <img src="{% static 'images/icons/Eye.svg' %}" alt="" />
+                        <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
                     </a>
                 </div>
             </div>
@@ -161,4 +161,110 @@
             </div>
         </div>
     </section>
+
+    <section class="mx-auto">
+        <h2 class="text-[var(--clr-gray-900)] text-center text-[2rem] font-semibold mb-10">Shop With Categorys</h2>
+
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+
+                <div class="swiper-slide">
+                    {% include 'partials/products/card_slider.html' %}
+                </div>
+            </div>
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
+
+    <section class="section-featured mx-auto py-18">
+        <div class="grid grid-cols-12">
+            <div class="col-span-3">
+                {% include 'partials/banner/banner_large_1.html' %}
+            </div>
+
+            <div class="col-span-9">
+                <div class="flex justify-between items-center mb-6.5">
+                    <h2 class="text-[var(--clr-gray-900)] font-semibold text-2xl inline">
+                        Featured Products
+                    </h2>
+
+                    <div class="flex justify-between items-center">
+                        <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-600)] text-sm">
+                            <a role="tab" class="tab tab-active">All Product</a>
+                            <a role="tab" class="tab">Smart Phone</a>
+                            <a role="tab" class="tab">Laptop</a>
+                            <a role="tab" class="tab">Headphone</a>
+                            <a role="tab" class="tab">TV</a>
+                        </div>
+
+                        <a class="text-[var(--clr-primary-500)] text-sm flex items-center gap-2">
+                            Browse All Product
+
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                 class="fill-[var(--clr-primary-500)]"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.125 10H16.875" stroke="currentColor" stroke-width="1.8"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                                <path d="M11.25 4.375L16.875 10L11.25 15.625" stroke="white" stroke-width="1.8"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-4">
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% include 'partials/products/card_regular_rating.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-blogs py-18 bg-[var(--clr-gray-50)]">
+        <div class="container mx-auto">
+            <h2 class="text-[var(--clr-gray-900)] text-center font-semibold text-2xl mb-10">Latest Blogs</h2>
+
+            <div class="grid grid-cols-3 gap-6">
+                {% include 'partials/blog/blog_card.html' %}
+                {% include 'partials/blog/blog_card.html' %}
+                {% include 'partials/blog/blog_card.html' %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'partials/banner/newsletter.html' %}
 {% endblock %}

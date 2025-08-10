@@ -106,7 +106,6 @@ html {
 }
 
 .container,
-footer,
 section {
     max-width: 1320px;
 }
@@ -204,3 +203,56 @@ section {
 .carousel-indicator-active {
     background-color: var(--clr-gray-900);
 }
+
+
+
+.swiper-button-prev,
+.swiper-button-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-primary-500);
+    width: 48px;
+    height: 48px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+}
+
+.swiper-button-prev {
+    background-image: url("/static/images/icons/ArrowLeft.svg");
+}
+
+.swiper-button-next {
+    background-image: url("/static/images/icons/ArrowRight.svg");
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    content: none;
+}
+
+.section-featured  .tab {
+    color: inherit;
+}
+
+.section-featured .tab-active {
+    background-color: transparent;
+    padding: 0;
+    color: var(--clr-primary-900);
+}
+
+.section-featured .tab-active::before{
+    width: 100%;
+    left: 0;
+    border-color: var(--clr-primary-500);
+}
+
+.section-blogs,
+.section-newsletter
+{
+    max-width: unset;
+}
+
