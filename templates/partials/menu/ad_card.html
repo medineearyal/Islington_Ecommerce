@@ -3,27 +3,31 @@
 
 <article class="ad-card m-w-[312px]">
     <div class="">
-        <figure class="w-[248px] h-[96px] mb-3">
-            <img src="{% static 'images/menu/ad-card-image.png' %}"
-                 alt="Need to Create a Meta Desc For This"/>
+        <figure class="mb-3">
+            {% if product.thumbnail %}
+                <img class="w-[248px] h-[96px] object-contain" src="{{ product.thumbnail.url }}"
+                 alt="{{ product }}" />
+            {% else %}
+                <img class="w-[248px] h-[96px] object-contain" src="{% static 'images/menu/ad-card-image.png' %}"
+                 alt=""/>
+            {% endif %}
         </figure>
 
         <div>
-            <h3 class="text-[var(--clr-gray-900)] font-semibold text-[1.75rem] text-center mb-2 leading-[1.15]">21% Discount</h3>
+            <h3 class="text-[var(--clr-gray-900)] font-semibold text-[1.75rem] text-center mb-2 leading-[1.15]">{{ product.discount }}% Discount</h3>
 
             <p class="text-base leading-[1.5] text-[var(--clr-gray-700)] text-center text-wrap mb-4">
-                Escape the noise, It’s time to hear the
-                magic with Xiaomi Earbuds.
+                {{ product.headline }}
             </p>
 
             <p class="text-center text-[var(--clr-gray-700)] text-sm">
-                Starting Price: <span class="bg-[var(--clr-gray-00)] py-[6px] px-3 text-[var(--clr-gray-900)] font-semibold text-base">Rs. 99</span>
+                Starting Price: <span class="bg-[var(--clr-gray-00)] py-[6px] px-3 text-[var(--clr-gray-900)] font-semibold text-base">Rs. {{ product.discounted_price }}</span>
             </p>
         </div>
     </div>
 
-    <div class="-body">
-        <a class="btn btn-shop-now">
+    <div class="">
+        <a href="{% url 'shop' %}?category={{ product.category.parent.pk }}" class="btn btn-shop-now">
             Shop Now
         </a>
     </div>

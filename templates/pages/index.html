@@ -7,38 +7,46 @@
     <section class="mx-auto py-6">
         <div class="grid grid-cols-3 gap-6">
             <div class="col-span-2 rounded-md bg-[var(--clr-gray-50)]">
-                <div class="carousel relative">
-                    <div id="item1" class="carousel-item p-13 items-center gap-9">
-                        <div class="w-[356px]">
-                            <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
-                                <div class="divider bg-[var(--clr-secondary-600)] w-[10%]" style="height: 2px;"></div>
-                                THE BEST PLACE TO PLAY
-                            </span>
+                <div class="swiper-banner overflow-hidden relative">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        {% for banner in banners %}
+                            <div class="swiper-slide">
+                                <div id="item1" class="carousel-item p-13 items-center gap-9">
+                                    <div class="w-[356px]">
+                                        <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
+                                            <div class="divider bg-[var(--clr-secondary-600)] w-[10%]"
+                                                 style="height: 2px;"></div>
+                                            {{ banner.short_title }}
+                                        </span>
 
-                            <h1 class="font-semibold text-5xl text-[var(--clr-gray-900)] mb-4">Xbox Consoles</h1>
+                                        <h1 class="font-semibold text-5xl text-[var(--clr-gray-900)] mb-4">{{ banner.title }}</h1>
 
-                            <p class="text-[var(--clr-gray-700)] mb-6">
-                                Save up to 50% on select Xbox games. Get 3 months of PC Game Pass for $2 USD.
-                            </p>
+                                        <p class="text-[var(--clr-gray-700)] mb-6">
+                                            {{ banner.headline }}
+                                        </p>
 
-                            <a class="btn btn-primary">SHOP NOW</a>
-                        </div>
+                                        <a class="btn btn-primary">SHOP NOW</a>
+                                    </div>
 
-                        <img
-                                src="{% static 'images/banner/banner_image_3.png' %}"
-                                alt=""
-                                class="w-[368px]"/>
+                                    <img
+                                            {% if not banner.product.thumbnail %}
+                                                src="{% static 'images/banner/banner_image_3.png' %}"
+                                            {% else %}
+                                                src="{{ banner.product.thumbnail.url }}"
+                                            {% endif %}
+                                                alt="{{ banner.product }}"
+                                                class="w-[368px]"/>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
-
-                    <div class="flex justify-center gap-2 py-2 absolute bottom-[56px] left-[56px]">
-                        <a href="#item1" class="carousel-indicator carousel-indicator-active"></a>
-                        <a href="#item1" class="carousel-indicator"></a>
-                        <a href="#item1" class="carousel-indicator"></a>
-                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination left-0 w-fit"></div>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4 items-center">
+            <div class="flex flex-col gap-4 items-center justify-between">
                 {% include 'partials/banner/banner_small_1.html' %}
 
                 {% include 'partials/banner/banner_small_2.html' %}
@@ -90,112 +98,90 @@
         </div>
     </section>
 
-    <section class="mx-auto py-18">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
-                Best Deals
-                <span class="text-sm">Deal ends in <span class="text-base px-3 py-2 bg-[var(--clr-warning-300)]"> 16d: 21h: 57m: 23s</span></span>
-            </h2>
+    {% if best_deals %}
+        <section class="mx-auto py-18">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                    Best Deals
+                    <span class="text-sm">Deal ends in <span id="best-deal-remaining-time" class="text-base px-3 py-2 bg-[var(--clr-warning-300)]" data-end-date="{{ best_deals.iso_end_date }}"></span></span>
+                </h2>
 
-            <a class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
-        </div>
-
-        <div class="grid grid-cols-12">
-            <div class="col-span-3 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-[592px] pt-0">
-                <figure class="mb-6">
-                    <img src="{% static 'images/products/product_2.png' %}" alt=""/>
-                </figure>
-
-                <div class="ratings flex items-center mb-1.5">
-                    <div class="flex gap-0.5">
-                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                        <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                    </div>
-                    <span class="text-[var(--clr-gray-500)]">(52,677)</span>
-                </div>
-
-                <div class="mb-6">
-                    <h3 class="text-[var(--clr-gray-900)]">Xbox Series S - 512GB SSD Console with Wireless Controller -
-                        EU Versio...</h3>
-
-                    <p class="my-3">
-                        <span class="line-through text-[var(--clr-gray-300)]">Rs. 865.99</span>
-                        <span class="text-[var(--clr-secondary-500)]">Rs. 442.12</span>
-                    </p>
-
-                    <p class="text-[var(--clr-gray-600)]">
-                        Games built using the Xbox Series X|S development kit showcase unparalleled load times, visuals.
-                    </p>
-                </div>
-
-                <div class="flex gap-2 items-center">
-                    <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
-                        <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
-                    </a>
-
-                    <a class="btn btn-primary no-icon rounded-[2px] h-12">
-                        <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
-                        ADD TO CART
-                    </a>
-
-                    <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
-                        <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
-                    </a>
-                </div>
+                <a href="{% url 'shop' %}" class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
             </div>
+
+            {% with first_prod=best_deals.products.all.0 %}
+                <div class="grid grid-cols-12">
+                <div class="col-span-3 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-[592px] pt-0">
+                    <figure class="mb-6">
+                        {% if first_prod.thumbnail %}
+                            <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}"/>
+                        {% else %}
+                            <img src="{% static 'images/products/product_2.png' %}" alt=""/>
+                        {% endif %}
+                    </figure>
+
+                    <div class="ratings flex items-center mb-1.5">
+                        <div class="flex gap-0.5">
+                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
+                        </div>
+                        <span class="text-[var(--clr-gray-500)]">(52,677)</span>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-[var(--clr-gray-900)]">{{ first_prod.name }}</h3>
+
+                        <p class="my-3">
+                            <span class="line-through text-[var(--clr-gray-300)]">Rs. {{ first_prod.price }}</span>
+                            <span class="text-[var(--clr-secondary-500)]">Rs. {{ first_prod.discounted_price }}</span>
+                        </p>
+
+                        <p class="text-[var(--clr-gray-600)]">
+                            {{ first_prod.description }}
+                        </p>
+                    </div>
+
+                    <div class="flex gap-2 items-center">
+                        <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                            <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
+                        </a>
+
+                        <a class="btn btn-primary no-icon rounded-[2px] h-12">
+                            <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
+                            ADD TO CART
+                        </a>
+
+                        <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                            <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
+                        </a>
+                    </div>
+                </div>
+            {% endwith %}
 
             <div class="col-span-9">
                 <div class="grid grid-cols-4">
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
-                    {% include "partials/products/card_regular.html" %}
+                    {% for product in best_deals.products.all|slice:"1:" %}
+                        {% include "partials/products/card_regular.html" with product=product %}
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+            </div>
+        </section>
+    {% endif %}
 
     <section class="mx-auto">
         <h2 class="text-[var(--clr-gray-900)] text-center text-[2rem] font-semibold mb-10">Shop With Categorys</h2>
 
         <div class="swiper">
-            <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
-
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
-
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
-
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
-
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
-
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
-
-                <div class="swiper-slide">
-                    {% include 'partials/products/card_slider.html' %}
-                </div>
+                {% for category in categories %}
+                    <div class="swiper-slide">
+                        {% include 'partials/products/card_slider.html' with category=category %}
+                    </div>
+                {% endfor %}
             </div>
             <!-- If we need navigation buttons -->
             <div class="swiper-button-prev"></div>

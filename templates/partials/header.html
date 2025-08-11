@@ -75,7 +75,7 @@
             </li>
             <li>
                 {% if not request.user.is_authenticated %}
-                    <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login" >
+                    <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login">
                         <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
                     </button>
                 {% else %}
@@ -90,109 +90,88 @@
     <div class="bg-[var(--clr-gray-00)]">
         <div class="container mx-auto navbar">
             <div class="navbar">
-                <!-- TODO: Need to Make Categorys Dynamic -->
+                <!-- TODO: Need To Create Category Detail Page -->
 
                 <ul class="menu menu-horizontal px-1 text-[var(--clr-gray-600)] font-normal items-center">
                     <li>
                         <details
-                                class="z-1 text-[var(--clr-gray-800)] text-sm font-medium bg-[var(--clr-gray-50)] py-3.5 px-6 [&[open]]:bg-[var(--clr-primary-500)] [&[open]]:text-[var(--clr-gray-00)]">
+                                class="z-2 text-[var(--clr-gray-800)] text-sm font-medium bg-[var(--clr-gray-50)] py-3.5 px-6 [&[open]]:bg-[var(--clr-primary-500)] [&[open]]:text-[var(--clr-gray-00)]">
                             <summary class="">All Category</summary>
-                            <ul class="bg-[var(--clr-gray-00)] text-[var(--clr-gray-600)] rounded-sm w-[240px] left-0 border border-[var(--clr-gray-100)]" style="padding: 12px 0;">
-                                <li>
-                                    <a class="px-4 py-2">Computer & Laptop</a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">Computer Accessories</a>
-                                </li>
-                                <li class="static group sub-menu">
-                                    <details class="[&[open]]:bg-[var(--clr-gray-50)] [&[open]]:text-[var(--clr-gray-900)]">
-                                        <summary class="px-4 py-2">
-                                            <a class="justify-between">SmartPhone</a>
-                                        </summary>
+                            <ul class="bg-[var(--clr-gray-00)] text-[var(--clr-gray-600)] rounded-sm w-[240px] left-0 border border-[var(--clr-gray-100)]"
+                                style="padding: 12px 0;">
+                                {% for category in header_categories %}
+                                    {% if category.is_leaf_node %}
+                                        <li>
+                                            <a href="{% url 'shop' %}?type={{ category.pk }}" class="px-4 py-2">{{ category }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="static group sub-menu">
+                                            <details
+                                                    class="[&[open]]:bg-[var(--clr-gray-50)] [&[open]]:text-[var(--clr-gray-900)]">
+                                                <summary class="px-4 py-2">
+                                                    <a class="justify-between">{{ category }}</a>
+                                                </summary>
 
-                                        <div class="flex gap-6 p-5 absolute left-full top-0 bg-[var(--clr-gray-00)] rounded-sm py-3 border border-[var(--clr-gray-100)] ml-3">
-                                            <div class="tabs flex-column w-[164px] content-start" role="tablist">
-                                                <a class="tab px-4 py-2 tab-active" onclick="showTab('all')">All</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('iphone')">Iphone</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('samsung')">Samsung</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('realme')">Realme</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('xiaomi')">Xiaomi</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('oppo')">Oppo</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('vivo')">Vivo</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('oneplus')">OnePlus</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('huwawei')">Huawei</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('infinix')">Infinix</a>
-                                                <a class="tab px-4 py-2" onclick="showTab('tecno')">Tecno</a>
-                                            </div>
+                                                <div class="flex gap-6 p-5 absolute left-full top-0 bg-[var(--clr-gray-00)] rounded-sm py-3 border border-[var(--clr-gray-100)] ml-3">
+                                                    <div class="tabs flex-column w-[164px] content-start"
+                                                         role="tablist">
+                                                        <a class="tab px-4 py-2 tab-active"
+                                                           onclick="showTab('all')">All</a>
+                                                        {% for child in category.get_children %}
+                                                            <a class="tab px-4 py-2"
+                                                               onclick="showTab('{{ child }}')">{{ child }}</a>
+                                                        {% endfor %}
+                                                    </div>
 
-                                            <div id="tab-content" class="flex-1 p-4">
-                                                <div id="tab-all" class="tab-pane">All Products Content...</div>
-                                                <div id="tab-iphone" class="tab-pane hidden">
-                                                    <div class="flex flex-row gap-5">
-                                                        <div>
-                                                            <h2 class="text-[var(--clr-gray-900)] font-bold text-base mb-4">
-                                                                Featured Phones
-                                                            </h2>
+                                                    <div id="tab-content" class="flex-1 p-4">
+                                                        <div id="tab-all" class="tab-pane">
+                                                            <div class="flex flex-row gap-5">
+                                                                <div>
+                                                                    <h2 class="text-[var(--clr-gray-900)] font-bold text-base mb-4">
+                                                                        Featured {{ category }}
+                                                                    </h2>
 
-                                                            <div class="flex flex-col gap-4">
-                                                                {% include 'partials/menu/product_card.html' %}
-                                                                {% include 'partials/menu/product_card.html' %}
-                                                                {% include 'partials/menu/product_card.html' %}
+                                                                    <div class="flex flex-col gap-4">
+                                                                        {% for product in category.featured_products %}
+                                                                            {% include 'partials/menu/product_card.html' with product=product %}
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+                                                                    {% include "partials/menu/ad_card.html" with product=category.header_banner_product %}
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <div>
-                                                            {% include "partials/menu/ad_card.html" %}
-                                                        </div>
+                                                        {% for child in category.get_children %}
+                                                            <div id="tab-{{ child }}" class="tab-pane hidden">
+                                                                <div class="flex flex-row gap-5">
+                                                                    <div>
+                                                                        <h2 class="text-[var(--clr-gray-900)] font-bold text-base mb-4">
+                                                                            Featured {{ category }}
+                                                                        </h2>
+
+                                                                        <div class="flex flex-col gap-4">
+                                                                            {% for product in child.featured_products %}
+                                                                                {% include 'partials/menu/product_card.html' with product=product %}
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        {% include "partials/menu/ad_card.html" with product=child.header_banner_product %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
-                                                <div id="tab-samsung" class="tab-pane hidden">Samsung Content...</div>
-                                                <div id="tab-realme" class="tab-pane hidden">Realme Content...</div>
-                                            </div>
-                                        </div>
 
-                                    </details>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        Headphone
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        Mobile Accessories
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        Gaming Console
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        Camera & Photo
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        TV & Home Appliances
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        Watches & Accessories
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        GPS & Navigation
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="px-4 py-2">
-                                        Wearable Technology
-                                    </a>
-                                </li>
+                                            </details>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </details>
                     </li>

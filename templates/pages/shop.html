@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Islington Ecommerce - Shop{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        <div class="bg-[var(--clr-gray-50)]">
+            <div class="container mx-auto">
+                <div class="flex items-center gap-2 py-6.5 text-[var(--clr-gray-600)] text-sm">
+                    <span class="flex items-center gap-2">
+                        <img src="{% static 'images/icons/House.svg' %}" alt=""/>
+                        Home
+                    </span>
+
+                    <span class="flex items-center gap-2">
+                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
+                        Shop
+                    </span>
+
+                    <span class="flex items-center gap-2">
+                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
+                        Shop Grid
+                    </span>
+
+                    <span class="flex items-center gap-2 text-[var(--clr-secondary-500)]">
+                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
+                        Category
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto py-10 grid grid-cols-3">
+            <div class="col-span-1 h-fit">
+                <form method="get">
+                    <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">CATEGORY</h2>
+
+                    {% for category in categories %}
+                        <div class="mb-3 flex items-center">
+                            <input type="radio"
+                                   class="radio mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
+                                   name="category" value="{{ category.pk }}" id="{{ category }}"
+                                   onclick="this.submit()"/>
+                            <label class="text-[var(--clr-gray-700)]" for="{{ category }}">{{ category }}</label>
+                        </div>
+                    {% endfor %}
+
+                    <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
+
+                    <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">PRICE RANGE</h2>
+
+                    <div id="slider" class="my-4"></div>
+                    <div class="flex justify-between text-gray-500 mt-2 gap-3 items-center">
+                        <div class="bg-[var(--clr-gray-00)] border inset-[var(--clr-gray-100)] rounded-sm py-2 px-3 w-full">
+                            Min: Rs. <span id="slider-min">0</span></div>
+                        <div class="bg-[var(--clr-gray-00)] border inset-[var(--clr-gray-100)] rounded-sm py-2 px-3 w-full">
+                            Max: Rs. <span id="slider-max">500000</span></div>
+                    </div>
+
+                    <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
+
+                    <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">POPULAR BRANDS</h2>
+
+                    <div class="grid grid-cols-2">
+                        {% for brand in brands %}
+                            <div class="mb-3 flex items-center">
+                                <input type="checkbox"
+                                       class="checkbox rounded-xs mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
+                                       name="brand" value="{{ brand.pk }}" id="{{ brand }}"
+                                       onclick="this.submit()"/>
+                                <label class="text-[var(--clr-gray-700)]" for="{{ brand }}">{{ brand }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
+
+                    <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">POPULAR TAGS</h2>
+
+                    <div class="grid grid-cols-2">
+                        {% for brand in brands %}
+                            <div class="mb-3 flex items-center">
+                                <input type="checkbox"
+                                       class="checkbox rounded-xs mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
+                                       name="brand" value="{{ brand.pk }}" id="{{ brand }}"
+                                       onclick="this.submit()"/>
+                                <label class="text-[var(--clr-gray-700)]" for="{{ brand }}">{{ brand }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            
+                {% include 'partials/banner/banner_large_1.html' %}
+            </div>
+
+            <div class="col-span-2">
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

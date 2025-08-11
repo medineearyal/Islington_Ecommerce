@@ -251,8 +251,61 @@ section {
     border-color: var(--clr-primary-500);
 }
 
+.section-with-breadcrumb,
 .section-blogs,
 .section-newsletter {
     max-width: unset;
+}
+
+.alert-secondary {
+
+}
+
+.swiper-banner .swiper-pagination {
+    width: fit-content;
+    left: 56px;
+    bottom: 56px;
+}
+
+.swiper-banner .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: var(--clr-gray-900);
+}
+
+/* Slider base track */
+.noUi-base {
+  height: 2px !important;
+  border-radius: 1px !important;
+  background: var(--clr-gray-00);
+}
+
+.noUi-connect {
+  height: 2px !important;
+  border-radius: 1px !important;
+  background: var(--clr-primary-500);
+}
+
+/* Handles (thumbs) */
+.noUi-handle {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50%;
+  background-color: var(--clr-gray-100);
+  border: 1px solid var(--clr-primary-500);
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+}
+
+.noUi-handle::before,
+.noUi-handle::after {
+    all: unset;
+}
+
+.noUi-handle:active {
+  cursor: grabbing;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+.noUi-horizontal {
+    height: inherit;
 }
 
