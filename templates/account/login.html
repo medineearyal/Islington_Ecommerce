@@ -27,6 +27,14 @@
         </div>
 
         <div class="container mx-auto py-25">
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {% for error in form.non_field_errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             <form class="w-[424px] mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm"
                   method="post">
                 <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-500)] font-semibold border-b-1 mb-6">
@@ -48,15 +56,21 @@
                         <p class="validator-hint hidden">
                             Enter valid email address
                         </p>
+
+                        {% if form.login.errors %}
+                            {% for error in form.login.errors %}
+                                <p class="validator-hint">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 
                     <div class="mb-5">
                         <label for="{{ form.password.id_for_label }}"
                                class="block validator mb-2">
-                    <span class="flex justify-between block text-sm text-[var(--clr-gray-900)] mb-2">
-                        {{ form.password.label }}
-                        <a href="" class="text-[var(--clr-secondary-500)]">Forget Password</a>
-                    </span>
+                                <span class="flex justify-between block text-sm text-[var(--clr-gray-900)] mb-2">
+                                    {{ form.password.label }}
+                                    <a href="" class="text-[var(--clr-secondary-500)]">Forget Password</a>
+                                </span>
 
                             {{ form.password }}
                         </label>
@@ -66,6 +80,12 @@
                             <br/>At least one number <br/>At least one lowercase letter <br/>At least one uppercase
                             letter
                         </p>
+
+                        {% if form.password.errors %}
+                            {% for error in form.password.errors %}
+                                <p class="validator-hint">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 
                     <button class="btn btn-shop-now">LOGIN</button>

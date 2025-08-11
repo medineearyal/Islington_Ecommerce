@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Product
+from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals
 
 
 # Register your models here.
@@ -8,21 +8,21 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
 
 
+class ProductImageInline(admin.StackedInline):
+    model = ProductImage
+    extra = 1
+    fk_name = "product"
+
 class ProductAdmin(admin.ModelAdmin):
-    exclude = ("created_at",)
-    list_display = ("id", "name", "category", "price", "stock", "status")
-    search_fields = ("name",)
-    list_filter = ("category",)
-    # prepopulated_fields = {'slug':('name',)}
-    # readonly_fields = ('image_preview',)
+    inlines = (ProductImageInline,)
 
-    # def image_preview(self,obj):
-    # if obj.product_image:
-    # return format_html('<img src="{}" width="80" height="80" style="object-fit:cover;" />',obj.product_image.url)
-    # return "No image"
-    # image_preview.short_description = 'Image'
-
+class BestDealsAdmin(admin.ModelAdmin):
+    filter_horizontal = ("products", )
 
 admin.site.register(Category, CategoryAdmin)
-
+admin.site.register(Tag)
+admin.site.register(Badge)
+admin.site.register(ProductBanner)
+admin.site.register(ProductImage)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(BestDeals, BestDealsAdmin)

@@ -1,0 +1,2933 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "account",
+    "model": "emailaddress"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "account",
+    "model": "emailconfirmation"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "product"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "blogs",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "blogs",
+    "model": "blog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "pages",
+    "model": "page"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sitesetting",
+    "model": "sitesetting"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "users",
+    "model": "authuser"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "debug_toolbar",
+    "model": "historyentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "tag"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "badge"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "productimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "productreview"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "productbanner"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "products",
+    "model": "bestdeals"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7sffr48ysvw76cv4yyn7obibh3zw4xvq",
+  "fields": {
+    "session_data": ".eJxVjE0OgyAQhe_CujGCg6K79iJkmIFISjFR6Kbp3auNGzcveX_fRyDRUnOxb7_GED1b_8KYxJRrSjdhsZbZ1s2vNrKYhBSXzCE9fT4KTOmImxPX_DdnvTX33flcImGJS36crwtqxm3eOTwY7UBKINAKRtfjwNAZ1WrTq6B8B4p6kNp5GQwPPAbYlVoyrAk1i-8PXP5HhA:1ukV4q:XoOhBdgl8O5oa3QuLhSoECh4kQR2DtxNeD_db4BI02I",
+    "expire_date": "2025-08-22T21:56:40.986Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "92qgtk11drdwvlnaq1l7i1ka2c08m8ba",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGll2iH-U9JzBGu_aJIAcKU4qxN1JpBRQjTTvzbxFxLoMcW15jiOLi-jE6bdLoGeuO-AH6n2SNNVlHpPcFXnQJm8T59f1cP8OBrRhW4esuBhDbAsCeWf7Phi3Ze6oGKW0hfO9C6ngrDSQkAis4Yk5IQfx-QLv5Dj5:1ulUeZ:GTBMSOn4iT4MiVcCEOX9udwYr4qt_P3-qnBkDKh-_kU",
+    "expire_date": "2025-08-25T15:41:39.572Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "joothxeavp4fha4mi4pd9h0ffojiwf4s",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGll2iH-U9JzBGu_aJIAcKU4qxN1JpBRQjTTvzbxFxLoMcW15jiOLi-jE6bdLoGeuO-AH6n2SNNVlHpPcFXnQJm8T59f1cP8OBrRhW4esuBhDbAsCeWf7Phi3Ze6oGKW0hfO9C6ngrDSQkAis4Yk5IQfx-QLv5Dj5:1ulX8Y:d9ANsfIj56bF4Sny6rDM8ut1OYF8snZSp3ZVWB-zdw0",
+    "expire_date": "2025-08-25T18:20:46.093Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "oq6djogapmzodwcdotaotp1pgc828clx",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGll2iH-U9JzBGu_aJIAcKU4qxN1JpBRQjTTvzbxFxLoMcW15jiOLi-jE6bdLoGeuO-AH6n2SNNVlHpPcFXnQJm8T59f1cP8OBrRhW4esuBhDbAsCeWf7Phi3Ze6oGKW0hfO9C6ngrDSQkAis4Yk5IQfx-QLv5Dj5:1ulFfz:QDjy-GInlws-JMzNlFsTJGH1kzjCFqan6wg3ynyfF1E",
+    "expire_date": "2025-08-24T23:42:07.710Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "wgzzsylixq2oobjicxtuqxuabm749rqz",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGll2iH-U9JzBGu_aJIAcKU4qxN1JpBRQjTTvzbxFxLoMcW15jiOLi-jE6bdLoGeuO-AH6n2SNNVlHpPcFXnQJm8T59f1cP8OBrRhW4esuBhDbAsCeWf7Phi3Ze6oGKW0hfO9C6ngrDSQkAis4Yk5IQfx-QLv5Dj5:1ukV5i:cWgLDbHZ2muT3UysDaT6wJz43talffPKROMXLNl2wvM",
+    "expire_date": "2025-08-22T21:57:34.717Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "Computer & Laptop",
+    "parent": null,
+    "image": "categories/Slider_1.png",
+    "slug": "computer-laptop",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 2,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Computer Accessories",
+    "parent": null,
+    "image": "categories/Accessories.png",
+    "slug": "computer-accessories",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 3,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Smartphone",
+    "parent": null,
+    "image": "categories/Smartphone.png",
+    "slug": "smartphone",
+    "lft": 1,
+    "rght": 22,
+    "tree_id": 8,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "name": "Headphone",
+    "parent": null,
+    "image": "categories/Headphone.png",
+    "slug": "headphone",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 6,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 5,
+  "fields": {
+    "name": "Mobile Accessories",
+    "parent": null,
+    "image": "",
+    "slug": "mobile-accessories",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 7,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 6,
+  "fields": {
+    "name": "Gaming Console",
+    "parent": null,
+    "image": "",
+    "slug": "gaming-console",
+    "lft": 1,
+    "rght": 4,
+    "tree_id": 5,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 7,
+  "fields": {
+    "name": "Camera & Photo",
+    "parent": null,
+    "image": "categories/Camera.png",
+    "slug": "camera-photo",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 1,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 8,
+  "fields": {
+    "name": "TV & Home Appliances",
+    "parent": null,
+    "image": "categories/TV__Homes.png",
+    "slug": "tv-home-appliances",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 9,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 9,
+  "fields": {
+    "name": "Watches & Accessories",
+    "parent": null,
+    "image": "",
+    "slug": "watches-accessories",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 10,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 10,
+  "fields": {
+    "name": "GPS & Navigation",
+    "parent": null,
+    "image": "",
+    "slug": "gps-navigation",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 4,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 11,
+  "fields": {
+    "name": "Wearable Technology",
+    "parent": null,
+    "image": "",
+    "slug": "wearable-technology",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 11,
+    "level": 0
+  }
+},
+{
+  "model": "products.category",
+  "pk": 12,
+  "fields": {
+    "name": "Iphone",
+    "parent": 3,
+    "image": "",
+    "slug": "iphone",
+    "lft": 6,
+    "rght": 7,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 13,
+  "fields": {
+    "name": "Samsung",
+    "parent": 3,
+    "image": "",
+    "slug": "samsung",
+    "lft": 14,
+    "rght": 15,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 14,
+  "fields": {
+    "name": "Realme",
+    "parent": 3,
+    "image": "",
+    "slug": "realme",
+    "lft": 12,
+    "rght": 13,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 15,
+  "fields": {
+    "name": "Xiaomi",
+    "parent": 3,
+    "image": "",
+    "slug": "xiaomi",
+    "lft": 20,
+    "rght": 21,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 16,
+  "fields": {
+    "name": "Oppo",
+    "parent": 3,
+    "image": "",
+    "slug": "oppo",
+    "lft": 10,
+    "rght": 11,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 17,
+  "fields": {
+    "name": "Vivo",
+    "parent": 3,
+    "image": "",
+    "slug": "vivo",
+    "lft": 18,
+    "rght": 19,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 18,
+  "fields": {
+    "name": "OnePlus",
+    "parent": 3,
+    "image": "",
+    "slug": "oneplus",
+    "lft": 8,
+    "rght": 9,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 19,
+  "fields": {
+    "name": "Huawei",
+    "parent": 3,
+    "image": "",
+    "slug": "huawei",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 20,
+  "fields": {
+    "name": "Infinix",
+    "parent": 3,
+    "image": "",
+    "slug": "infinix",
+    "lft": 4,
+    "rght": 5,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 21,
+  "fields": {
+    "name": "Tecno",
+    "parent": 3,
+    "image": "",
+    "slug": "tecno",
+    "lft": 16,
+    "rght": 17,
+    "tree_id": 8,
+    "level": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 22,
+  "fields": {
+    "name": "XboX",
+    "parent": 6,
+    "image": "",
+    "slug": "xbox",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 5,
+    "level": 1
+  }
+},
+{
+  "model": "products.tag",
+  "pk": 1,
+  "fields": {
+    "name": "Samsung",
+    "slug": "samsung"
+  }
+},
+{
+  "model": "products.tag",
+  "pk": 2,
+  "fields": {
+    "name": "Gaming",
+    "slug": "gaming"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "created": "2025-08-11T18:09:44.605Z",
+    "modified": "2025-08-11T19:03:23.761Z",
+    "name": "Samsung Galaxy S23 Ultra",
+    "price": "160000.00",
+    "description": "Samsung's flagship phone with a 6.8-inch AMOLED display, Snapdragon 8 Gen 2, 200MP camera, and S Pen support.",
+    "stock": 1,
+    "category": 13,
+    "slug": "samsung-galaxy-s23-ultra",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/s23.webp",
+    "is_header_banner": true,
+    "discount": 21,
+    "headline": "Escape the noise, It’s time to hear the magic with Xiaomi Earbuds.",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "created": "2025-08-11T18:10:46.974Z",
+    "modified": "2025-08-11T18:10:46.974Z",
+    "name": "Samsung Galaxy A54 5G",
+    "price": "50000.00",
+    "description": "Mid-range smartphone with a 6.4-inch Super AMOLED display, Exynos 1380 processor, and a versatile triple-camera setup.",
+    "stock": 1,
+    "category": 13,
+    "slug": "samsung-galaxy-a54-5g",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/Samsung-Galaxy-A54-5G-Awesome-Graphite.jpg",
+    "is_header_banner": false,
+    "discount": 0,
+    "headline": null,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "created": "2025-08-11T18:11:36.644Z",
+    "modified": "2025-08-11T18:11:36.644Z",
+    "name": "Samsung Galaxy Z Flip5",
+    "price": "100000.00",
+    "description": "Foldable smartphone featuring a compact clamshell design, 6.7-inch foldable display, and Snapdragon 8 Gen 2 chipset.",
+    "stock": 1,
+    "category": 13,
+    "slug": "samsung-galaxy-z-flip5",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/z-flip.png",
+    "is_header_banner": false,
+    "discount": 0,
+    "headline": null,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "created": "2025-08-11T19:38:27.309Z",
+    "modified": "2025-08-11T19:42:50.277Z",
+    "name": "Xbox Series X",
+    "price": "50000.00",
+    "description": "The most powerful Xbox console with 12 teraflops of processing power, 4K gaming at 60 FPS, and an ultra-fast SSD.",
+    "stock": 1,
+    "category": 22,
+    "slug": "xbox-series-x",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/banner_image_3.png",
+    "is_header_banner": false,
+    "discount": 15,
+    "headline": "Save up to 50% on select Xbox games. Get 3 months of PC Game Pass for $2 USD.",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "created": "2025-08-11T19:39:57.551Z",
+    "modified": "2025-08-11T19:42:59.147Z",
+    "name": "Xbox Series S",
+    "price": "30000.00",
+    "description": "A compact, all-digital Xbox console offering next-gen performance at a more affordable price point.",
+    "stock": 1,
+    "category": 22,
+    "slug": "xbox-series-s",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/Xbox_Series_S.webp",
+    "is_header_banner": false,
+    "discount": 10,
+    "headline": "A compact, all-digital Xbox console offering next-gen performance at a more affordable price point.",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "created": "2025-08-11T19:41:18.977Z",
+    "modified": "2025-08-11T19:43:05.695Z",
+    "name": "Xbox Series X Halo Infinite Edition",
+    "price": "60000.00",
+    "description": "Limited edition Xbox Series X featuring Halo Infinite themed design and exclusive in-game content.",
+    "stock": 1,
+    "category": 22,
+    "slug": "xbox-series-x-halo-infinite-edition",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/Xbox_Series_X_Halo_Infinite_Edition.webp",
+    "is_header_banner": false,
+    "discount": 5,
+    "headline": "Limited edition Xbox Series X featuring Halo Infinite themed design and exclusive in-game content.",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "products.productbanner",
+  "pk": 1,
+  "fields": {
+    "product": 4,
+    "headline": "The most powerful Xbox console with 12 teraflops of processing power, 4K gaming at 60 FPS, and an ultra-fast SSD.",
+    "title": "XboX Consoles",
+    "short_title": "The Best Place To Buy",
+    "is_display": true
+  }
+},
+{
+  "model": "products.productbanner",
+  "pk": 2,
+  "fields": {
+    "product": 1,
+    "headline": "Unleash Next-Level Performance: Discover Samsung’s Flagship Phones",
+    "title": "Home of Samsung Falgships",
+    "short_title": "The Best Place To Buy",
+    "is_display": true
+  }
+},
+{
+  "model": "products.badge",
+  "pk": 1,
+  "fields": {
+    "name": "discount",
+    "product": 1
+  }
+},
+{
+  "model": "products.bestdeals",
+  "pk": 1,
+  "fields": {
+    "created": "2025-08-11T20:35:03.919Z",
+    "modified": "2025-08-11T20:35:09.592Z",
+    "is_active": true,
+    "end_date": "2025-08-31T00:00:00Z",
+    "products": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 1,
+  "fields": {
+    "name": "Computer & Laptop"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 2,
+  "fields": {
+    "name": "Computer Accessories"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 3,
+  "fields": {
+    "name": "Smartphone"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 4,
+  "fields": {
+    "name": "Headphone"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 5,
+  "fields": {
+    "name": "Mobile Accessories"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 6,
+  "fields": {
+    "name": "Gaming Console"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 7,
+  "fields": {
+    "name": "Camera & Photo"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 8,
+  "fields": {
+    "name": "TV & Home Appliances"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 9,
+  "fields": {
+    "name": "Watches & Accessories"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 10,
+  "fields": {
+    "name": "GPS & Navigation"
+  }
+},
+{
+  "model": "blogs.category",
+  "pk": 11,
+  "fields": {
+    "name": "Wearable Technology"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "add_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "change_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "delete_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "view_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "add_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "change_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "delete_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "view_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add product",
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "codename": "add_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change product",
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "codename": "change_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete product",
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "codename": "delete_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view product",
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "codename": "view_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "orders",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "orders",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "orders",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "orders",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add blog",
+    "content_type": [
+      "blogs",
+      "blog"
+    ],
+    "codename": "add_blog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change blog",
+    "content_type": [
+      "blogs",
+      "blog"
+    ],
+    "codename": "change_blog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete blog",
+    "content_type": [
+      "blogs",
+      "blog"
+    ],
+    "codename": "delete_blog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view blog",
+    "content_type": [
+      "blogs",
+      "blog"
+    ],
+    "codename": "view_blog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add page",
+    "content_type": [
+      "pages",
+      "page"
+    ],
+    "codename": "add_page"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change page",
+    "content_type": [
+      "pages",
+      "page"
+    ],
+    "codename": "change_page"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete page",
+    "content_type": [
+      "pages",
+      "page"
+    ],
+    "codename": "delete_page"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view page",
+    "content_type": [
+      "pages",
+      "page"
+    ],
+    "codename": "view_page"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Site Setting",
+    "content_type": [
+      "sitesetting",
+      "sitesetting"
+    ],
+    "codename": "add_sitesetting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Site Setting",
+    "content_type": [
+      "sitesetting",
+      "sitesetting"
+    ],
+    "codename": "change_sitesetting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Site Setting",
+    "content_type": [
+      "sitesetting",
+      "sitesetting"
+    ],
+    "codename": "delete_sitesetting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Site Setting",
+    "content_type": [
+      "sitesetting",
+      "sitesetting"
+    ],
+    "codename": "view_sitesetting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "users",
+      "authuser"
+    ],
+    "codename": "add_authuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "users",
+      "authuser"
+    ],
+    "codename": "change_authuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "users",
+      "authuser"
+    ],
+    "codename": "delete_authuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "users",
+      "authuser"
+    ],
+    "codename": "view_authuser"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add history entry",
+    "content_type": [
+      "debug_toolbar",
+      "historyentry"
+    ],
+    "codename": "add_historyentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change history entry",
+    "content_type": [
+      "debug_toolbar",
+      "historyentry"
+    ],
+    "codename": "change_historyentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete history entry",
+    "content_type": [
+      "debug_toolbar",
+      "historyentry"
+    ],
+    "codename": "delete_historyentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view history entry",
+    "content_type": [
+      "debug_toolbar",
+      "historyentry"
+    ],
+    "codename": "view_historyentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add tag",
+    "content_type": [
+      "products",
+      "tag"
+    ],
+    "codename": "add_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change tag",
+    "content_type": [
+      "products",
+      "tag"
+    ],
+    "codename": "change_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete tag",
+    "content_type": [
+      "products",
+      "tag"
+    ],
+    "codename": "delete_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view tag",
+    "content_type": [
+      "products",
+      "tag"
+    ],
+    "codename": "view_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add badge",
+    "content_type": [
+      "products",
+      "badge"
+    ],
+    "codename": "add_badge"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change badge",
+    "content_type": [
+      "products",
+      "badge"
+    ],
+    "codename": "change_badge"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete badge",
+    "content_type": [
+      "products",
+      "badge"
+    ],
+    "codename": "delete_badge"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view badge",
+    "content_type": [
+      "products",
+      "badge"
+    ],
+    "codename": "view_badge"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add product image",
+    "content_type": [
+      "products",
+      "productimage"
+    ],
+    "codename": "add_productimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change product image",
+    "content_type": [
+      "products",
+      "productimage"
+    ],
+    "codename": "change_productimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete product image",
+    "content_type": [
+      "products",
+      "productimage"
+    ],
+    "codename": "delete_productimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view product image",
+    "content_type": [
+      "products",
+      "productimage"
+    ],
+    "codename": "view_productimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add product review",
+    "content_type": [
+      "products",
+      "productreview"
+    ],
+    "codename": "add_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change product review",
+    "content_type": [
+      "products",
+      "productreview"
+    ],
+    "codename": "change_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete product review",
+    "content_type": [
+      "products",
+      "productreview"
+    ],
+    "codename": "delete_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view product review",
+    "content_type": [
+      "products",
+      "productreview"
+    ],
+    "codename": "view_productreview"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add product banner",
+    "content_type": [
+      "products",
+      "productbanner"
+    ],
+    "codename": "add_productbanner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change product banner",
+    "content_type": [
+      "products",
+      "productbanner"
+    ],
+    "codename": "change_productbanner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete product banner",
+    "content_type": [
+      "products",
+      "productbanner"
+    ],
+    "codename": "delete_productbanner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view product banner",
+    "content_type": [
+      "products",
+      "productbanner"
+    ],
+    "codename": "view_productbanner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add best deals",
+    "content_type": [
+      "products",
+      "bestdeals"
+    ],
+    "codename": "add_bestdeals"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change best deals",
+    "content_type": [
+      "products",
+      "bestdeals"
+    ],
+    "codename": "change_bestdeals"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete best deals",
+    "content_type": [
+      "products",
+      "bestdeals"
+    ],
+    "codename": "delete_bestdeals"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view best deals",
+    "content_type": [
+      "products",
+      "bestdeals"
+    ],
+    "codename": "view_bestdeals"
+  }
+},
+{
+  "model": "users.authuser",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$XEyk29duEjVpLm8r9RxIJj$3IczgUpXwcNo6d+Yd+JyFmOz0yPyDHHS4w+8nQwKogE=",
+    "last_login": "2025-08-08T21:56:40.953Z",
+    "is_superuser": false,
+    "username": "test",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-08-08T21:56:40.433Z",
+    "email": "test@test.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.authuser",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$IBL0ZqBaoBz1neaPDYriJP$FLrHia9tMyAoA+q6+PfDAEZzOL0GqDe+38iyE8Om0LU=",
+    "last_login": "2025-08-11T18:20:46.077Z",
+    "is_superuser": true,
+    "username": "",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-08-08T21:57:24.131Z",
+    "email": "admin@admin.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.authuser",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$SJOcjzMLTDan6gc5AFv7CK$D866Mmv0dMwd5mgNkCOc7M/IswlHpCSqm7ccOIda7H0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-08-11T12:10:58.568Z",
+    "email": "user@test.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "test@test.com"
+    ],
+    "email": "test@test.com",
+    "verified": false,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "user@test.com"
+    ],
+    "email": "user@test.com",
+    "verified": false,
+    "primary": true
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-08-11T17:29:38.419Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "1",
+    "object_repr": "Computer & Laptop",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-08-11T17:29:48.604Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "2",
+    "object_repr": "Computer Accessories",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-08-11T17:29:57.729Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "3",
+    "object_repr": "Smartphone",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-08-11T17:30:04.027Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "4",
+    "object_repr": "Headphone",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-08-11T17:30:11.346Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "5",
+    "object_repr": "Mobile Accessories",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-08-11T17:30:18.711Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "6",
+    "object_repr": "Gaming Console",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-08-11T17:30:25.881Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "7",
+    "object_repr": "Camera & Photo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2025-08-11T17:30:34.979Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "8",
+    "object_repr": "TV & Home Appliances",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-08-11T17:30:43.902Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "9",
+    "object_repr": "Watches & Accessories",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-08-11T17:30:52.528Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "10",
+    "object_repr": "GPS & Navigation",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-08-11T17:31:00.342Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "blogs",
+      "category"
+    ],
+    "object_id": "11",
+    "object_repr": "Wearable Technology",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-08-11T17:37:15.085Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "1",
+    "object_repr": "Computer & Laptop",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2025-08-11T17:37:28.205Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "2",
+    "object_repr": "Computer Accessories",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2025-08-11T17:37:31.750Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "3",
+    "object_repr": "Smartphone",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2025-08-11T17:37:35.382Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "4",
+    "object_repr": "Headphone",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2025-08-11T17:37:39.289Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "5",
+    "object_repr": "Mobile Accessories",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-08-11T17:37:43.013Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "6",
+    "object_repr": "Gaming Console",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-08-11T17:37:46.528Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "7",
+    "object_repr": "Camera & Photo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2025-08-11T17:37:50.181Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "8",
+    "object_repr": "TV & Home Appliances",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-08-11T17:37:53.384Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "9",
+    "object_repr": "Watches & Accessories",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-08-11T17:37:56.724Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "10",
+    "object_repr": "GPS & Navigation",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-08-11T17:37:59.684Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "11",
+    "object_repr": "Wearable Technology",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2025-08-11T17:43:05.809Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "12",
+    "object_repr": "Iphone",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2025-08-11T17:43:15.021Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "13",
+    "object_repr": "Samsung",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2025-08-11T17:43:25.801Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "14",
+    "object_repr": "Realme",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2025-08-11T17:43:38.562Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "15",
+    "object_repr": "Xiaomi",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2025-08-11T17:43:45.625Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "16",
+    "object_repr": "Oppo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2025-08-11T17:43:52.525Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "17",
+    "object_repr": "Vivo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2025-08-11T17:43:59.684Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "18",
+    "object_repr": "OnePlus",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2025-08-11T17:44:06.467Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "19",
+    "object_repr": "Huawei",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2025-08-11T17:44:13.289Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "20",
+    "object_repr": "Infinix",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2025-08-11T17:44:19.101Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "21",
+    "object_repr": "Tecno",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2025-08-11T18:09:21.262Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "tag"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2025-08-11T18:09:44.919Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung Galaxy S23 Ultra",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2025-08-11T18:10:47.270Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "2",
+    "object_repr": "Samsung Galaxy A54 5G",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2025-08-11T18:11:36.947Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "3",
+    "object_repr": "Samsung Galaxy Z Flip5",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2025-08-11T18:36:09.181Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung Galaxy S23 Ultra",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2025-08-11T18:36:13.727Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung Galaxy S23 Ultra",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Is header banner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2025-08-11T18:48:39.752Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "badge"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung Galaxy S23 Ultra_discount",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2025-08-11T18:50:23.996Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung Galaxy S23 Ultra",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Discount\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2025-08-11T19:03:23.764Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Samsung Galaxy S23 Ultra",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Headline\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2025-08-11T19:37:12.229Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "tag"
+    ],
+    "object_id": "2",
+    "object_repr": "Gaming",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2025-08-11T19:38:27.316Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "4",
+    "object_repr": "Xbox Series X",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2025-08-11T19:39:57.852Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "5",
+    "object_repr": "Xbox Series S",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2025-08-11T19:41:18.983Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "6",
+    "object_repr": "Xbox Series X Halo Infinite Edition",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2025-08-11T19:42:15.691Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "22",
+    "object_repr": "XboX",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2025-08-11T19:42:50.280Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "4",
+    "object_repr": "Xbox Series X",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2025-08-11T19:42:59.149Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "5",
+    "object_repr": "Xbox Series S",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2025-08-11T19:43:05.697Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "product"
+    ],
+    "object_id": "6",
+    "object_repr": "Xbox Series X Halo Infinite Edition",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Category\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2025-08-11T19:49:54.180Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "productbanner"
+    ],
+    "object_id": "1",
+    "object_repr": "Xbox Series X_Banner",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2025-08-11T19:51:00.644Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "productbanner"
+    ],
+    "object_id": "2",
+    "object_repr": "Samsung Galaxy S23 Ultra_Banner",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2025-08-11T20:07:43.455Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "1",
+    "object_repr": "Computer & Laptop",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2025-08-11T20:08:21.707Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "3",
+    "object_repr": "Smartphone",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2025-08-11T20:08:53.829Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "4",
+    "object_repr": "Headphone",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2025-08-11T20:09:34.283Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "2",
+    "object_repr": "Computer Accessories",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2025-08-11T20:09:58.498Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "7",
+    "object_repr": "Camera & Photo",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2025-08-11T20:10:26.216Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "category"
+    ],
+    "object_id": "8",
+    "object_repr": "TV & Home Appliances",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2025-08-11T20:35:03.924Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "bestdeals"
+    ],
+    "object_id": "1",
+    "object_repr": "Best Deals_2025-08-11 20:35:03.919836+00:00_True",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2025-08-11T20:35:09.595Z",
+    "user": [
+      "admin@admin.com"
+    ],
+    "content_type": [
+      "products",
+      "bestdeals"
+    ],
+    "object_id": "1",
+    "object_repr": "Best Deals_2025-08-11 20:35:03.919836+00:00_True",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+}
+]

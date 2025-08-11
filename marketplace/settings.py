@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 import sys
 from pathlib import Path
-
+from django.contrib import messages
 import dj_database_url
 from decouple import config
 
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "apps.pages",
     "apps.sitesetting",
     "apps.users",
+    "apps.common",
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,6 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-
 ROOT_URLCONF = "marketplace.urls"
 
 TEMPLATES = [
@@ -98,7 +98,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "apps.pages.context_processor.pages_links",
                 "apps.sitesetting.context_processors.site_setting",
-                "apps.pages.context_processor.login_form",
+                "apps.pages.context_processor.header_context",
             ],
         },
     },
@@ -341,6 +341,15 @@ ACCOUNT_FORMS = {
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# Messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 TESTING = "test" in sys.argv or "PYTEST_VERSION" in os.environ
 

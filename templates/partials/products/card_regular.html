@@ -3,12 +3,16 @@
 <div class="card rounded-none border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] h-[296px]">
     <figure class="indicator w-full">
         <img
-                src="{% static 'images/products/prodcut_1.png' %}"
-                alt="Shoes"/>
+                {% if product.thumbnail %}
+                    src="{{ product.thumbnail.url }}"
+                {% else %}
+                    src="{% static 'images/products/prodcut_1.png' %}"
+                {% endif %}
+                alt="{{ product }}"/>
         <span class="indicator-item badge badge-primary translate-none rounded-none top-[12px] left-[12px]">SOLD OUT</span>
     </figure>
     <div class="card-body">
-        <h2 class="card-title text-[var(--clr-gray-900)] text-sm">Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...</h2>
-        <span class="text-[var(--clr-secondary-500)]">Rs. 2,300</span>
+        <h2 class="card-title text-[var(--clr-gray-900)] text-sm">{{ product.name }}</h2>
+        <span class="text-[var(--clr-secondary-500)]">Rs. {{ product.price }}</span>
     </div>
 </div>

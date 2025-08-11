@@ -3,13 +3,17 @@
 <div class="card bg-[var(--clr-gray-00)] shadow-sm flex-row items-center p-3 gap-3 w-[312px]">
     <figure class="rounded-none w-full">
         <img class="w-[80px] h-[80px]"
-             src="{% static 'images/menu/menu_prod_1.png' %}"
+             {% if product.thumbnail %}
+                 src="{{ product.thumbnail.url }}"
+             {% else %}
+                 src="{% static 'images/menu/menu_prod_1.png' %}"
+             {% endif %}
              alt=""/>
     </figure>
     <div class="card-body p-0">
-        <h2 class="card-title text-[var(--clr-gray-900)] text-wrap text-sm">Samsung Electronics Samsung Galexy S21 5G</h2>
+        <h2 class="card-title text-[var(--clr-gray-900)] text-wrap text-sm">{{ product.name }}</h2>
         <div class="card-actions justify-start text-sm font-normal">
-            <span class="text-info">$160</span>
+            <span class="text-info">Rs. {{ product.price }}</span>
         </div>
     </div>
 </div>
