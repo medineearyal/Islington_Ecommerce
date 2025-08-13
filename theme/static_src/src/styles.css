@@ -61,3 +61,9 @@
     -webkit-mask: url('/static/images/icons/ArrowRight.svg') no-repeat center / contain;
     mask: url('/static/images/icons/ArrowRight.svg') no-repeat center / contain;
 }
+
+.btn-danger {
+    @apply w-full;
+    background-color: var(--clr-danger-500);
+    border-color: var(--clr-danger-500);
+}

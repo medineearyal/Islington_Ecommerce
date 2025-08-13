@@ -35,8 +35,9 @@
                 </div>
             {% endif %}
 
-            <form class="w-[424px] mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm"
+            <form class="w-[424px] relative mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md"
                   method="post">
+            <span class="absolute inset-0 rounded-xl p-[2px] bg-gradient-to-r from-[var(--clr-danger-500)] to-[var(--clr-danger-700)] -z-10"></span>
                 <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-500)] font-semibold border-b-1 mb-6">
                     <a href="{% url 'account_login' %}" role="tab" class="tab tab-active flex-1">Sign In</a>
                     <a href="{% url 'account_signup' %}" role="tab" class="tab flex-1">Sign Up</a>

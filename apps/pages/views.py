@@ -46,19 +46,37 @@ class ShopPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ShopPageView, self).get_context_data(**kwargs)
 
+        data = self.request.GET.copy()
+        products = Product.objects.all()
+
+        category = data.get("category")
+        min_price = data.get("min")
+        max_price = data.get("max")
+        brand = data.get("brand")
+        tag = data.get("tag")
+
+        if category:
+            products = products.filter(category__slug=category)
+
+        if min_price and max_price:
+            products = products.filter(price__gte=min_price, price__lte=max_price)
+        elif min_price:
+            products = products.filter(price__gte=min_price)
+        elif max_price:
+            products = products.filter(price_lte=max_price)
+
+        if brand:
+            products = products.filter(category__slug=brand)
+
+        if tag:
+            products = products.filter(tags__tags__slug=tag)
+
+
+
         context.update({
             "categories": Category.objects.filter(parent__isnull=True),
             "brands": Category.objects.filter(level=1),
+            "products": products,
         })
 
         return context
-
-
-def page(request):
-    all_pages = Page.objects.all()
-    return render(request, "pages/page_details.html", {"pages": all_pages})
-
-
-def page_detail(request, slug):
-    page = get_object_or_404(Page, slug=slug)
-    return render(request, "pages/page_details.html", {"page": page})

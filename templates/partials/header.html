@@ -79,8 +79,22 @@
                         <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
                     </button>
                 {% else %}
-                    {{ request.user }}
-                    <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                    <ul
+                            tabindex="0"
+                            class="menu menu-horizontal">
+                        <li>
+                            <details>
+                                <summary class="flex gap-2 items-center shadow-md">
+                                    <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                                    {{ request.user }}
+                                </summary>
+                                <ul class="p-0 w-full bg-[var(--clr-gray-00)] text-[var(--gray-900)] rounded-none">
+                                    <li><a href="">Profile</a></li>
+                                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
                 {% endif %}
 
             </li>
@@ -102,7 +116,8 @@
                                 {% for category in header_categories %}
                                     {% if category.is_leaf_node %}
                                         <li>
-                                            <a href="{% url 'shop' %}?type={{ category.pk }}" class="px-4 py-2">{{ category }}</a>
+                                            <a href="{% url 'shop' %}?type={{ category.pk }}"
+                                               class="px-4 py-2">{{ category }}</a>
                                         </li>
                                     {% else %}
                                         <li class="static group sub-menu">

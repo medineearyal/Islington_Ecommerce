@@ -95,6 +95,8 @@
 
     --color-error: var(--clr-danger-400);
     --color-error-content: var(--clr-danger-800);
+
+    --lg-danger: linear-gradient(to right, var(--clr-danger-500), var(--clr-danger-600), var(--clr-danger-700)) 1;
 }
 
 html {
@@ -147,7 +149,7 @@ section {
 
     opacity: 0;
 
-    transition: display 1s, opacity 1s;
+    transition: display 0.5s, opacity 0.5s;
     transition-behavior: allow-discrete;
 }
 
@@ -183,7 +185,7 @@ section {
 
     opacity: 0;
 
-    transition: display 1s, opacity 1s;
+    transition: display 0.5s, opacity 0.5s;
     transition-behavior: allow-discrete;
 }
 
@@ -273,26 +275,27 @@ section {
 
 /* Slider base track */
 .noUi-base {
-  height: 2px !important;
-  border-radius: 1px !important;
-  background: var(--clr-gray-00);
+    height: 2px !important;
+    border-radius: 1px !important;
+    background: var(--clr-gray-00);
 }
 
 .noUi-connect {
-  height: 2px !important;
-  border-radius: 1px !important;
-  background: var(--clr-primary-500);
+    height: 2px !important;
+    border-radius: 1px !important;
+    background: var(--clr-primary-500);
 }
 
 /* Handles (thumbs) */
 .noUi-handle {
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50%;
-  background-color: var(--clr-gray-100);
-  border: 1px solid var(--clr-primary-500);
-  cursor: grab;
-  transition: box-shadow 0.2s ease;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50%;
+    background-color: var(--clr-gray-100);
+    border: 1px solid var(--clr-primary-500);
+    cursor: grab;
+    transition: box-shadow 0.2s ease;
+    right: 0 !important;
 }
 
 .noUi-handle::before,
@@ -301,11 +304,58 @@ section {
 }
 
 .noUi-handle:active {
-  cursor: grabbing;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    cursor: grabbing;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .noUi-horizontal {
     height: inherit;
 }
 
+.alert {
+    border-radius: 0;
+}
+
+.menu ul {
+    padding: 0;
+}
+
+.menu li {
+    border-radius: 0;
+}
+
+.menu li a {
+    color: var(--clr-gray-900);
+    padding: 0.5rem;
+}
+
+.menu li a:hover,
+.menu li:hover {
+    background-color: var(--clr-secondary-700);
+    color: var(--clr-gray-00);
+    transition: background-color 500ms;
+}
+
+@keyframes progressShrink {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.alert.fade-out {
+    animation: fadeOut 0.3s ease-out 5s forwards;
+}
+
+.alert.fade-out .progress-bar {
+    animation: progressShrink 5s linear forwards;
+}

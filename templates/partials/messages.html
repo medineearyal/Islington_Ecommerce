@@ -1,5 +1,6 @@
 {% for message in messages %}
-    <div class="alert {{ message.tags }}" role="alert">
-        {{ message }}
+    <div class="relative alert {{ message.tags }} fade-out" role="alert">
+        <div class="pr-6">{{ message }}</div>
+        <div class="absolute bottom-0 left-0 h-1 bg-current progress-bar"></div>
     </div>
 {% endfor %}
