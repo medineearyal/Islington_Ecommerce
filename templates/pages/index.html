@@ -103,7 +103,11 @@
             <div class="flex justify-between items-center mb-6">
                 <h2 class="flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
                     Best Deals
-                    <span class="text-sm">Deal ends in <span id="best-deal-remaining-time" class="text-base px-3 py-2 bg-[var(--clr-warning-300)]" data-end-date="{{ best_deals.iso_end_date }}"></span></span>
+                    <span class="text-sm">
+                        Deal ends in
+                        <span id="best-deal-remaining-time" class="text-base px-3 py-2 bg-[var(--clr-warning-300)]"
+                              data-end-date="{{ best_deals.iso_end_date }}"></span>
+                    </span>
                 </h2>
 
                 <a href="{% url 'shop' %}" class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
@@ -120,16 +124,7 @@
                         {% endif %}
                     </figure>
 
-                    <div class="ratings flex items-center mb-1.5">
-                        <div class="flex gap-0.5">
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                        </div>
-                        <span class="text-[var(--clr-gray-500)]">(52,677)</span>
-                    </div>
+                    {% include "partials/products/ratings.html" with rating=products.average_ratings %}
 
                     <div class="mb-6">
                         <h3 class="text-[var(--clr-gray-900)]">{{ first_prod.name }}</h3>
@@ -154,7 +149,8 @@
                             ADD TO CART
                         </a>
 
-                        <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                        <a href="{% url 'products:detail' first_prod.slug %}"
+                           class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
                             <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
                         </a>
                     </div>
@@ -227,14 +223,9 @@
                 </div>
 
                 <div class="grid grid-cols-4 gap-4">
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
+                    {% for product in best_deals.products.all %}
+                        {% include 'partials/products/card_regular_rating.html' with product=product %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

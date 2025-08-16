@@ -1,8 +1,0 @@
-{% extends 'master/base.html' %}
-{% block content %}
-<img src="{{ product.product_image}}" alt="{{product.name}}" />
-<h2>{{ product.name }}</h2>
-<p><strong>Price:</strong> Rs. {{ product.price }}</p>
-<p>{{ product.description }}</p>
-<a href="{% url 'products' %}">← Back to Products</a>
-{% endblock %}

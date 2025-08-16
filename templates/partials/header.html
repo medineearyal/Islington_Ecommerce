@@ -73,7 +73,7 @@
                     <img src="{% static 'images/icons/Heart.svg' %}" alt="Favorites">
                 </a>
             </li>
-            <li>
+            <li class="user-menu">
                 {% if not request.user.is_authenticated %}
                     <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login">
                         <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>

@@ -24,7 +24,7 @@
     />
 
     <!-- noUISlider -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css"/>
 
 
     {% tailwind_css %}
@@ -51,9 +51,6 @@
 <main>
     {% block content %}
     {% endblock %}
-
-    {% block extra_js %}
-    {% endblock %}
 </main>
 
 <!-- Footer -->
@@ -65,7 +62,15 @@
 <!-- noUISlider -->
 <script src="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js"></script>
 
+<!-- HTMX -->
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
+        integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
+        crossorigin="anonymous"></script>
+
 <script src="{% static 'js/script.js' %}"></script>
+
+{% block extra_js %}
+{% endblock %}
 
 </body>
 </html>

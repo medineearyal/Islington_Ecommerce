@@ -1,6 +1,7 @@
 {% load static %}
+{% load currency %}
 
-<div class="card rounded-none border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] h-[296px]">
+<a href="{% url 'products:detail' product.slug %}" class="card rounded-none border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] h-[296px]">
     <figure class="indicator w-full">
         <img
                 {% if product.thumbnail %}
@@ -13,6 +14,6 @@
     </figure>
     <div class="card-body">
         <h2 class="card-title text-[var(--clr-gray-900)] text-sm">{{ product.name }}</h2>
-        <span class="text-[var(--clr-secondary-500)]">Rs. {{ product.price }}</span>
+        <span class="text-[var(--clr-secondary-500)]">{{ product.price|nepali_currency }}</span>
     </div>
-</div>
+</a>

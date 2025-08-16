@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% load static %}
+{% load currency %}
+
+{% block title %}Islington Ecommerce - {{ product.name }}{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include "partials/breadcrumb.html" %}
+
+        <div class="container mx-auto">
+            <div class="grid grid-cols-2 justify-center gap-14 pt-8 pb-18">
+                <div class="flex flex-col gap-4">
+                    <div class="product-main-swiper overflow-hidden w-full h-[414px] rounded-sm border border-[var(--clr-gray-100)] text-center">
+                        <div class="swiper-wrapper">
+                            {% for image in product.product_image.all %}
+                                <div class="swiper-slide w-full flex items-center justify-center">
+                                    <img class="h-full w-full object-cover object-center" src="{{ image.image.url }}"
+                                         alt=""/>
+                                </div>
+                            {% empty %}
+                                <div class="swiper-slide w-full flex items-center justify-center">
+                                    <img class="h-full w-full object-cover object-center"
+                                         src="{{ product.thumbnail.url }}"
+                                         alt=""/>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {% if product.product_image.exists %}
+                        <div class="thumb-container relative w-full">
+                            <div class="thumb-swiper overflow-hidden">
+                                <div class="swiper-wrapper">
+                                    {% for image in product.product_image.all %}
+                                        <div class="swiper-slide">
+                                            <img class="mx-auto w-[96px] object-center object-cover aspect-square border-4 border-[var(--clr-gray-100)] rounded-xs"
+                                                 src="{{ image.image.url }}" alt=""/>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    {% include 'partials/products/ratings.html' with rating=product.overall_ratings %}
+
+                    <h2 class="text-[var(--clr-gray-900)] text-xl pb-4">{{ product.name }}</h2>
+
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <p class="text-sm text-[var(--clr-gray-600)] mb-2">
+                                SKU: <span class="text-[var(--clr-gray-900)] font-semibold">{{ product.sku }}</span></p>
+                            <p class="text-[var(--clr-gray-600)] mb-2">
+                                Brand: <span class="text-[var(--clr-gray-900)] font-semibold">{{ product.category }}</span>
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-[var(--clr-gray-600)] mb-2">
+                                Availability: <span
+                                    class="{% if product.is_available.1 %}text-[var(--clr-success-500)]{% else %}text-[var(--clr-danger-500)]{% endif %} font-semibold">{{ product.is_available.0 }}</span>
+                            </p>
+                            <p class="text-[var(--clr-gray-600)] mb-2">Category: <span
+                                    class="text-[var(--clr-gray-900)] font-semibold">{{ product.category.parent }}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    {% if product.discounted_price != product.price %}
+                        <p class="my-6 text-[var(--clr-secondary-500)] font-semibold text-2xl flex items-center">
+                            {{ product.discounted_price|nepali_currency }} <span
+                                class="text-[var(--clr-gray-500)] text-lg line-through">{{ product.price|nepali_currency }}</span>
+                            <span
+                                    class="badge rounded-xs ml-3 text-[var(--clr-gray-900)] bg-[var(--clr-warning-400)] font-semibold py-[5px] border-0">{{ product.discount }}% OFF</span>
+                        </p>
+                    {% else %}
+                        <p class="my-6 text-[var(--clr-secondary-500)] font-semibold text-2xl">{{ product.price|nepali_currency }}</p>
+                    {% endif %}
+
+                    <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
+
+                    {% with attributes=product.attribute_set.all %}
+                        <div class="grid grid-rows-2 gap-4 mb-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <p class="text-[var(--clr-gray-900)] text-sm mb-2">Color</p>
+                                    {% for color in product.colors.all %}
+                                        <input
+                                                type="radio"
+                                                name="color"
+                                                value="{{ color }}"
+                                                id="color-{{ forloop.counter }}"
+                                                style="--tw-before-bg: {{ color.color_code }}"
+                                                class="radio w-11 h-11 text-[var(--tw-before-bg)] p-1.5 checked:border-3 checked:border-[var(--clr-primary-500)] checked:bg-transparent before:bg-[var(--tw-before-bg)]"
+                                        />
+                                    {% endfor %}
+                                </div>
+
+                                {% if attributes.0.attributes.exists %}
+                                    <div>
+                                        <p class="text-[var(--clr-gray-900)] text-sm mb-2">{{ attributes.0.name }}</p>
+                                        <select
+                                                class="focus:bg-transparent focus:text-[var(--clr-gray-700)] focus:border-[var(--clr-gray-100)] select select-ghost text-[var(--clr-gray-700)] bg-[var(--clr-gary-00)] rounded-sm border border-[var(--clr-gray-100)]"
+                                                name="{{ attributes.0.name|slugify }}"
+                                        >
+                                            {% for attribute in attributes.0.attributes.all %}
+                                                <option>{{ attribute.value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                {% for attribute in attributes|slice:"1:4" %}
+                                    {% if attribute.attributes.exists %}
+                                        <div>
+                                            <p class="text-[var(--clr-gray-900)] text-sm mb-2">{{ attribute.name }}</p>
+                                            <select
+                                                    class="focus:bg-transparent focus:text-[var(--clr-gray-700)] focus:border-[var(--clr-gray-100)] select select-ghost text-[var(--clr-gray-700)] bg-[var(--clr-gary-00)] rounded-sm border border-[var(--clr-gray-100)]"
+                                                    name="{{ attribute.name|slugify }}"
+                                            >
+                                                {% for attr in attribute.attributes.all %}
+                                                    <option value="{{ attr.value }}">{{ attr.value }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endwith %}
+
+                    <div class="flex flex-wrap pt-3 gap-4 mb-6">
+                        <div class="flex justify-between items-center border-2 border-[var(--clr-gray-100)] px-5">
+                            <span>
+                                <img src="{% static 'images/icons/Minus.svg' %}" class="w-4 h-4" alt="" onclick="decreaseStock(this)" />
+                            </span>
+                            <input class="input text-center bg-[var(--clr-gray-00)] text-[var(--clr-gray-700)] border-none focus:outline-none focus:border-none focus:shadow-none no-spinner"
+                                   type="number" min="1" name="quantity" max="{{ product.stock }}" value="1" onchange="checkForStockOverflow(this)" />
+                            <span>
+                                <img src="{% static 'images/icons/Plus.svg' %}" class="w-4 h-4" alt="" onclick="increaseStock(this)" />
+                            </span>
+                        </div>
+
+                        <a class="btn btn-primary cart-icon flex-1 h-auto disabled:pointer-events-none">
+                            ADD TO CART
+                        </a>
+
+                        <a class="btn btn-primary btn-outline no-icon h-auto">
+                            BUY NOW
+                        </a>
+                        <div class="stock-error text-[var(--clr-danger-500)] text-sm text-center py-4 w-full hidden">
+                            Only {{ product.stock }} stock is avaiable
+                        </div>
+                    </div>
+
+                    <div class="flex gap-6">
+                        <a class="flex items-center gap-1 text-[var(--clr-gray-700)]">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.625 7.49803 3.01546 6.40585 3.72996 5.53431C4.44445 4.66277 5.43884 4.0657 6.54393 3.84468C7.64903 3.62366 8.79657 3.79235 9.79131 4.32204C10.7861 4.85174 11.5665 5.70972 12 6.75001C12.4335 5.70972 13.2139 4.85174 14.2087 4.32204C15.2034 3.79235 16.351 3.62366 17.4561 3.84468C18.5612 4.0657 19.5555 4.66277 20.27 5.53431C20.9845 6.40585 21.375 7.49803 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
+                                      stroke="var(--clr-gray-700)" stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+
+                            Add to Wishlist
+                        </a>
+
+                        <a class="flex items-center gap-1 text-[var(--clr-gray-700)]">
+                            <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
+                            Add to Compare
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs-container border border-[var(--clr-gray-100)]">
+                <!-- Tab List -->
+                <div class="flex border-b border-gray-300 justify-center">
+                    {% for description in product.descriptions.all %}
+                        <button class="tab-btn px-5 py-4.5 text-gray-500 hover:text-gray-900 uppercase {% if forloop.first %}active{% endif %}"
+                                data-tab="{{ description.title|slugify }}">{{ description.title }}
+                        </button>
+                    {% endfor %}
+
+                    {% if product.reviews.exists %}
+                        <button class="tab-btn px-5 py-4.5 text-gray-500 hover:text-gray-900 uppercase"
+                                data-tab="reviews">Reviews
+                        </button>
+                    {% endif %}
+                </div>
+
+                <!-- Tab Content -->
+                <div class="p-10">
+                    {% for description in product.descriptions.all %}
+                        <div class="tab-panel p-4 text-[var(--clr-gray-600)] {% if not forloop.first %}hidden{% endif %}"
+                             id="{{ description.title|slugify }}">
+                            {{ description.description|safe }}
+                        </div>
+                    {% endfor %}
+
+                    {% if product.reviews.exists %}
+                        <div id="reviews" class="tab-panel p-4 text-[var(--clr-gray-600)] hidden">
+                            {% include 'partials/products/reviews_list.html' %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="py-18">
+                <h2 class="text-base font-semibold uppercase text-[var(--clr-gray-900)]">Related Products</h2>
+                <div class="grid grid-cols-4 gap-6">
+                    {% for related_product in related_products %}
+                        {% include "partials/menu/product_card.html" with product=related_product %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.querySelectorAll(".tab-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const tabId = button.getAttribute("data-tab");
+
+                document.querySelectorAll(".tab-btn").forEach(btn =>
+                    btn.classList.remove("active")
+                );
+
+                document.querySelectorAll(".tab-panel").forEach(panel =>
+                    panel.classList.add("hidden")
+                );
+
+                button.classList.add("active");
+
+                document.getElementById(tabId).classList.remove("hidden");
+            });
+        });
+
+        const tablesInDescriptions = document.querySelectorAll(".tab-panel table");
+        tablesInDescriptions.forEach(table => {
+            table.classList.add("table");
+            table.parentElement.classList.remove("table");
+
+            const trAll = table.querySelectorAll("tbody tr");
+            trAll.forEach(tr => {
+                tr.classList.add("hover:bg-[var(--clr-gray-100)]");
+            })
+        });
+    </script>
+{% endblock %}

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_ckeditor_5",
     "tailwind",
     "theme",
+    "rest_framework",
     "allauth",
     "allauth.account",
     # Local Apps
@@ -96,9 +97,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "apps.pages.context_processor.pages_links",
                 "apps.sitesetting.context_processors.site_setting",
                 "apps.pages.context_processor.header_context",
+                "apps.common.context_processors.breadcrumbs"
             ],
         },
     },
@@ -377,3 +378,11 @@ else:
         from .prod import *  # noqa
     except ImportError:
         pass
+
+
+# Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

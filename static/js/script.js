@@ -1,3 +1,23 @@
+const thumbSwiper = new Swiper(".thumb-swiper", {
+    direction: 'horizontal',
+    slidesPerView: 6,
+    watchSlidesProgress: true,
+    watchSlideVisibility: true,
+})
+
+const productMainSwiper = new Swiper(".product-main-swiper", {
+    slidesPerView: 1,
+
+    navigation: {
+        nextEl: ".thumb-container .swiper-button-next",
+        prevEl: ".thumb-container .swiper-button-prev",
+    },
+
+    thumbs: {
+        swiper: thumbSwiper,
+    }
+})
+
 const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     speed: 500,
@@ -77,14 +97,20 @@ window.addEventListener("DOMContentLoaded", function () {
         const minOutput = document.getElementById('slider-min');
         const maxOutput = document.getElementById('slider-max');
 
+        const minPrice = Number(minOutput.getAttribute("data-min-price")) || 0;
+        const maxPrice = Number(maxOutput.getAttribute("data-max-price")) || 0;
+
+
         noUiSlider.create(slider, {
-            start: [100, 900],
+            start: [
+                minPrice + 10000, maxPrice - 10000
+            ],
             connect: true,
             range: {
-                'min': 0,
-                'max': 1000
+                'min': minPrice,
+                'max': maxPrice
             },
-            step: 10,
+            step: 1000,
             tooltips: [true, true],
             format: {
                 to: value => Math.round(value),
@@ -92,9 +118,85 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        slider.noUiSlider.on('update', function (values) {
-            minOutput.textContent = values[0];
-            maxOutput.textContent = values[1];
+        slider.noUiSlider.on('change', function (values) {
+            minOutput.value = values[0];
+            maxOutput.value = values[1];
         });
     }
+
+    const searchFilterForm = document.getElementById("search-filter-form");
+    if (searchFilterForm) {
+        searchFilterForm.addEventListener("submit", function (e) {
+            const minField = searchFilterForm.querySelector("[name=min-price]");
+            const maxField = searchFilterForm.querySelector("[name=max-price]");
+
+            const minPrice = Number(minField?.value) || 0;
+            const maxPrice = Number(maxField?.value) || 0;
+
+            if (minPrice > maxPrice) {
+                e.preventDefault();
+
+                const error = document.getElementById("price-range-error");
+                error.classList.add("block");
+                error.classList.remove("hidden");
+                error.innerHTML = "Max Price Cannot Be Smaller Than Min Price";
+            }
+
+            const urlParms = new URLSearchParams(window.location.search);
+            const minPrevPrice = urlParms.get("min-price");
+            const maxPrevPrice = urlParms.get("max-price");
+
+            if (minPrice === 0 && maxPrice === 0) {
+                if (minPrevPrice && maxPrevPrice) {
+                    minField.value = minPrevPrice;
+                    maxField.value = maxPrevPrice;
+                }
+            }
+        })
+    }
 });
+
+function priceReset(elem) {
+    const minPriceInput = document.querySelector("[name=min_price]");
+    const maxPriceInput = document.querySelector("[name=max_price]");
+
+    minPriceInput.value = 0;
+    maxPriceInput.value = 0;
+}
+
+function decreaseStock(elem) {
+    const stockElem = elem.parentElement.parentElement.querySelector("input[type=number]");
+    const currentValue = Number(stockElem.value);
+
+    if (currentValue < Number(elem.getAttribute("min"))) {
+        stockElem.value = currentValue - 1;
+    }
+}
+
+function increaseStock(elem) {
+    const stockElem = elem.parentElement.parentElement.querySelector("input[type=number]");
+    const currentValue = Number(stockElem.value);
+
+    if (currentValue < Number(elem.getAttribute("max"))) {
+        stockElem.value = currentValue + 1;
+    }
+}
+
+function checkForStockOverflow(elem) {
+    const currentValue = Number(elem.value);
+    const parent = elem.parentElement.parentElement;
+    const stockError = parent.querySelector(".stock-error");
+    const cartBtn = parent.querySelector(".cart-icon");
+
+    if (currentValue > Number(elem.getAttribute("max"))) {
+        stockError.classList.remove("hidden");
+        cartBtn.setAttribute("disabled", "disabled");
+    }else {
+        stockError.classList.add("hidden");
+        cartBtn.removeAttribute("disabled");
+    }
+}
+
+function addToCart() {
+
+}
