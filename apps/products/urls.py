@@ -8,4 +8,5 @@ app_name = "products"
 urlpatterns = [
     path("", RedirectView.as_view(pattern_name="shop", permanent=True)),
     path("<str:slug>/", views.ProductDetailView.as_view(), name="detail"),
+    path("cart/<int:pk>/", views.CartView.as_view(), name="cart"),
 ]

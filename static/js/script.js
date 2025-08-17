@@ -196,7 +196,3 @@ function checkForStockOverflow(elem) {
         cartBtn.removeAttribute("disabled");
     }
 }
-
-function addToCart() {
-
-}

@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView, DetailView
 from rest_framework.views import APIView
 
@@ -50,13 +51,76 @@ class ProductDetailView(DetailView):
 
             return render(request, self.template_name, context=context)
 
-
-
     def get_object(self, queryset=None):
         return get_object_or_404(
             Product.objects.prefetch_related(
-            "product_image",
-            "colors",
-            "attribute_set__attributes",
-            "descriptions"
-        ), slug=self.kwargs["slug"])
+                "product_image",
+                "colors",
+                "attribute_set__attributes",
+                "descriptions"
+            ), slug=self.kwargs["slug"])
+
+
+class CartView(TemplateView):
+    template_name = "partials/products/cart.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        action = request.GET.get("action")
+        product_id = kwargs.get("pk")
+        cart = request.session.get("cart", {})
+        quantity = request.GET.get("quantity")
+
+        if action == "add":
+            product = get_object_or_404(Product, id=product_id)
+
+            if str(product_id) in cart:
+                if quantity:
+                    cart[str(product_id)]["quantity"] += int(quantity)
+                else:
+                    cart[str(product_id)]["quantity"] += 1
+            else:
+                cart[str(product_id)] = {
+                    "name": product.name,
+                    "quantity": int(quantity) if quantity else 1,
+                    "price": float(product.price),
+                    "discounted_price": float(product.discounted_price),
+                    "discount": product.discount,
+                    "thumbnail": product.thumbnail.url,
+                }
+            request.session["cart"] = cart
+        elif action == "remove":
+            cart = request.session.get("cart")
+            cart.pop(str(product_id), None)
+            request.session["cart"] = cart
+        elif action == "update":
+            if str(product_id) in cart:
+                if cart[str(product_id)]["quantity"] != quantity:
+                    cart[str(product_id)]["quantity"] = quantity
+
+        total_price = sum(
+            [int(item["quantity"]) * float(item["price"] if not item["discount"] else item["discounted_price"]) for item
+             in cart.values()])
+
+        extra_update_html = f"""
+        <span id="cart-count" hx-swap-oob="true" class="absolute -top-1 -right-1 bg-[var(--clr-gray-00)] text-[var(--clr-secondary-700)] text-xs w-5 h-5 flex items-center justify-center rounded-full">
+            {len(cart)}
+        </span>
+        
+        <span id="total-price" hx-swap-oob="true">
+            {total_price}
+        </span>
+        
+        <span class="text-[var(--clr-gray-600)]" id="cart-items-inner" hx-swap-oob="true">({len(cart)})</span>
+        """
+
+        context.update({
+            "cart": cart,
+            "total_price": total_price,
+        })
+
+        template_string = render_to_string(self.template_name, context, request=request)
+        final_html = template_string + extra_update_html
+
+        return HttpResponse(final_html)

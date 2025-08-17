@@ -98,8 +98,9 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "apps.sitesetting.context_processors.site_setting",
-                "apps.pages.context_processor.header_context",
-                "apps.common.context_processors.breadcrumbs"
+                "apps.pages.context_processors.header_context",
+                "apps.common.context_processors.breadcrumbs",
+                "apps.products.context_processors.cart_total_sum"
             ],
         },
     },

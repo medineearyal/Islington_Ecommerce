@@ -1,0 +1,37 @@
+{% load static %}
+
+<div class=" bg-black/20 h-full w-full flex items-center justify-center gap-2">
+    <a class="group/inner h-[48px] w-[48px] bg-[var(--clr-gray-00)] p-3 rounded-full hover:bg-[var(--clr-primary-500)] hover:cursor-pointer">
+        <svg class="stroke-[var(--clr-gray-700)] group-hover/inner:stroke-white" width="24" height="24" viewBox="0 0 24 24"
+             fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 20.25C12 20.25 2.625 15 2.625 8.62501C2.625 7.49803 3.01546 6.40585 3.72996 5.53431C4.44445 4.66277 5.43884 4.0657 6.54393 3.84468C7.64903 3.62366 8.79657 3.79235 9.79131 4.32204C10.7861 4.85174 11.5665 5.70972 12 6.75001C12.4335 5.70972 13.2139 4.85174 14.2087 4.32204C15.2034 3.79235 16.351 3.62366 17.4561 3.84468C18.5612 4.0657 19.5555 4.66277 20.27 5.53431C20.9845 6.40585 21.375 7.49803 21.375 8.62501C21.375 15 12 20.25 12 20.25Z"
+                  stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+
+    <a
+            hx-get="{% url 'products:cart' product.pk %}?action=add"
+            hx-target="#cart-list"
+            hx-swap="innerHTML"
+            class="group/inner h-[48px] w-[48px] bg-[var(--clr-gray-00)] p-3 rounded-full hover:bg-[var(--clr-primary-500)] hover:cursor-pointer"
+    >
+        <svg class="stroke-[var(--clr-gray-700)] group-hover/inner:stroke-white" width="21" height="20" viewBox="0 0 21 20"
+             fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.75 16.375C7.02614 16.375 7.25 16.5989 7.25 16.875C7.25 17.1511 7.02614 17.375 6.75 17.375C6.47386 17.375 6.25 17.1511 6.25 16.875C6.25 16.5989 6.47386 16.375 6.75 16.375Z"
+                  fill="white" stroke="" stroke-width="1.5"/>
+            <path d="M14.875 18.125C15.5654 18.125 16.125 17.5654 16.125 16.875C16.125 16.1846 15.5654 15.625 14.875 15.625C14.1846 15.625 13.625 16.1846 13.625 16.875C13.625 17.5654 14.1846 18.125 14.875 18.125Z"
+                  fill="white"/>
+            <path d="M3.80469 5.625H17.8203L15.7578 12.8438C15.6842 13.1057 15.5266 13.3363 15.3093 13.5C15.0919 13.6638 14.8268 13.7516 14.5547 13.75H7.07031C6.79819 13.7516 6.53308 13.6638 6.31572 13.5C6.09836 13.3363 5.94078 13.1057 5.86719 12.8438L3.03906 2.95313C3.00169 2.82246 2.92275 2.70754 2.8142 2.62578C2.70565 2.54401 2.5734 2.49986 2.4375 2.5H1.125"
+                  stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+
+    <a class="group/inner h-[48px] w-[48px] bg-[var(--clr-gray-00)] p-3 rounded-full hover:bg-[var(--clr-primary-500)] hover:cursor-pointer">
+        <svg class="stroke-[var(--clr-gray-700)] group-hover/inner:stroke-white" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 4.25C5 4.25 2 12 2 12C2 12 5 19.75 12.5 19.75C20 19.75 23 12 23 12C23 12 20 4.25 12.5 4.25Z"
+                  stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.5 15C14.1569 15 15.5 13.6569 15.5 12C15.5 10.3431 14.1569 9 12.5 9C10.8431 9 9.5 10.3431 9.5 12C9.5 13.6569 10.8431 15 12.5 15Z"
+                  stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
