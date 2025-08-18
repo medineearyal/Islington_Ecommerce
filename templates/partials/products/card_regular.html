@@ -17,7 +17,9 @@
         </div>
     </figure>
     <div class="card-body">
-        <h2 class="card-title text-[var(--clr-gray-900)] text-sm">{{ product.name }}</h2>
+        <a href="{% url 'products:detail' product.slug %}">
+            <h2 class="card-title text-[var(--clr-gray-900)] text-sm">{{ product.name }}</h2>
+        </a>
         <span class="text-[var(--clr-secondary-500)]">{{ product.price|nepali_currency }}</span>
     </div>
 </div>

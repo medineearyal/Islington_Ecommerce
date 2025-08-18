@@ -6,11 +6,11 @@
         <img
                 class="w-[202px] h-[172px] object-cover"
                 {% if product.thumbnail %}
-                    src="{{ product.thumbnail.url }}"
+                src="{{ product.thumbnail.url }}"
                 {% else %}
-                    src="{% static 'images/products/product_3.png' %}"
+                src="{% static 'images/products/product_3.png' %}"
                 {% endif %}
-                    alt="{{ product.name }}"/>
+                alt="{{ product.name }}"/>
         <span class="indicator-item badge bg-[var(--clr-danger-500)] translate-none rounded-none top-[12px] left-[12px] px-2.5 py-1 items-center border-none">HOT</span>
 
         <div class="z-1 hidden absolute h-full w-full group-hover/outer:block ease-in-out duration-300">
@@ -20,13 +20,16 @@
     <div class="card-body p-4">
         {% include "partials/products/ratings.html" with rating=product.overall_ratings %}
 
-        <h2 class="card-title text-[var(--clr-gray-900)] text-sm font-normal">
-            {% if product.name %}
-                {{ product.name }}
-            {% else %}
-                TOZO T6 True Wireless Earbuds Bluetooth Headphon...
-            {% endif %}
-        </h2>
+        <a href="{% url 'products:detail' product.slug %}">
+            <h2 class="card-title text-[var(--clr-gray-900)] text-sm font-normal">
+                {% if product.name %}
+                    {{ product.name }}
+                {% else %}
+                    TOZO T6 True Wireless Earbuds Bluetooth Headphon...
+                {% endif %}
+            </h2>
+        </a>
+
         <span class="text-[var(--clr-secondary-500)]">
             {% if product.price %}
                 {{ product.price|nepali_currency }}
