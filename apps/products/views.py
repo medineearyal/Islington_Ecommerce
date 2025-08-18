@@ -1,3 +1,4 @@
+from babel.numbers import format_decimal
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -109,7 +110,7 @@ class CartView(TemplateView):
         </span>
         
         <span id="total-price" hx-swap-oob="true">
-            {total_price}
+            Rs. {format_decimal(total_price, format="#,##,##0.00", locale="ne_NP")}
         </span>
         
         <span class="text-[var(--clr-gray-600)]" id="cart-items-inner" hx-swap-oob="true">({len(cart)})</span>
