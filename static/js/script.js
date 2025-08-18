@@ -194,5 +194,10 @@ function checkForStockOverflow(elem) {
     }else {
         stockError.classList.add("hidden");
         cartBtn.removeAttribute("disabled");
+
+        const addToCartBtn = document.querySelector("#add-to-cart");
+        const hxGet = addToCartBtn.getAttribute("hx-get");
+        const newHxGet = `${hxGet}&quantity=${currentValue}`;
+        addToCartBtn.setAttribute("hx-get", newHxGet);
     }
 }

@@ -58,7 +58,8 @@
                             <p class="text-sm text-[var(--clr-gray-600)] mb-2">
                                 SKU: <span class="text-[var(--clr-gray-900)] font-semibold">{{ product.sku }}</span></p>
                             <p class="text-[var(--clr-gray-600)] mb-2">
-                                Brand: <span class="text-[var(--clr-gray-900)] font-semibold">{{ product.category }}</span>
+                                Brand: <span
+                                    class="text-[var(--clr-gray-900)] font-semibold">{{ product.category }}</span>
                             </p>
                         </div>
 
@@ -89,19 +90,21 @@
                     {% with attributes=product.attribute_set.all %}
                         <div class="grid grid-rows-2 gap-4 mb-6">
                             <div class="grid grid-cols-2 gap-6">
-                                <div>
-                                    <p class="text-[var(--clr-gray-900)] text-sm mb-2">Color</p>
-                                    {% for color in product.colors.all %}
-                                        <input
-                                                type="radio"
-                                                name="color"
-                                                value="{{ color }}"
-                                                id="color-{{ forloop.counter }}"
-                                                style="--tw-before-bg: {{ color.color_code }}"
-                                                class="radio w-11 h-11 text-[var(--tw-before-bg)] p-1.5 checked:border-3 checked:border-[var(--clr-primary-500)] checked:bg-transparent before:bg-[var(--tw-before-bg)]"
-                                        />
-                                    {% endfor %}
-                                </div>
+                                {% if product.colors.exists %}
+                                    <div>
+                                        <p class="text-[var(--clr-gray-900)] text-sm mb-2">Color</p>
+                                        {% for color in product.colors.all %}
+                                            <input
+                                                    type="radio"
+                                                    name="color"
+                                                    value="{{ color }}"
+                                                    id="color-{{ forloop.counter }}"
+                                                    style="--tw-before-bg: {{ color.color_code }}"
+                                                    class="radio w-11 h-11 text-[var(--tw-before-bg)] p-1.5 checked:border-3 checked:border-[var(--clr-primary-500)] checked:bg-transparent before:bg-[var(--tw-before-bg)]"
+                                            />
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
 
                                 {% if attributes.0.attributes.exists %}
                                     <div>
@@ -141,16 +144,26 @@
                     <div class="flex flex-wrap pt-3 gap-4 mb-6">
                         <div class="flex justify-between items-center border-2 border-[var(--clr-gray-100)] px-5">
                             <span>
-                                <img src="{% static 'images/icons/Minus.svg' %}" class="w-4 h-4" alt="" onclick="decreaseStock(this)" />
+                                <img src="{% static 'images/icons/Minus.svg' %}" class="w-4 h-4" alt=""
+                                     onclick="decreaseStock(this)"/>
                             </span>
                             <input class="input text-center bg-[var(--clr-gray-00)] text-[var(--clr-gray-700)] border-none focus:outline-none focus:border-none focus:shadow-none no-spinner"
-                                   type="number" min="1" name="quantity" max="{{ product.stock }}" value="1" onchange="checkForStockOverflow(this)" />
+                                   type="number" min="1" name="quantity" max="{{ product.stock }}" value="1"
+                                   onchange="checkForStockOverflow(this)"/>
                             <span>
-                                <img src="{% static 'images/icons/Plus.svg' %}" class="w-4 h-4" alt="" onclick="increaseStock(this)" />
+                                <img src="{% static 'images/icons/Plus.svg' %}" class="w-4 h-4" alt=""
+                                     onclick="increaseStock(this)"/>
                             </span>
                         </div>
 
-                        <a class="btn btn-primary cart-icon flex-1 h-auto disabled:pointer-events-none">
+                        <a
+                                hx-get="{% url 'products:cart' product.pk %}?action=add"
+                                hx-target="#cart-list"
+                                hx-swap="innerHTML"
+
+                                class="btn btn-primary cart-icon flex-1 h-auto disabled:pointer-events-none"
+                                id="add-to-cart"
+                        >
                             ADD TO CART
                         </a>
 
