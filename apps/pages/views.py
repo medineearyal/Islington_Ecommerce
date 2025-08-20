@@ -1,14 +1,22 @@
+import requests
+import json
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Prefetch
 from django.db.models.functions import Coalesce, Cast
-from django.forms import DecimalField
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
 from django.db.models import Q, When, Case, BooleanField, Value, Min, Max, Avg
 from apps.blogs.models import Blog
 from apps.products.models import Product, ProductBanner, Category, BestDeals
-
+from django.urls import reverse, reverse_lazy
 from .models import Page
+from ..orders.constants import PaymentOptions
+from ..orders.forms import OrderForm
+from ..orders.models import Transaction, KhaltiTransaction
+from ..orders.utils import process_cart_totals
 from ..products.constans import ShopSortChoicesEnum
 
 
@@ -143,3 +151,124 @@ class ShopPageView(TemplateView):
         })
 
         return context
+
+
+class CartPageView(TemplateView):
+    template_name = "pages/shopping_cart.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CartPageView, self).get_context_data(**kwargs)
+        cart = self.request.session.get("cart", {})
+
+        total_sum, vat_amount, dst_amount = process_cart_totals(cart)
+
+        context.update({
+            "cart": cart,
+            "sub_total": total_sum,
+            "final_sum": total_sum + vat_amount + dst_amount,
+            "vat_amount": vat_amount,
+            "dst_amount": dst_amount,
+        })
+
+        return context
+
+
+class CheckoutPageView(LoginRequiredMixin, TemplateView):
+    template_name = "pages/checkout.html"
+    login_url = reverse_lazy("account_login")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order_form = OrderForm()
+        cart = self.request.session.get("cart", {})
+
+        total_sum, vat_amount, dst_amount = process_cart_totals(cart)
+
+        context.update({
+            "form": order_form,
+            "cart": cart,
+            "sub_total": total_sum,
+            "final_sum": total_sum + vat_amount + dst_amount,
+            "vat_amount": vat_amount,
+            "dst_amount": dst_amount,
+        })
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        if not context["cart"]:
+            return redirect("pages:cart")
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        form = OrderForm(request.POST)
+        context = self.get_context_data(**kwargs)
+
+        if form.is_valid():
+            user = request.user if request.user.is_authenticated else None
+            payment_method = form.cleaned_data.get("payment_option")
+            order = form.save(commit=False)
+            order.customer = user
+            order.save()
+
+            cart = context.get("cart")
+            for pid, item in cart.items():
+                product = Product.objects.get(pk=pid)
+                order.products.add(product)
+
+            request.session["cart"] = {}
+
+            transaction = Transaction.objects.create(
+                order=order,
+            )
+
+            if payment_method == PaymentOptions.QR:
+                return redirect(reverse_lazy("orders:manual-pay", kwargs={"uuid":order.uuid}))
+            elif payment_method == PaymentOptions.KHALTI:
+                messages.success(request, "Your Order Has Been Placed Successfully... Happy Shopping!!")
+                url = f"{settings.KHALTI_BASE_URL}epayment/initiate/"
+                headers = {
+                    "Authorization": f"key {settings.KHALTI_API_KEY}",
+                    "Content-Type": "application/json"
+                }
+
+                payload = json.dumps({
+                    "return_url": f"{settings.WEBSITE_URL}{reverse("orders:success")}?tid={transaction.uuid}",
+                    "website_url": f"{settings.WEBSITE_URL}{reverse("pages:home")}",
+                    "amount": f"{order.total_amount}",
+                    "purchase_order_id": f"{order.uuid}",
+                    "purchase_order_name": f"{order}",
+                    "customer_info": {
+                        "name": f"{str(request.user)}",
+                        "email": f"{request.user.email}",
+                        "phone": "9800000001"
+                    }
+                })
+                response = requests.post(
+                    url=url,
+                    headers=headers,
+                    data=payload
+                ).json()
+
+                pidx = response["pidx"]
+                KhaltiTransaction.objects.create(
+                    transaction=transaction,
+                    pidx=pidx,
+                    total_amount=order.total_amount,
+                    purchase_order_id=f"{order.uuid}",
+                    purchase_order_name=f"{str(order)}",
+                )
+
+                return redirect(response["payment_url"])
+            else:
+                messages.success(request, "Your Order Has Been Placed Successfully... Happy Shopping!!")
+                return redirect(f"{reverse_lazy("orders:success")}?tid={transaction.uuid}")
+        else:
+            context.update({
+                "form": form,
+            })
+            messages.error(request, "Something Went Wrong Please Try Again...")
+        return render(request, self.template_name, context=context)

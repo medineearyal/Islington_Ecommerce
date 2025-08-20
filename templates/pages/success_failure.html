@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Islington Marketplace - Order Placement Success{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include "partials/breadcrumb.html" %}
+
+        <div class="container mx-auto py-31 flex flex-col gap-8 items-center">
+            {% if success %}
+                <div>
+                    <img src="{% static 'images/icons/CheckCircle.svg' %}" alt="" class="mb-6 mx-auto"/>
+
+                    <h2 class="text-[var(--clr-gray-900)] font-semibold text-2xl mb-3 text-center">Your Order is Placed
+                        Successfully</h2>
+
+                    <p class="text-center text-[var(--clr-gray-700)] text-sm">Thank You!! For Shopping With Us...</p>
+                </div>
+            {% else %}
+                <div>
+                    <img src="{% static 'images/icons/Cross.svg' %}" alt="" class="mb-6 mx-auto w-[88px] aspect-square"/>
+
+                    <h2 class="text-[var(--clr-gray-900)] font-semibold text-2xl mb-3 text-center">
+                        Failed To Place Your Order, Error During The Transaction.
+                    </h2>
+
+                    <p class="text-center text-[var(--clr-gray-700)] text-sm">
+                        Sorry for the inconvinience, Please Try Again...
+                    </p>
+                </div>
+            {% endif %}
+
+
+            <div class="flex gap-3">
+                <a class="btn btn-primary btn-outline no-icon uppercase before-stack-icon">
+                    Go To Dashboard
+                </a>
+
+                <a class="btn btn-primary uppercase">
+                    View Order
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        if (window.location.search) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+{% endblock %}

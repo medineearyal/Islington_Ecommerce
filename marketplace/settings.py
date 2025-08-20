@@ -328,8 +328,8 @@ CKEDITOR_5_CONFIGS = {
 TAILWIND_APP_NAME = "theme"
 
 # AllAuth
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "pages:home"
+LOGOUT_REDIRECT_URL = "pages:home"
 ACCOUNT_LOGIN_METHOD = {
     "email",
 }
@@ -337,7 +337,12 @@ ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_FORMS = {
     "login": "apps.users.forms.UserLoginForm",
     "signup": "apps.users.forms.UserSignupForm",
+    "reset_password": "apps.users.forms.UserResetPasswordForm",
+    "reset_password_from_key": "apps.users.forms.UserResetPasswordFromKeyForm",
 }
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
 
 # Debug Toolbar
 INTERNAL_IPS = [
@@ -387,3 +392,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Khalti
+KHALTI_BASE_URL = config("KHALTI_BASE_URL")
+KHALTI_API_KEY = config("KHALTI_API_KEY")
+WEBSITE_URL = "http://localhost:8000"

@@ -16,8 +16,8 @@
                 <span id="total-price">{{ cart_sum|nepali_currency }}</span>
             </p>
 
-            <a class="btn btn-primary w-full mb-3 rounded-none">CHECKOUT NOW</a>
-            <a class="btn btn-outline btn-primary no-icon w-full rounded-none">VIEW CART</a>
+            <a href="{% url "pages:checkout" %}" class="btn btn-primary w-full mb-3 rounded-none">CHECKOUT NOW</a>
+            <a href="{% url 'pages:cart' %}" class="btn btn-outline btn-primary no-icon w-full rounded-none">VIEW CART</a>
         </div>
     </div>
 </div>

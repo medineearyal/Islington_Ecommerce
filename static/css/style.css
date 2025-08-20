@@ -373,9 +373,15 @@ section {
     transform: translateX(42%);
 }
 
+.main-category-swiper-wrapper .swiper-button-prev,
 .thumb-container .swiper-button-prev {
     left: 0;
     transform: translateX(-42%);
+}
+
+.main-category-swiper-wrapper .swiper-button-next {
+    right: 0;
+    transform: translateX(20%);
 }
 
 .cart-icon::after {
@@ -469,4 +475,47 @@ button.htmx-request::after {
     background-color: var(--clr-gray-500);
     opacity: 80%;
     pointer-events: none;
+}
+
+.product-detail-modal[open] {
+    background-color: oklch(0% 0 0/ 0.9);
+}
+
+.icon-before::before {
+    content: "";
+    height: 24px;
+    width: 24px;
+    background-color: var(--clr-secondary-500);
+    -webkit-mask: url('/static/images/icons/ArrowLeft.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    mask: url('/static/images/icons/ArrowLeft.svg') no-repeat center;
+}
+
+.payment-divider {
+    height: 100%;
+    width: 2px;
+    background-color: var(--clr-gray-100);
+}
+
+.before-stack-icon::before {
+    content: url("/static/images/icons/Stack.svg");
+    width: 20px;
+    height: 20px;
+}
+
+.before-stack-icon:hover::before {
+    content: "";
+    background-color: var(--clr-gray-00);
+    -webkit-mask: url('/static/images/icons/Stack.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    mask: url('/static/images/icons/Stack.svg') no-repeat center;
+}
+
+.payment-failed {
+    background-color: var(--clr-danger-500);
+    -webkit-mask: url('/static/images/icons/CheckCircle.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    width: 88px;
+    height: 88px;
+    mask: url('/static/images/icons/CheckCircle.svg') no-repeat center;
 }

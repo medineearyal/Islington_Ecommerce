@@ -7,7 +7,7 @@ def breadcrumbs(request):
     breadcrumb_list = [
         {
             "name": "Home",
-            "url": reverse_lazy("home")
+            "url": reverse_lazy("pages:home")
         }
     ]
 

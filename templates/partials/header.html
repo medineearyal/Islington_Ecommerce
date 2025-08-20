@@ -51,7 +51,7 @@
     <div class="divider m-0"></div>
 
     <div class="container flex justify-between items-center py-5 m-auto">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'pages:home' %}">
             <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
         </a>
 
@@ -130,7 +130,7 @@
                                 {% for category in header_categories %}
                                     {% if category.is_leaf_node %}
                                         <li>
-                                            <a href="{% url 'shop' %}?type={{ category.pk }}"
+                                            <a href="{% url 'pages:shop' %}?type={{ category.pk }}"
                                                class="px-4 py-2">{{ category }}</a>
                                         </li>
                                     {% else %}

@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="card bg-[var(--clr-gray-00)] rounded-1 border border-[var(--clr-gray-100)] p-6 w-[205px] h-full aspect-3/4">
-    <a href="{% url 'shop' %}?category={{ category.slug }}">
+    <a href="{% url 'pages:shop' %}?category={{ category.slug }}">
         <img
                 {% if not category.image %}
                     src="{% static 'images/Slider/Slider_1.png' %}"

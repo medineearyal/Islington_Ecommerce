@@ -110,7 +110,7 @@
                     </span>
                 </h2>
 
-                <a href="{% url 'shop' %}" class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
+                <a href="{% url 'pages:shop' %}" class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
             </div>
 
             {% with first_prod=best_deals.products.all.0 %}
@@ -171,13 +171,15 @@
     <section class="mx-auto">
         <h2 class="text-[var(--clr-gray-900)] text-center text-[2rem] font-semibold mb-10">Shop With Categorys</h2>
 
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                {% for category in categories %}
-                    <div class="swiper-slide">
-                        {% include 'partials/products/card_slider.html' with category=category %}
-                    </div>
-                {% endfor %}
+        <div class="main-category-swiper-wrapper relative w-full">
+            <div class="main-category-swiper overflow-hidden">
+                <div class="swiper-wrapper">
+                    {% for category in categories %}
+                        <div class="swiper-slide">
+                            {% include 'partials/products/card_slider.html' with category=category %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             <!-- If we need navigation buttons -->
             <div class="swiper-button-prev"></div>
@@ -224,7 +226,11 @@
 
                 <div class="grid grid-cols-4 gap-4">
                     {% for product in best_deals.products.all %}
-                        {% include 'partials/products/card_regular_rating.html' with product=product %}
+                        <div>
+                            {% include 'partials/products/card_regular_rating.html' with product=product %}
+
+                            {% include 'partials/products/product_detail_modal.html' with product=product %}
+                        </div>
                     {% endfor %}
                 </div>
             </div>

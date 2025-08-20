@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+{% load static %}
+{% load currency %}
+
+{% block title %}Islington Ecommerce - Checkout{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include 'partials/breadcrumb.html' %}
+
+        <div class="container mx-auto py-18">
+            <form method="POST" class="grid grid-cols-3 gap-6">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div>
+                        {% for error in form.non_field_errors %}
+                            <div class="text-[var(--clr-danger-500)] text-sm">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="col-span-2">
+                    <h2 class="font-medium text-lg text-[var(--clr-gray-900)] mb-6">
+                        Billing Information
+                    </h2>
+
+                    <div class="mb-10">
+                        <div class="text-[var(--clr-gray-900)] text-sm mb-4">
+                            <label class="mb-2 inline-block">Full Name</label>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="w-full">
+                                    {{ form.first_name }}
+
+                                    {% if form.first_name.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.first_name.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                                <div class="w-full">
+                                    {{ form.last_name }}
+
+                                    {% if form.last_name.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.last_name.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-[var(--clr-gray-900)] text-sm mb-4"
+                             id="{{ form.shipping_street.id_for_label }}">
+                            <label class="mb-2 inline-block">Address</label>
+
+                            <div class="w-full">
+                                {{ form.shipping_street }}
+
+                                {% if form.shipping_street.errors %}
+                                    <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                        {{ form.shipping_street.errors.0 }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 flex-wrap mb-4">
+                            <div class="text-[var(--clr-gray-900)] text-sm flex-1">
+                                <label class="mb-2 inline-block"
+                                       id="{{ form.shipping_country.id_for_label }}">Country</label>
+
+                                <div class="w-full">
+                                    {{ form.shipping_country }}
+
+                                    {% if form.shipping_country.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.shipping_country.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            <div class="text-[var(--clr-gray-900)] text-sm flex-1">
+                                <label class="mb-2 inline-block"
+                                       id="{{ form.shipping_region.id_for_label }}">Province/State</label>
+
+                                <div class="w-full">
+                                    {{ form.shipping_region }}
+
+                                    {% if form.shipping_region.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.shipping_region.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="text-[var(--clr-gray-900)] text-sm flex-1"
+                                 id="{{ form.shipping_city.id_for_label }}">
+                                <label class="mb-2 inline-block">City</label>
+
+                                <div class="w-full">
+                                    {{ form.shipping_city }}
+
+                                    {% if form.shipping_city.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.shipping_city.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="text-[var(--clr-gray-900)] text-sm flex-1"
+                                 id="{{ form.shipping_zip_code.id_for_label }}">
+                                <label class="mb-2 inline-block">Zip Code</label>
+
+                                <div class="w-full">
+                                    {{ form.shipping_zip_code }}
+
+                                    {% if form.shipping_zip_code.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.shipping_zip_code.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <div class="text-[var(--clr-gray-900)] text-sm flex-1">
+                                <label class="mb-2 inline-block" id="{{ form.email.id_for_label }}">Email</label>
+
+                                <div class="w-full">
+                                    {{ form.email }}
+
+                                    {% if form.email.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.email.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="text-[var(--clr-gray-900)] text-sm flex-1">
+                                <label class="mb-2 inline-block" for="{{ form.ph_number.id_for_label }}">Phone
+                                    Number</label>
+
+                                <div class="w-full">
+                                    {{ form.ph_number }}
+
+                                    {% if form.ph_number.errors %}
+                                        <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                            {{ form.ph_number.errors.0 }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-[var(--clr-gray-900)] text-sm flex gap-2 items-center">
+                            {{ form.use_billing_address }}
+
+                            <label class="inline-block" for="{{ form.use_billing_address.id_for_label }}">
+                                Use Your Billing Address
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="ring ring-[var(--clr-gray-100)] rounded-xs text-[var(--clr-gray-900)] w-full mb-10">
+                        <h2 class="font-medium text-lg text-[var(--clr-gray-900)] py-5 px-6 ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                            Payment Option
+                        </h2>
+
+                        <div class="flex p-6 gap-1 flex-wrap">
+                            {% if form.payment_option.errors %}
+                                <p class="text-[var(--clr-danger-500)] text-sm my-4 w-full">
+                                    {{ form.payment_option.errors.0 }}
+                                </p>
+                            {% endif %}
+
+                            {% for option in form.payment_option %}
+                                {% if option.choice_label == "Cash on Delivery" %}
+                                    <div class="flex flex-col items-center gap-4 w-[160px]">
+                                        <label class="flex items-center flex-col gap-2" for="{{ option.id_for_label }}">
+                                            <svg fill="#000000" width="50px" height="50px" viewBox="0 0 32 32"
+                                                 style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+                                                 version="1.1"
+                                                 xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                                <g transform="matrix(1,0,0,1,-240,-384)">
+
+                                                <g transform="matrix(1.2,0,0,1,66.4,93)">
+
+                                                <path d="M168,300.472C168,300.162 167.94,299.855 167.824,299.578C167.441,298.659 166.521,296.452 165.961,295.106C165.678,294.428 165.101,294 164.47,294C161.728,294 154.272,294 151.53,294C150.899,294 150.322,294.428 150.039,295.106C149.479,296.452 148.559,298.659 148.176,299.578C148.06,299.855 148,300.162 148,300.472C148,302.843 148,313.511 148,318C148,318.53 148.176,319.039 148.488,319.414C148.801,319.789 149.225,320 149.667,320C153.433,320 162.567,320 166.333,320C166.775,320 167.199,319.789 167.512,319.414C167.824,319.039 168,318.53 168,318C168,313.511 168,302.843 168,300.472Z"
+                                                      style="fill:var(--clr-gray-00);"/>
+                                                </g>
+                                                    <path d="M263.764,386L248.236,386C247.1,386 246.061,386.642 245.553,387.658L243.317,392.13C243.108,392.547 243,393.006 243,393.472C243,395.843 243,406.511 243,411C243,411.796 243.316,412.559 243.879,413.121C244.441,413.684 245.204,414 246,414C250.52,414 261.48,414 266,414C266.796,414 267.559,413.684 268.121,413.121C268.684,412.559 269,411.796 269,411L269,393.472C269,393.006 268.892,392.547 268.683,392.131L266.447,387.658C265.939,386.642 264.9,386 263.764,386ZM267,394L260,394L260,397.955C260,398.719 259.565,399.416 258.879,399.752C258.193,400.088 257.375,400.003 256.772,399.534L256,398.934L255.228,399.534C254.625,400.003 253.807,400.088 253.121,399.752C252.435,399.416 252,398.719 252,397.955L252,394L245,394L245,411C245,411.265 245.105,411.52 245.293,411.707C245.48,411.895 245.735,412 246,412L266,412C266.265,412 266.52,411.895 266.707,411.707C266.895,411.52 267,411.265 267,411C267,411 267,394 267,394ZM249.886,407.998C248.283,407.938 247,406.618 247,405C247,403.344 248.344,402 250,402L251,402C251.552,402 252,402.448 252,403C252,403.552 251.552,404 251,404C251,404 250,404 250,404C249.448,404 249,404.448 249,405C249,405.552 249.448,406 250,406L250.888,406C251.44,406 251.888,406.448 251.888,407C251.888,407.535 251.468,407.972 250.94,407.999L249.888,408L249.886,407.998ZM260,407C260,407.552 260.448,408 261,408L262,408C263.656,408 265,406.656 265,405C265,403.344 263.656,402 262,402L261,402C260.448,402 260,402.448 260,403L260,407ZM256,402C254.344,402 253,403.344 253,405C253,406.656 254.344,408 256,408C257.656,408 259,406.656 259,405C259,403.344 257.656,402 256,402ZM262,406C262.552,406 263,405.552 263,405C263,404.448 262.552,404 262,404L262,406ZM256,404C256.552,404 257,404.448 257,405C257,405.552 256.552,406 256,406C255.448,406 255,405.552 255,405C255,404.448 255.448,404 256,404ZM258,394L258,397.955C257.29,397.403 256.614,396.877 256.614,396.877C256.253,396.596 255.747,396.596 255.386,396.877L254,397.955L254,394L258,394ZM252.82,388L252.153,392L245.618,392L247.342,388.553C247.511,388.214 247.857,388 248.236,388L252.82,388ZM254.18,392L254.847,388L257.153,388L257.82,392L254.18,392ZM259.18,388L263.764,388C264.143,388 264.489,388.214 264.658,388.553L266.382,392L259.847,392L259.18,388Z"
+                                                          style="fill:var(--clr-gray-900);"/>
+                                                </g>
+                                        </svg>
+
+                                            <span>{{ option.choice_label }}</span>
+                                        </label>
+                                        {{ option.tag }}
+                                    </div>
+                                    <div>
+                                        <div class="payment-divider"></div>
+                                    </div>
+                                {% elif option.choice_label == "Khalti" %}
+                                    <div class="flex flex-col items-center gap-4 w-[160px]">
+                                        <label class="flex items-center flex-col gap-2" for="{{ option.id_for_label }}">
+                                            <img src="{% static 'images/icons/khalti.jpg' %}" alt=""
+                                                 class="h-[50px] aspect-square"/>
+
+                                            <span>{{ option.choice_label }}</span>
+                                        </label>
+                                        {{ option.tag }}
+                                    </div>
+                                    <div>
+                                        <div class="payment-divider"></div>
+                                    </div>
+                                {% elif option.choice_label == "QR" %}
+                                    <div class="flex flex-col items-center gap-4 w-[160px]">
+                                        <label class="flex items-center flex-col gap-2" for="{{ option.id_for_label }}">
+                                            <svg viewBox="0 0 1024 1024" class="icon" version="1.1"
+                                                 xmlns="http://www.w3.org/2000/svg" fill="#000000"
+                                                 width="50px" height="50px"
+                                            >
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                   stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path d="M896 960H128c-35.3 0-64-28.7-64-64V128c0-35.3 28.7-64 64-64h768c35.3 0 64 28.7 64 64v768c0 35.3-28.7 64-64 64z"
+                                                          fill="#1c1a03"></path>
+                                                    <path d="M426.3 426.3H128V189.7c0-34 27.7-61.7 61.7-61.7h236.6v298.3z m-236.6-61.7h174.9V189.7H189.7v174.9zM395.4 896H266.9c-17.1 0-30.9-13.8-30.9-30.9 0-17.1 13.8-30.9 30.9-30.9h128.6c17.1 0 30.9 13.8 30.9 30.9-0.1 17.1-13.9 30.9-31 30.9zM158.9 779.4c-17.1 0-30.9-13.8-30.9-30.9v-120c0-17.1 13.8-30.9 30.9-30.9s30.9 13.8 30.9 30.9v120c-0.1 17.1-13.9 30.9-30.9 30.9z"
+                                                          fill="#fff"></path>
+                                                    <path d="M896 426.3H597.7V128h236.6c34 0 61.7 27.7 61.7 61.7v236.6z m-236.6-61.7h174.9V189.7H659.4v174.9z"
+                                                          fill="#ffffff"></path>
+                                                    <path d="M834.3 896H597.7V597.7H896v236.6c0 34-27.7 61.7-61.7 61.7z m-174.9-61.7h174.9V659.4H659.4v174.9z"
+                                                          fill="#fff"></path>
+                                                    <path d="M365.4 762.3h-72.9c-17.1 0-30.9-13.8-30.9-30.9v-72.9c0-17.1 13.8-30.9 30.9-30.9h103.7v103.7c0.1 17.2-13.7 31-30.8 31z"
+                                                          fill="#ffffff"></path>
+                                                    <path d="M512 896c-17.1 0-30.9-13.8-30.9-30.9V614.4c0-17.1 13.8-30.9 30.9-30.9 17.1 0 30.9 13.8 30.9 30.9v250.7c0 17.1-13.8 30.9-30.9 30.9z m0-465c-17.1 0-30.9-13.8-30.9-30.9V158.9c0-17.1 13.8-30.9 30.9-30.9 17.1 0 30.9 13.8 30.9 30.9v241.3c0 17-13.8 30.8-30.9 30.8z m353.1 111.9H158.9c-17.1 0-30.9-13.8-30.9-30.9 0-17.1 13.8-30.9 30.9-30.9h706.3c17.1 0 30.9 13.8 30.9 30.9-0.1 17.1-13.9 30.9-31 30.9z"
+                                                          fill="#ffffff"></path>
+                                                </g>
+                                            </svg>
+
+                                            <span>{{ option.choice_label }}</span>
+                                        </label>
+                                        {{ option.tag }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="font-medium text-lg text-[var(--clr-gray-900)] mb-6">
+                            Additional Information
+                        </h2>
+
+                        <div class="text-[var(--clr-gray-900)] text-sm flex-1">
+                            <label class="mb-2 block" for="{{ form.note.id_for_label }}">
+                                Other Notes (Optional)
+                            </label>
+
+                            {{ form.note }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-1">
+                    <div class="ring ring-[var(--clr-gray-100)] rounded-sm text-[var(--clr-gray-900)] px-4 py-3 w-full">
+                        <h2 class="font-medium text-lg text-[var(--clr-gray-900)] py-5 px-6">Order Summary</h2>
+
+                        <div>
+                            <ul class="cart-items px-6 py-5 flex flex-col gap-4" id="cart-list" role="list">
+                                {% for pid, item in cart.items %}
+                                    <li class="flex gap-4 items-center">
+                                        <img src="{{ item.thumbnail }}"
+                                             class="w-[80px] aspect-1/1 object-cover border border-[var(--clr-gray-100)]"
+                                             alt=""/>
+
+                                        <div class="flex-1">
+                                            <h3 class="text-[var(--clr-gray-900)] text-sm mb-2">{{ item.name }}</h3>
+                                            <p>
+                                                <span class="text-[var(--clr-gray-600)]">{{ item.quantity }} x </span><span
+                                                    class="text-[var(--clr-secondary-500)]">
+                                                {% if item.discount %}
+                                                    {{ item.discounted_price|nepali_currency }}
+                                                    <span class="line-through text-[var(--clr-gray-500)]">{{ item.price|nepali_currency }}</span>
+                                                {% else %}
+                                                    {{ item.price|nepali_currency }}
+                                                {% endif %}
+                                            </span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                            <div class="p-6 flex gap-3 flex-col">
+                                <p class="flex justify-between items-center">
+                                    <span class="text-sm text-[var(--clr-gray-600)]">Sub-Total</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">{{ sub_total|nepali_currency }}</span>
+                                </p>
+                                <p class="flex justify-between items-center">
+                                    <span class="text-sm text-[var(--clr-gray-600)]">Shipping</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">Free</span>
+                                </p>
+                                <p class="flex justify-between items-center">
+                                    <span class="text-sm text-[var(--clr-gray-600)]">Discount</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">0</span>
+                                </p>
+                                <p class="flex justify-between items-center">
+                                    <span class="text-sm text-[var(--clr-gray-600)]">Tax</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">{{ vat_amount|nepali_currency }}</span>
+                                </p>
+
+                                {% if dst_amount != 0 %}
+                                    <p class="flex justify-between items-center">
+                                        <span class="text-sm text-[var(--clr-gray-600)]">Digital Service Tax</span>
+                                        <span class="text-[var(--clr-gray-900)] text-sm">{{ dst_amount|nepali_currency }}</span>
+                                    </p>
+                                {% endif %}
+
+                                <div class="divider bg-[var(--clr-gray-100)] my-4"></div>
+
+                                <p class="flex justify-between items-center text-[var(--clr-gray-900)] text-sm pb-6">
+                                    <span>Total</span>
+                                    <span>{{ final_sum|nepali_currency }}</span>
+                                    <input type="hidden" name="total_amount" value="{{ final_sum }}" />
+                                </p>
+
+                                <button class="btn btn-primary uppercase h-[56px]">Place Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

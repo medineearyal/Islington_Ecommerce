@@ -89,6 +89,8 @@ class CartView(TemplateView):
                     "discounted_price": float(product.discounted_price),
                     "discount": product.discount,
                     "thumbnail": product.thumbnail.url,
+                    "stock": product.stock,
+                    "category": product.category.name,
                 }
             request.session["cart"] = cart
         elif action == "remove":

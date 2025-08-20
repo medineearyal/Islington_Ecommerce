@@ -14,11 +14,29 @@ class AuthUserAdmin(UserAdmin):
     list_filter = ("email", "is_staff", "is_active")
     fieldsets = (
         (
-            None,
+            "Personal Details",
             {
                 "fields": (
+                    "first_name",
+                    "last_name",
                     "email",
                     "password",
+                    "profile_picture",
+                    "ph_number",
+                    "user_type",
+                    "is_verified_seller"
+                )
+            },
+        ),
+        (
+            "Seller Details",
+            {
+                "fields": (
+                    "seller_qr_code",
+                    "seller_bank_name",
+                    "seller_bank_account_number",
+                    "seller_bank_branch_name",
+                    "seller_bank_account_name",
                 )
             },
         ),

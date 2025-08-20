@@ -18,7 +18,7 @@ const productMainSwiper = new Swiper(".product-main-swiper", {
     }
 })
 
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('.main-category-swiper', {
     direction: 'horizontal',
     speed: 500,
     loop: true,
@@ -34,8 +34,8 @@ const swiper = new Swiper('.swiper', {
     },
 
     navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.main-category-swiper-wrapper .swiper-button-next',
+        prevEl: '.main-category-swiper-wrapper .swiper-button-prev',
     },
 });
 

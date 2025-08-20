@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Islington Marketplace - Email Confirmation Email{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include "partials/breadcrumb.html" %}
+
+        <div class="container mx-auto my-25">
+            <div class="p-8 bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md text-center w-[424px] mx-auto">
+                <h2 class="text-[var(--clr-gray-900)] font-semibold text-xl mb-3">Verify Your Email Address</h2>
+                <p class="text-[var(--clr-gray-600)]">
+                    We have sent an email to you for verification. Follow the link provided to finalize the signup
+                    process.
+                    If you do not see the verification email in your main inbox, check your spam folder. Please contact
+                    us
+                    if you do not receive the verification email within a few minutes.
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
