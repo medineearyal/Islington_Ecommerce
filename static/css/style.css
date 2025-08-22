@@ -30,9 +30,11 @@
     --clr-secondary-400: #57B7F5;
     --clr-secondary-500: #2DA5F3;
     --clr-secondary-600: #2484C2;
+    --clr-secondary-650: #2E3191;
     --clr-secondary-700: #1B6392;
     --clr-secondary-800: #124261;
     --clr-secondary-900: #092131;
+
 
     --clr-success-50: #EAF7E9;
     --clr-success-100: #D5F0D3;
@@ -518,4 +520,67 @@ button.htmx-request::after {
     width: 88px;
     height: 88px;
     mask: url('/static/images/icons/CheckCircle.svg') no-repeat center;
+}
+
+.dash-nav-link:hover,
+.active-nav {
+    background-color: var(--clr-primary-500);
+    color: var(--clr-gray-00);
+}
+
+.dash-nav-link:hover .nav-icon::after,
+.active-nav .nav-icon::after {
+    content: "";
+    background-color: var(--clr-gray-00);
+    --webkit-mask-image: var(--nav-img-url);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+
+    mask-image: var(--nav-img-url);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.nav-icon::after {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    content: "";
+    background-color: var(--clr-gray-600);
+    background-color: var(--img-clr);
+    -webkit-mask-image: var(--nav-img-url);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+
+    mask-image: var(--nav-img-url);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.active-nav .nav-icon::after {
+    content: "";
+    background-color: var(--clr-gray-00);
+    -webkit-mask-image: var(--nav-img-url);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+
+    mask-image: var(--nav-img-url);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.btn.nav-icon::after {
+    content: "";
+    background-color: var(--clr-primary-500) !important;
+}
+
+.section-newsletter {
+    background: url("/static/images/islington.jpg") center;
+    backdrop-filter: blur(5px);
 }

@@ -34,3 +34,10 @@ class PaymentStatusEnum(TextChoices):
     PENDING = "pending", "Pending"
     COMPLETED = "completed", "Completed"
     CANCELED = "canceled", "User canceled"
+
+
+class OrderStatusEnum(TextChoices):
+    PLACED = "placed", "Placed"
+    SHIPPED = "shipped", "Shipped"
+    OUT_FOR_DELIVERY = "out_for_delivery", "Out For Delivery"
+    DELIVERED = "delivered", "Delivered"

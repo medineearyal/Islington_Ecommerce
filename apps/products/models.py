@@ -87,6 +87,7 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
     discount = models.PositiveSmallIntegerField(default=0)
     headline = models.CharField(max_length=255, null=True, blank=True)
 
+    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     sku = models.CharField(max_length=50, unique=True, blank=True)
     colors = models.ManyToManyField(ProductColors, related_name="colors")
 
@@ -182,7 +183,7 @@ class ProductImage(models.Model):
 
 class ProductReview(TimeStampedModel, models.Model):
     rating = models.PositiveSmallIntegerField(default=0)
-    feedback = models.CharField(max_length=500)
+    feedback = models.TextField()
     review_from = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="reviews", null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="reviews")
 

@@ -188,7 +188,7 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
             "form": order_form,
             "cart": cart,
             "sub_total": total_sum,
-            "final_sum": total_sum + vat_amount + dst_amount,
+            "final_sum": round(total_sum + vat_amount + dst_amount),
             "vat_amount": vat_amount,
             "dst_amount": dst_amount,
         })
@@ -212,12 +212,9 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
             payment_method = form.cleaned_data.get("payment_option")
             order = form.save(commit=False)
             order.customer = user
-            order.save()
-
             cart = context.get("cart")
-            for pid, item in cart.items():
-                product = Product.objects.get(pk=pid)
-                order.products.add(product)
+            order.products = json.dumps(cart)
+            order.save()
 
             request.session["cart"] = {}
 
@@ -253,6 +250,8 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                     data=payload
                 ).json()
 
+                print(response)
+
                 pidx = response["pidx"]
                 KhaltiTransaction.objects.create(
                     transaction=transaction,
@@ -267,6 +266,7 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 messages.success(request, "Your Order Has Been Placed Successfully... Happy Shopping!!")
                 return redirect(f"{reverse_lazy("orders:success")}?tid={transaction.uuid}")
         else:
+            print(form.errors)
             context.update({
                 "form": form,
             })

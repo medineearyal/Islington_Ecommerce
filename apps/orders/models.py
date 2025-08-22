@@ -3,8 +3,10 @@ from django.db import models
 import uuid
 from apps.common.models import TimeStampedModel
 from apps.common.validators import validate_nepali_mobile
-from apps.orders.constants import CountryEnum, NepalDeliveryProvincesEnum, BagmatiCities, PaymentOptions, PaymentStatusEnum
+from apps.orders.constants import CountryEnum, NepalDeliveryProvincesEnum, BagmatiCities, PaymentOptions, \
+    PaymentStatusEnum, OrderStatusEnum
 from apps.products.models import Product
+from django.urls import reverse
 
 # Create your models here.
 User = get_user_model()
@@ -19,14 +21,16 @@ class Order(TimeStampedModel, models.Model):
     ph_number = models.CharField(max_length=14, validators=[validate_nepali_mobile])
     payment_option = models.CharField(max_length=100, choices=PaymentOptions.choices, default=PaymentOptions.COD)
     note = models.TextField(blank=True, null=True)
-    products = models.ManyToManyField(Product)
+    products = models.JSONField(null=True, blank=True)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=OrderStatusEnum.choices, default=OrderStatusEnum.PLACED)
 
     # Shipping Address
     use_billing_address = models.BooleanField(default=False)
     shipping_street = models.CharField(max_length=255, null=True, blank=True)
     shipping_country = models.CharField(max_length=100, choices=CountryEnum.choices, default=CountryEnum.NEPAL)
-    shipping_region = models.CharField(max_length=100, choices=NepalDeliveryProvincesEnum.choices, default=NepalDeliveryProvincesEnum.BAGMATI)
+    shipping_region = models.CharField(max_length=100, choices=NepalDeliveryProvincesEnum.choices,
+                                       default=NepalDeliveryProvincesEnum.BAGMATI)
     shipping_city = models.CharField(max_length=100, choices=BagmatiCities.choices, default=BagmatiCities.KATHMANDU)
     shipping_zip_code = models.CharField(max_length=100, null=True, blank=True)
 
@@ -40,6 +44,19 @@ class Order(TimeStampedModel, models.Model):
     @property
     def shipping_address(self):
         return f"{self.shipping_street},{self.shipping_city}, {self.shipping_region}, {self.shipping_zip_code}, {self.shipping_country}"
+
+    def get_absolute_url(self):
+        return reverse("users:order-detail", kwargs={"uuid": self.uuid})
+
+
+class OrderStatusLog(TimeStampedModel, models.Model):
+    order = models.ForeignKey(Order, related_name='status_logs', on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=OrderStatusEnum.choices)
+    updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    note = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['created']
 
 
 class Transaction(TimeStampedModel, models.Model):
@@ -64,4 +81,3 @@ class KhaltiTransaction(TimeStampedModel, models.Model):
 
     def __str__(self):
         return f"Khalti Transaction {self.transaction}"
-

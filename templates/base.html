@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-            Islington Markteplace
+            Islington Marketplace
         {% endblock %}
     </title>
 
@@ -30,6 +30,10 @@
     {% tailwind_css %}
 
     <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+     <link rel="icon" type="image/x-icon" href="{{ setting.favicon.url }}" />
+
+    <meta name="description" content="{% block meta_description %}{{ setting.meta_description }}{% endblock %}">
 
     {% block extra_css %}
     {% endblock %}

@@ -1,0 +1,154 @@
+{% extends "dashboard_base.html" %}
+{% load currency %}
+{% load static %}
+
+{% block title %}Islington Marketplace - {{ object }} Detail{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex justify-between items-center shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md py-3.5 px-6">
+        <h2 class="text-2xl font-semibold text-[var(--clr-gray-900)] mb-3 flex items-center gap-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.25 12H3.75" stroke="var(--clr-gray-900)" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+                <path d="M10.5 5.25L3.75 12L10.5 18.75" stroke="var(--clr-gray-900)" stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+            Order Details
+        </h2>
+
+        <div
+                class="text-[var(--clr-primary-500)] flex items-center gap-2 cursor-pointer"
+                style="--nav-img-url: url('{% static 'images/icons/Plus.svg' %}'); --img-clr: var(--clr-primary-500)"
+                onclick="document.getElementById('order-{{ object.uuid }}').showModal()"
+        >
+            Leave a Rating
+            <div class="nav-icon"></div>
+        </div>
+    </div>
+
+    <div class="bg-[var(--clr-warning-50)] border border-[var(--clr-warning-200)] p-6 flex justify-between items-center">
+        <div>
+            <h1 class="text-[var(--clr-gray-900)] text-xl mb-2">#{{ object.uuid }}</h1>
+            <p class="text-[var(--clr-gray-700)] flex items-center gap-2">
+                {{ products|length }} Products <span>.</span> Order Placed in {{ object.created }}
+            </p>
+        </div>
+
+        <span class="text-[var(--clr-secondary-500)] font-semibold text-3xl">{{ order.total_amount|nepali_currency }}</span>
+    </div>
+
+    <div class="col-span-2 border border-[var(--clr-gray-100)] rounded-sm">
+        <h2 class="font-medium text-lg text-[var(--clr-gray-900)] py-5 px-6">Products ({{ products|length }})</h2>
+
+        <div class="overflow-x-auto">
+            <table class="table">
+                <!-- head -->
+                <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                    <th class="uppercase">Products</th>
+                    <th class="uppercase">Price</th>
+                    <th class="uppercase">Quantity</th>
+                    <th class="uppercase">Sub-Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, value in products.items %}
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="mask mask-squircle h-12 w-12">
+                                        <img
+                                                src="{{ value.thumbnail }}"
+                                                alt="Avatar Tailwind CSS Component"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-[var(--clr-gray-900)]">{{ value.name }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-[var(--clr-gray-700)] text-sm">
+                            {% if value.discount %}
+                                {{ value.discounted_price|nepali_currency }}
+                            {% else %}
+                                {{ value.price|nepali_currency }}
+                            {% endif %}
+                        </td>
+                        <td class="text-[var(--clr-gray-700)] text-sm">
+                            x{{ value.quantity }}
+                        </td>
+                        <th class="text-[var(--clr-gray-900)]">
+                            {{ value.total_price|nepali_currency }}
+                        </th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="py-8 px-6 grid grid-cols-3 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-0 backdrop-blur-md">
+        <div class="bg-[var(--clr-gray-00)] flex flex-col border-r-2 border-[var(--clr-gray-100)]">
+            <h3 class="uppercase text-[var(--clr-gray-900)] py-4 px-6 font-medium">
+                Shipping Address</h3>
+            <p class="text-[var(--clr-gray-900)] text-sm font-semibold py-4 px-6">{{ order.full_name }}</p>
+
+            <div class="text-[var(--clr-gray-900)] py-4 px-6 h-full">
+                <div class="mb-5">
+                    <p class="text-[var(--clr-gray-600)] text-sm font-medium">{{ order.shipping_address }}</p>
+                </div>
+
+                <div class="text-[var(--clr-gray-900)] flex gap-2 flex-col mb-5.5">
+                    {% if order.shipping_ph_number %}
+                        <p>Phone: <span
+                                class="text-[var(--clr-gray-600)]">{{ order.shipping_ph_number }}</span>
+                        </p>
+                    {% endif %}
+                    {% if order.shipping_email %}
+                        <p>Email: <span
+                                class="text-[var(--clr-gray-600)]">{{ order.shipping_email }}</span>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if order.note %}
+            <div class="bg-[var(--clr-gray-00)] flex flex-col border-r-2 border-[var(--clr-gray-100)]">
+                <h3 class="uppercase text-[var(--clr-gray-900)] py-4 px-6 font-medium">
+                    Order Notes</h3>
+                <p class="text-[var(--clr-gray-600)] text-sm font-semibold py-4 px-6">{{ order.note }}</p>
+            </div>
+
+        {% endif %}
+    </div>
+
+    {% include 'partials/dashboard/rating_modal.html' with product=object form=form %}
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const reviewForms = document.querySelectorAll(".review-form");
+
+        reviewForms.forEach(form => {
+            const ratingInputs = form.querySelectorAll("[type=radio]");
+            const formInputRating = form.querySelector("[type=hidden]");
+            const starInfo = form.querySelector(".star-info");
+
+            ratingInputs.forEach(input => {
+                if (input.value === formInputRating.value) {
+                    input.setAttribute("checked", "checked");
+                    starInfo.innerHTML = `${input.value} star Rating`;
+                }
+            });
+        });
+
+        function updateRating(elem) {
+            const starInfo = elem.parentElement.parentElement.querySelector(".star-info");
+            const inputFormField = elem.parentElement.parentElement.parentElement.querySelector("[type=hidden]");
+            starInfo.innerHTML = `${elem.value} star Rating`;
+            inputFormField.value = elem.value;
+        }
+    </script>
+{% endblock %}

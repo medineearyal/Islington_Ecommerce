@@ -34,7 +34,7 @@ class SuccessView(LoginRequiredMixin, TemplateView):
             })
 
             if pidx:
-                khalti_transaction = get_object_or_404(KhaltiTransaction, kwargs={"pidx": pidx, "transaction": transaction})
+                khalti_transaction = get_object_or_404(KhaltiTransaction, pidx= pidx, transaction=transaction)
 
                 # modified field suggests at what time the actual Khalti Transaction Succeeed or Failed
                 if status == PaymentStatusEnum.COMPLETED.label:

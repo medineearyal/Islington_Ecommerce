@@ -187,7 +187,7 @@
                             Add to Wishlist
                         </a>
 
-                        <a class="flex items-center gap-1 text-[var(--clr-gray-700)]">
+                        <a href="{% url 'products:add_to_compare' product.pk %}" class="flex items-center gap-1 text-[var(--clr-gray-700)]">
                             <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
                             Add to Compare
                         </a>
@@ -195,4 +195,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </dialog>

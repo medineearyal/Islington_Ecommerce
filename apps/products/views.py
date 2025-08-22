@@ -1,11 +1,13 @@
 from babel.numbers import format_decimal
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView, DetailView
-from rest_framework.views import APIView
+from django.contrib import messages
 
+from .forms import ProductForm, ImageFormSet, DescriptionFormSet
 from .models import Product
 
 
@@ -18,8 +20,11 @@ class ProductDetailView(DetailView):
         product = self.get_object()
         reviews = product.reviews.all().order_by("-created")
 
-        related_categories = [child.pk for child in product.category.parent.get_children()]
-        related_products = Product.objects.filter(category__pk__in=related_categories).exclude(pk=product.pk)
+        try:
+            related_categories = [child.pk for child in product.category.parent.get_children()]
+            related_products = Product.objects.filter(category__pk__in=related_categories).exclude(pk=product.pk)
+        except:
+            related_products = Product.objects.none()
 
         paginator = Paginator(reviews, 5)
 
@@ -93,14 +98,17 @@ class CartView(TemplateView):
                     "category": product.category.name,
                 }
             request.session["cart"] = cart
+            messages.success(request, "Product Successfully Added To The Cart.")
         elif action == "remove":
             cart = request.session.get("cart")
             cart.pop(str(product_id), None)
             request.session["cart"] = cart
+            messages.success(request, "Product Successfully Removed From The Cart.")
         elif action == "update":
             if str(product_id) in cart:
                 if cart[str(product_id)]["quantity"] != quantity:
                     cart[str(product_id)]["quantity"] = quantity
+                    messages.success(request, "Product Successfully Updated In  The Cart.")
 
         total_price = sum(
             [int(item["quantity"]) * float(item["price"] if not item["discount"] else item["discounted_price"]) for item
@@ -127,3 +135,85 @@ class CartView(TemplateView):
         final_html = template_string + extra_update_html
 
         return HttpResponse(final_html)
+
+
+def add_to_compare(request, product_id):
+    compare = request.session.get('compare', [])
+
+    if product_id in compare:
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+    if len(compare) >= 3:
+        messages.error(request, "You can only compare up to 3 products.")
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+    compare.append(product_id)
+    request.session['compare'] = compare
+    messages.success(request, "Product added to compare.")
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def remove_from_compare(request, product_id):
+    compare = request.session.get('compare', [])
+    if product_id in compare:
+        compare.remove(product_id)
+        request.session['compare'] = compare
+        messages.success(request, "Product removed from comparison.")
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def compare_products(request):
+    compare_ids = request.session.get('compare', [])
+    products = Product.objects.filter(id__in=compare_ids)
+    products = sorted(products, key=lambda p: compare_ids.index(p.id))
+
+    request.session['compare'] = [p.id for p in products]
+
+
+    return render(request, 'dashboard/compare_items.html', {'products': products, "active_nav": "compare"})
+
+
+@login_required
+def product_create(request):
+    product = Product(seller=request.user)
+    form = ProductForm(request.POST or None, instance=product)
+    image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="img")
+    description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="desc")
+
+    if request.method == "POST":
+        if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
+            product = form.save(commit=False)
+            product.seller = request.user
+            product.save()
+            image_fs.instance = product
+            description_fs.instance = product
+            image_fs.save()
+            description_fs.save()
+            return redirect("users:seller_products")
+
+    return render(request, "partials/products/product_create_modal.html", {
+        "form": form,
+        "image_fs": image_fs,
+        "description_fs": description_fs,
+    })
+
+
+@login_required
+def product_edit(request, pk):
+    product = get_object_or_404(Product, pk=pk, seller=request.user)
+    form = ProductForm(request.POST or None, instance=product)
+    image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="img")
+    description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="desc")
+
+    if request.method == "POST":
+        if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
+            form.save()
+            image_fs.save()
+            description_fs.save()
+            return redirect("users:seller_products")
+
+    return render(request, "partials/products/product_create_modal.html", {
+        "form": form,
+        "image_fs": image_fs,
+        "description_fs": description_fs,
+    })

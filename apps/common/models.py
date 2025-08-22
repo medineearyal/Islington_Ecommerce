@@ -27,7 +27,7 @@ class AddressModel(models.Model):
     city = models.CharField(max_length=100, choices=BagmatiCities.choices, default=BagmatiCities.KATHMANDU)
     zip_code = models.CharField(max_length=9)
     email = models.EmailField()
-    ph_number = models.TextField(max_length=20, validators=[validate_nepali_mobile, ])
+    ph_number = models.CharField(max_length=20, validators=[validate_nepali_mobile, ])
 
     def __str__(self):
         return f"{self.user}_shipping_address"

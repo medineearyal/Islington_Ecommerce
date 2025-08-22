@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Blog, Category
+from .models import Blog
 
 
 # Register your models here.
@@ -9,8 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "category", "status")
+    list_display = ("id", "name", "status")
 
 
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Blog, BlogAdmin)

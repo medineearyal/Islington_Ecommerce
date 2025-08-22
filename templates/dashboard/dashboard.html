@@ -1,0 +1,196 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% load currency %}
+
+{% block title %}Islington Marketplace - User Dashboard{% endblock %}
+
+{% block dashboard_content %}
+    <h2 class="text-2xl font-semibold text-[var(--clr-gray-900)] mb-3">
+        Hello, {{ request.user.full_name }}</h2>
+
+    <p class="text-[var(--clr-gray-700)]">
+        From your account dashboard. you can easily check & view your <a href=""
+                                                                         class="text-[var(--clr-secondary-500)]">Recent
+        Orders</a>, manage your <a class="text-[var(--clr-secondary-500)]" href="">Shipping Address</a> and
+        edit your <a class="text-[var(--clr-secondary-500)]" href="">Password</a> and <a href="">Account
+        Details</a>.
+    </p>
+
+    <div class="grid grid-cols-3 gap-6 py-6">
+        <div class="bg-[var(--clr-gray-00)] flex flex-col">
+            <h3 class="uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+                Account Info</h3>
+
+            <div class="text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-t-0 border-[var(--clr-gray-100)] rounded-b-sm backdrop-blur-md h-full">
+                <div class="flex gap-4 items-center mb-5">
+                    {% if request.user.profile_image %}
+                        <div class="avatar">
+                            <div class="w-12 rounded-full">
+                                <img src="{{ request.user.profile_image.url }}" alt="Profile Picture"/>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="avatar">
+                            <div class="w-12 rounded-full">
+                                <img src="{% static 'images/icons/User.svg' %}"
+                                     class="bg-[var(--clr-gray-600)]" alt="Profile Picture"/>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <p class="text-[var(--clr-gray-900)] text-base font-semibold">{{ request.user.full_name }}</p>
+                </div>
+
+                <div class="text-[var(--clr-gray-900)] flex gap-2 flex-col mb-5.5">
+                    <p>Email: <span class="text-[var(--clr-gray-600)]">{{ request.user.email }}</span></p>
+                    <p>Phone: <span class="text-[var(--clr-gray-600)]">{{ request.user.ph_number }}</span>
+                    </p>
+                </div>
+
+                <a href=""
+                   class="btn btn-outline no-icon text-[var(--clr-secondary-500)] border-[var(--clr-secondary-100)] uppercase rounded-0">Edit
+                    Account</a>
+            </div>
+        </div>
+
+        {% if request.user.shipping_address %}
+            <div class="bg-[var(--clr-gray-00) flex flex-col]">
+                <h3 class="uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+                    Billing Address</h3>
+
+                <div class="text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-t-0 border-[var(--clr-gray-100)] rounded-b-sm backdrop-blur-md h-full">
+                    <div class="mb-5">
+                        <p class="text-[var(--clr-gray-900)] text-sm font-medium">{{ request.user.full_name }}</p>
+                    </div>
+
+                    <div class="text-[var(--clr-gray-900)] flex gap-2 flex-col mb-5.5">
+                        <p class="tex-sm text-[var(--clr-gray-600)]">{{ request.user.shipping_address }}</p>
+                        <p>Phone: <span
+                                class="text-[var(--clr-gray-600)]">{{ request.user.shipping_ph_number }}</span>
+                        <p>Email: <span
+                                class="text-[var(--clr-gray-600)]">{{ request.user.shipping_email }}</span>
+                        </p>
+                    </div>
+
+                    <a href=""
+                       class="btn btn-outline no-icon text-[var(--clr-secondary-500)] border-[var(--clr-secondary-100)] uppercase rounded-0">Edit
+                        Address</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="bg-[var(--clr-gray-00)] flex flex-col">
+                <h3 class="uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+                    Billing Address</h3>
+
+                <div class="text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-t-0 border-[var(--clr-gray-100)] rounded-b-sm backdrop-blur-md h-full">
+                    <div class="mb-5">
+                        <p class="text-[var(--clr-gray-900)] text-sm font-medium">{{ request.user.full_name }}</p>
+                    </div>
+
+                    <div class="text-[var(--clr-gray-900)] flex gap-2 flex-col mb-5.5">
+                        <p>
+                            Your Shipping Address Information Will Be Displayed Here
+                        </p>
+                    </div>
+
+                    <a href=""
+                       class="btn btn-outline no-icon text-[var(--clr-secondary-500)] border-[var(--clr-secondary-100)] uppercase rounded-0">Add
+                        Address</a>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="bg-[var(--clr-gray-00)] flex flex-col">
+            <div class="stats flex flex-col gap-6 justify-between">
+                <div class="stat bg-[var(--clr-secondary-50)] rounded-sm grid-cols-4">
+                    <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                        {{ total_orders }}
+                    </div>
+                    <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Orders
+                    </div>
+                    <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                        <div class="avatar">
+                            <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                                <img src="{% static 'images/icons/Rocket.svg' %}"
+                                     class="w-8 aspect-square p-3" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat bg-[var(--clr-primary-50)] rounded-sm grid-cols-4">
+                    <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                        {{ pending_orders }}
+                    </div>
+                    <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Pending Orders
+                    </div>
+                    <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                        <div class="avatar">
+                            <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                                <img src="{% static 'images/icons/Receipt.svg' %}"
+                                     class="w-8 aspect-square p-3" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat bg-[var(--clr-success-50)] rounded-sm grid-cols-4">
+                    <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                        {{ completed_orders }}
+                    </div>
+                    <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Completed Orders
+                    </div>
+                    <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                        <div class="avatar">
+                            <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                                <img src="{% static 'images/icons/Package.svg' %}"
+                                     class="w-8 aspect-square p-3" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-[var(--clr-gray-00)]py-4">
+        <h2 class="flex justify-between items-center uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+            Recent Orders <a
+                class="btn bg-transparent text-[var(--clr-primary-500)] border-0 shadow-none nav-icon"
+                style="--nav-img-url: url({% static 'images/icons/ArrowRight.svg' %})">View All</a>
+        </h2>
+
+        <div class="overflow-x-auto rounded-b-sm">
+            <table class="table border border-[var(--clr-gray-100)]">
+                <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                    <th class="uppercase">Order ID</th>
+                    <th class="uppercase">Status</th>
+                    <th class="uppercase">Date</th>
+                    <th class="uppercase">Sub-Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in recent_orders %}
+                    <tr class="text-sm">
+                        <td class="text-[var(--clr-gray-900)] font-medium">
+                            {{ order.uuid }}
+                        </td>
+                        <td>
+                            {% if order.status == "Completed" %}
+                                <span class="text-[var(--clr-secondary-500)] uppercase font-semibold">{{ order.status }}</span>
+                            {% else %}
+                                <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-[var(--clr-gray-600)]">
+                            {{ order.created }}
+                        </td>
+                        <td class="text-[var(--clr-gray-700)]">
+                            {{ order.total_amount|nepali_currency }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

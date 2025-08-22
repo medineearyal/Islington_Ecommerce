@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% load currency %}
+
+{% block title %}Islington Marketplace - User Dashboard{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb dashboard-wrappper">
+        {% include "partials/breadcrumb.html" %}
+
+        <div class="container mx-auto mt-10 mb-18 grid grid-cols-4 gap-18">
+            <div class="col-span-1">
+                <ul class="list bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md py-4">
+                    <li>
+                        <a href="{% url 'users:dashboard' %}"
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "dashboard" %}active-nav{% endif %}"
+                           style="--nav-img-url: url('{% static 'images/icons/Stack.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Dashboard
+                        </a>
+                    </li>
+                    {% if request.user.user_type == "seller" %}
+                        <li>
+                            <a href="{% url 'users:seller_products' %}"
+                               class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "seller-products" %}active-nav{% endif %}"
+                               style="--nav-img-url: url('{% static 'images/icons/ArrowsCounterClockwise.svg' %}'); --img-clr: var(--clr-gray-700);">
+                                <div class="nav-icon"></div>
+                                Products
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'users:orders' %}"
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "order-history" %}active-nav{% endif %}"
+                           style="--nav-img-url: url('{% static 'images/icons/Storefront.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Order History
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users:order-track' %}"
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "track-order" %}active-nav{% endif %}"
+                           style="--nav-img-url: url('{% static 'images/icons/MapPinLine.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Track Order
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'pages:cart' %}"
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "shopping-cart" %}active-nav{% endif %}"
+                           style="--nav-img-url: url('{% static 'images/icons/Cart.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Shopping Cart
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products:compare_products' %}"
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "compare" %}active-nav{% endif %}"
+                           style="--nav-img-url: url('{% static 'images/icons/ArrowsCounterClockwise.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Compare
+                        </a>
+                    </li>
+                    {#                    <li>#}
+                    {#                        <a href=""#}
+                    {#                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "addresses" %}active-nav{% endif %}"#}
+                    {#                           style="--nav-img-url: url('{% static 'images/icons/Notebook.svg' %}'); --img-clr: var(--clr-gray-700);">#}
+                    {#                            <div class="nav-icon"></div>#}
+                    {#                            Addresses#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                    <li>
+                        <a href="{% url 'users:profile' request.user.pk %}"
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "settings" %}active-nav{% endif %}"
+                           style="--nav-img-url: url('{% static 'images/icons/Gear.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a href=""
+                           class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center"
+                           style="--nav-img-url: url('{% static 'images/icons/SignOut.svg' %}'); --img-clr: var(--clr-gray-700);">
+                            <div class="nav-icon"></div>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-span-3" id="content">
+                {% block dashboard_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% load currency %}
+
+{% block title %}Islington Marketplace - User Dashboard{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include "partials/breadcrumb.html" %}
+
+        <div class="container mx-auto py-18">
+            <h2 class="text-2xl font-semibold text-[var(--clr-gray-900)] mb-3">
+                Compare</h2>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-gray-200 text-left">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-3 border-r border-gray-200">Feature</th>
+                        {% for product in products %}
+                            <th class="px-4 py-3 text-center border-r border-gray-200">
+                                <!-- Remove Button -->
+                                <a href="{% url 'products:remove_from_compare' product.id %}" class="inline-block mb-2">
+                                    <img src="{% static 'images/icons/Cross.svg' %}" alt="Remove" class="h-5 w-5"/>
+                                </a>
+                                <!-- Product Name -->
+                                <div class="font-semibold">{{ product.name }}</div>
+                                <!-- Product Image -->
+                                <figure class="mt-2">
+                                    {% if product.thumbnail %}
+                                        <img src="{{ product.thumbnail.url }}" alt="{{ product }}"
+                                             class="h-40 w-full object-cover rounded-sm"/>
+                                    {% else %}
+                                        <img src="{% static 'images/products/product_2.png' %}" alt=""
+                                             class="h-40 w-full object-cover rounded-sm"/>
+                                    {% endif %}
+                                </figure>
+                            </th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!-- Customer Feedback -->
+                    <tr class="bg-gray-50">
+                        <td class="px-4 py-3 font-medium border-t border-gray-200 text-[var(--clr-gray-700)]">Customer Feedback</td>
+                        {% for product in products %}
+                            <td class="px-4 py-3 border-t border-gray-200 text-center text-[var(--clr-gray-700)]">
+                                <div class="flex justify-center">
+                                    {% include "partials/products/ratings.html" with rating=product.average_ratings %}
+                                </div>
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                    <!-- Price -->
+                    <tr>
+                        <td class="px-4 py-3 font-medium border-t border-gray-200 text-[var(--clr-gray-700)]">Price</td>
+                        {% for product in products %}
+                            <td class="px-4 py-3 border-t border-gray-200 text-center">
+                                {% if product.discounted_price != product.price %}
+                                    <span class="text-green-600 font-semibold text-lg">{{ product.discounted_price|nepali_currency }}</span>
+                                    <span class="line-through text-gray-400 ml-1">{{ product.price|nepali_currency }}</span>
+                                {% else %}
+                                    <span class="text-gray-900 font-semibold text-lg">{{ product.price|nepali_currency }}</span>
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                    <!-- Sold By -->
+                    <tr class="bg-gray-50">
+                        <td class="px-4 py-3 font-medium border-t border-gray-200 text-[var(--clr-gray-700)]">Sold By</td>
+                        {% for product in products %}
+                            <td class="px-4 py-3 border-t border-gray-200 text-center text-[var(--clr-gray-700)]">
+                                {{ product.seller }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                    <!-- Add to Cart -->
+                    <tr>
+                        <td class="px-4 py-3 font-medium border-t border-gray-200 text-[var(--clr-gray-700)]">Action</td>
+                        {% for product in products %}
+                            <td class="px-4 py-3 border-t border-gray-200 text-center">
+                                <a href="{% url 'products:cart' product.id %}"
+                                   class="btn btn-primary btn-sm w-full flex items-center justify-center gap-2">
+                                    <img src="{% static 'images/icons/Cart.svg' %}" alt="" class="h-4 w-4"/>
+                                    Add to Cart
+                                </a>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "dashboard_base.html" %}
+{% load currency %}
+{% load static %}
+
+{% block title %}Islington Marketplace - Order Tracking{% endblock %}
+
+{% block dashboard_content %}
+    <h1 class="text-3xl font-semibold text-[var(--clr-gray-900)] mb-3">
+        Track Order</h1>
+
+    <p class="text-[var(--clr-gray-700)] mb-6">
+        To track your order please enter your order ID in the input field below and press the “Track Order” button. this
+        was given to you on your receipt and in the confirmation email you should have received.
+    </p>
+
+    <div class="gap-6 py-6">
+        <form id="track-form" class="relative mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md"
+              method="get">
+            {% if form.non_field_errors %}
+                <div class="error text-center">
+                    {% for error in form.non_field_errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="p-6.5">
+                <div class="flex gap-4">
+                    <div class="mb-4">
+                        <label for="order-id"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">Order ID</span>
+
+                            <input type="text" placeholder="ID..." name="orderId"
+                                   class="border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"/>
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot Be Empty
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">Associated Email Address</span>
+
+                            <input type="email" placeholder="Shipping Email" name="shippingEmail"
+                                   class="border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"/>
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot Be Empty
+                        </p>
+                    </div>
+                </div>
+
+                <button class="btn btn-shop-now uppercase w-fit" style="width: fit-content">Track Order</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const form = document.querySelector("#track-form");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const orderId = form.querySelector("[name='orderId']").value;
+            const email = form.querySelector("[name='shippingEmail']").value;
+
+            form.action = "/users/orders/track/" + encodeURIComponent(orderId) + "?email=" + encodeURIComponent(email);
+            form.submit();
+        });
+    </script>
+{% endblock %}

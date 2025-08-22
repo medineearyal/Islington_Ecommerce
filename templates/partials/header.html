@@ -1,6 +1,6 @@
 {% load static %}
 
-<header id="header" class="main-header bg-[var(--clr-secondary-800)]">
+<header id="header" class="main-header bg-[var(--clr-secondary-650)]">
     <div class="container flex flex-row justify-between items-center mx-auto py-4">
         <span class="text-sm font-light ">Welcome to Islington Ecommerce</span>
 
@@ -39,12 +39,12 @@
                 </li>
             </ul>
 
-            <form>
-                <select class="select select-ghost pl-0" name="language-change">
-                    <option>Eng</option>
-                    <option>Nep</option>
-                </select>
-            </form>
+{#            <form>#}
+{#                <select class="select select-ghost pl-0" name="language-change">#}
+{#                    <option>Eng</option>#}
+{#                    <option>Nep</option>#}
+{#                </select>#}
+{#            </form>#}
         </div>
     </div>
 
@@ -103,7 +103,7 @@
                                     {{ request.user }}
                                 </summary>
                                 <ul class="p-0 w-full bg-[var(--clr-gray-00)] text-[var(--gray-900)] rounded-none">
-                                    <li><a href="">Profile</a></li>
+                                    <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
                                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
                                 </ul>
                             </details>
@@ -205,36 +205,36 @@
                         </details>
                     </li>
                     <li>
-                        <a>
+                        <a href="{% url 'users:order-track' %}">
                             <img src="{% static 'images/icons/MapPinLine.svg' %}" alt=""/>
                             Track Order
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a href="{% url 'products:compare_products' %}">
                             <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
                             Compare
                         </a>
                     </li>
-                    <li>
-                        <a>
-                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>
-                            Customer Support
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>
-                            Need Help
-                        </a>
-                    </li>
+{#                    <li>#}
+{#                        <a>#}
+{#                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>#}
+{#                            Customer Support#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a>#}
+{#                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>#}
+{#                            Need Help#}
+{#                        </a>#}
+{#                    </li>#}
                 </ul>
             </div>
 
             <div class="navbar-end text-[var(--clr-gray-900)]">
                 <span class="flex items-center gap-2">
                     <img src="{% static 'images/icons/Call.svg' %}" alt=""/>
-                    +1-202-555-0104
+                    {{ setting.phone }}
                 </span>
             </div>
         </div>

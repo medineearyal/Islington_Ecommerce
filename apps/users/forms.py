@@ -274,6 +274,7 @@ class UserResetPasswordForm(ResetPasswordForm):
             "class": "border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
         })
 
+
 class UserResetPasswordFromKeyForm(ResetPasswordKeyForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -287,3 +288,15 @@ class UserResetPasswordFromKeyForm(ResetPasswordKeyForm):
             "placeholder": "Enter the same password as above",
             "class": "border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
         })
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = AuthUser
+        exclude = ["password", "username", "date_joined", "user_type", "is_superuser", "is_staff", "is_active"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({
+                "class": "border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
+            })

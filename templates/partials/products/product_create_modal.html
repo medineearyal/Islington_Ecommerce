@@ -1,0 +1,75 @@
+<div class="modal modal-open">
+    <div class="modal-box max-w-5xl bg-[var(--clr-gray-00)]">
+        <h3 class="font-bold text-lg text-[var(--clr-gray-900)]">{{ form.instance.pk|yesno:"Edit Product,Add Product" }}</h3>
+
+        <form method="post" enctype="multipart/form-data"
+              hx-post="{{ request.path }}"
+              hx-target="#product-table-body"
+              hx-swap="outerHTML">
+            {% csrf_token %}
+            <div class="grid grid-cols-2 gap-4 text-[var(--clr-gray-700)]">
+                <div>
+                    {{ form.as_p }}
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mt-4 text-xl">Images</h4>
+                    {{ image_fs.management_form }}
+                    {% for f in image_fs %}
+                        <div class="mb-2">
+                            <div>
+                                <label for="{{ f.title.id_for.label }}">
+                                    Image
+                                </label>
+                                {{ f.image }}
+                            </div>
+
+                            <div class="flex items-center w-full text-[var(--clr-danger-500)]">
+                                {{ f.DELETE }}
+
+                                <label for="{{ f.title.id_for.label }}" class="text-nowrap">
+                                    Delete Image
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <h4 class="font-semibold mt-4 text-xl">Descriptions</h4>
+                    {{ description_fs.management_form }}
+                    {% for f in description_fs %}
+                        <div class="mb-2">
+                            <div>
+                                <label for="{{ f.title.id_for.label }}">
+                                    Title
+                                </label>
+                                {{ f.title }}
+                            </div>
+
+                            <div>
+                                <label for="{{ f.description.id_for.label }}">
+                                    Description
+                                </label>
+                                {{ f.description }}
+
+                            </div>
+
+                            <div class="flex items-center flex-start">
+                                {{ f.DELETE }}
+
+                                <label for="{{ f.DELETE.id_for.label }}"
+                                       class="flex-1 w-full block text-[var(--clr-danger-500)] text-nowrap">
+                                    Delete Description
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="#" class="btn" hx-get="">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

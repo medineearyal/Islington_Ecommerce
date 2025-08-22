@@ -6,7 +6,7 @@ from .models import Order
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        exclude = ("products", "customer",)
+        exclude = ("customer", "status",)
         widgets = {
             "first_name": TextInput(attrs={
                 "class": "ring ring-[var(--clr-gray-100)] rounded-xs text-[var(--clr-gray-900)] px-4 py-3 w-full important",
