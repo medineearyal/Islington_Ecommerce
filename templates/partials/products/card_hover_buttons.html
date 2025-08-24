@@ -28,7 +28,9 @@
 
     <a
             class="group/inner h-[48px] w-[48px] bg-[var(--clr-gray-00)] p-3 rounded-full hover:bg-[var(--clr-primary-500)] hover:cursor-pointer"
-            onclick="document.getElementById('product-{{ product.slug }}').showModal()"
+            hx-get="{% url 'products:quick_view' product.slug %}"
+            hx-target="#quick-view-container"
+            hx-swap="innerHTML"
     >
         <svg class="stroke-[var(--clr-gray-700)] group-hover/inner:stroke-white" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.5 4.25C5 4.25 2 12 2 12C2 12 5 19.75 12.5 19.75C20 19.75 23 12 23 12C23 12 20 4.25 12.5 4.25Z"

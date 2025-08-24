@@ -1,6 +1,6 @@
-from django.db.models.functions import Substr, Cast
+from django.db.models.functions import Substr, Cast, Coalesce
 from django.utils.text import slugify
-from django.db.models import Q, IntegerField, Max
+from django.db.models import Q, IntegerField, Max, Case, When, Value, CharField
 
 
 def generate_unique_slug(instance, field_name="slug", from_name="name"):
@@ -25,7 +25,17 @@ def generate_unique_slug(instance, field_name="slug", from_name="name"):
     if qs.exists():
         max_suffix = qs.annotate(
             suffix_num=Cast(
-                Substr(field_name, len(base_slug) + 2),
+                Coalesce(
+                    Case(
+                        When(
+                            **{f"{field_name}__regex": rf'^{base_slug}-\d+$'},
+                            then=Substr(field_name, len(base_slug) + 2)
+                        ),
+                        default=Value("0"),
+                        output_field=CharField()
+                    ),
+                    Value("0")
+                ),
                 IntegerField()
             )
         ).aggregate(max_num=Max('suffix_num'))['max_num'] or 1
@@ -33,5 +43,3 @@ def generate_unique_slug(instance, field_name="slug", from_name="name"):
         return f"{base_slug}-{max_suffix + 1}"
     else:
         return base_slug
-
-

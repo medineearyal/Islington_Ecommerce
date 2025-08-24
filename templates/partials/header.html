@@ -7,44 +7,35 @@
         <div class="flex gap-2 items-center">
             <span class="text-sm font-light">Follow Us:</span>
             <ul role="list" class="flex flex-row justify-center gap-2 border-r-1 border-[var(--clr-gray-00)] pr-2">
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Facebook.svg' %}" alt="Facebook Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Instagram.svg' %}" alt="Instagram Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Pinterest.svg' %}" alt="Pinterest Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Reddit.svg' %}" alt="Reddit Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Twitter.svg' %}" alt="Twitter Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Youtube.svg' %}" alt="Youtube Link"/>
-                    </a>
-                </li>
+                {% if setting.facebook %}
+                    <li>
+                        <a href="{{ setting.facebook }}">
+                            <img src="{% static 'images/icons/Facebook.svg' %}" alt="Facebook Link"/>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if setting.instagram %}
+                    <li>
+                        <a href="{{ setting.instagram }}">
+                            <img src="{% static 'images/icons/Instagram.svg' %}" alt="Facebook Link"/>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if setting.youtube %}
+                    <li>
+                        <a href="{{ setting.youtube }}">
+                            <img src="{% static 'images/icons/Youtube.svg' %}" alt="Youtube Link"/>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
 
-{#            <form>#}
-{#                <select class="select select-ghost pl-0" name="language-change">#}
-{#                    <option>Eng</option>#}
-{#                    <option>Nep</option>#}
-{#                </select>#}
-{#            </form>#}
+            {#            <form>#}
+            {#                <select class="select select-ghost pl-0" name="language-change">#}
+            {#                    <option>Eng</option>#}
+            {#                    <option>Nep</option>#}
+            {#                </select>#}
+            {#            </form>#}
         </div>
     </div>
 
@@ -130,7 +121,7 @@
                                 {% for category in header_categories %}
                                     {% if category.is_leaf_node %}
                                         <li>
-                                            <a href="{% url 'pages:shop' %}?type={{ category.pk }}"
+                                            <a href="{% url 'pages:shop' %}?category={{ category.slug }}"
                                                class="px-4 py-2">{{ category }}</a>
                                         </li>
                                     {% else %}
@@ -216,18 +207,18 @@
                             Compare
                         </a>
                     </li>
-{#                    <li>#}
-{#                        <a>#}
-{#                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>#}
-{#                            Customer Support#}
-{#                        </a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a>#}
-{#                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>#}
-{#                            Need Help#}
-{#                        </a>#}
-{#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a>#}
+                    {#                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>#}
+                    {#                            Customer Support#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a>#}
+                    {#                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>#}
+                    {#                            Need Help#}
+                    {#                        </a>#}
+                    {#                    </li>#}
                 </ul>
             </div>
 

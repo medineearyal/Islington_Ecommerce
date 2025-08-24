@@ -1,0 +1,17 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Islington Ecommerce - Category{% endblock %}
+
+{% block dashboard_content %}
+    <div class="text-[var(--clr-gray-900)]">
+        <h2 class="font-semibold text-2xl mb-3">Add Colors</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+{% endblock %}

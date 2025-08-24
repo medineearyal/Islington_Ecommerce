@@ -16,4 +16,8 @@ urlpatterns = [
 
     path("products/create/", views.product_create, name="create"),
     path("products/edit/<int:pk>/", views.product_edit, name="edit"),
+    path("products/cateogry/create/", views.CategoryView.as_view(), name="create_category"),
+    path("products/colors/create/", views.ProductColorsView.as_view(), name="create_color"),
+
+    path("products/quick_view/<str:slug>/", views.product_detail_modal, name="quick_view")
 ]

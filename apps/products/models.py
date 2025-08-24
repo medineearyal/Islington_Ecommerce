@@ -17,7 +17,6 @@ User = get_user_model()
 
 class Category(SlugMixin, MPTTModel):
     name = models.CharField(max_length=255)
-    short_identifier = models.CharField(max_length=3, unique=True)
     parent = TreeForeignKey(
         "self",
         on_delete=models.CASCADE,
@@ -79,7 +78,7 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.IntegerField(default=1)
     tags = models.ManyToManyField(Tag, related_name="tags")
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, limit_choices_to=leaf_categories)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, limit_choices_to=leaf_categories, related_name="product_category")
     slug = models.SlugField(blank=True, null=True, unique=True)
     is_featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to="products/thumbnails/", null=True, blank=True)
@@ -89,7 +88,7 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
 
     seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     sku = models.CharField(max_length=50, unique=True, blank=True)
-    colors = models.ManyToManyField(ProductColors, related_name="colors")
+    colors = models.ManyToManyField(ProductColors, related_name="colors", blank=True)
 
     def __str__(self):
         return self.name

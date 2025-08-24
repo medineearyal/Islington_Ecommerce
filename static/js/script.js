@@ -1,59 +1,30 @@
-const thumbSwiper = new Swiper(".thumb-swiper", {
-    direction: 'horizontal',
-    slidesPerView: 6,
-    watchSlidesProgress: true,
-    watchSlideVisibility: true,
-})
+document.body.addEventListener("htmx:afterSwap", (event) => {
+    if (event.detail.target.id === "quick-view-container") {
+        const modalContainer = document.getElementById("quick-view-container");
+        const modal = modalContainer.querySelector("dialog");
+        if (modal) {
+            modal.showModal();
+            const thumbSwiper = new Swiper(".thumb-swiper", {
+                direction: 'horizontal',
+                slidesPerView: 6,
+                watchSlidesProgress: true,
+                watchSlideVisibility: true,
+            })
 
-const productMainSwiper = new Swiper(".product-main-swiper", {
-    slidesPerView: 1,
+            const productMainSwiper = new Swiper(".product-main-swiper", {
+                slidesPerView: 1,
 
-    navigation: {
-        nextEl: ".thumb-container .swiper-button-next",
-        prevEl: ".thumb-container .swiper-button-prev",
-    },
+                navigation: {
+                    nextEl: ".thumb-container .swiper-button-next",
+                    prevEl: ".thumb-container .swiper-button-prev",
+                },
 
-    thumbs: {
-        swiper: thumbSwiper,
+                thumbs: {
+                    swiper: thumbSwiper,
+                }
+            })
+        }
     }
-})
-
-const swiper = new Swiper('.main-category-swiper', {
-    direction: 'horizontal',
-    speed: 500,
-    loop: true,
-    slidesPerView: 6,
-
-    pagination: {
-        el: '.swiper-pagination',
-    },
-
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-    },
-
-    navigation: {
-        nextEl: '.main-category-swiper-wrapper .swiper-button-next',
-        prevEl: '.main-category-swiper-wrapper .swiper-button-prev',
-    },
-});
-
-const swiperBanner = new Swiper(".swiper-banner", {
-    direction: 'horizontal',
-    loop: true,
-    speed: 500,
-    slidesPerView: 1,
-
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-    },
-
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
 });
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -154,6 +125,64 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         })
     }
+
+    const swiper = new Swiper('.main-category-swiper', {
+        direction: 'horizontal',
+        speed: 500,
+        loop: true,
+        slidesPerView: 6,
+
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+        },
+
+        navigation: {
+            nextEl: '.main-category-swiper-wrapper .swiper-button-next',
+            prevEl: '.main-category-swiper-wrapper .swiper-button-prev',
+        },
+    });
+
+    const featuredSwiper = new Swiper(".featured-swiper", {
+        direction: "horizontal",
+        speed: 500,
+        loop: true,
+        slidesPerView: 1,
+
+        pagination: {
+            el: ".swiper-pagination"
+        },
+
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: true
+        },
+        navigation: {
+            nextEl: ".featured-swiper .swiper-button-next",
+            prevEl: ".featured_swiper .swiper-button-prev"
+        }
+    });
+
+    const swiperBanner = new Swiper(".swiper-banner", {
+        direction: 'horizontal',
+        loop: true,
+        speed: 500,
+        slidesPerView: 1,
+
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+        },
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
 });
 
 function priceReset(elem) {
@@ -191,7 +220,7 @@ function checkForStockOverflow(elem) {
     if (currentValue > Number(elem.getAttribute("max"))) {
         stockError.classList.remove("hidden");
         cartBtn.setAttribute("disabled", "disabled");
-    }else {
+    } else {
         stockError.classList.add("hidden");
         cartBtn.removeAttribute("disabled");
 
@@ -200,4 +229,34 @@ function checkForStockOverflow(elem) {
         const newHxGet = `${hxGet}&quantity=${currentValue}`;
         addToCartBtn.setAttribute("hx-get", newHxGet);
     }
+}
+
+function closeModal(el) {
+    el.closest(".modal").classList.remove("modal-open");
+}
+
+function setupDynamicFormset(opts) {
+    const {prefix, addBtnId, containerId, templateId} = opts;
+    const totalInput = document.querySelector(`#id_${prefix}-TOTAL_FORMS`);
+    const addBtn = document.getElementById(addBtnId);
+    const container = document.getElementById(containerId);
+    const tmplHTML = document.getElementById(templateId).innerHTML.trim();
+
+    function addForm() {
+        const index = parseInt(totalInput.value, 10);
+        const html = tmplHTML.replace(/__prefix__/g, index);
+        container.insertAdjacentHTML("beforeend", html);
+        totalInput.value = index + 1;
+    }
+
+    addBtn?.addEventListener("click", addForm);
+
+    container.addEventListener("click", (e) => {
+        if (e.target.closest('[data-action="remove-form"]')) {
+            const block = e.target.closest("[data-formset-item]");
+            const del = block.querySelector('input[type="checkbox"][name$="-DELETE"]');
+            if (del) del.checked = true;
+            block.style.display = "none";
+        }
+    });
 }

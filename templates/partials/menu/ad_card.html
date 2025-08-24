@@ -27,7 +27,7 @@
     </div>
 
     <div class="">
-        <a href="{% url 'pages:shop' %}?category={{ product.category.parent.pk }}" class="btn btn-shop-now">
+        <a href="{% url 'pages:shop' %}?category={{ product.category.parent.slug }}" class="btn btn-shop-now">
             Shop Now
         </a>
     </div>

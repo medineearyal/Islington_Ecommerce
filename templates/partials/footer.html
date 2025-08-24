@@ -11,14 +11,14 @@
 
                     <br/>
 
-                    <span class="font-medium">(+977) 9863784674</span>
+                    <span class="font-medium">(+977) {{ setting.phone }}</span>
                 </p>
 
                 <p class="text-[var(--clr-gray-500)] text-sm mb-3">
-                    SeshmatiPul, Tarkeshwor, Bagmati Province 3 Nepal
+                    {{ setting.location }}
                 </p>
 
-                <p class="text-base font-medium">info@ing.com</p>
+                <p class="text-base font-medium">{{ setting.email }}</p>
             </div>
 
             <div class="flex gap-6">
@@ -26,13 +26,17 @@
                     <h3 class="text-base font-medium]">TOP CATEGORY</h3>
 
                     <ul role="list" class="text-[var(--clr-gray-400)] text-sm font-medium">
-                        <li class="py-2">Computer & Laptop</li>
-                        <li class="py-2">SmartPhone</li>
-                        <li class="py-2">Headphone</li>
+                        {% for category in categories %}
+                            {% if forloop.counter < 4 %}
+                                <li>
+                                    <a href="{% url 'pages:shop' %}?category={{ category.slug }}" class="py-2">{{ category }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
 
                     <span class="flex items-center gap-2 font-medium text-sm">
-                        <div class="divider bg-[var(--clr-warning-500)] w-[10%]" style="height: 2px;"></div>
+                        <span class="divider bg-[var(--clr-warning-500)] w-[10%]" style="height: 2px;"></span>
                         Accessories
                     </span>
 
@@ -48,11 +52,26 @@
                     <h3 class="text-base font-medium]">QUICK LINKS</h3>
 
                     <ul role="list" class="text-[var(--clr-gray-400)] text-sm font-medium">
-                        <li class="py-2">Shop Product</li>
-                        <li class="py-2">Shoping Cart</li>
-                        <li class="py-2">Wishlist</li>
-                        <li class="py-2">Compare</li>
-                        <li class="py-2">Track Order</li>
+                        <li class="py-2">
+                            <a href="{% url 'pages:shop' %}">
+                                Shop Product
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="{% url 'pages:cart' %}">
+                                Shoping Cart
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="{% url 'products:compare_products' %}">
+                                Compare
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="{% url 'users:order-track' %}">
+                                Track Order
+                            </a>
+                        </li>
                         <li class="py-2">Customer Help</li>
                         <li class="py-2">About Us</li>
                     </ul>
@@ -63,22 +82,9 @@
                 <h3 class="text-base font-medium] mb-4.5">POPULAR TAG</h3>
 
                 <div class="flex flex-wrap gap-2">
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Game</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">iPhone</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">TV</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Asus
-                        Laptops</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Macbook</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Graphics
-                        Card </a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Power
-                        Bank</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Smart
-                        TV</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Speaker</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Tablet</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Microwave</a>
-                    <a class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">Samsung</a>
+                    {% for category in categories %}
+                        <a href="{% url 'pages:shop' %}?category={{ category.slug }}" class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">{{ category }}</a>
+                    {% endfor %}
                 </div>
             </div>
         </div>

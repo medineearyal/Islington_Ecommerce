@@ -1,5 +1,6 @@
 import requests
 import json
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,7 +9,7 @@ from django.db.models import Prefetch
 from django.db.models.functions import Coalesce, Cast
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
-from django.db.models import Q, When, Case, BooleanField, Value, Min, Max, Avg
+from django.db.models import Q, When, Case, BooleanField, Value, Min, Max, Avg, Count
 from apps.blogs.models import Blog
 from apps.products.models import Product, ProductBanner, Category, BestDeals
 from django.urls import reverse, reverse_lazy
@@ -28,12 +29,14 @@ class HomePageView(TemplateView):
         context = super(HomePageView, self).get_context_data(**kwargs)
 
         banners = ProductBanner.objects.filter(is_display=True)[:3]
-        categories = Category.objects.filter(parent__isnull=True)
+        categories = Category.objects.annotate(product_count=Count("product_category", distinct=True)).filter(parent__isnull=True, product_count__gt=0)
         best_deals = BestDeals.objects.filter(is_active=True).prefetch_related(
             Prefetch("products", queryset=Product.objects.order_by("-discount"))
-        ).first()
+        )
 
         products = Product.objects.all()
+        new_arrivals = products.order_by("-created")[:6]
+
         blogs = Blog.objects.all()[:3]
         pages = Page.objects.all()[:3]
 
@@ -41,7 +44,8 @@ class HomePageView(TemplateView):
             {
                 "banners": banners,
                 "categories": categories,
-                "best_deals": best_deals,
+                "best_deals": best_deals.first(),
+                "new_arrivals": new_arrivals,
 
                 "products": products,
                 "blogs": blogs,
@@ -61,7 +65,7 @@ class ShopPageView(TemplateView):
         data = self.request.GET.copy()
 
         products = Product.objects.all().prefetch_related("reviews")
-        categories = Category.objects.filter(parent__isnull=True)
+        categories = Category.objects.annotate(products=Count("product_category")).filter(parent__isnull=True, products__gt=0)
         brands = Category.objects.filter(level=1)
 
         category = data.get("category")

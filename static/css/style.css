@@ -581,6 +581,16 @@ button.htmx-request::after {
 }
 
 .section-newsletter {
+    position: relative;
+}
+
+.section-newsletter::after {
+    content: "";
     background: url("/static/images/islington.jpg") center;
-    backdrop-filter: blur(5px);
+    filter: blur(2px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }

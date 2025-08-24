@@ -27,25 +27,29 @@
                             {% endfor %}
                         </div>
                     </div>
-
-                    {% if product.product_image.exists %}
-                        <div class="thumb-container relative w-full">
-                            <div class="thumb-swiper overflow-hidden">
-                                <div class="swiper-wrapper">
+                    <div class="thumb-container relative w-full">
+                        <div class="thumb-swiper overflow-hidden">
+                            <div class="swiper-wrapper">
+                                {% if product.product_image.exists %}
                                     {% for image in product.product_image.all %}
                                         <div class="swiper-slide">
                                             <img class="mx-auto w-[96px] object-center object-cover aspect-square border-4 border-[var(--clr-gray-100)] rounded-xs"
                                                  src="{{ image.image.url }}" alt=""/>
                                         </div>
                                     {% endfor %}
-                                </div>
+                                {% else %}
+                                    <div class="swiper-slide">
+                                        <img class="mx-auto w-[96px] object-center object-cover aspect-square border-4 border-[var(--clr-gray-100)] rounded-xs"
+                                             src="{{ product.thumbnail.url }}" alt=""/>
+                                    </div>
+                                {% endif %}
                             </div>
-
-                            <!-- If we need navigation buttons -->
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
                         </div>
-                    {% endif %}
+
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
                 </div>
 
                 <div>
@@ -187,7 +191,8 @@
                             Add to Wishlist
                         </a>
 
-                        <a href="{% url 'products:add_to_compare' product.pk %}" class="flex items-center gap-1 text-[var(--clr-gray-700)]">
+                        <a href="{% url 'products:add_to_compare' product.pk %}"
+                           class="flex items-center gap-1 text-[var(--clr-gray-700)]">
                             <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
                             Add to Compare
                         </a>

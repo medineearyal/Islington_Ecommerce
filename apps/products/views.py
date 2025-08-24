@@ -4,11 +4,13 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
-from django.views.generic import TemplateView, DetailView
+from django.template.response import TemplateResponse
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, DetailView, CreateView
 from django.contrib import messages
 
-from .forms import ProductForm, ImageFormSet, DescriptionFormSet
-from .models import Product
+from .forms import ProductForm, ImageFormSet, DescriptionFormSet, CategoryForm, ProductColorsForm
+from .models import Product, Category, ProductColors
 
 
 # Create your views here.
@@ -65,6 +67,11 @@ class ProductDetailView(DetailView):
                 "attribute_set__attributes",
                 "descriptions"
             ), slug=self.kwargs["slug"])
+
+
+def product_detail_modal(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    return TemplateResponse(request, "partials/products/product_detail_modal.html",{"product": product,})
 
 
 class CartView(TemplateView):
@@ -169,7 +176,6 @@ def compare_products(request):
 
     request.session['compare'] = [p.id for p in products]
 
-
     return render(request, 'dashboard/compare_items.html', {'products': products, "active_nav": "compare"})
 
 
@@ -177,8 +183,8 @@ def compare_products(request):
 def product_create(request):
     product = Product(seller=request.user)
     form = ProductForm(request.POST or None, instance=product)
-    image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="img")
-    description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="desc")
+    image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="images")
+    description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="descriptions")
 
     if request.method == "POST":
         if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
@@ -217,3 +223,17 @@ def product_edit(request, pk):
         "image_fs": image_fs,
         "description_fs": description_fs,
     })
+
+
+class CategoryView(CreateView):
+    model = Category
+    template_name = "products/category_create.html"
+    form_class = CategoryForm
+    success_url = reverse_lazy("products:create_category")
+
+
+class ProductColorsView(CreateView):
+    model = ProductColors
+    template_name = "products/colors_create.html"
+    form_class = ProductColorsForm
+    success_url = reverse_lazy("products:create_color")

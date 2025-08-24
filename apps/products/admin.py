@@ -11,17 +11,17 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ProductImageInline(admin.StackedInline):
     model = ProductImage
-    extra = 1
+    extra = 0
     fk_name = "product"
 
 
 class ProductAttributeInline(admin.StackedInline):
     model = Attribute
-    extra = 1
+    extra = 0
 
 class ProductDescriptionInline(admin.StackedInline):
     model = ProductDescription
-    extra = 1
+    extra = 0
 
 class ProductAdmin(admin.ModelAdmin):
     filter_horizontal = ("colors", )
