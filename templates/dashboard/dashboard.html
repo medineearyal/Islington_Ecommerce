@@ -175,11 +175,7 @@
                             {{ order.uuid }}
                         </td>
                         <td>
-                            {% if order.status == "Completed" %}
-                                <span class="text-[var(--clr-secondary-500)] uppercase font-semibold">{{ order.status }}</span>
-                            {% else %}
-                                <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
-                            {% endif %}
+                            <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
                         </td>
                         <td class="text-[var(--clr-gray-600)]">
                             {{ order.created }}

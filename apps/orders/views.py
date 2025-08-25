@@ -11,7 +11,7 @@ from apps.orders.models import Order, KhaltiTransaction, Transaction
 # Create your views here.
 class SuccessView(LoginRequiredMixin, TemplateView):
     template_name = "pages/success_failure.html"
-    login_url = reverse_lazy("accounts_login")
+    login_url = reverse_lazy("account_login")
 
     def get_context_data(self, **kwargs):
         context = super(SuccessView, self).get_context_data(**kwargs)

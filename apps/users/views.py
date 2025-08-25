@@ -100,20 +100,23 @@ class UserOrderDetailView(LoginRequiredMixin, DetailView):
         valid = True
         review_forms = []
 
-        for product in self.object.products.all():
+        products = json.loads(self.object.products)
+
+        for key, product in products.items():
             try:
                 existing_review = ProductReview.objects.get(
-                    product=product, review_from=request.user
+                    product_id=int(key), review_from=request.user
                 )
                 form = ProductReviewForm(
-                    request.POST, instance=existing_review, prefix=str(product.pk)
+                    request.POST, instance=existing_review, prefix=str(key)
                 )
             except ProductReview.DoesNotExist:
-                form = ProductReviewForm(request.POST, prefix=str(product.pk))
+                form = ProductReviewForm(request.POST, prefix=str(key))
 
             if form.is_valid():
                 review = form.save(commit=False)
-                review.product = product
+                instance = get_object_or_404(Product, pk=int(key))
+                review.product = instance
                 review.review_from = request.user
                 review.save()
                 messages.success(request, "Review submitted Successfully. Thank You..")
@@ -121,6 +124,7 @@ class UserOrderDetailView(LoginRequiredMixin, DetailView):
                 messages.success(request, "There was an Issue. Please Try Again..")
                 valid = False
 
+            review_forms.append((product, form))
             review_forms.append((product, form))
 
         if valid:

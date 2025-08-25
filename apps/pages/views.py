@@ -54,6 +54,15 @@ class HomePageView(TemplateView):
         )
 
         return context
+    
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get("query")
+
+        if query:
+            return redirect(f"{reverse("pages:shop")}?query={query}")
+
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
 
 
 class ShopPageView(TemplateView):
@@ -110,8 +119,11 @@ class ShopPageView(TemplateView):
         )
 
         query = data.get("product-query")
+        if data.get("query"):
+            products = products.filter(name__icontains=data["query"])
+
         if query:
-            products.filter(name__icontains=query)
+            products = products.filter(name__icontains=query)
 
         sort = data.get("sort")
         if sort == ShopSortChoicesEnum.PRICE_ASC:

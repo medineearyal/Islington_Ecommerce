@@ -46,7 +46,7 @@
             <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
         </a>
 
-        <form method="get" class="">
+        <form method="get" class="" action="{% url 'pages:shop' %}">
             <label class="input w-[100%] bg-[var(--clr-gray-00)]">
                 <input type="search" class="grow text-black w-100" name="query" placeholder="Search For Anything"/>
                 <img src="{% static 'images/icons/Search.svg' %}" alt="Search Icon"/>
