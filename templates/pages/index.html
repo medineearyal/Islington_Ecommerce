@@ -295,5 +295,7 @@
 
     {% include 'partials/banner/newsletter.html' %}
 
-    {% include "partials/notice_modal.html" with notices=notices %}
+    {% if notices  %}
+        {% include "partials/notice_modal.html" with notices=notices %}
+    {% endif %}
 {% endblock %}
