@@ -1,5 +1,9 @@
+from datetime import timedelta
 from decimal import Decimal
 
+from django.utils import timezone
+
+from apps.common.models import Tag
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -53,13 +57,6 @@ class Category(SlugMixin, MPTTModel):
             return Product.objects.filter(discount__gt=0).order_by("-discount").first()
         return qs.first()
 
-class Tag(SlugMixin, models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, null=False, blank=False)
-
-    def __str__(self):
-        return self.name
-
 
 def leaf_categories():
     return Q(children__isnull=True)
@@ -86,7 +83,7 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
     discount = models.PositiveSmallIntegerField(default=0)
     headline = models.CharField(max_length=255, null=True, blank=True)
 
-    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     sku = models.CharField(max_length=50, unique=True, blank=True)
     colors = models.ManyToManyField(ProductColors, related_name="colors", blank=True)
 
@@ -115,6 +112,36 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
             return ProductInventoryStatusEnum.AVAILABLE.label, True
         else:
             return ProductInventoryStatusEnum.SOLD_OUT.label, False
+
+    @property
+    def badges(self):
+        badge_list = []
+
+        if self.discount:
+            badge_list.append({
+                "text" : f"{self.discount}% OFF",
+                "class": "text-[var(--clr-gray-900)] bg-[var(--clr-warning-400)]"
+            })
+
+        if self.overall_ratings["ratings"] > 4:
+            badge_list.append({
+                "text": "hot",
+                "class": "text-[var(--clr-gray-00)] bg-[var(--clr-danger-500)]"
+            })
+
+        if self.created >= timezone.now() - timedelta(days=30):
+            badge_list.append({
+                "text": "Fresh",
+                "class": "text-[var(--clr-gray-00)] bg-[var(--clr-secondary-500)]"
+            })
+
+        if self.stock <= 0:
+            badge_list = [{
+                "text": "sold out",
+                "class": "text-[var(--clr-gray-00)] bg-[var(--clr-gray-400)]"
+            }]
+
+        return badge_list
 
 class ProductDescription(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="descriptions")
@@ -188,6 +215,14 @@ class ProductReview(TimeStampedModel, models.Model):
 
     def __str__(self):
         return f"{self.product}_{self.rating}"
+
+
+class WishList(TimeStampedModel, models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlist")
+    products = models.ManyToManyField(Product, related_name="wishlist")
+
+    def __str__(self):
+        return f"{self.user.full_name}-Wishlist"
 
 
 class BestDeals(TimeStampedModel, models.Model):

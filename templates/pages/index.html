@@ -26,7 +26,8 @@
                                             {{ banner.headline }}
                                         </p>
 
-                                        <a href="{% url 'pages:shop' %}?category={{ banner.product.category.slug }}" class="btn btn-primary">SHOP NOW</a>
+                                        <a href="{% url 'pages:shop' %}?category={{ banner.product.category.slug }}"
+                                           class="btn btn-primary">SHOP NOW</a>
                                     </div>
 
                                     <img
@@ -36,7 +37,7 @@
                                                 src="{{ banner.product.thumbnail.url }}"
                                             {% endif %}
                                                 alt="{{ banner.product }}"
-                                                class="w-[368px] h-[408px] object-center object-cover" />
+                                                class="w-[368px] h-[408px] object-center object-cover"/>
                                 </div>
                             </div>
                         {% endfor %}
@@ -120,7 +121,8 @@
                 <div class="lg:col-span-3 md:col-span-5 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-fit pt-0">
                     <figure class="mb-6">
                         {% if first_prod.thumbnail %}
-                            <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}" class="h-full w-[280px] object-cover object-center"/>
+                            <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}"
+                                 class="h-full w-[280px] object-cover object-center"/>
                         {% else %}
                             <img src="{% static 'images/products/product_2.png' %}" alt=""/>
                         {% endif %}
@@ -142,11 +144,16 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                        <a href="{% url 'pages:wishlist' %}?action=add&product_slug={{ first_prod.slug }}" class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
                             <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
                         </a>
 
-                        <a class="btn btn-primary no-icon rounded-[2px] h-12">
+                        <a
+                                hx-get="{% url 'products:cart' first_prod.pk %}?action=add"
+                                hx-target="#cart-list"
+                                hx-swap="innerHTML"
+                                class="btn btn-primary no-icon rounded-[2px] h-12"
+                        >
                             <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
                             ADD TO CART
                         </a>
@@ -257,7 +264,8 @@
                                                     {{ banner.headline }}
                                                 </p>
 
-                                                <a class="btn btn-primary">SHOP NOW</a>
+                                                <a href="{% url 'pages:shop' %}?category={{ banner.product.category.slug }}"
+                                                   class="btn btn-primary">SHOP NOW</a>
                                             </div>
                                         </div>
                                     </div>
@@ -286,4 +294,6 @@
     </section>
 
     {% include 'partials/banner/newsletter.html' %}
+
+    {% include "partials/notice_modal.html" with notices=notices %}
 {% endblock %}

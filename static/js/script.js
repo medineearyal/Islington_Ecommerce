@@ -183,6 +183,36 @@ window.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
     });
+
+    const noticeSwiper = new Swiper(".notice-swiper", {
+        direction: 'horizontal',
+        loop: true,
+        speed: 500,
+        slidesPerView: 1,
+
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+        },
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+});
+
+document.body.addEventListener("showMessage", function (event) {
+    const container = document.getElementById("message-container");
+    let toastMessage = `
+        <div class="toast toast-top toast-end z-10">
+            <div class="relative alert alert-info ${event.detail.tag} fade-out" role="alert">
+                <span id="toast-message">${event.detail.text}</span>
+                <div class="absolute bottom-0 left-0 h-1 bg-current progress-bar"></div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = toastMessage;
 });
 
 function priceReset(elem) {

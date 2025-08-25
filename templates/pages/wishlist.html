@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load currency %}
+{% load static %}
+
+{% block title %}Islington Marketplace - Wishlist{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include 'partials/breadcrumb.html' %}
+
+        <div class="container mx-auto py-18 gap-6">
+            <div class="col-span-2 border border-[var(--clr-gray-100)] rounded-sm">
+                <h2 class="font-medium text-lg text-[var(--clr-gray-900)] py-5 px-6">Your Wishlist</h2>
+
+                {% if wishlist.products %}
+                    <div class="overflow-x-auto">
+                        <table class="table">
+                            <!-- head -->
+                            <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                            <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                                <th class="uppercase" colspan="2">Products</th>
+                                <th class="uppercase">Price</th>
+                                <th class="uppercase">Stock</th>
+                                <th class="uppercase">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for product in wishlist.products.all %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'pages:wishlist' %}?action=remove&product_slug={{ product.slug }}">
+                                            <div
+                                                    class="cursor-pointer group/x p-2 rounded-full border border-[var(--clr-danger-500)] delete-btn w-fit"
+                                            >
+                                                <svg class="group-hover/x:stroke-[var(--clr-danger-500)] stroke-[var(--clr-gray-600)]"
+                                                     width="16" height="16"
+                                                     viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5 3.5L3.5 12.5" stroke="" stroke-width="1.5"
+                                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M12.5 12.5L3.5 3.5" stroke="" stroke-width="1.5"
+                                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center gap-3">
+                                            <div class="avatar">
+                                                <div class="mask mask-squircle h-12 w-12">
+                                                    <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}"/>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="text-sm text-[var(--clr-gray-900)]">{{ product.name }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-[var(--clr-gray-700)] text-sm">
+                                        {% if product.discount %}
+                                            <span class="text-[var(--clr-gray-400)] line-through">{{ product.price|nepali_currency }}</span>
+                                            {{ product.discounted_price|nepali_currency }}
+                                        {% else %}
+                                            {{ product.price|nepali_currency }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-sm text-[var(--clr-gray-700)]">
+                                        {% if product.stock > 0 %}
+                                            In Stock ({{ product.stock }})
+                                        {% else %}
+                                            <span class="text-[var(--clr-danger-500)]">Out of Stock</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="flex gap-2">
+                                        {% if product.stock > 0 %}
+                                            <a hx-get="{% url 'products:cart' product.pk %}?action=add" hx-target="#cart-list" hx-swap="innerHTML"
+                                               class="btn btn-sm btn-primary">Add to Cart</a>
+                                        {% else %}
+                                            <button class="btn btn-sm btn-disabled">Add to Cart</button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                            <!-- foot -->
+                            <tfoot>
+                            <tr class="ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                                <th colspan="2">
+                                    <a href="{% url 'pages:shop' %}"
+                                       class="btn btn-outline uppercase icon-before no-icon p-6 border-2 border-[var(--clr-secondary-500)] text-[var(--clr-secondary-500)] hover:bg-[var(--clr-secondary-500)] hover:text-[var(--clr-gray-00)]">
+                                        Return To Shop
+                                    </a>
+                                </th>
+                                <th colspan="3"></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="flex flex-col items-center justify-center text-center gap-4 px-4 py-12">
+                        <span class="text-6xl">💖</span>
+                        <h2 class="text-2xl font-semibold text-gray-800">Your Wishlist is Empty</h2>
+                        <p class="text-gray-600 max-w-md">
+                            Looks like you haven’t added any products to your wishlist yet. Browse our collection and
+                            start adding your favorites!
+                        </p>
+                        <!-- Call to action -->
+                        <a href="{% url 'pages:shop' %}" class="btn btn-primary mt-4">
+                            Browse Products
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const deleteBtns = document.querySelectorAll("table td .delete-btn");
+        deleteBtns.forEach(btn => {
+            btn.addEventListener("htmx:afterRequest", function () {
+                window.location.reload();
+            })
+        });
+    </script>
+{% endblock %}

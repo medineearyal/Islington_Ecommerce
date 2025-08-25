@@ -5,11 +5,11 @@
         {% if blog.image %}
             <img
                 src="{{ blog.image.url }}"
-                alt="Shoes"/>
+                alt="Blog"/>
         	{% else %}
             <img
                 src="{% static 'images/blog/blog_1.png' %}"
-                alt="Shoes"/>
+                alt="Blog"/>
         {% endif %}
 
     </figure>
@@ -17,17 +17,17 @@
         <div class="flex justify-start w-fit gap-4">
             <p class="flex gap-1.5 items-center text-[var(--clr-gray-700)] text-sm w-fit">
                 <img src="{% static 'images/icons/UserCircle.svg' %}" alt="" />
-                Medinee
+                {{ blog.author.full_name }}
             </p>
 
             <p class="flex gap-1.5 items-center text-[var(--clr-gray-700)] text-sm">
                 <img src="{% static 'images/icons/CalendarBlank.png' %}" alt="" />
-                {{ blog.created_at }}
+                {{ blog.created|date:"M d, Y" }}
             </p>
 
             <p class="flex gap-1.5 items-center text-[var(--clr-gray-700)] text-sm">
                 <img src="{% static 'images/icons/ChatCircleDots.svg' %}" alt="" />
-                453
+                {{ blog.views }}
             </p>
 
         </div>
@@ -37,6 +37,6 @@
     </div>
 
     <div>
-        <a class="btn btn-outline btn-primary">READ MORE</a>
+        <a href="{% url 'blogs:blog_detail' blog.slug %}" class="btn btn-outline btn-primary">READ MORE</a>
     </div>
 </div>

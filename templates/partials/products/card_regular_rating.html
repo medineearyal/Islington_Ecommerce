@@ -11,7 +11,13 @@
                 src="{% static 'images/products/product_3.png' %}"
                 {% endif %}
                 alt="{{ product.name }}"/>
-        <span class="indicator-item badge bg-[var(--clr-danger-500)] translate-none rounded-none top-[12px] left-[12px] px-2.5 py-1 items-center border-none">HOT</span>
+        <div class="absolute flex flex-col gap-2 top-[12px] left-[12px]">
+            {% for badge in product.badges %}
+                <span class="relative indicator-item badge badge-primary translate-none rounded-none uppercase border-0 {{ badge.class }}">
+                {{ badge.text }}
+                </span>
+            {% endfor %}
+        </div>
 
         <div class="z-1 hidden absolute h-full w-full group-hover/outer:block ease-in-out duration-300">
             {% include 'partials/products/card_hover_buttons.html' with product=product %}

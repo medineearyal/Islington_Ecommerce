@@ -1,0 +1,138 @@
+{% extends "dashboard_base.html" %}
+{% load currency %}
+{% load static %}
+
+{% block title %}Islington Ecommerce - Products{% endblock %}
+
+{% block dashboard_content %}
+    <div class="flex items-center justify-between mb-5">
+        <div class="flex items-center gap-4">
+            {% if seller.seller_shop_logo %}
+                <img src="{{ seller.shop_logo.url }}" alt="Shop Logo" class="w-16 h-16 rounded-full border">
+            {% else %}
+                <img src="{% static 'images/Store Temp.avif' %}" alt="Shop Logo" class="w-16 h-16 rounded-full border">
+            {% endif %}
+            <div>
+                <h1 class="text-2xl font-bold text-[var(--clr-gray-900)]">{{ seller.full_name }}'s Shop</h1>
+            </div>
+        </div>
+
+        <div class="flex gap-4">
+            <button class="btn btn-primary"
+                    hx-get="{% url 'products:create' %}"
+                    hx-target="#modal-container"
+                    hx-trigger="click">
+                + Add Product
+            </button>
+        </div>
+    </div>
+
+    <div class="stats flex gap-6 justify-between mb-5">
+        <div class="stat bg-[var(--clr-secondary-50)] rounded-sm grid-cols-4">
+            <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                {{ total_products }}
+            </div>
+            <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Products
+            </div>
+            <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                <div class="avatar">
+                    <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                        <img src="{% static 'images/icons/Rocket.svg' %}"
+                             class="w-8 aspect-square p-3" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stat bg-[var(--clr-primary-50)] rounded-sm grid-cols-4">
+            <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                {{ total_products_sold }}
+            </div>
+            <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Sales
+            </div>
+            <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                <div class="avatar">
+                    <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                        <img src="{% static 'images/icons/Receipt.svg' %}"
+                             class="w-8 aspect-square p-3" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stat bg-[var(--clr-success-50)] rounded-sm grid-cols-4">
+            <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                {{ total_shipping_completed }}
+            </div>
+            <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Shipping Completed
+            </div>
+            <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                <div class="avatar">
+                    <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                        <img src="{% static 'images/icons/Package.svg' %}"
+                             class="w-8 aspect-square p-3" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Your Products</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for product in products %}
+                <div class="card bg-base-100 shadow">
+                    <figure class="h-48 overflow-hidden">
+                        <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}"
+                             class="object-cover w-full h-full">
+                    </figure>
+                    <div class="card-body p-4">
+                        <h3 class="font-semibold text-lg">{{ product.name }}</h3>
+                        <p class="text-[var(--clr-gray-00)]">{{ product.price|nepali_currency }}</p>
+                        <p class="text-[var(--clr-gray-00)] text-sm">Stock: {{ product.stock }}</p>
+                        <div class="card-actions mt-2 justify-between">
+                            <button class="btn btn-sm btn-outline"
+                                    hx-get="{% url 'products:edit' product.id %}"
+                                    hx-target="#modal-container">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-gray-500 col-span-full text-center">You haven’t added any products yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Sales Snapshot -->
+    <div class="mt-5">
+        <h2 class="text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Recent Orders</h2>
+        <table class="table w-full border text-[var(--clr-gray-900)] border-[var(--clr-gray-100)] rounded-sm">
+            <thead>
+            <tr class="text-[var(--clr-gray-900)]">
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.uuid }}</td>
+                    <td>{{ order.customer.full_name }}</td>
+                    <td>{{ order.status|upper }}</td>
+                    <td>{{ order.total_amount|nepali_currency }}</td>
+                    <td>{{ order.created|date:"M d, Y" }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-gray-500">No recent orders</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal-container"></div>
+{% endblock %}

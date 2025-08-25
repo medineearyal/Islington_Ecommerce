@@ -12,99 +12,119 @@
             <div class="col-span-2 border border-[var(--clr-gray-100)] rounded-sm">
                 <h2 class="font-medium text-lg text-[var(--clr-gray-900)] py-5 px-6">Your Cart</h2>
 
-                <div class="overflow-x-auto">
-                    <table class="table">
-                        <!-- head -->
-                        <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
-                        <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
-                            <th class="uppercase" colspan="2">Products</th>
-                            <th class="uppercase">Price</th>
-                            <th class="uppercase">Quantity</th>
-                            <th class="uppercase">Sub-Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for pid, item in cart.items %}
-                            <tr>
-                                <td>
-                                    <div
-                                            hx-get="{% url 'products:cart' pid %}?action=remove"
-                                            hx-trigger="click"
-                                            hx-swap="none"
-                                            class="cursor-pointer group/x p-2 rounded-full border border-[var(--clr-danger-500)] delete-btn w-fit"
-                                    >
-                                        <svg class="group-hover/x:stroke-[var(--clr-danger-500)] stroke-[var(--clr-gray-600)]"
-                                             width="16" height="16"
-                                             viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.5 3.5L3.5 12.5" stroke="" stroke-width="1.5"
-                                                  stroke-linecap="round"
-                                                  stroke-linejoin="round"/>
-                                            <path d="M12.5 12.5L3.5 3.5" stroke="" stroke-width="1.5"
-                                                  stroke-linecap="round"
-                                                  stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="flex items-center gap-3">
-                                        <div class="avatar">
-                                            <div class="mask mask-squircle h-12 w-12">
-                                                <img
-                                                        src="{{ item.thumbnail }}"
-                                                        alt="Avatar Tailwind CSS Component"/>
+                {% if cart.items %}
+                    <div class="overflow-x-auto">
+
+                        <table class="table">
+                            <!-- head -->
+                            <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                            <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                                <th class="uppercase" colspan="2">Products</th>
+                                <th class="uppercase">Price</th>
+                                <th class="uppercase">Quantity</th>
+                                <th class="uppercase">Sub-Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for pid, item in cart.items %}
+                                <tr>
+                                    <td>
+                                        <div
+                                                hx-get="{% url 'products:cart' pid %}?action=remove"
+                                                hx-trigger="click"
+                                                hx-swap="none"
+                                                class="cursor-pointer group/x p-2 rounded-full border border-[var(--clr-danger-500)] delete-btn w-fit"
+                                        >
+                                            <svg class="group-hover/x:stroke-[var(--clr-danger-500)] stroke-[var(--clr-gray-600)]"
+                                                 width="16" height="16"
+                                                 viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.5 3.5L3.5 12.5" stroke="" stroke-width="1.5"
+                                                      stroke-linecap="round"
+                                                      stroke-linejoin="round"/>
+                                                <path d="M12.5 12.5L3.5 3.5" stroke="" stroke-width="1.5"
+                                                      stroke-linecap="round"
+                                                      stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center gap-3">
+                                            <div class="avatar">
+                                                <div class="mask mask-squircle h-12 w-12">
+                                                    <img
+                                                            src="{{ item.thumbnail }}"
+                                                            alt="Avatar Tailwind CSS Component"/>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="text-sm text-[var(--clr-gray-900)]">{{ item.name }}</div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="text-sm text-[var(--clr-gray-900)]">{{ item.name }}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-[var(--clr-gray-700)] text-sm">
-                                    {% if item.discount %}
-                                        <span class="text-[var(--clr-gray-400)] line-through">{{ item.price|nepali_currency }}</span>
-                                        {{ item.discounted_price|nepali_currency }}
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <div class="flex justify-between items-center border-2 border-[var(--clr-gray-100)] px-5">
+                                    </td>
+                                    <td class="text-[var(--clr-gray-700)] text-sm">
+                                        {% if item.discount %}
+                                            <span class="text-[var(--clr-gray-400)] line-through">{{ item.price|nepali_currency }}</span>
+                                            {{ item.discounted_price|nepali_currency }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="flex justify-between items-center border-2 border-[var(--clr-gray-100)] px-5">
                                         <span>
                                             <img src="{% static 'images/icons/Minus.svg' %}" class="w-4 h-4" alt=""
                                                  onclick="decreaseStock(this)"/>
                                         </span>
-                                        <input class="input text-center bg-[var(--clr-gray-00)] text-[var(--clr-gray-700)] border-none focus:outline-none focus:border-none focus:shadow-none no-spinner"
-                                               type="number" min="1" name="quantity" max="{{ item.stock }}" value="1"
-                                               onchange="checkForStockOverflow(this)"/>
-                                        <span>
+                                            <input class="input text-center bg-[var(--clr-gray-00)] text-[var(--clr-gray-700)] border-none focus:outline-none focus:border-none focus:shadow-none no-spinner"
+                                                   type="number" min="1" name="quantity" max="{{ item.stock }}"
+                                                   value="1"
+                                                   onchange="checkForStockOverflow(this)"/>
+                                            <span>
                                             <img src="{% static 'images/icons/Plus.svg' %}" class="w-4 h-4" alt=""
                                                  onclick="increaseStock(this)"/>
                                         </span>
-                                    </div>
+                                        </div>
 
-                                    <div class="stock-error text-[var(--clr-danger-500)] text-sm text-center py-4 w-full hidden">
-                                        Only {{ item.stock }} stock is avaiable
-                                    </div>
-                                </td>
-                                <th class="text-[var(--clr-gray-900)]">
-                                    {{ item.total_price|nepali_currency }}
+                                        <div class="stock-error text-[var(--clr-danger-500)] text-sm text-center py-4 w-full hidden">
+                                            Only {{ item.stock }} stock is avaiable
+                                        </div>
+                                    </td>
+                                    <th class="text-[var(--clr-gray-900)]">
+                                        {{ item.total_price|nepali_currency }}
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <!-- foot -->
+                            <tfoot>
+                            <tr class="ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                                <th colspan="2">
+                                    <a href="{% url 'pages:shop' %}"
+                                       class="btn btn-outline uppercase icon-before no-icon p-6 border-2 border-[var(--clr-secondary-500)] text-[var(--clr-secondary-500)] hover:bg-[var(--clr-secondary-500)] hover:text-[var(--clr-gray-00)]">
+                                        Return To Shop
+                                    </a>
                                 </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                        <!-- foot -->
-                        <tfoot>
-                        <tr class="ring-inset ring-1 ring-[var(--clr-gray-100)]">
-                            <th colspan="2">
-                                <a href="{% url 'pages:shop' %}" class="btn btn-outline uppercase icon-before no-icon p-6 border-2 border-[var(--clr-secondary-500)] text-[var(--clr-secondary-500)] hover:bg-[var(--clr-secondary-500)] hover:text-[var(--clr-gray-00)]">
-                                    Return To Shop
-                                </a>
-                            </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                            </tfoot>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="flex flex-col items-center justify-center text-center gap-4 px-4">
+                        <span class="text-6xl">🛒</span>
+                        <h2 class="text-2xl font-semibold text-gray-800">Your Cart is Empty</h2>
+
+                        <p class="text-gray-600 max-w-md">
+                            Looks like you haven’t added any products to your cart yet. Browse our collection and
+                            start shopping today!
+                        </p>
+
+                        <!-- Call to action -->
+                        <a href="{% url 'pages:shop' %}" class="btn btn-primary mt-4">
+                            Browse Products
+                        </a>
+                    </div>
+                {% endif %}
             </div>
 
             <div class="col-span-1">
@@ -143,11 +163,12 @@
                             <span>{{ final_sum|nepali_currency }}</span>
                         </p>
 
-                        <a href="{% url 'pages:checkout' %}" class="btn btn-primary uppercase h-[56px]">Proceed To Checkout</a>
+                        <a href="{% url 'pages:checkout' %}" class="btn btn-primary uppercase h-[56px]">Proceed To
+                            Checkout</a>
                     </div>
                 </div>
 
-                <div class="pb-6 rounded-sm overflow-hidden">
+                <div class="rounded-sm overflow-hidden">
                     <h2 class="font-medium text-lg text-[var(--clr-gray-900)] py-5 px-6 ring-inset ring-1 ring-[var(--clr-gray-100)]">
                         Coupon Code</h2>
 
@@ -173,7 +194,7 @@
     <script>
         const deleteBtns = document.querySelectorAll("table td .delete-btn");
         deleteBtns.forEach(btn => {
-            btn.addEventListener("htmx:afterRequest", function() {
+            btn.addEventListener("htmx:afterRequest", function () {
                 window.location.reload();
             })
         });

@@ -4,21 +4,24 @@ import json
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
-from django.db.models import Prefetch
+from django.db.models import Prefetch, IntegerField
 from django.db.models.functions import Coalesce, Cast
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
-from django.db.models import Q, When, Case, BooleanField, Value, Min, Max, Avg, Count
+from django.db.models import Q, When, Case, BooleanField, Value, Min, Max, Avg, Count, F
 from apps.blogs.models import Blog
-from apps.products.models import Product, ProductBanner, Category, BestDeals
+from apps.products.models import Product, ProductBanner, Category, BestDeals, WishList
 from django.urls import reverse, reverse_lazy
 from .models import Page
+from ..common.models import Notices
 from ..orders.constants import PaymentOptions
 from ..orders.forms import OrderForm
 from ..orders.models import Transaction, KhaltiTransaction
 from ..orders.utils import process_cart_totals
 from ..products.constans import ShopSortChoicesEnum
+from ..users.constants import UserTypeEnum
 
 
 # Create your views here.
@@ -30,26 +33,45 @@ class HomePageView(TemplateView):
 
         banners = ProductBanner.objects.filter(is_display=True)[:3]
         categories = Category.objects.annotate(product_count=Count("product_category", distinct=True)).filter(parent__isnull=True, product_count__gt=0)
-        best_deals = BestDeals.objects.filter(is_active=True).prefetch_related(
-            Prefetch("products", queryset=Product.objects.order_by("-discount"))
-        )
 
         products = Product.objects.all()
+
+        beast_deal_qs = BestDeals.objects.filter(is_active=True)
+
+        user = self.request.user
+
+        if user.is_authenticated and user.user_type == UserTypeEnum.SELLER:
+            products = products.exclude(seller=user)
+            product_prefetch = Prefetch(
+                "products",
+                queryset=Product.objects.exclude(seller=user).order_by("-discount"),
+            )
+        else:
+            product_prefetch = Prefetch(
+                "products",
+                queryset=Product.objects.order_by("-discount")
+            )
+
+        beast_deal_qs = beast_deal_qs.prefetch_related(product_prefetch)
+
         new_arrivals = products.order_by("-created")[:6]
 
         blogs = Blog.objects.all()[:3]
         pages = Page.objects.all()[:3]
 
+        notices = Notices.objects.filter(is_active=True).order_by("-created")[:3]
+
         context.update(
             {
                 "banners": banners,
                 "categories": categories,
-                "best_deals": best_deals.first(),
+                "best_deals": beast_deal_qs.first(),
                 "new_arrivals": new_arrivals,
 
                 "products": products,
                 "blogs": blogs,
                 "pages": pages,
+                "notices": notices,
             }
         )
 
@@ -73,7 +95,7 @@ class ShopPageView(TemplateView):
 
         data = self.request.GET.copy()
 
-        products = Product.objects.all().prefetch_related("reviews")
+        products = Product.objects.all().prefetch_related("reviews").order_by("-created")
         categories = Category.objects.annotate(products=Count("product_category")).filter(parent__isnull=True, products__gt=0)
         brands = Category.objects.filter(level=1)
 
@@ -176,7 +198,7 @@ class CartPageView(TemplateView):
         context = super(CartPageView, self).get_context_data(**kwargs)
         cart = self.request.session.get("cart", {})
 
-        total_sum, vat_amount, dst_amount = process_cart_totals(cart)
+        total_sum, vat_amount, dst_amount, no_of_sellers = process_cart_totals(cart)
 
         context.update({
             "cart": cart,
@@ -198,7 +220,12 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
         order_form = OrderForm()
         cart = self.request.session.get("cart", {})
 
-        total_sum, vat_amount, dst_amount = process_cart_totals(cart)
+        total_sum, vat_amount, dst_amount, no_of_sellers = process_cart_totals(cart)
+
+        if no_of_sellers != 1:
+            context.update({
+                "multi_seller": True
+            })
 
         context.update({
             "form": order_form,
@@ -229,8 +256,17 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
             order = form.save(commit=False)
             order.customer = user
             cart = context.get("cart")
-            order.products = json.dumps(cart)
+            order.products = cart
             order.save()
+
+            whens = [
+                When(id=pid, then=F("stock") - values["quantity"])
+                for pid, values in cart.items()
+            ]
+
+            Product.objects.filter(id__in=cart.keys()).update(
+                stock=Case(*whens, output_field=IntegerField())
+            )
 
             request.session["cart"] = {}
 
@@ -238,8 +274,10 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 order=order,
             )
 
+            multiple_seller = context.get("multi_seller", False)
+
             if payment_method == PaymentOptions.QR:
-                return redirect(reverse_lazy("orders:manual-pay", kwargs={"uuid":order.uuid}))
+                return redirect(f"{reverse_lazy("orders:manual-pay", kwargs={"uuid": order.uuid})}?multi-seller={multiple_seller}")
             elif payment_method == PaymentOptions.KHALTI:
                 messages.success(request, "Your Order Has Been Placed Successfully... Happy Shopping!!")
                 url = f"{settings.KHALTI_BASE_URL}epayment/initiate/"
@@ -266,8 +304,6 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                     data=payload
                 ).json()
 
-                print(response)
-
                 pidx = response["pidx"]
                 KhaltiTransaction.objects.create(
                     transaction=transaction,
@@ -288,3 +324,69 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
             })
             messages.error(request, "Something Went Wrong Please Try Again...")
         return render(request, self.template_name, context=context)
+
+class WishlistPageView(LoginRequiredMixin, TemplateView):
+    template_name = "pages/wishlist.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        wishlist, created = WishList.objects.get_or_create(user=self.request.user)
+
+        context.update({
+            "wishlist": wishlist,
+        })
+
+        return context
+
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        wishlist = context.get("wishlist")
+
+        data = request.GET.copy()
+        action = data.get("action")
+
+        if wishlist:
+            product_slug = data.get("product_slug")
+            if product_slug:
+                product = get_object_or_404(Product, slug=product_slug)
+
+                if action == "add":
+                    wishlist.products.add(product)
+                    messages.success(self.request, "Product Successfully Added to Wishlist.")
+                    return redirect("pages:wishlist")
+                elif action == "remove":
+                    wishlist.products.remove(product)
+                    messages.success(self.request, "Product Successfully Removed From the Wishlist.")
+                    return redirect("pages:wishlist")
+        else:
+            messages.error(self.request, "Something Went Wrong Please Try Again...")
+
+        return self.render_to_response(context)
+
+
+# Error Views
+def error_page(request, status_code, message="Something went wrong"):
+    return render(
+        request,
+        "pages/error.html",
+        context={
+            "status_code": status_code,
+            "message": message
+        },
+        status=status_code
+    )
+
+def custom_404(request, exception):
+    return error_page(request, 404, str(exception) or "Something went wrong. It’s look that your requested could not be found. It’s look like the link is broken or the page is removed.")
+
+def custom_500(request):
+    return error_page(request, 500, "Internal server error")
+
+def custom_403(request, exception):
+    return error_page(request, 403, str(exception) or "Permission denied")
+
+def custom_400(request, exception):
+    return error_page(request, 400, str(exception) or "Bad request")

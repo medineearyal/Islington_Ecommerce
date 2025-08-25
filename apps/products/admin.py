@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals, ProductReview, Attribute, \
-    ProductAttributeValue, ProductColors, ProductDescription
+    ProductAttributeValue, ProductColors, ProductDescription, WishList
 
 
 # Register your models here.
@@ -42,3 +42,4 @@ admin.site.register(ProductColors)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductReview)
 admin.site.register(BestDeals, BestDealsAdmin)
+admin.site.register(WishList)

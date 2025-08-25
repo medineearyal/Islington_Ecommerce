@@ -15,6 +15,7 @@ class AuthUser(AbstractUser):
 
     user_type = models.CharField(choices=UserTypeEnum.choices, max_length=20, default=UserTypeEnum.USER)
 
+    seller_shop_logo = models.ImageField(upload_to="user/seller/profile/", null=True, blank=True)
     seller_qr_code = models.ImageField(upload_to="user/profile/", null=True, blank=True)
     seller_bank_name = models.CharField(max_length=255, null=True, blank=True)
     seller_bank_account_number = models.CharField(max_length=255, null=True, blank=True)
@@ -33,3 +34,13 @@ class AuthUser(AbstractUser):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+
+    @property
+    def billing_address(self):
+        from apps.common.models import AddressModel
+
+        try:
+            address = AddressModel.objects.get(pk=self.pk)
+            return address
+        except AddressModel.DoesNotExist:
+            return None

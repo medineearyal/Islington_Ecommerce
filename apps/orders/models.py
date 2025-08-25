@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 import uuid
+import json
 from apps.common.models import TimeStampedModel
 from apps.common.validators import validate_nepali_mobile
 from apps.orders.constants import CountryEnum, NepalDeliveryProvincesEnum, BagmatiCities, PaymentOptions, \
@@ -14,7 +15,7 @@ User = get_user_model()
 
 class Order(TimeStampedModel, models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer")
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -22,7 +23,10 @@ class Order(TimeStampedModel, models.Model):
     payment_option = models.CharField(max_length=100, choices=PaymentOptions.choices, default=PaymentOptions.COD)
     note = models.TextField(blank=True, null=True)
     products = models.JSONField(null=True, blank=True)
+
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    tax_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
     status = models.CharField(max_length=20, choices=OrderStatusEnum.choices, default=OrderStatusEnum.PLACED)
 
     # Shipping Address
@@ -43,10 +47,24 @@ class Order(TimeStampedModel, models.Model):
 
     @property
     def shipping_address(self):
+        if self.use_billing_address:
+            return self.customer.billing_address.address
         return f"{self.shipping_street},{self.shipping_city}, {self.shipping_region}, {self.shipping_zip_code}, {self.shipping_country}"
 
     def get_absolute_url(self):
         return reverse("users:order-detail", kwargs={"uuid": self.uuid})
+
+    @property
+    def sellers(self):
+        product_ids = list(self.products.keys())
+        products = Product.objects.filter(pk__in=product_ids)
+        sellers = products.values_list("seller", flat=True)
+        return sellers
+
+    @property
+    def items(self):
+        product_ids = self.products.keys()
+        return Product.objects.filter(pk__in=product_ids)
 
 
 class OrderStatusLog(TimeStampedModel, models.Model):

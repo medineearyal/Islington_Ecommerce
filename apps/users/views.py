@@ -1,8 +1,8 @@
 # Create your views here.
 import json
 from allauth.core.internal.httpkit import redirect
+from django import http
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory
@@ -17,7 +17,8 @@ from apps.orders.models import Order
 from apps.products.forms import ProductReviewForm, ProductForm, ImageFormSet, DescriptionFormSet
 from apps.products.models import ProductReview, Product
 from django.contrib import messages
-
+from django.db.models import Q
+from apps.users.constants import UserTypeEnum
 from apps.users.forms import UserSignupForm, UserProfileForm
 
 User = get_user_model()
@@ -240,16 +241,49 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
         return super().form_invalid(form)
 
 
-class UserSellerProductsView(LoginRequiredMixin, TemplateView):
-    template_name = "dashboard/products.html"
+class UserShopView(LoginRequiredMixin, TemplateView):
+    template_name = "dashboard/my_shop.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = Product.objects.filter(seller=self.request.user)
 
+        total_products = products.count()
+
+        product_ids = list(products.values_list('id', flat=True))
+        q = Q()
+        for pid in product_ids:
+            q |= Q(**{"products__has_key": str(pid)})
+            print(Order.objects.filter(products__has_key=str(pid)))
+
+
+        seller_products_order_qs = Order.objects.filter(q)
+        total_products_sold = seller_products_order_qs.count()
+
+        total_shipping_completed = seller_products_order_qs.filter(status=OrderStatusEnum.DELIVERED).count()
+
         context.update({
             "active_nav": "seller-products",
             "products": products,
+            "total_products": total_products,
+            "total_products_sold": total_products_sold,
+            "total_shipping_completed": total_shipping_completed,
+            "orders": seller_products_order_qs,
         })
 
         return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        user = self.request.user
+
+        if user.user_type != UserTypeEnum.SELLER:
+            raise http.Http404("Sorry, The Page was Not Found.")
+        elif not user.is_verified_seller:
+            raise http.Http404("Sorry, You are not verified yet. Please Contact the Admin To Resolve the Issue.")
+        else:
+            context.update({
+                "seller": request.user,
+            })
+
+        return self.render_to_response(context)

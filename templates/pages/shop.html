@@ -19,7 +19,7 @@
                                name="category" value="all" id="all"
                                onclick="this.form.requestSubmit()"
                                 {% if request.GET.category == "all" %}
-                               checked
+                                    checked
                                 {% endif %}
                         />
                         <label class="text-[var(--clr-gray-700)]" for="all">All</label>
@@ -120,7 +120,9 @@
                         {% endfor %}
                     </div>
 
-                    {% include 'partials/pagination.html' with page_obj=products %}
+                    {% if page_obj.has_next or page.has_previous %}
+                        {% include 'partials/pagination.html' with page_obj=products %}
+                    {% endif %}
                 </div>
             </form>
 

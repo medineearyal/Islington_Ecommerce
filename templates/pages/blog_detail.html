@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Islington Marketplace - {{ blog.name }}{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include "partials/breadcrumb.html" %}
+        <div class="container mx-auto py-18">
+            <div class="text-[var(--clr-gray-900)]">
+                {% if blog.image %}
+                    <div class="mb-8 relative rounded-lg overflow-hidden shadow-lg">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.name }}" class="w-full h-64 md:h-96 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                            <h1 class="text-3xl md:text-5xl font-bold text-white text-center px-4">{{ blog.name }}</h1>
+                        </div>
+                    </div>
+                {% else %}
+                    <h1 class="text-4xl font-bold mb-6">{{ blog.name }}</h1>
+                {% endif %}
+
+                <div class="flex items-center text-gray-500 text-sm mb-8">
+                    <span>By {{ blog.author.full_name }}</span>
+                    <span class="mx-2">•</span>
+                    <span>{{ blog.created|date:"M d, Y" }}</span>
+                </div>
+
+                <!-- Main content with sidebar -->
+                <div class="grid md:grid-cols-3 gap-8">
+
+                    <!-- Blog content -->
+                    <div class="md:col-span-2 space-y-6">
+
+                        <div class="prose prose-lg max-w-full">
+                            {{ blog.description|safe }}
+                        </div>
+
+                        <!-- Tags -->
+                        {% if blog.tags.exists %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for tag in blog.tags.all %}
+                                    <span class="badge badge-outline">{{ tag.name }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="space-y-6">
+
+                        <!-- Related Posts -->
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="font-semibold mb-3">Related Posts</h3>
+                            <ul class="space-y-2">
+                                {% for post in related_posts %}
+                                    <li>
+                                        <a href="{% url 'blogs:blog_detail' post.slug %}"
+                                           class="hover:underline text-blue-600">{{ post.name|truncatechars:50 }}</a>
+                                    </li>
+                                {% empty %}
+                                    {% include "partials/empty_item.html" with item_name="posts" %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h3 class="font-semibold mb-3">Categories</h3>
+                            <ul class="space-y-2">
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{% url 'blogs:blogs' %}?category={{ category.slug }}"
+                                           class="hover:underline text-blue-600">{{ category.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

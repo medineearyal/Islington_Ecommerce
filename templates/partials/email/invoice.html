@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .invoice-container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            padding: 24px;
+        }
+        .header {
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: bold;
+        }
+        .header p {
+            font-size: 12px;
+            color: #666;
+            margin: 2px 0;
+        }
+        .logo {
+            height: 40px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        .customer-info p {
+            margin: 2px 0;
+            font-size: 13px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            font-weight: bold;
+            background: #f9fafb;
+        }
+        .summary {
+            margin-top: 16px;
+        }
+        .summary div {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            font-size: 13px;
+        }
+        .summary .total {
+            font-weight: bold;
+            font-size: 16px;
+            color: #111;
+        }
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="invoice-container">
+    <!-- Header -->
+    <div class="header">
+        <img src="cid:logo_image" alt="Store Logo" class="logo" style="width: fit-content" />
+
+        <div>
+            <h1>Invoice</h1>
+            <p>Order: {{ order }}</p>
+            <p>Date: {{ order.date|date:"M d, Y" }}</p>
+        </div>
+    </div>
+
+    <!-- Customer Info -->
+    <div class="customer-info">
+        <p class="section-title">Bill To:</p>
+        <p>{{ order.customer.full_name }}</p>
+        <p>{{ order.customer.email }}</p>
+        <p>{{ order.shipping_address }}</p>
+    </div>
+
+    <!-- Product Table -->
+    <table>
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Tax Amount</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key, item in order.products.items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>Rs. {{ item.total_price }}</td>
+                <td>Rs. {{ item.vat_amount }}</td>
+                <td><strong>Rs. {{ item.total_price|add:item.vat_amount }}</strong></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Summary -->
+    <div class="summary">
+        <div><span>Subtotal:</span> <span>Rs. {{ total_amount }}</span></div>
+        <div><span>Tax:</span> <span>Rs. {{ order.tax_amount }}</span></div>
+        <div class="total"><span>Total:</span> <span>Rs. {{ order.total_amount }}</span></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Thank you for your purchase! <br>
+        Need help? Contact us at
+        <a href="mailto:support@medineearyal.com">support@medineearyal.com</a>
+    </div>
+</div>
+</body>
+</html>

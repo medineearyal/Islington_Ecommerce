@@ -1,5 +1,5 @@
 from apps.users.views import UserDashboardView, UserOrdersView, UserOrderDetailView, UserOrderTrack, \
-    UserOrderTrackDetail, UserProfileView, UserSellerProductsView
+    UserOrderTrackDetail, UserProfileView, UserShopView
 from django.urls import path
 
 app_name = "users"
@@ -11,5 +11,5 @@ urlpatterns = [
     path("orders-track/", UserOrderTrack.as_view(), name="order-track"),
     path("orders/track/<str:uuid>/", UserOrderTrackDetail.as_view(), name="order-track-detail"),
     path("profile/<int:pk>/", UserProfileView.as_view(), name="profile"),
-    path("products/", UserSellerProductsView.as_view(), name="seller_products"),
+    path("products/", UserShopView.as_view(), name="seller_products"),
 ]

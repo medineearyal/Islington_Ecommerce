@@ -1,11 +1,11 @@
 {% load static %}
 
-<div class="flex gap-4 rounded-md w-full h-[248px] px-10 py-12 bg-[var(--clr-gray-900)] relative overflow-hidden">
+<div class="flex gap-4 rounded-md w-full h-[248px] px-10 py-12 bg-[var(--clr-secondary-750)] relative overflow-hidden">
     <div class="z-1">
         <span class="font-medium text-sm text-[var(--clr-warning-500)]">{{ "Summer Sales"|upper }}</span>
         <h2 class="text-2xl font-semibold mb-4.5">{{ product.name }}</h2>
 
-        <a href="{% url 'pages:shop' %}?category={{ product.category }}" class="btn btn-primary">SHOP NOW</a>
+        <a href="{% url 'pages:shop' %}?category={{ product.category.slug }}" class="btn btn-primary">SHOP NOW</a>
     </div>
     <div class="absolute h-[312px] aspect-square right-[-25%] bottom-[-53%]">
         {% if not product.thumbnail %}

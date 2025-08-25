@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from apps.common.mixins import SlugMixin
 from apps.common.validators import validate_nepali_mobile
 from apps.orders.constants import CountryEnum, NepalDeliveryProvincesEnum, BagmatiCities
 
@@ -17,7 +18,7 @@ class TimeStampedModel(models.Model):
 
 
 class AddressModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="address")
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
@@ -31,3 +32,27 @@ class AddressModel(models.Model):
 
     def __str__(self):
         return f"{self.user}_shipping_address"
+
+    @property
+    def address(self):
+        return f"{self.street}, {self.country}, {self.city}, {self.zip_code}"
+
+
+class Tag(SlugMixin, models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, null=False, blank=False)
+
+    def __str__(self):
+        return self.name
+
+
+class Notices(SlugMixin, TimeStampedModel, models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, null=False, blank=True)
+    header_text = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField()
+    is_active = models.BooleanField(default=False)
+    image = models.ImageField(upload_to="notices", null=True, blank=True)
+
+    def __str__(self):
+        return self.name

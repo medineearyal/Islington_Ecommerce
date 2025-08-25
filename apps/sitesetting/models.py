@@ -16,6 +16,11 @@ class SiteSetting(models.Model):
     twitter = models.URLField(blank=True, null=True)
     youtube = models.URLField(blank=True, null=True)
 
+    merchant_name = models.CharField(max_length=255, blank=True, null=True)
+    merchant_bank_name = models.CharField(max_length=255, blank=True, null=True)
+    merchant_bank_account_number = models.CharField(max_length=255, blank=True, null=True)
+    merchant_bank_branch_name = models.CharField(max_length=255, blank=True, null=True)
+
     def __str__(self):
         return "Site Setting"
 

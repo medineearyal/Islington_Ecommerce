@@ -32,6 +32,7 @@ class AuthUserAdmin(UserAdmin):
             "Seller Details",
             {
                 "fields": (
+                    "seller_shop_logo",
                     "seller_qr_code",
                     "seller_bank_name",
                     "seller_bank_account_number",

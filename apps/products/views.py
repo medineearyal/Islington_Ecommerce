@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DetailView, CreateView
 from django.contrib import messages
-
+import json
 from .forms import ProductForm, ImageFormSet, DescriptionFormSet, CategoryForm, ProductColorsForm
 from .models import Product, Category, ProductColors
 
@@ -85,8 +85,34 @@ class CartView(TemplateView):
         cart = request.session.get("cart", {})
         quantity = request.GET.get("quantity")
 
+        toast_message = {}
+
         if action == "add":
             product = get_object_or_404(Product, id=product_id)
+
+            if product.stock <= 0:
+                toast_message["text"] = "Sorry, the item has been sold out."
+                toast_message["tag"] = "alert-info"
+                response = HttpResponse()
+                response["HX-Trigger"] = json.dumps({
+                    "showMessage": {
+                        "text": toast_message["text"],
+                        "tag": toast_message["tag"],
+                    }
+                })
+                return response
+
+            if product.seller == request.user:
+                toast_message["text"] = "Sorry, you can't buy your own product"
+                toast_message["tag"] = "alert-info"
+                response = HttpResponse()
+                response["HX-Trigger"] = json.dumps({
+                    "showMessage": {
+                        "text": toast_message["text"],
+                        "tag": toast_message["tag"],
+                    }
+                })
+                return response
 
             if str(product_id) in cart:
                 if quantity:
@@ -105,17 +131,20 @@ class CartView(TemplateView):
                     "category": product.category.name,
                 }
             request.session["cart"] = cart
-            messages.success(request, "Product Successfully Added To The Cart.")
+            toast_message["text"] = "Product Successfully Added To The Cart."
+            toast_message["tag"] = "alert-success"
         elif action == "remove":
             cart = request.session.get("cart")
             cart.pop(str(product_id), None)
             request.session["cart"] = cart
-            messages.success(request, "Product Successfully Removed From The Cart.")
+            toast_message["text"] = "Product Successfully Removed From The Cart."
+            toast_message["tag"] = "alert-success"
         elif action == "update":
             if str(product_id) in cart:
                 if cart[str(product_id)]["quantity"] != quantity:
                     cart[str(product_id)]["quantity"] = quantity
-                    messages.success(request, "Product Successfully Updated In  The Cart.")
+                    toast_message["text"] = "Product Successfully Updated In The Cart."
+                    toast_message["tag"] = "alert-success"
 
         total_price = sum(
             [int(item["quantity"]) * float(item["price"] if not item["discount"] else item["discounted_price"]) for item
@@ -141,7 +170,14 @@ class CartView(TemplateView):
         template_string = render_to_string(self.template_name, context, request=request)
         final_html = template_string + extra_update_html
 
-        return HttpResponse(final_html)
+        response = HttpResponse(final_html, content_type="text/html")
+        response["HX-Trigger"] = json.dumps({
+            "showMessage": {
+                "text": toast_message["text"],
+                "tag": toast_message["tag"],
+            }
+        })
+        return response
 
 
 def add_to_compare(request, product_id):
