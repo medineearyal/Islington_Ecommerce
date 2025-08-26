@@ -75,7 +75,7 @@ class UserOrderDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         review_forms = []
 
-        products = json.loads(self.object.products)
+        products = self.object.products
 
         for key in products:
             product = Product.objects.get(pk=int(key))
