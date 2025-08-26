@@ -158,7 +158,7 @@ class UserOrderTrackDetail(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        products = json.loads(self.object.products)
+        products = self.object.products
 
         logs = self.object.status_logs.all()
 
