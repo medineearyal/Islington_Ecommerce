@@ -79,27 +79,36 @@
         <h2 class="text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Your Products</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for product in products %}
-                <div class="card bg-base-100 shadow">
+                <div class="relative card bg-base-100 shadow">
+                    {% if not product.is_verified %}
+                        <div class="absolute top-2 left-0 w-full text-[var(--clr-gray-00)] bg-[var(--clr-danger-500)] text-base font-bold px-2 py-1 shadow">
+                            Not Approved
+                        </div>
+                    {% endif %}
+
                     <figure class="h-48 overflow-hidden">
                         {% if product.thumbnail %}
-                        <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}"
-                             class="object-cover w-full h-full">
+                            <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}"
+                                 class="object-cover w-full h-full">
                         {% else %}
                             <img src="{% static 'images/products/prodcut_1.png' %}" alt="{{ product.name }}"
-                             class="object-cover w-full h-full">
+                                 class="object-cover w-full h-full">
                         {% endif %}
                     </figure>
                     <div class="card-body p-4">
                         <h3 class="font-semibold text-lg">{{ product.name }}</h3>
                         <p class="text-[var(--clr-gray-00)]">{{ product.price|nepali_currency }}</p>
                         <p class="text-[var(--clr-gray-00)] text-sm">Stock: {{ product.stock }}</p>
-                        <div class="card-actions mt-2 justify-between">
-                            <button class="btn btn-sm btn-outline"
-                                    hx-get="{% url 'products:create' %}?action=edit&pk={{product.pk}}"
-                                    hx-target="#modal-container">
-                                Edit
-                            </button>
-                        </div>
+
+                        {% if product.is_verified %}
+                            <div class="card-actions mt-2 justify-between">
+                                <button class="btn btn-sm btn-outline"
+                                        hx-get="{% url 'products:create' %}?action=edit&pk={{ product.pk }}"
+                                        hx-target="#modal-container">
+                                    Edit
+                                </button>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% empty %}

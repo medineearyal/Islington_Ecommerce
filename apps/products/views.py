@@ -225,7 +225,7 @@ def product_create(request):
     data = request.GET.copy()
     action = data.get("action")
 
-    if request.method == "POST" and action == "create":
+    if request.method == "POST" and not action:
         if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
             product = form.save(commit=False)
             product.seller = request.user
@@ -242,8 +242,10 @@ def product_create(request):
         product = get_object_or_404(Product, pk=product_id)
         form = ProductForm(request.POST or None, request.FILES or None, instance=product)
         if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
-            print(form.cleaned_data)
-            form.save()
+            product = form.save(commit=False)
+            product.is_verified = False
+            product.save()
+            form.save_m2m()
             image_fs.save()
             description_fs.save()
             messages.success(request, f"Product {product.name} Successfully Edited")

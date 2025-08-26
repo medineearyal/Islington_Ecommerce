@@ -40,7 +40,7 @@ class ProductReviewForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ["seller", "sku", "is_featured", "is_header_banner", "headline", "tags", "slug", "status"]
+        exclude = ["seller", "sku", "is_featured", "is_header_banner", "headline", "tags", "slug", "status", "is_verified"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

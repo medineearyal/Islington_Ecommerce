@@ -55,6 +55,8 @@ class HomePageView(TemplateView):
         best_deal_qs = best_deal_qs.prefetch_related(product_prefetch)
         new_arrivals = products.order_by("-created")[:6]
 
+        print(products, new_arrivals)
+
         blogs = Blog.objects.all()[:3]
         pages = Page.objects.all()[:3]
 
@@ -93,8 +95,12 @@ class ShopPageView(TemplateView):
         context = super(ShopPageView, self).get_context_data(**kwargs)
 
         data = self.request.GET.copy()
+        products = Product.objects.all().prefetch_related("reviews").filter(is_verified=True)
 
-        products = Product.objects.all().prefetch_related("reviews").filter(is_verified=True).order_by("-created")
+        if self.request.user.is_authenticated:
+            products = products.exclude(seller=self.request.user)
+
+        products = products.order_by("-created")
         categories = Category.objects.annotate(products=Count("product_category")).filter(parent__isnull=True, products__gt=0)
         brands = Category.objects.filter(level=1)
 

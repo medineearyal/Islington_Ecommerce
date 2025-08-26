@@ -1,4 +1,8 @@
 from django.contrib import admin
+from django.utils.html import format_html
+from django.shortcuts import redirect
+from django.urls import path, reverse
+
 from apps.common.mixins import VerifiedProductMixin
 from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals, ProductReview, Attribute, \
     ProductAttributeValue, ProductColors, ProductDescription, WishList
@@ -25,6 +29,35 @@ class ProductDescriptionInline(admin.StackedInline):
 class ProductAdmin(admin.ModelAdmin):
     filter_horizontal = ("colors", )
     inlines = (ProductImageInline, ProductAttributeInline, ProductDescriptionInline)
+    list_display = ["name", "seller", "is_verified", "verify_product_button"]
+
+    def verify_product_button(self, obj):
+        if not obj.is_verified:
+            return format_html(
+                "<a class='btn btn-success' href={}>Verify<a/>",
+                reverse("admin:verify-product", args=[obj.pk])
+            )
+        return ""
+
+    verify_product_button.short_description = "Verify"
+
+    def get_urls(self):
+        urls = super(ProductAdmin, self).get_urls()
+
+        custom_urls =  [
+            path("<int:product_id>/verify/", self.admin_site.admin_view(self.verify_product), name="verify-product"),
+        ]
+
+        return custom_urls + urls
+
+    def verify_product(self, request, product_id):
+        product = Product.objects.get(pk=product_id)
+        product.is_verified = True
+        product.save()
+        self.message_user(request, f"Product {product} is successfully verified.")
+        return redirect(request.META.get("HTTP_REFERER"))
+
+
 
 class BestDealsAdmin(admin.ModelAdmin):
     filter_horizontal = ("products", )
