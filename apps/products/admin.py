@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals
+from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals, ProductReview, Attribute, \
+    ProductAttributeValue, ProductColors, ProductDescription, WishList
 
 
 # Register your models here.
@@ -10,11 +11,21 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ProductImageInline(admin.StackedInline):
     model = ProductImage
-    extra = 1
+    extra = 0
     fk_name = "product"
 
+
+class ProductAttributeInline(admin.StackedInline):
+    model = Attribute
+    extra = 0
+
+class ProductDescriptionInline(admin.StackedInline):
+    model = ProductDescription
+    extra = 0
+
 class ProductAdmin(admin.ModelAdmin):
-    inlines = (ProductImageInline,)
+    filter_horizontal = ("colors", )
+    inlines = (ProductImageInline, ProductAttributeInline, ProductDescriptionInline)
 
 class BestDealsAdmin(admin.ModelAdmin):
     filter_horizontal = ("products", )
@@ -24,5 +35,11 @@ admin.site.register(Tag)
 admin.site.register(Badge)
 admin.site.register(ProductBanner)
 admin.site.register(ProductImage)
+admin.site.register(Attribute)
+admin.site.register(ProductDescription)
+admin.site.register(ProductAttributeValue)
+admin.site.register(ProductColors)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductReview)
 admin.site.register(BestDeals, BestDealsAdmin)
+admin.site.register(WishList)

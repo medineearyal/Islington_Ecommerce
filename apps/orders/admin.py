@@ -1,16 +1,7 @@
+from apps.orders.models import Order, Transaction, KhaltiTransaction, OrderStatusLog
 from django.contrib import admin
 
-from .models import Category, Order
-
-
-# Register your models here.
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")
-
-
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "category", "stock", "status")
-
-
-admin.site.register(Order, OrderAdmin)
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Order)
+admin.site.register(OrderStatusLog)
+admin.site.register(Transaction)
+admin.site.register(KhaltiTransaction)

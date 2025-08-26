@@ -1,39 +1,30 @@
-const swiper = new Swiper('.swiper', {
-    direction: 'horizontal',
-    speed: 500,
-    loop: true,
-    slidesPerView: 6,
+document.body.addEventListener("htmx:afterSwap", (event) => {
+    if (event.detail.target.id === "quick-view-container") {
+        const modalContainer = document.getElementById("quick-view-container");
+        const modal = modalContainer.querySelector("dialog");
+        if (modal) {
+            modal.showModal();
+            const thumbSwiper = new Swiper(".thumb-swiper", {
+                direction: 'horizontal',
+                slidesPerView: 6,
+                watchSlidesProgress: true,
+                watchSlideVisibility: true,
+            })
 
-    pagination: {
-        el: '.swiper-pagination',
-    },
+            const productMainSwiper = new Swiper(".product-main-swiper", {
+                slidesPerView: 1,
 
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-    },
+                navigation: {
+                    nextEl: ".thumb-container .swiper-button-next",
+                    prevEl: ".thumb-container .swiper-button-prev",
+                },
 
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-});
-
-const swiperBanner = new Swiper(".swiper-banner", {
-    direction: 'horizontal',
-    loop: true,
-    speed: 500,
-    slidesPerView: 1,
-
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-    },
-
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
+                thumbs: {
+                    swiper: thumbSwiper,
+                }
+            })
+        }
+    }
 });
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -77,14 +68,20 @@ window.addEventListener("DOMContentLoaded", function () {
         const minOutput = document.getElementById('slider-min');
         const maxOutput = document.getElementById('slider-max');
 
+        const minPrice = Number(minOutput.getAttribute("data-min-price")) || 0;
+        const maxPrice = Number(maxOutput.getAttribute("data-max-price")) || 0;
+
+
         noUiSlider.create(slider, {
-            start: [100, 900],
+            start: [
+                minPrice + 10000, maxPrice - 10000
+            ],
             connect: true,
             range: {
-                'min': 0,
-                'max': 1000
+                'min': minPrice,
+                'max': maxPrice
             },
-            step: 10,
+            step: 1000,
             tooltips: [true, true],
             format: {
                 to: value => Math.round(value),
@@ -92,9 +89,204 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        slider.noUiSlider.on('update', function (values) {
-            minOutput.textContent = values[0];
-            maxOutput.textContent = values[1];
+        slider.noUiSlider.on('change', function (values) {
+            minOutput.value = values[0];
+            maxOutput.value = values[1];
         });
     }
+
+    const searchFilterForm = document.getElementById("search-filter-form");
+    if (searchFilterForm) {
+        searchFilterForm.addEventListener("submit", function (e) {
+            const minField = searchFilterForm.querySelector("[name=min-price]");
+            const maxField = searchFilterForm.querySelector("[name=max-price]");
+
+            const minPrice = Number(minField?.value) || 0;
+            const maxPrice = Number(maxField?.value) || 0;
+
+            if (minPrice > maxPrice) {
+                e.preventDefault();
+
+                const error = document.getElementById("price-range-error");
+                error.classList.add("block");
+                error.classList.remove("hidden");
+                error.innerHTML = "Max Price Cannot Be Smaller Than Min Price";
+            }
+
+            const urlParms = new URLSearchParams(window.location.search);
+            const minPrevPrice = urlParms.get("min-price");
+            const maxPrevPrice = urlParms.get("max-price");
+
+            if (minPrice === 0 && maxPrice === 0) {
+                if (minPrevPrice && maxPrevPrice) {
+                    minField.value = minPrevPrice;
+                    maxField.value = maxPrevPrice;
+                }
+            }
+        })
+    }
+
+    const swiper = new Swiper('.main-category-swiper', {
+        direction: 'horizontal',
+        speed: 500,
+        loop: true,
+        slidesPerView: 6,
+
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+        },
+
+        navigation: {
+            nextEl: '.main-category-swiper-wrapper .swiper-button-next',
+            prevEl: '.main-category-swiper-wrapper .swiper-button-prev',
+        },
+    });
+
+    const featuredSwiper = new Swiper(".featured-swiper", {
+        direction: "horizontal",
+        speed: 500,
+        loop: true,
+        slidesPerView: 1,
+
+        pagination: {
+            el: ".swiper-pagination"
+        },
+
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: true
+        },
+        navigation: {
+            nextEl: ".featured-swiper .swiper-button-next",
+            prevEl: ".featured_swiper .swiper-button-prev"
+        }
+    });
+
+    const swiperBanner = new Swiper(".swiper-banner", {
+        direction: 'horizontal',
+        loop: true,
+        speed: 500,
+        slidesPerView: 1,
+
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+        },
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+
+    const noticeSwiper = new Swiper(".notice-swiper", {
+        direction: 'horizontal',
+        loop: true,
+        speed: 500,
+        slidesPerView: 1,
+
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: true,
+        },
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
 });
+
+document.body.addEventListener("showMessage", function (event) {
+    const container = document.getElementById("message-container");
+    let toastMessage = `
+        <div class="toast toast-top toast-end z-10">
+            <div class="relative alert alert-info ${event.detail.tag} fade-out" role="alert">
+                <span id="toast-message">${event.detail.text}</span>
+                <div class="absolute bottom-0 left-0 h-1 bg-current progress-bar"></div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = toastMessage;
+});
+
+function priceReset(elem) {
+    const minPriceInput = document.querySelector("[name=min_price]");
+    const maxPriceInput = document.querySelector("[name=max_price]");
+
+    minPriceInput.value = 0;
+    maxPriceInput.value = 0;
+}
+
+function decreaseStock(elem) {
+    const stockElem = elem.parentElement.parentElement.querySelector("input[type=number]");
+    const currentValue = Number(stockElem.value);
+
+    if (currentValue < Number(elem.getAttribute("min"))) {
+        stockElem.value = currentValue - 1;
+    }
+}
+
+function increaseStock(elem) {
+    const stockElem = elem.parentElement.parentElement.querySelector("input[type=number]");
+    const currentValue = Number(stockElem.value);
+
+    if (currentValue < Number(elem.getAttribute("max"))) {
+        stockElem.value = currentValue + 1;
+    }
+}
+
+function checkForStockOverflow(elem) {
+    const currentValue = Number(elem.value);
+    const parent = elem.parentElement.parentElement;
+    const stockError = parent.querySelector(".stock-error");
+    const cartBtn = parent.querySelector(".cart-icon");
+
+    if (currentValue > Number(elem.getAttribute("max"))) {
+        stockError.classList.remove("hidden");
+        cartBtn.setAttribute("disabled", "disabled");
+    } else {
+        stockError.classList.add("hidden");
+        cartBtn.removeAttribute("disabled");
+
+        const addToCartBtn = document.querySelector("#add-to-cart");
+        const hxGet = addToCartBtn.getAttribute("hx-get");
+        const newHxGet = `${hxGet}&quantity=${currentValue}`;
+        addToCartBtn.setAttribute("hx-get", newHxGet);
+    }
+}
+
+function closeModal(el) {
+    el.closest(".modal").classList.remove("modal-open");
+}
+
+function setupDynamicFormset(opts) {
+    const {prefix, addBtnId, containerId, templateId} = opts;
+    const totalInput = document.querySelector(`#id_${prefix}-TOTAL_FORMS`);
+    const addBtn = document.getElementById(addBtnId);
+    const container = document.getElementById(containerId);
+    const tmplHTML = document.getElementById(templateId).innerHTML.trim();
+
+    function addForm() {
+        const index = parseInt(totalInput.value, 10);
+        const html = tmplHTML.replace(/__prefix__/g, index);
+        container.insertAdjacentHTML("beforeend", html);
+        totalInput.value = index + 1;
+    }
+
+    addBtn?.addEventListener("click", addForm);
+
+    container.addEventListener("click", (e) => {
+        if (e.target.closest('[data-action="remove-form"]')) {
+            const block = e.target.closest("[data-formset-item]");
+            const del = block.querySelector('input[type="checkbox"][name$="-DELETE"]');
+            if (del) del.checked = true;
+            block.style.display = "none";
+        }
+    });
+}

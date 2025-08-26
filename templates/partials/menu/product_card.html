@@ -1,7 +1,8 @@
 {% load static %}
+{% load currency %}
 
-<div class="card bg-[var(--clr-gray-00)] shadow-sm flex-row items-center p-3 gap-3 w-[312px]">
-    <figure class="rounded-none w-full">
+<a href="{% url 'products:detail' product.slug %}" class="card bg-[var(--clr-gray-00)] shadow-sm flex-row items-center p-3 gap-3 w-[312px]">
+    <figure class="rounded-none">
         <img class="w-[80px] h-[80px]"
              {% if product.thumbnail %}
                  src="{{ product.thumbnail.url }}"
@@ -13,7 +14,7 @@
     <div class="card-body p-0">
         <h2 class="card-title text-[var(--clr-gray-900)] text-wrap text-sm">{{ product.name }}</h2>
         <div class="card-actions justify-start text-sm font-normal">
-            <span class="text-info">Rs. {{ product.price }}</span>
+            <span class="text-info">{{ product.price|nepali_currency }}</span>
         </div>
     </div>
-</div>
+</a>

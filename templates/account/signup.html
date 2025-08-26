@@ -3,6 +3,33 @@
 
 {% block title %}Islington Ecommerce - Login{% endblock %}
 
+{% block extra_css %}
+    <style>
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .animate-gradient {
+            background: linear-gradient(
+                    90deg,
+                    var(--clr-secondary-500) 0%,
+                    var(--clr-secondary-600) 25%,
+                    var(--clr-secondary-700) 50%,
+                    var(--clr-secondary-800) 75%,
+                    var(--clr-secondary-500) 100%
+            );
+            background-size: 200% 200%;
+            animation: gradient-move 2s linear infinite;
+            transition: width 0.8s ease-in-out;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <section class="section-login" style="max-width: unset;">
         <div class="bg-[var(--clr-gray-50)]">
@@ -27,8 +54,8 @@
         </div>
 
         <div class="container mx-auto py-25">
-            <form class="w-[424px] mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm"
-                  method="post">
+            <form class="w-[600px] mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm"
+                  id="multiStepForm" method="POST" enctype="multipart/form-data">
                 <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-500)] font-semibold border-b-1 mb-6">
                     <a href="{% url 'account_login' %}" role="tab" class="tab flex-1">Sign In</a>
                     <a href="{% url 'account_signup' %}" role="tab" class="tab tab-active flex-1">Sign Up</a>
@@ -36,7 +63,79 @@
 
                 {% csrf_token %}
 
-                <div class="p-6.5">
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden mb-2">
+                    <div id="progressBar" class="h-3 rounded-full w-0 animate-gradient"></div>
+                </div>
+
+                <div class="text-center mb-6 font-semibold text-[var(--clr-primary-500)]" id="stepName">Personal
+                    Details
+                </div>
+
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            <p style="color:red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="p-6.5" id="step-1">
+                    <div class="mb-4">
+                        <div class="flex flex-col items-center space-y-2">
+                            <img id="preview"
+                                 src="{% static 'images/icons/UserCircle.svg' %}"
+                                 alt="Profile Preview"
+                                 class="w-32 h-32 rounded-full object-cover border border-gray-300 shadow-md"/>
+                        </div>
+
+                        <label for="{{ form.profile_picture.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.profile_picture.label }}</span>
+
+                            {{ form.profile_picture }}
+                        </label>
+                    </div>
+
+                    <div class="flex gap-4 mb-4 ">
+                        <div class="flex-1">
+                            <label for="{{ form.first_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.first_name.label }}</span>
+
+                                {{ form.first_name }}
+                            </label>
+
+                            <p class="validator-hint {% if not form.first_name.errors %}hidden{% endif %} ">
+                                {{ form.first_name.errors.0 }}
+                            </p>
+                        </div>
+                        <div class="flex-1">
+                            <label for="{{ form.last_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.last_name.label }}</span>
+
+                                {{ form.last_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.ph_number.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.ph_number.label }}</span>
+
+                            {{ form.ph_number }}
+                        </label>
+
+                        <p class="{% if not form.ph_number.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.ph_number.errors.0 }}
+                        </p>
+                    </div>
+
                     <div class="mb-4">
                         <label for="{{ form.email.id_for_label }}"
                                class="block validator">
@@ -53,10 +152,9 @@
                     <div class="mb-5">
                         <label for="{{ form.password1.id_for_label }}"
                                class="block validator mb-2">
-                    <span class="flex justify-between text-sm text-[var(--clr-gray-900)] mb-2">
-                        {{ form.password1.label }}
-                    </span>
-
+                                <span class="flex justify-between text-sm text-[var(--clr-gray-900)] mb-2">
+                                    {{ form.password1.label }}
+                                </span>
                             {{ form.password1 }}
                         </label>
 
@@ -70,9 +168,9 @@
                     <div class="mb-5">
                         <label for="{{ form.password1.id_for_label }}"
                                class="block validator mb-2">
-                    <span class="flex justify-between text-sm text-[var(--clr-gray-900)] mb-2">
-                        {{ form.password2.label }}
-                    </span>
+                            <span class="flex justify-between text-sm text-[var(--clr-gray-900)] mb-2">
+                                {{ form.password2.label }}
+                            </span>
 
                             {{ form.password2 }}
                         </label>
@@ -84,14 +182,295 @@
                         </p>
                     </div>
 
-                    <div class="mb-8">
-                        <input type="checkbox" id="terms" name="terms" />
-                        <label for="terms" class="text-[var(--clr-gray-700)] text-sm">Are you agree to Islington Ecommerce <a class="text-[var(--clr-secondary-500)]">Terms of Condition</a> and <a class="text-[var(--clr-secondary-500)]">Privacy Policy.</a></label>
+                    <button type="button" id="nextBtn-1" class="btn btn-shop-now w-full">Next</button>
+                </div>
+
+                <div class="p-6.5 hidden" id="step-2">
+                    <div class="flex gap-4 mb-4">
+                        <div class="flex-1">
+                            <label for="{{ form.f_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.f_name.label }}</span>
+
+                                {{ form.f_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                        <div class="flex-1">
+                            <label for="{{ form.l_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.l_name.label }}</span>
+
+                                {{ form.l_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
                     </div>
 
-                    <button class="btn btn-shop-now">SIGNUP</button>
+                    <div class="mb-4">
+                        <label for="{{ form.street.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.street.label }}</span>
+
+                            {{ form.street }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot be Empty
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.country.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.country.label }}</span>
+
+                            {{ form.country }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot be Empty
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.state.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.state.label }}</span>
+
+                            {{ form.state }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot be Empty
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.city.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.city.label }}</span>
+
+                            {{ form.city }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot be Empty
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.zip_code.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.zip_code.label }}</span>
+
+                            {{ form.zip_code }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot be Empty
+                        </p>
+                    </div>
+
+                    <div class="flex justify-between gap-4">
+                        <button type="button" id="prevBtn-1"
+                                class="btn btn-ghost bg-[var(--clr-gray-600)] text-[var(--clr-gray-00)] no-icon flex-1">
+                            Back
+                        </button>
+                        <button type="button" id="nextBtn-2" class="btn btn-shop-now flex-1">Next</button>
+
+                    </div>
+                </div>
+
+                <div class="p-6.5 hidden" id="step-3">
+                    <div class="flex-1 mb-4">
+                        <label for="{{ form.user_type.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.user_type.label }}</span>
+
+                            {{ form.user_type }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Cannot be Empty
+                        </p>
+                    </div>
+
+                    <div class="mb-4 hidden" id="seller-config">
+                        <div class="flex-1 mb-4">
+                            <label for="{{ form.seller_qr_code.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.seller_qr_code.label }}</span>
+
+                                {{ form.seller_qr_code }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                        <div class="flex-1 mb-4">
+                            <label for="{{ form.seller_bank_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.seller_bank_name.label }}</span>
+
+                                {{ form.seller_bank_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                        <div class="flex-1 mb-4">
+                            <label for="{{ form.seller_bank_account_number.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.seller_bank_account_number.label }}</span>
+
+                                {{ form.seller_bank_account_number }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                        <div class="flex-1 mb-4">
+                            <label for="{{ form.seller_bank_branch_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.seller_bank_branch_name.label }}</span>
+
+                                {{ form.seller_bank_branch_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                        <div class="flex-1 mb-4">
+                            <label for="{{ form.seller_bank_account_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.seller_bank_account_name.label }}</span>
+
+                                {{ form.seller_bank_account_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <input type="checkbox" id="terms" name="terms" required/>
+                        <label for="terms" class="text-[var(--clr-gray-700)] text-sm">Are you agree to Islington
+                            Ecommerce <a class="text-[var(--clr-secondary-500)]">Terms of Condition</a> and <a
+                                    class="text-[var(--clr-secondary-500)]">Privacy Policy.</a>
+                        </label>
+                    </div>
+
+                    <div class="flex justify-between gap-4">
+                        <button type="button" id="prevBtn-2"
+                                class="btn btn-ghost bg-[var(--clr-gray-600)] text-[var(--clr-gray-00)] no-icon flex-1">
+                            Back
+                        </button>
+                        <button type="submit" class="btn btn-success upper no-icon text-[var(--clr-gray-00)] flex-1">
+                            Submit
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const steps = [
+            {id: "step-1", name: "Personal Details", percent: 33.33},
+            {id: "step-2", name: "Shipping Address", percent: 66.66},
+            {id: "step-3", name: "User Config", percent: 100},
+        ];
+
+        let currentStep = 0;
+        const progressBar = document.getElementById("progressBar");
+        const stepName = document.getElementById("stepName");
+
+        function showStep(index) {
+            steps.forEach((step, i) => {
+                const el = document.getElementById(step.id);
+                if (i === index) el.classList.remove("hidden");
+                else el.classList.add("hidden");
+            });
+
+            stepName.textContent = steps[index].name;
+
+            progressBar.style.width = steps[index].percent + "%";
+        }
+
+        showStep(currentStep);
+
+        document.getElementById("nextBtn-1").addEventListener("click", () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        document.getElementById("nextBtn-2").addEventListener("click", () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        document.getElementById("prevBtn-1").addEventListener("click", () => {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        document.getElementById("prevBtn-2").addEventListener("click", () => {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        const input = document.getElementById(`{{ form.profile_picture.id_for_label }}`);
+        const preview = document.getElementById("preview");
+
+        input.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+
+        const form = document.getElementById("multiStepForm");
+        form.addEventListener("submit", function (e) {
+            const terms = document.getElementById("terms");
+
+            if (!terms.checked) {
+                e.preventDefault();
+            }
+        });
+
+        const userType = document.getElementById(`{{ form.user_type.id_for_label }}`);
+        const sellerConfig = document.getElementById("seller-config");
+
+        if (userType.value === "seller") {
+            sellerConfig.classList.remove("hidden");
+        }
+
+        userType.addEventListener("change", function (e) {
+            if (e.target.value === "seller") {
+                // Show Seller Form Specifics
+                sellerConfig.classList.remove("hidden");
+            }else{
+                sellerConfig.classList.add("hidden");
+            }
+        });
+    </script>
 {% endblock %}

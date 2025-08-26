@@ -1,0 +1,43 @@
+{% load static %}
+{% load currency %}
+
+{% for pid, item in cart.items %}
+    <li class="flex gap-4 items-center">
+        <img src="{{ item.thumbnail }}"
+             class="w-[80px] aspect-1/1 object-cover border border-[var(--clr-gray-100)]" alt=""/>
+
+        <div class="flex-1">
+            <h3 class="text-[var(--clr-gray-900)] text-sm mb-2">{{ item.name }}</h3>
+            <p>
+                <span class="text-[var(--clr-gray-600)]">{{ item.quantity }} x </span><span
+                    class="text-[var(--clr-secondary-500)]">
+                    {% if item.discount %}
+                        {{ item.discounted_price|nepali_currency }}
+                        <span class="line-through text-[var(--clr-gray-500)]">{{ item.price|nepali_currency }}</span>
+                    {% else %}
+                        {{ item.price|nepali_currency }}
+                    {% endif %}
+                </span>
+            </p>
+        </div>
+
+        <div
+                hx-get="{% url 'products:cart' pid %}?action=remove"
+                hx-target="#cart-list"
+                hx-swap="innerHTML"
+                class="cursor-pointer group/x"
+        >
+            <svg class="group-hover/x:stroke-[var(--clr-gray-900)] stroke-[var(--clr-gray-600)]" width="16" height="16"
+                 viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 3.5L3.5 12.5" stroke="" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+                <path d="M12.5 12.5L3.5 3.5" stroke="" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </li>
+{% empty %}
+    <div role="alert" class="alert alert-info alert-soft]">
+        <span>There is nothing on the Cart...<span class="text-xl">😞</span> Continue Shopping..</span>
+    </div>
+{% endfor %}

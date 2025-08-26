@@ -1,15 +1,24 @@
+from datetime import timedelta
 from decimal import Decimal
+
+from django.utils import timezone
+
+from apps.common.models import Tag
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 from mptt.models import MPTTModel, TreeForeignKey
 from apps.common.mixins import SlugMixin
 from apps.common.models import TimeStampedModel
-from apps.products.constans import BadgeTypeEnum
-from django.db.models import Q, Max
+from apps.products.constans import BadgeTypeEnum, ProductInventoryStatusEnum, ProductColorsEnum, ProductAttributesEnum
+from django.db.models import Q, Max, Avg
 from django.utils.timezone import localtime
 
 
 # Create your models here.
+User = get_user_model()
+
 class Category(SlugMixin, MPTTModel):
     name = models.CharField(max_length=255)
     parent = TreeForeignKey(
@@ -34,7 +43,8 @@ class Category(SlugMixin, MPTTModel):
 
         if not qs.exists():
             if not self.is_leaf_node():
-                qs = Product.objects.filter(category__in=self.children.all().values_list("pk", flat=True), is_featured=True).order_by('-discount')
+                qs = Product.objects.filter(category__in=self.children.all().values_list("pk", flat=True),
+                                            is_featured=True).order_by('-discount')
         return qs[:3]
 
     @property
@@ -48,31 +58,34 @@ class Category(SlugMixin, MPTTModel):
         return qs.first()
 
 
-class Tag(SlugMixin, models.Model):
+def leaf_categories():
+    return Q(children__isnull=True)
+
+class ProductColors(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, null=False, blank=False)
+    color_code = models.CharField(max_length=50)
+    color_format = models.CharField(choices=ProductColorsEnum.choices, max_length=50)
 
     def __str__(self):
         return self.name
 
 
-def leaf_categories():
-    return Q(children__isnull=True)
-
-
 class Product(SlugMixin, TimeStampedModel, models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField()
     stock = models.IntegerField(default=1)
     tags = models.ManyToManyField(Tag, related_name="tags")
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, limit_choices_to=leaf_categories)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, limit_choices_to=leaf_categories, related_name="product_category")
     slug = models.SlugField(blank=True, null=True, unique=True)
     is_featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to="products/thumbnails/", null=True, blank=True)
     is_header_banner = models.BooleanField(default=False)
-    discount=models.PositiveSmallIntegerField(default=0)
+    discount = models.PositiveSmallIntegerField(default=0)
     headline = models.CharField(max_length=255, null=True, blank=True)
+
+    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    sku = models.CharField(max_length=50, unique=True, blank=True)
+    colors = models.ManyToManyField(ProductColors, related_name="colors", blank=True)
 
     def __str__(self):
         return self.name
@@ -83,6 +96,76 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
             return round(self.price - (self.price * Decimal(self.discount / 100)), 2)
         return self.price
 
+    @property
+    def overall_ratings(self):
+        review_qs = ProductReview.objects.filter(product=self)
+        average_ratings = review_qs.aggregate(Avg("rating"))["rating__avg"] or 0
+        no_of_ratings = review_qs.count()
+        return {
+            "ratings": round(average_ratings),
+            "count": no_of_ratings
+        }
+
+    @property
+    def is_available(self):
+        if self.stock > 0:
+            return ProductInventoryStatusEnum.AVAILABLE.label, True
+        else:
+            return ProductInventoryStatusEnum.SOLD_OUT.label, False
+
+    @property
+    def badges(self):
+        badge_list = []
+
+        if self.discount:
+            badge_list.append({
+                "text" : f"{self.discount}% OFF",
+                "class": "text-[var(--clr-gray-900)] bg-[var(--clr-warning-400)]"
+            })
+
+        if self.overall_ratings["ratings"] > 4:
+            badge_list.append({
+                "text": "hot",
+                "class": "text-[var(--clr-gray-00)] bg-[var(--clr-danger-500)]"
+            })
+
+        if self.created >= timezone.now() - timedelta(days=30):
+            badge_list.append({
+                "text": "Fresh",
+                "class": "text-[var(--clr-gray-00)] bg-[var(--clr-secondary-500)]"
+            })
+
+        if self.stock <= 0:
+            badge_list = [{
+                "text": "sold out",
+                "class": "text-[var(--clr-gray-00)] bg-[var(--clr-gray-400)]"
+            }]
+
+        return badge_list
+
+class ProductDescription(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="descriptions")
+    title = models.CharField(max_length=255)
+    description = CKEditor5Field()
+
+    def __str__(self):
+        return f"{self.product}_{self.title}"
+
+class Attribute(models.Model):
+    name = models.CharField(max_length=50)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    datatype = models.CharField(max_length=20, choices=ProductAttributesEnum.choices)
+
+    def __str__(self):
+        return f"{self.name}"
+
+class ProductAttributeValue(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE, related_name="attributes")
+    value = models.TextField()
+
+    def __str__(self):
+        return f"{self.attribute.name}-{self.product}-{self.pk}"
 
 class ProductBanner(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
@@ -126,11 +209,20 @@ class ProductImage(models.Model):
 
 class ProductReview(TimeStampedModel, models.Model):
     rating = models.PositiveSmallIntegerField(default=0)
-    feedback = models.CharField(max_length=500)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    feedback = models.TextField()
+    review_from = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="reviews", null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="reviews")
 
     def __str__(self):
         return f"{self.product}_{self.rating}"
+
+
+class WishList(TimeStampedModel, models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlist")
+    products = models.ManyToManyField(Product, related_name="wishlist")
+
+    def __str__(self):
+        return f"{self.user.full_name}-Wishlist"
 
 
 class BestDeals(TimeStampedModel, models.Model):

@@ -12,7 +12,7 @@
                         <!-- Slides -->
                         {% for banner in banners %}
                             <div class="swiper-slide">
-                                <div id="item1" class="carousel-item p-13 items-center gap-9">
+                                <div id="main-banner-{{ banner.pk }}" class="carousel-item p-13 items-center gap-9">
                                     <div class="w-[356px]">
                                         <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
                                             <div class="divider bg-[var(--clr-secondary-600)] w-[10%]"
@@ -26,7 +26,8 @@
                                             {{ banner.headline }}
                                         </p>
 
-                                        <a class="btn btn-primary">SHOP NOW</a>
+                                        <a href="{% url 'pages:shop' %}?category={{ banner.product.category.slug }}"
+                                           class="btn btn-primary">SHOP NOW</a>
                                     </div>
 
                                     <img
@@ -36,7 +37,7 @@
                                                 src="{{ banner.product.thumbnail.url }}"
                                             {% endif %}
                                                 alt="{{ banner.product }}"
-                                                class="w-[368px]"/>
+                                                class="w-[368px] h-[408px] object-center object-cover"/>
                                 </div>
                             </div>
                         {% endfor %}
@@ -47,9 +48,9 @@
             </div>
 
             <div class="flex flex-col gap-4 items-center justify-between">
-                {% include 'partials/banner/banner_small_1.html' %}
+                {% include 'partials/banner/banner_small_1.html' with product=best_deals.products.all.0 %}
 
-                {% include 'partials/banner/banner_small_2.html' %}
+                {% include 'partials/banner/banner_small_2.html' with product=best_deals.products.all.1 %}
             </div>
         </div>
 
@@ -103,33 +104,31 @@
             <div class="flex justify-between items-center mb-6">
                 <h2 class="flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
                     Best Deals
-                    <span class="text-sm">Deal ends in <span id="best-deal-remaining-time" class="text-base px-3 py-2 bg-[var(--clr-warning-300)]" data-end-date="{{ best_deals.iso_end_date }}"></span></span>
+                    <span class="text-sm">
+                                Deal ends in
+                                <span id="best-deal-remaining-time"
+                                      class="text-base px-3 py-2 bg-[var(--clr-warning-300)]"
+                                      data-end-date="{{ best_deals.iso_end_date }}"></span>
+                            </span>
                 </h2>
 
-                <a href="{% url 'shop' %}" class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All Product</a>
+                <a href="{% url 'pages:shop' %}" class="btn btn-no-bg text-[var(--clr-secondary-500)]">Browse All
+                    Product</a>
             </div>
 
             {% with first_prod=best_deals.products.all.0 %}
                 <div class="grid grid-cols-12">
-                <div class="col-span-3 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-[592px] pt-0">
+                <div class="lg:col-span-3 md:col-span-5 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-fit pt-0">
                     <figure class="mb-6">
                         {% if first_prod.thumbnail %}
-                            <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}"/>
+                            <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}"
+                                 class="h-full w-[280px] object-cover object-center"/>
                         {% else %}
                             <img src="{% static 'images/products/product_2.png' %}" alt=""/>
                         {% endif %}
                     </figure>
 
-                    <div class="ratings flex items-center mb-1.5">
-                        <div class="flex gap-0.5">
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                            <img src="{% static 'images/icons/Star.svg' %}" alt=""/>
-                        </div>
-                        <span class="text-[var(--clr-gray-500)]">(52,677)</span>
-                    </div>
+                    {% include "partials/products/ratings.html" with rating=products.average_ratings %}
 
                     <div class="mb-6">
                         <h3 class="text-[var(--clr-gray-900)]">{{ first_prod.name }}</h3>
@@ -145,24 +144,30 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                        <a href="{% url 'pages:wishlist' %}?action=add&product_slug={{ first_prod.slug }}" class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
                             <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
                         </a>
 
-                        <a class="btn btn-primary no-icon rounded-[2px] h-12">
+                        <a
+                                hx-get="{% url 'products:cart' first_prod.pk %}?action=add"
+                                hx-target="#cart-list"
+                                hx-swap="innerHTML"
+                                class="btn btn-primary no-icon rounded-[2px] h-12"
+                        >
                             <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
                             ADD TO CART
                         </a>
 
-                        <a class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                        <a href="{% url 'products:detail' first_prod.slug %}"
+                           class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
                             <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
                         </a>
                     </div>
                 </div>
             {% endwith %}
 
-            <div class="col-span-9">
-                <div class="grid grid-cols-4">
+            <div class="lg:col-span-9 md:col-span-7">
+                <div class="grid lg:grid-cols-4 md:grid-cols-2">
                     {% for product in best_deals.products.all|slice:"1:" %}
                         {% include "partials/products/card_regular.html" with product=product %}
                     {% endfor %}
@@ -175,13 +180,15 @@
     <section class="mx-auto">
         <h2 class="text-[var(--clr-gray-900)] text-center text-[2rem] font-semibold mb-10">Shop With Categorys</h2>
 
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                {% for category in categories %}
-                    <div class="swiper-slide">
-                        {% include 'partials/products/card_slider.html' with category=category %}
-                    </div>
-                {% endfor %}
+        <div class="main-category-swiper-wrapper relative w-full">
+            <div class="main-category-swiper overflow-hidden">
+                <div class="swiper-wrapper">
+                    {% for category in categories %}
+                        <div class="swiper-slide">
+                            {% include 'partials/products/card_slider.html' with category=category %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             <!-- If we need navigation buttons -->
             <div class="swiper-button-prev"></div>
@@ -191,26 +198,27 @@
 
     <section class="section-featured mx-auto py-18">
         <div class="grid grid-cols-12">
-            <div class="col-span-3">
+            <div class="lg:col-span-3 md:col-span-5">
                 {% include 'partials/banner/banner_large_1.html' %}
             </div>
 
-            <div class="col-span-9">
+            <div class="lg:col-span-9 md:col-span-7">
                 <div class="flex justify-between items-center mb-6.5">
                     <h2 class="text-[var(--clr-gray-900)] font-semibold text-2xl inline">
-                        Featured Products
+                        New Arrivals
                     </h2>
 
                     <div class="flex justify-between items-center">
-                        <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-600)] text-sm">
+                        <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-600)] text-sm mr-2">
                             <a role="tab" class="tab tab-active">All Product</a>
-                            <a role="tab" class="tab">Smart Phone</a>
-                            <a role="tab" class="tab">Laptop</a>
-                            <a role="tab" class="tab">Headphone</a>
-                            <a role="tab" class="tab">TV</a>
+                            {#                            <a role="tab" class="tab">Smart Phone</a>#}
+                            {#                            <a role="tab" class="tab">Laptop</a>#}
+                            {#                            <a role="tab" class="tab">Headphone</a>#}
+                            {#                            <a role="tab" class="tab">TV</a>#}
                         </div>
 
-                        <a class="text-[var(--clr-primary-500)] text-sm flex items-center gap-2">
+                        <a href="{% url 'pages:shop' %}"
+                           class="text-[var(--clr-primary-500)] text-sm flex items-center gap-2">
                             Browse All Product
 
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -226,18 +234,51 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 gap-4">
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
-                    {% include 'partials/products/card_regular_rating.html' %}
+                <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
+                    {% for product in new_arrivals.all %}
+                        <div class="h-full flex">
+                            {% include 'partials/products/card_regular_rating.html' with product=product %}
+
+                            <dialog id="product-{{ product.slug }}" class="modal product-detail-modal">
+                            </dialog>
+                        </div>
+                    {% endfor %}
+
+                    <div class="col-span-2">
+                        <div class="swiper featured-swiper border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]">
+                            <div class="swiper-wrapper">
+                                {% for banner in banners %}
+                                    <div class="swiper-slide">
+                                        <div id="new-arrival-{{ banner.pk }}"
+                                             class="carousel-item p-13 items-center gap-9">
+                                            <div class="w-fit">
+                                                <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
+                                                    <div class="divider bg-[var(--clr-secondary-600)] w-[10%]"
+                                                         style="height: 2px;"></div>
+                                                    {{ banner.short_title }}
+                                                </span>
+
+                                                <h1 class="font-semibold text-5xl text-[var(--clr-gray-900)] mb-4">{{ banner.title }}</h1>
+
+                                                <p class="text-[var(--clr-gray-700)] mb-6">
+                                                    {{ banner.headline }}
+                                                </p>
+
+                                                <a href="{% url 'pages:shop' %}?category={{ banner.product.category.slug }}"
+                                                   class="btn btn-primary">SHOP NOW</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div id="quick-view-container"></div>
     </section>
 
     <section class="section-blogs py-18 bg-[var(--clr-gray-50)]">
@@ -245,12 +286,16 @@
             <h2 class="text-[var(--clr-gray-900)] text-center font-semibold text-2xl mb-10">Latest Blogs</h2>
 
             <div class="grid grid-cols-3 gap-6">
-                {% include 'partials/blog/blog_card.html' %}
-                {% include 'partials/blog/blog_card.html' %}
-                {% include 'partials/blog/blog_card.html' %}
+                {% for blog in blogs %}
+                    {% include 'partials/blog/blog_card.html' with blog=blog %}
+                {% endfor %}
             </div>
         </div>
     </section>
 
     {% include 'partials/banner/newsletter.html' %}
+
+    {% if notices  %}
+        {% include "partials/notice_modal.html" with notices=notices %}
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,86 @@
+<dialog id="order-{{ order.uuid }}" class="modal product-detail-modal">
+    <div class="modal-box bg-[var(--clr-gray-00)] relative overflow-visible max-w-[472px] p-0">
+        <form method="dialog">
+            <button class="absolute top-0 right-[-8%] btn btn-sm btn-circle btn-ghost no-icon text-[var(--clr-gray-00)] bg-white/12">
+                ✕
+            </button>
+        </form>
+        <div class="">
+            <div class="p-8 bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md text-center max-h-[80vh] overflow-y-auto">
+                <h2 class="text-[var(--clr-gray-900)] font-semibold text-xl mb-3">Send A Feedback</h2>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% for product, form in review_forms %}
+                        <h3 class="text-[var(--clr-gray-900)] text-sm mb-4">{{ product.name }}</h3>
+
+                        <div id="form-{{ forloop.counter }}" class="review-form">
+                            <div class="mb-4 text-left">
+                                <label for="{{ form.rating.id_for_label }}"
+                                       class="block validator">
+                                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.rating.label }}</span>
+
+                                    <div class="flex gap-2 items-center border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)] h-[50px]">
+                                        <div class="rating items-center gap-2">
+                                            <input type="radio" name="rating-{{ forloop.counter }}" value="1"
+                                                   class="mask mask-star-2 bg-[var(--clr-primary-500)]"
+                                                   aria-label="1 star"
+                                                   onchange="updateRating(this);"
+                                            />
+                                            <input type="radio" name="rating-{{ forloop.counter }}"
+                                                   class="mask mask-star-2 bg-[var(--clr-primary-500)]"
+                                                   aria-label="2 star" value="2"
+                                                   onchange="updateRating(this);"
+                                            />
+                                            <input type="radio" name="rating-{{ forloop.counter }}" value="3"
+                                                   class="mask mask-star-2 bg-[var(--clr-primary-500)]"
+                                                   aria-label="3 star"
+                                                   onchange="updateRating(this);"
+                                            />
+                                            <input type="radio" name="rating-{{ forloop.counter }}" value="4"
+                                                   class="mask mask-star-2 bg-[var(--clr-primary-500)]"
+                                                   aria-label="4 star"
+                                                   onchange="updateRating(this);"
+                                            />
+                                            <input type="radio" name="rating-{{ forloop.counter }}" value="5"
+                                                   class="mask mask-star-2 bg-[var(--clr-primary-500)]"
+                                                   aria-label="5 star"
+                                                   onchange="updateRating(this);"
+                                            />
+                                        </div>
+
+                                        <span class="star-info text-[var(--clr-gray-700)]">2 star Rating</span>
+                                    </div>
+
+                                    {{ form.rating }}
+                                </label>
+
+                                {% if form.rating.errors %}
+                                    {% for error in form.rating.errors %}
+                                        <p class="text-[var(--clr-danger-500)]">{{ error }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="mb-4 text-left">
+                                <label for="{{ form.feedback.id_for_label }}"
+                                       class="block validator">
+                                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.feedback.label }}</span>
+
+                                    {{ form.feedback }}
+                                </label>
+
+                                {% if form.feedback.errors %}
+                                    {% for error in form.feedback.errors %}
+                                        <p class="text-[var(--clr-danger-500)]">{{ error }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-primary text-left w-full">Publish Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</dialog>

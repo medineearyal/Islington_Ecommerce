@@ -1,5 +1,8 @@
 {% for message in messages %}
-    <div class="alert {{ message.tags }}" role="alert">
-        {{ message }}
+    <div class="toast toast-top toast-end">
+        <div class="relative alert alert-info {{ message.tags }} fade-out" role="alert">
+            <span id="toast-message">{{ message }}</span>
+            <div class="absolute bottom-0 left-0 h-1 bg-current progress-bar"></div>
+        </div>
     </div>
 {% endfor %}

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a77977a809a718a7920dcefb0703a856030bbccaa0c8e6bd59008595476bdcbb"
+            "sha256": "c0986e41a17800d1f9b4f27b1d83bebc8a266dab48f7047e983c2cfc51cb2ac8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,15 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==3.9.1"
+        },
+        "babel": {
+            "hashes": [
+                "sha256:0c54cffb19f690cdcc52a3b50bcbf71e07a808d1c80d549f2459b9d2cf0afb9d",
+                "sha256:4d0b53093fdfb4b21c92b5213dba5a1b23885afa8383709427046b21c366e5f2"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==2.17.0"
         },
         "certifi": {
             "hashes": [
@@ -316,6 +325,13 @@
             "markers": "python_version >= '3.9'",
             "version": "==0.17.0"
         },
+        "django-rest-framework": {
+            "hashes": [
+                "sha256:47a8f496fa69e3b6bd79f68dd7a1527d907d6b77f009e9db7cf9bb21cc565e4a"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
+        },
         "django-tailwind": {
             "extras": [
                 "reload"
@@ -326,6 +342,14 @@
             ],
             "markers": "python_version >= '3.10' and python_version < '4.0'",
             "version": "==4.2.0"
+        },
+        "djangorestframework": {
+            "hashes": [
+                "sha256:166809528b1aced0a17dc66c24492af18049f2c9420dbd0be29422029cfc3ff7",
+                "sha256:33a59f47fb9c85ede792cbf88bde71893bcda0667bc573f784649521f1102cec"
+            ],
+            "markers": "python_version >= '3.9'",
+            "version": "==3.16.1"
         },
         "gunicorn": {
             "hashes": [

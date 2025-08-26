@@ -27,20 +27,20 @@
         </div>
 
         <div class="container mx-auto py-25">
-            {% if form.non_field_errors %}
-                <div class="error">
-                    {% for error in form.non_field_errors %}
-                        <p style="color:red;">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            <form class="w-[424px] mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm"
+            <form class="w-[600px] relative mx-auto bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md"
                   method="post">
                 <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-500)] font-semibold border-b-1 mb-6">
                     <a href="{% url 'account_login' %}" role="tab" class="tab tab-active flex-1">Sign In</a>
                     <a href="{% url 'account_signup' %}" role="tab" class="tab flex-1">Sign Up</a>
                 </div>
+
+                {% if form.non_field_errors %}
+                    <div class="error text-center">
+                        {% for error in form.non_field_errors %}
+                            <p style="color:red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
                 {% csrf_token %}
 
@@ -67,9 +67,9 @@
                     <div class="mb-5">
                         <label for="{{ form.password.id_for_label }}"
                                class="block validator mb-2">
-                                <span class="flex justify-between block text-sm text-[var(--clr-gray-900)] mb-2">
+                                <span class="flex justify-between text-sm text-[var(--clr-gray-900)] mb-2">
                                     {{ form.password.label }}
-                                    <a href="" class="text-[var(--clr-secondary-500)]">Forget Password</a>
+                                    <a href="{% url 'account_reset_password' %}" class="text-[var(--clr-secondary-500)]">Forget Password</a>
                                 </span>
 
                             {{ form.password }}

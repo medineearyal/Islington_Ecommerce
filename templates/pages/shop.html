@@ -6,43 +6,35 @@
 
 {% block content %}
     <section class="section-with-breadcrumb">
-        <div class="bg-[var(--clr-gray-50)]">
-            <div class="container mx-auto">
-                <div class="flex items-center gap-2 py-6.5 text-[var(--clr-gray-600)] text-sm">
-                    <span class="flex items-center gap-2">
-                        <img src="{% static 'images/icons/House.svg' %}" alt=""/>
-                        Home
-                    </span>
+        {% include "partials/breadcrumb.html" %}
 
-                    <span class="flex items-center gap-2">
-                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
-                        Shop
-                    </span>
-
-                    <span class="flex items-center gap-2">
-                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
-                        Shop Grid
-                    </span>
-
-                    <span class="flex items-center gap-2 text-[var(--clr-secondary-500)]">
-                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
-                        Category
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mx-auto py-10 grid grid-cols-3">
-            <div class="col-span-1 h-fit">
-                <form method="get">
+        <div class="">
+            <form method="get" id="search-filter-form" class="container mx-auto py-10 grid grid-cols-12 gap-6">
+                <div class="col-span-3 h-fit w-fit">
                     <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">CATEGORY</h2>
+
+                    <div class="mb-3 flex items-center">
+                        <input type="radio"
+                               class="radio mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
+                               name="category" value="all" id="all"
+                               onclick="this.form.requestSubmit()"
+                                {% if request.GET.category == "all" %}
+                                    checked
+                                {% endif %}
+                        />
+                        <label class="text-[var(--clr-gray-700)]" for="all">All</label>
+                    </div>
 
                     {% for category in categories %}
                         <div class="mb-3 flex items-center">
                             <input type="radio"
                                    class="radio mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
-                                   name="category" value="{{ category.pk }}" id="{{ category }}"
-                                   onclick="this.submit()"/>
+                                   name="category" value="{{ category.slug }}" id="{{ category }}"
+                                   onclick="this.form.requestSubmit()"
+                                    {% if category.is_active %}
+                                   checked
+                                    {% endif %}
+                            />
                             <label class="text-[var(--clr-gray-700)]" for="{{ category }}">{{ category }}</label>
                         </div>
                     {% endfor %}
@@ -51,53 +43,90 @@
 
                     <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">PRICE RANGE</h2>
 
-                    <div id="slider" class="my-4"></div>
-                    <div class="flex justify-between text-gray-500 mt-2 gap-3 items-center">
-                        <div class="bg-[var(--clr-gray-00)] border inset-[var(--clr-gray-100)] rounded-sm py-2 px-3 w-full">
-                            Min: Rs. <span id="slider-min">0</span></div>
-                        <div class="bg-[var(--clr-gray-00)] border inset-[var(--clr-gray-100)] rounded-sm py-2 px-3 w-full">
-                            Max: Rs. <span id="slider-max">500000</span></div>
+                    <div id="slider" class="mt-15 mb-4"></div>
+                    <div class="flex justify-between text-gray-500 mt-2 gap-3 items-center flex-wrap">
+                        <div class="bg-[var(--clr-gray-00)] border inset-[var(--clr-gray-100)] rounded-sm py-2 px-3 w-fit flex-1">
+                            <input type="number" min="0" id="slider-min" placeholder="Min: Rs 0" name="min-price"
+                                   class="outline-0 w-full" data-min-price="{{ prices.min_price }}"/>
+                        </div>
+                        <div class="bg-[var(--clr-gray-00)] border inset-[var(--clr-gray-100)] rounded-sm py-2 px-3 w-fit flex-1">
+                            <input type="number" min="0" id="slider-max" placeholder="Max: Rs 10000" name="max-price"
+                                   class="outline-0 w-full" data-max-price="{{ prices.max_price }}"/>
+                        </div>
+
+                        <p class="text-[var(--clr-danger-500)] my-2 hidden w-full text-center"
+                           id="price-range-error"></p>
+
+                        <button class="btn btn-primary no-icon w-full">Submit</button>
+                        <button type="button" class="btn btn-secondary w-full no-icon" id="price-reset"
+                                onclick="priceReset()">Reset
+                        </button>
                     </div>
 
                     <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
 
-                    <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">POPULAR BRANDS</h2>
 
-                    <div class="grid grid-cols-2">
-                        {% for brand in brands %}
-                            <div class="mb-3 flex items-center">
-                                <input type="checkbox"
-                                       class="checkbox rounded-xs mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
-                                       name="brand" value="{{ brand.pk }}" id="{{ brand }}"
-                                       onclick="this.submit()"/>
-                                <label class="text-[var(--clr-gray-700)]" for="{{ brand }}">{{ brand }}</label>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    {% if brands %}
+                        <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">POPULAR BRANDS</h2>
+
+                        <div class="grid grid-cols-2">
+                            {% for brand in brands %}
+                                <div class="mb-3 flex items-center">
+                                    <input type="checkbox"
+                                           class="checkbox rounded-xs mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
+                                           name="brand" value="{{ brand.slug }}" id="{{ brand }}"
+                                           onclick="this.form.requestSubmit()"
+                                            {% if brand.is_active %}
+                                           checked
+                                            {% endif %}
+                                    />
+                                    <label class="text-[var(--clr-gray-700)]" for="{{ brand }}">{{ brand }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
                     <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
 
-                    <h2 class="text-base font-medium mb-4 text-[var(--clr-gray-900)]">POPULAR TAGS</h2>
+                    {% include 'partials/banner/banner_large_1.html' %}
+                </div>
 
-                    <div class="grid grid-cols-2">
-                        {% for brand in brands %}
-                            <div class="mb-3 flex items-center">
-                                <input type="checkbox"
-                                       class="checkbox rounded-xs mr-2 bg-[var(--clr-gray-00)] border-[var(--clr-gray-200)] checked:bg-[var(--clr-primary-500)] checked:text-[var(--clr-gray-00)] checked:border-[var(--clr-primary-500)]"
-                                       name="brand" value="{{ brand.pk }}" id="{{ brand }}"
-                                       onclick="this.submit()"/>
-                                <label class="text-[var(--clr-gray-700)]" for="{{ brand }}">{{ brand }}</label>
-                            </div>
+                <div class="col-span-9">
+                    <div class="flex justify-between items-center mb-6">
+                        <label class="input bg-[var(--clr-gray-00)] border border-solid border-[var(--clr-gray-100)]">
+                            <input type="search" class="grow text-black" name="product-query"
+                                   placeholder="Search For Anything"/>
+                            <img src="{% static 'images/icons/Search.svg' %}" alt="Search Icon"/>
+                        </label>
+
+                        <div class="flex gap-2 items-center">
+                            <label for="sort" class="text-[var(--clr-gray-900)] text-nowrap text-sm">Sort By:</label>
+                            <select
+                                    id="sort"
+                                    class="select select-ghost text-[var(--clr-gray-700)] border border-[var(--clr-gray-100)] focus:bg-[var(--clr-gray-50)] focus:text-[var(--clr-gray-900)]"
+                                    name="sort"
+                                    onchange="this.form.requestSubmit()"
+                            >
+                                {% for value, label in sort_choices %}
+                                    <option value="{{ value }}" {% if value == sort %}selected{% endif %} >{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-4 mb-10">
+                        {% for product in products %}
+                            {% include 'partials/products/card_regular_rating.html' with product=product %}
                         {% endfor %}
                     </div>
-                </form>
-            
-                {% include 'partials/banner/banner_large_1.html' %}
-            </div>
 
-            <div class="col-span-2">
+                    {% if page_obj.has_next or page.has_previous %}
+                        {% include 'partials/pagination.html' with page_obj=products %}
+                    {% endif %}
+                </div>
+            </form>
 
-            </div>
+            <div id="quick-view-container"></div>
         </div>
     </section>
 {% endblock %}

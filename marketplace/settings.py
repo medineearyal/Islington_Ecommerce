@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_ckeditor_5",
     "tailwind",
     "theme",
+    "rest_framework",
     "allauth",
     "allauth.account",
     # Local Apps
@@ -75,6 +76,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     # Allauth
     "allauth.account.middleware.AccountMiddleware",
+    "apps.common.middlewares.CurrentUserMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -96,9 +98,10 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "apps.pages.context_processor.pages_links",
                 "apps.sitesetting.context_processors.site_setting",
-                "apps.pages.context_processor.header_context",
+                "apps.pages.context_processors.header_context",
+                "apps.common.context_processors.breadcrumbs",
+                "apps.products.context_processors.cart_total_sum"
             ],
         },
     },
@@ -326,8 +329,8 @@ CKEDITOR_5_CONFIGS = {
 TAILWIND_APP_NAME = "theme"
 
 # AllAuth
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "pages:home"
+LOGOUT_REDIRECT_URL = "pages:home"
 ACCOUNT_LOGIN_METHOD = {
     "email",
 }
@@ -335,7 +338,12 @@ ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_FORMS = {
     "login": "apps.users.forms.UserLoginForm",
     "signup": "apps.users.forms.UserSignupForm",
+    "reset_password": "apps.users.forms.UserResetPasswordForm",
+    "reset_password_from_key": "apps.users.forms.UserResetPasswordFromKeyForm",
 }
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
 
 # Debug Toolbar
 INTERNAL_IPS = [
@@ -377,3 +385,24 @@ else:
         from .prod import *  # noqa
     except ImportError:
         pass
+
+
+# Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+# Khalti
+KHALTI_BASE_URL = config("KHALTI_BASE_URL")
+KHALTI_API_KEY = config("KHALTI_API_KEY")
+WEBSITE_URL = "http://localhost:8000"
+
+#SMTP EMAIL CONFIG
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")

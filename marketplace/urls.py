@@ -18,15 +18,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from apps.pages.views import custom_400, custom_403, custom_404, custom_500
+
+handler404 = custom_404
+handler500 = custom_500
+handler403 = custom_403
+handler400 = custom_400
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("apps.pages.urls")),
     path("accounts/", include("allauth.urls")),
+    path("users/", include("apps.users.urls")),
     path("products/", include("apps.products.urls")),
     path("orders/", include("apps.orders.urls")),
     path("blogs/", include("apps.blogs.urls")),
-    path("pages/", include("apps.pages.urls")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -34,6 +40,7 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += [
         path("__reload__/", include("django_browser_reload.urls")),
+        path('api-auth/', include('rest_framework.urls')),
     ]
 
     if not settings.TESTING:

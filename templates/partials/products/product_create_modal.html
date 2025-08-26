@@ -1,0 +1,200 @@
+{% load static %}
+
+<div class="modal modal-open" id="productModal">
+    <div class="modal-box max-w-5xl bg-[var(--clr-gray-00)] text-[var(--clr-gray-700)]">
+        <h3 class="font-bold text-lg text-[var(--clr-gray-900)] mb-4">
+            {{ form.instance.pk|yesno:"Edit Product,Add Product" }}
+        </h3>
+
+        <form method="post" action="{% url 'products:create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Stepper -->
+            <div class="flex justify-between items-center mb-6">
+                <ul class="steps w-full">
+                    <li class="step step-primary" data-step="1">Product</li>
+                    <li class="step" data-step="2">Images</li>
+                    <li class="step" data-step="3">Descriptions</li>
+                </ul>
+            </div>
+
+            <!-- Step 1: Product Info -->
+            <div class="step-content" id="step-1">
+                <div class="grid grid-cols-2 gap-4 text-[var(--clr-gray-700)]">
+                    {% for field in form %}
+                        <div class="mb-4">
+                            {% if field.name == "category" %}
+                                <label for="{{ field.id_for_label }}" class="mb-2 font-medium flex justify-between items-center">
+                                    {{ field.label }}
+
+                                    <a href="{% url 'products:create_category' %}" target="_blank" class="btn btn-primary no-icon">
+                                        Create
+                                    </a>
+                                </label>
+                            {% elif field.name == "colors" %}
+                                <label for="{{ field.id_for_label }}" class="mb-2 font-medium flex justify-between items-center">
+                                    {{ field.label }}
+
+                                    <a href="{% url 'products:create_color' %}" target="_blank" class="btn btn-primary no-icon">
+                                        Create
+                                    </a>
+                                </label>
+                            {% else %}
+                                <label for="{{ field.id_for_label }}" class="mb-2 block font-medium">
+                                    {{ field.label }}
+                                </label>
+                            {% endif %}
+
+                            {{ field }}
+
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <p class="text-[var(--clr-danger-500)]">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Step 2: Images -->
+            <div class="hidden step-content" id="step-2">
+                <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
+                    Images
+                    <button type="button" class="btn btn-sm btn-outline" id="add-images-btn">+ Add Image</button>
+                </h4>
+
+                {{ image_fs.management_form }}
+                <div id="images-formset" class="grid grid-cols-2 gap-4">
+                    {% for f in image_fs %}
+                        <div class="p-3 border rounded-lg bg-gray-50">
+                            <label class="block mb-2">Image</label>
+                            {{ f.image }}
+                            <div class="flex items-center mt-2 text-[var(--clr-danger-500)]">
+                                <span class="w-fit">{{ f.DELETE }}</span>
+                                <label for="{{ f.DELETE.id_for_label }}" class="ml-2 text-sm">Delete</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Hidden empty form template (Django formset provides this) -->
+
+                <template id="images-empty-form">
+                    {% with form=image_fs.empty_form %}
+                        <div class="p-3 border rounded-lg bg-gray-50" data-formset-item>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">Image</span>
+                                <button type="button" class="btn btn-xs" data-action="remove-form">Remove</button>
+                            </div>
+                            {{ form.image }}
+                            <label class="mt-2 inline-flex items-center gap-2 text-[var(--clr-danger-500)]">
+                                <span class="w-fit"><span
+                                        class="w-fit">{{ form.DELETE }}</span></span><span>Delete</span>
+                            </label>
+                        </div>
+                    {% endwith %}
+                </template>
+            </div>
+
+            <!-- Step 3: Descriptions -->
+            <div class="hidden step-content" id="step-3">
+                <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
+                    Descriptions
+                    <button type="button" class="btn btn-sm btn-outline" id="add-descriptions-btn">+ Add Description
+                    </button>
+                </h4>
+
+                {{ description_fs.management_form }}
+                <div id="descriptions-formset" class="space-y-4">
+                    {% for f in description_fs %}
+                        <div class="p-3 border rounded-lg bg-gray-50">
+                            <label class="block mb-2">Title</label>
+                            {{ f.title }}
+                            <label class="block mt-2 mb-2">Description</label>
+                            {{ f.description }}
+                            <div class="flex items-center mt-2 text-[var(--clr-danger-500)]">
+                                <span class="w-fit">{{ f.DELETE }}</span>
+                                <label for="{{ f.DELETE.id_for_label }}" class="ml-2 text-sm">Delete</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Hidden empty form template -->
+                <template id="descriptions-empty-form">
+                    {% with form=description_fs.empty_form %}
+                        <div class="p-3 border rounded-lg bg-gray-50" data-formset-item>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">Description</span>
+                                <button type="button" class="btn btn-xs" data-action="remove-form">Remove</button>
+                            </div>
+
+                            <label class="block mb-2" for="{{ form.title.id_for_label }}">Title</label>
+                            {{ form.title }}
+
+                            <label class="block mt-2 mb-2" for="{{ form.description.id_for_label }}">Description</label>
+                            {{ form.description }}
+
+                            <label class="mt-2 inline-flex items-center gap-2 text-[var(--clr-danger-500)]">
+                                <span class="w-fit">{{ form.DELETE }}</span><span>Delete</span>
+                            </label>
+                        </div>
+                    {% endwith %}
+                </template>
+            </div>
+
+
+            <!-- Navigation Buttons -->
+            <div class="modal-action flex justify-between">
+                <button type="button" class="btn no-icon" id="prevBtn">Previous</button>
+                <button type="button" class="btn btn-primary no-icon" id="nextBtn">Next</button>
+                <button type="submit" class="btn btn-success hidden no-icon text-[var(--clr-gray-00)]" id="submitBtn">
+                    Save
+                </button>
+                <button type="button" class="btn no-icon" onclick="closeModal(this);">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    function showStep(step) {
+        document.querySelectorAll(".step-content").forEach((el, i) => {
+            el.classList.toggle("hidden", i + 1 !== step);
+        });
+        document.querySelectorAll(".steps .step").forEach((el, i) => {
+            el.classList.toggle("step-primary", i + 1 <= step);
+        });
+
+        document.getElementById("prevBtn").style.display = step === 1 ? "none" : "inline-flex";
+        document.getElementById("nextBtn").style.display = step === totalSteps ? "none" : "inline-flex";
+        document.getElementById("submitBtn").classList.toggle("hidden", step !== totalSteps);
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+        if (currentStep > 1) showStep(--currentStep);
+    });
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        if (currentStep < totalSteps) showStep(++currentStep);
+    });
+
+    showStep(currentStep);
+
+    setupDynamicFormset({
+        prefix: "images",
+        addBtnId: "add-images-btn",
+        containerId: "images-formset",
+        templateId: "images-empty-form",
+    });
+
+    setupDynamicFormset({
+        prefix: "descriptions",
+        addBtnId: "add-descriptions-btn",
+        containerId: "descriptions-formset",
+        templateId: "descriptions-empty-form",
+    });
+</script>
