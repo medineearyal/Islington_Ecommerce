@@ -86,6 +86,8 @@ class Product(SlugMixin, TimeStampedModel, models.Model):
     seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     sku = models.CharField(max_length=50, unique=True, blank=True)
     colors = models.ManyToManyField(ProductColors, related_name="colors", blank=True)
+    
+    is_verified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

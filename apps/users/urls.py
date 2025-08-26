@@ -11,5 +11,5 @@ urlpatterns = [
     path("orders-track/", UserOrderTrack.as_view(), name="order-track"),
     path("orders/track/<str:uuid>/", UserOrderTrackDetail.as_view(), name="order-track-detail"),
     path("profile/<int:pk>/", UserProfileView.as_view(), name="profile"),
-    path("products/", UserShopView.as_view(), name="seller_products"),
+    path("products/", UserShopView.as_view(), name="seller_shop"),
 ]

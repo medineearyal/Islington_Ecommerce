@@ -6,10 +6,9 @@
             {{ form.instance.pk|yesno:"Edit Product,Add Product" }}
         </h3>
 
-        <form method="post" action="{% url 'products:create' %}" enctype="multipart/form-data">
+        <form method="post" {% if not isEdit %}action="{% url 'products:create' %}"{% else %} action = "{% url 'products:create' %}?action=edit&pk={{product.pk}}" {% endif %} enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- Stepper -->
             <div class="flex justify-between items-center mb-6">
                 <ul class="steps w-full">
                     <li class="step step-primary" data-step="1">Product</li>
@@ -18,7 +17,6 @@
                 </ul>
             </div>
 
-            <!-- Step 1: Product Info -->
             <div class="step-content" id="step-1">
                 <div class="grid grid-cols-2 gap-4 text-[var(--clr-gray-700)]">
                     {% for field in form %}
@@ -57,7 +55,6 @@
                 </div>
             </div>
 
-            <!-- Step 2: Images -->
             <div class="hidden step-content" id="step-2">
                 <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
                     Images
@@ -78,8 +75,6 @@
                     {% endfor %}
                 </div>
 
-                <!-- Hidden empty form template (Django formset provides this) -->
-
                 <template id="images-empty-form">
                     {% with form=image_fs.empty_form %}
                         <div class="p-3 border rounded-lg bg-gray-50" data-formset-item>
@@ -97,7 +92,6 @@
                 </template>
             </div>
 
-            <!-- Step 3: Descriptions -->
             <div class="hidden step-content" id="step-3">
                 <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
                     Descriptions
@@ -121,7 +115,6 @@
                     {% endfor %}
                 </div>
 
-                <!-- Hidden empty form template -->
                 <template id="descriptions-empty-form">
                     {% with form=description_fs.empty_form %}
                         <div class="p-3 border rounded-lg bg-gray-50" data-formset-item>
@@ -145,7 +138,6 @@
             </div>
 
 
-            <!-- Navigation Buttons -->
             <div class="modal-action flex justify-between">
                 <button type="button" class="btn no-icon" id="prevBtn">Previous</button>
                 <button type="button" class="btn btn-primary no-icon" id="nextBtn">Next</button>

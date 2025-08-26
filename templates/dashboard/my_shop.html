@@ -81,8 +81,13 @@
             {% for product in products %}
                 <div class="card bg-base-100 shadow">
                     <figure class="h-48 overflow-hidden">
+                        {% if product.thumbnail %}
                         <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}"
                              class="object-cover w-full h-full">
+                        {% else %}
+                            <img src="{% static 'images/products/prodcut_1.png' %}" alt="{{ product.name }}"
+                             class="object-cover w-full h-full">
+                        {% endif %}
                     </figure>
                     <div class="card-body p-4">
                         <h3 class="font-semibold text-lg">{{ product.name }}</h3>
@@ -90,7 +95,7 @@
                         <p class="text-[var(--clr-gray-00)] text-sm">Stock: {{ product.stock }}</p>
                         <div class="card-actions mt-2 justify-between">
                             <button class="btn btn-sm btn-outline"
-                                    hx-get="{% url 'products:edit' product.id %}"
+                                    hx-get="{% url 'products:create' %}?action=edit&pk={{product.pk}}"
                                     hx-target="#modal-container">
                                 Edit
                             </button>

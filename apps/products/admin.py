@@ -1,8 +1,7 @@
 from django.contrib import admin
-
+from apps.common.mixins import VerifiedProductMixin
 from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals, ProductReview, Attribute, \
     ProductAttributeValue, ProductColors, ProductDescription, WishList
-
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
@@ -29,11 +28,19 @@ class ProductAdmin(admin.ModelAdmin):
 
 class BestDealsAdmin(admin.ModelAdmin):
     filter_horizontal = ("products", )
+    
+
+class ProductBannerAdmin(VerifiedProductMixin, admin.ModelAdmin):
+    pass
+
+class WishListAdmin(VerifiedProductMixin, admin.ModelAdmin):
+    product_field_name = "products"
+    pass
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag)
 admin.site.register(Badge)
-admin.site.register(ProductBanner)
+admin.site.register(ProductBanner, ProductBannerAdmin)
 admin.site.register(ProductImage)
 admin.site.register(Attribute)
 admin.site.register(ProductDescription)
@@ -42,4 +49,4 @@ admin.site.register(ProductColors)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductReview)
 admin.site.register(BestDeals, BestDealsAdmin)
-admin.site.register(WishList)
+admin.site.register(WishList, WishListAdmin)

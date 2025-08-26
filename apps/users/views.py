@@ -20,6 +20,7 @@ from django.contrib import messages
 from django.db.models import Q
 from apps.users.constants import UserTypeEnum
 from apps.users.forms import UserSignupForm, UserProfileForm
+from apps.users.mixins import GroupRequiredMixin, SellerIsVerifiedMixin
 
 User = get_user_model()
 
@@ -241,8 +242,9 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
         return super().form_invalid(form)
 
 
-class UserShopView(LoginRequiredMixin, TemplateView):
+class UserShopView( LoginRequiredMixin, GroupRequiredMixin, SellerIsVerifiedMixin, TemplateView):
     template_name = "dashboard/my_shop.html"
+    group_required = "Sellers"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -277,9 +279,7 @@ class UserShopView(LoginRequiredMixin, TemplateView):
         context = self.get_context_data()
         user = self.request.user
 
-        if user.user_type != UserTypeEnum.SELLER:
-            raise http.Http404("Sorry, The Page was Not Found.")
-        elif not user.is_verified_seller:
+        if not user.is_verified_seller:
             raise http.Http404("Sorry, You are not verified yet. Please Contact the Admin To Resolve the Issue.")
         else:
             context.update({

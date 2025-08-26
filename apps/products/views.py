@@ -218,41 +218,49 @@ def compare_products(request):
 @login_required
 def product_create(request):
     product = Product(seller=request.user)
-    form = ProductForm(request.POST or None, instance=product)
+    form = ProductForm(request.POST or None, request.FILES or None, instance=product)
     image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="images")
     description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="descriptions")
 
-    if request.method == "POST":
+    data = request.GET.copy()
+    action = data.get("action")
+
+    if request.method == "POST" and action == "create":
         if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
             product = form.save(commit=False)
             product.seller = request.user
             product.save()
+            form.save_m2m()
             image_fs.instance = product
             description_fs.instance = product
             image_fs.save()
             description_fs.save()
-            return redirect("users:seller_products")
-
-    return render(request, "partials/products/product_create_modal.html", {
-        "form": form,
-        "image_fs": image_fs,
-        "description_fs": description_fs,
-    })
-
-
-@login_required
-def product_edit(request, pk):
-    product = get_object_or_404(Product, pk=pk, seller=request.user)
-    form = ProductForm(request.POST or None, instance=product)
-    image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="img")
-    description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="desc")
-
-    if request.method == "POST":
+            messages.success(request, f"Product {product.name} has been successfully created.")
+            return redirect("users:seller_shop")
+    elif request.method == "POST" and action == "edit":
+        product_id = data.get("pk")
+        product = get_object_or_404(Product, pk=product_id)
+        form = ProductForm(request.POST or None, request.FILES or None, instance=product)
         if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
+            print(form.cleaned_data)
             form.save()
             image_fs.save()
             description_fs.save()
-            return redirect("users:seller_products")
+            messages.success(request, f"Product {product.name} Successfully Edited")
+            return redirect("users:seller_shop")
+        
+    if action == "edit" and data.get("pk"):
+        product_id = data.get("pk")
+        product = get_object_or_404(Product, pk=product_id)
+        form = ProductForm(instance=product)
+        
+        return render (request, "partials/products/product_create_modal.html", {
+            "isEdit": True,
+            "product": product,
+            "form": form,
+            "image_fs": image_fs,
+            "description_fs": description_fs
+        })
 
     return render(request, "partials/products/product_create_modal.html", {
         "form": form,

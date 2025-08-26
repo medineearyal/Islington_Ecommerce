@@ -117,6 +117,11 @@
                     <div class="grid grid-cols-4 gap-4 mb-10">
                         {% for product in products %}
                             {% include 'partials/products/card_regular_rating.html' with product=product %}
+
+                        {% empty %}
+                            <div class="col-span-full">
+                                {% include "partials/empty_item.html" with item_name="Products" %}
+                            </div>
                         {% endfor %}
                     </div>
 

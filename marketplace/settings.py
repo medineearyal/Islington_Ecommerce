@@ -359,6 +359,19 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# Khalti
+KHALTI_BASE_URL = config("KHALTI_BASE_URL")
+KHALTI_API_KEY = config("KHALTI_API_KEY")
+WEBSITE_URL = "http://localhost:8000"
+
+#SMTP EMAIL CONFIG
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
 TESTING = "test" in sys.argv or "PYTEST_VERSION" in os.environ
 
 if DEBUG:
@@ -393,16 +406,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-# Khalti
-KHALTI_BASE_URL = config("KHALTI_BASE_URL")
-KHALTI_API_KEY = config("KHALTI_API_KEY")
-WEBSITE_URL = "http://localhost:8000"
-
-#SMTP EMAIL CONFIG
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = config("EMAIL_HOST")
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")

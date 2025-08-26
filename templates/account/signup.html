@@ -105,7 +105,7 @@
                                 {{ form.first_name }}
                             </label>
 
-                            <p class="validator-hint {% if not form.first_name.errors %}hidden{% endif %} ">
+                            <p class="{% if not form.first_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
                                 {{ form.first_name.errors.0 }}
                             </p>
                         </div>
@@ -117,8 +117,8 @@
                                 {{ form.last_name }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.last_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.last_name.errors.0 }}
                             </p>
                         </div>
                     </div>
@@ -144,8 +144,8 @@
                             {{ form.email }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Enter valid email address
+                        <p class="{% if not form.email.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.email.errors.0 }}
                         </p>
                     </div>
 
@@ -158,10 +158,8 @@
                             {{ form.password1 }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Must be more than 8 characters, including
-                            <br/>At least one number <br/>At least one lowercase letter <br/>At least one uppercase
-                            letter
+                        <p class="{% if not form.password1.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.password1.errors.0 }}
                         </p>
                     </div>
 
@@ -175,10 +173,8 @@
                             {{ form.password2 }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Must be more than 8 characters, including
-                            <br/>At least one number <br/>At least one lowercase letter <br/>At least one uppercase
-                            letter
+                        <p class="{% if not form.password2.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.password2.errors.0 }}
                         </p>
                     </div>
 
@@ -195,8 +191,8 @@
                                 {{ form.f_name }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.f_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.f_name.errors.0 }}
                             </p>
                         </div>
                         <div class="flex-1">
@@ -207,8 +203,8 @@
                                 {{ form.l_name }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.l_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.l_name.errors.0 }}
                             </p>
                         </div>
                     </div>
@@ -221,8 +217,8 @@
                             {{ form.street }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Cannot be Empty
+                        <p class="{% if not form.street.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.street.errors.0 }}
                         </p>
                     </div>
                     <div class="mb-4">
@@ -233,8 +229,8 @@
                             {{ form.country }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Cannot be Empty
+                        <p class="{% if not form.country.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.country.errors.0 }}
                         </p>
                     </div>
                     <div class="mb-4">
@@ -245,8 +241,8 @@
                             {{ form.state }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Cannot be Empty
+                        <p class="{% if not form.state.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.state.errors.0 }}
                         </p>
                     </div>
                     <div class="mb-4">
@@ -257,8 +253,8 @@
                             {{ form.city }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Cannot be Empty
+                        <p class="{% if not form.city.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.city.errors.0 }}
                         </p>
                     </div>
                     <div class="mb-4">
@@ -269,8 +265,8 @@
                             {{ form.zip_code }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Cannot be Empty
+                        <p class="{% if not form.zip_code.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.zip_code.errors.0 }}
                         </p>
                     </div>
 
@@ -280,7 +276,6 @@
                             Back
                         </button>
                         <button type="button" id="nextBtn-2" class="btn btn-shop-now flex-1">Next</button>
-
                     </div>
                 </div>
 
@@ -293,8 +288,8 @@
                             {{ form.user_type }}
                         </label>
 
-                        <p class="validator-hint hidden">
-                            Cannot be Empty
+                        <p class="{% if not form.user_type.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.user_type.errors.0 }}
                         </p>
                     </div>
 
@@ -307,8 +302,8 @@
                                 {{ form.seller_qr_code }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.seller_qr_code.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.seller_qr_code.errors.0 }}
                             </p>
                         </div>
                         <div class="flex-1 mb-4">
@@ -319,8 +314,8 @@
                                 {{ form.seller_bank_name }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.seller_bank_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.seller_bank_name.errors.0 }}
                             </p>
                         </div>
                         <div class="flex-1 mb-4">
@@ -331,8 +326,8 @@
                                 {{ form.seller_bank_account_number }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.seller_bank_account_number.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.seller_bank_account_number.errors.0 }}
                             </p>
                         </div>
                         <div class="flex-1 mb-4">
@@ -343,8 +338,8 @@
                                 {{ form.seller_bank_branch_name }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.seller_bank_branch_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.seller_bank_branch_name.errors.0 }}
                             </p>
                         </div>
                         <div class="flex-1 mb-4">
@@ -355,8 +350,8 @@
                                 {{ form.seller_bank_account_name }}
                             </label>
 
-                            <p class="validator-hint hidden">
-                                Cannot be Empty
+                            <p class="{% if not form.seller_bank_account_name.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                {{ form.seller_bank_account_name.errors.0 }}
                             </p>
                         </div>
                     </div>
@@ -468,7 +463,7 @@
             if (e.target.value === "seller") {
                 // Show Seller Form Specifics
                 sellerConfig.classList.remove("hidden");
-            }else{
+            } else {
                 sellerConfig.classList.add("hidden");
             }
         });

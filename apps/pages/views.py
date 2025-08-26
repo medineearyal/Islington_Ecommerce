@@ -34,9 +34,9 @@ class HomePageView(TemplateView):
         banners = ProductBanner.objects.filter(is_display=True)[:3]
         categories = Category.objects.annotate(product_count=Count("product_category", distinct=True)).filter(parent__isnull=True, product_count__gt=0)
 
-        products = Product.objects.all()
+        products = Product.objects.all().filter(is_verified=True)
 
-        beast_deal_qs = BestDeals.objects.filter(is_active=True)
+        best_deal_qs = BestDeals.objects.filter(is_active=True)
 
         user = self.request.user
 
@@ -44,16 +44,15 @@ class HomePageView(TemplateView):
             products = products.exclude(seller=user)
             product_prefetch = Prefetch(
                 "products",
-                queryset=Product.objects.exclude(seller=user).order_by("-discount"),
+                queryset=products.exclude(seller=user).order_by("-discount"),
             )
         else:
             product_prefetch = Prefetch(
                 "products",
-                queryset=Product.objects.order_by("-discount")
+                queryset=products.order_by("-discount")
             )
 
-        beast_deal_qs = beast_deal_qs.prefetch_related(product_prefetch)
-
+        best_deal_qs = best_deal_qs.prefetch_related(product_prefetch)
         new_arrivals = products.order_by("-created")[:6]
 
         blogs = Blog.objects.all()[:3]
@@ -65,7 +64,7 @@ class HomePageView(TemplateView):
             {
                 "banners": banners,
                 "categories": categories,
-                "best_deals": beast_deal_qs.first(),
+                "best_deals": best_deal_qs.first(),
                 "new_arrivals": new_arrivals,
 
                 "products": products,
@@ -95,7 +94,7 @@ class ShopPageView(TemplateView):
 
         data = self.request.GET.copy()
 
-        products = Product.objects.all().prefetch_related("reviews").order_by("-created")
+        products = Product.objects.all().prefetch_related("reviews").filter(is_verified=True).order_by("-created")
         categories = Category.objects.annotate(products=Count("product_category")).filter(parent__isnull=True, products__gt=0)
         brands = Category.objects.filter(level=1)
 

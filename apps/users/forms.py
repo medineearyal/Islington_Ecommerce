@@ -1,8 +1,6 @@
 from allauth.account.forms import LoginForm, SignupForm, ResetPasswordForm, ResetPasswordKeyForm
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django import forms
-from django.forms.models import inlineformset_factory
-
 from .constants import UserTypeEnum
 from .models import AuthUser
 from apps.common.models import AddressModel
