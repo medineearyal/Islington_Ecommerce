@@ -9,47 +9,71 @@
             Orders History
         </h2>
 
-        <div class="overflow-x-auto rounded-b-sm">
-            <table class="table border border-[var(--clr-gray-100)]">
-                <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
-                <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
-                    <th class="uppercase">Order ID</th>
-                    <th class="uppercase">Status</th>
-                    <th class="uppercase">Date</th>
-                    <th class="uppercase">Sub-Total</th>
-                    <th class="uppercase">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for order in orders %}
-                    <tr class="text-sm">
-                        <td class="text-[var(--clr-gray-900)] font-medium">
-                            {{ order.uuid }}
-                        </td>
-                        <td>
-                            {% if order.status == "Completed" %}
-                                <span class="text-[var(--clr-secondary-500)] uppercase font-semibold">{{ order.status }}</span>
-                            {% else %}
-                                <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
-                            {% endif %}
-                        </td>
-                        <td class="text-[var(--clr-gray-600)]">
-                            {{ order.created }}
-                        </td>
-                        <td class="text-[var(--clr-gray-700)]">
-                            {{ order.total_amount|nepali_currency }}
-                        </td>
-                        <td>
-                            <a href="{% url 'users:order-detail' order.uuid %}" class="text-[var(--clr-secondary-500)]">
-                                View Detail
-                            </a>
-                        </td>
+        {% if orders %}
+            <div class="rounded-b-sm">
+                <table class="table border border-[var(--clr-gray-100)]">
+                    <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                    <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                        <th class="uppercase">Order ID</th>
+                        <th class="uppercase">Status</th>
+                        <th class="uppercase">Date</th>
+                        <th class="uppercase">Sub-Total</th>
+                        <th class="uppercase">Actions</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr class="text-sm">
+                            <td class="text-[var(--clr-gray-900)] font-medium">
+                                {{ order.uuid }}
+                            </td>
+                            <td>
+                                {% if order.status == "Completed" %}
+                                    <span class="text-[var(--clr-secondary-500)] uppercase font-semibold">{{ order.status }}</span>
+                                {% else %}
+                                    <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-[var(--clr-gray-600)]">
+                                {{ order.created }}
+                            </td>
+                            <td class="text-[var(--clr-gray-700)]">
+                                {{ order.total_amount|nepali_currency }}
+                            </td>
+                            <td>
+                                <div class="dropdown dropdown-end">
+                                    <label tabindex="0" class="btn btn-ghost btn-circle no-icon text-[var(--clr-gray-900)] hover:text-[var(--clr-gray-00)]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                             viewBox="0 0 20 20">
+                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                        </svg>
+                                    </label>
 
-        {% include 'partials/pagination.html' with page_obj=orders %}
+                                    <ul tabindex="0"
+                                        class="dropdown-content menu p-2 shadow border border-[var(--clr-gray-900)] rounded-box w-40 gap-2">
+                                        <li>
+                                            <a href="{% url 'users:order-detail' order.uuid %}"
+                                               class="btn btn-primary text-[var(--clr-gray-00)] no-icon">
+                                                View Detail
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="btn btn-outline btn-danger no-icon">Cancel</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            {% include 'partials/empty_item.html' with item_name="Orders" %}
+        {% endif %}
+
+        {% if orders.has_next or orders.has_previous %}
+            {% include 'partials/pagination.html' with page_obj=orders %}
+        {% endif %}
     </div>
 {% endblock %}

@@ -75,9 +75,10 @@
         </div>
     </div>
 
-    <div>
-        <h2 class="text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Your Products</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="collapse collapse-arrow">
+        <input type="radio" name="user-shop-accordion" id="products" value="products" />
+        <h2 class="collapse-title text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Your Products</h2>
+        <div class="collapse-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for product in products %}
                 <div class="relative card bg-base-100 shadow">
                     {% if not product.is_verified %}
@@ -118,16 +119,17 @@
     </div>
 
     <!-- Sales Snapshot -->
-    <div class="mt-5">
-        <h2 class="text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Recent Orders</h2>
-        <table class="table w-full border text-[var(--clr-gray-900)] border-[var(--clr-gray-100)] rounded-sm">
+    <div class="mt-5 collapse collapse-arrow">
+        <input type="radio" name="user-shop-accordion" id="recent-orders" value="recent-orders" />
+        <h2 class="collapse-title text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Recent Orders</h2>
+        <table class="collapse-content table w-full border text-[var(--clr-gray-900)] border-[var(--clr-gray-100)] rounded-sm">
             <thead>
             <tr class="text-[var(--clr-gray-900)]">
                 <th>Order ID</th>
                 <th>Customer</th>
-                <th>Status</th>
                 <th>Total</th>
                 <th>Date</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
@@ -135,9 +137,21 @@
                 <tr>
                     <td>{{ order.uuid }}</td>
                     <td>{{ order.customer.full_name }}</td>
-                    <td>{{ order.status|upper }}</td>
                     <td>{{ order.total_amount|nepali_currency }}</td>
                     <td>{{ order.created|date:"M d, Y" }}</td>
+                    <td>
+                        <form method="POST" action="?order={{ order.uuid }}">
+                            {% csrf_token %}
+
+                            {{ order.order_status_form.status }}
+
+                            {% if order.order_status_form.status.errors %}
+                                <p class="text-[var(--clr-danger-500)] text-sm">
+                                    {{ order.order_status_form.status.errors.0 }}
+                                </p>
+                            {% endif %}
+                        </form>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>
@@ -149,4 +163,27 @@
     </div>
 
     <div id="modal-container"></div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const radios = document.querySelectorAll('input[name="user-shop-accordion"]');
+
+        const saved = localStorage.getItem('selected-shop');
+        if (saved) {
+            const radio = document.querySelector(`input[name="user-shop-accordion"][value="${saved}"]`);
+            if (radio) radio.checked = true;
+        }else{
+            radios[0].checked = true;
+        }
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    localStorage.setItem('selected-shop', radio.value);
+                    console.log(radio);
+                }
+            });
+        });
+    </script>
 {% endblock %}

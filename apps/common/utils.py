@@ -53,8 +53,7 @@ def generate_unique_slug(instance, field_name="slug", from_name="name"):
         return base_slug
 
 
-def send_invoice_email(recipient_emails, html_content):
-    subject = "Your Order Has Been Successfully Placed"
+def send_order_status_email(recipient_emails, html_content, subject):
     from_email = settings.DEFAULT_FROM_EMAIL
     to = recipient_emails
 
@@ -71,9 +70,28 @@ def send_invoice_email(recipient_emails, html_content):
     msg.send()
 
 
-def send_invoice_email_async(recipient_email, html_content):
+def send_async_email(recipient_email, html_content, subject="Your Order Has Been Successfully Placed"):
     thread = threading.Thread(
-        target=send_invoice_email,
-        args=(recipient_email, html_content)
+        target=send_order_status_email,
+        args=(recipient_email, html_content, subject)
     )
     thread.start()
+
+def calculate_redeem_points(total_purchase_amount):
+    """
+    Current Implementation:
+    - 50 per 500 Rs or more purchase
+    - 100 per 1000 or more Rs purchase
+    - 200 per 2000 or more Rs purchase
+    cap the max points earned to 200. 10 points will be equivalent to 1 rs discount.
+
+    args: total_purchase_amount -> int
+    return: redeem_points -> int
+    """
+    if total_purchase_amount >= 2000:
+        return 200
+    elif total_purchase_amount >= 1000:
+        return 100
+    elif total_purchase_amount >= 500:
+        return 50
+    return 0

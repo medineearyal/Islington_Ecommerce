@@ -7,13 +7,16 @@
 {% block dashboard_content %}
     <div class="flex justify-between items-center shadow-[0px_8px_40px_rgba(0_0_0_0.12)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md py-3.5 px-6">
         <h2 class="text-2xl font-semibold text-[var(--clr-gray-900)] mb-3 flex items-center gap-2">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.25 12H3.75" stroke="var(--clr-gray-900)" stroke-width="1.5" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                <path d="M10.5 5.25L3.75 12L10.5 18.75" stroke="var(--clr-gray-900)" stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"/>
-            </svg>
+            <a href="{% url 'users:orders' %}">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.25 12H3.75" stroke="var(--clr-gray-900)" stroke-width="1.5" stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                    <path d="M10.5 5.25L3.75 12L10.5 18.75" stroke="var(--clr-gray-900)" stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </a>
+
             Order Details
         </h2>
 

@@ -44,3 +44,19 @@ class AuthUser(AbstractUser):
             return address
         except AddressModel.DoesNotExist:
             return None
+
+
+class UserRedeemProfile(models.Model):
+    """
+    A User's Redeem Points that let them get some discount based on the amount of their purchase.
+    """
+    user = models.OneToOneField(AuthUser, on_delete=models.CASCADE, related_name="redeem_points")
+    orders_completed = models.PositiveIntegerField(default=0)
+    redeem_points = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user} redeem points"
+
+    @property
+    def get_discount(self):
+        return self.redeem_points/10

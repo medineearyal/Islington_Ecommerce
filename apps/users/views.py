@@ -13,6 +13,7 @@ from django.urls import reverse
 from apps.common.forms import AddressForm
 from apps.common.models import AddressModel
 from apps.orders.constants import OrderStatusEnum
+from apps.orders.forms import UserShopOrderForm, OrderCancellationForm
 from apps.orders.models import Order
 from apps.products.forms import ProductReviewForm, ProductForm, ImageFormSet, DescriptionFormSet
 from apps.products.models import ProductReview, Product
@@ -58,13 +59,22 @@ class UserOrdersView(LoginRequiredMixin, TemplateView):
         page_num = self.request.GET.get("page")
         orders = paginator.get_page(page_num)
 
+        order_cancellation_form = OrderCancellationForm()
+
         context.update({
             "orders": orders,
             "active_nav": "order-history",
+            "order_cancellation_form": order_cancellation_form,
         })
 
         return context
 
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        form = OrderCancellationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return self.render_to_response(context)
 
 class UserOrderDetailView(LoginRequiredMixin, DetailView):
     template_name = "dashboard/order_detail.html"
@@ -260,6 +270,9 @@ class UserShopView( LoginRequiredMixin, GroupRequiredMixin, SellerIsVerifiedMixi
 
 
         seller_products_order_qs = Order.objects.filter(q)
+        for order in seller_products_order_qs:
+            order.order_status_form = UserShopOrderForm(instance=order, prefix=f"order_{order.uuid}")
+
         total_products_sold = seller_products_order_qs.count()
 
         total_shipping_completed = seller_products_order_qs.filter(status=OrderStatusEnum.DELIVERED).count()
@@ -285,5 +298,21 @@ class UserShopView( LoginRequiredMixin, GroupRequiredMixin, SellerIsVerifiedMixi
             context.update({
                 "seller": request.user,
             })
+        return self.render_to_response(context)
 
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        uuid = request.GET.get("order")
+        order = get_object_or_404(Order, uuid=uuid)
+        form = UserShopOrderForm(request.POST, instance=order, prefix=f"order_{order.uuid}")
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Order status has been successfully changed to {order.status.upper()}.")
+            return redirect("users:seller_shop")
+        else:
+            form = UserShopOrderForm(instance=order)
+            context.update({
+                "form": form,
+            })
+            messages.error(request, "The status was unable to change.")
         return self.render_to_response(context)

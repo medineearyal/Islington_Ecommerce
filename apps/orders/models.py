@@ -99,3 +99,11 @@ class KhaltiTransaction(TimeStampedModel, models.Model):
 
     def __str__(self):
         return f"Khalti Transaction {self.transaction}"
+
+
+class OrderCancellation(TimeStampedModel, models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    reason = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.order} Cancellation"

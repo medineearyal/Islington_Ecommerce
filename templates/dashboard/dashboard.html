@@ -9,10 +9,9 @@
         Hello, {{ request.user.full_name }}</h2>
 
     <p class="text-[var(--clr-gray-700)]">
-        From your account dashboard. you can easily check & view your <a href=""
+        From your account dashboard. you can easily check & view your <a href="{% url 'users:orders' %}"
                                                                          class="text-[var(--clr-secondary-500)]">Recent
-        Orders</a>, manage your <a class="text-[var(--clr-secondary-500)]" href="">Shipping Address</a> and
-        edit your <a class="text-[var(--clr-secondary-500)]" href="">Password</a> and <a href="">Account
+        Orders</a>, and edit your <a href="{% url 'users:profile' request.user.pk %}" class="text-[var(--clr-secondary-500)]">Account
         Details</a>.
     </p>
 

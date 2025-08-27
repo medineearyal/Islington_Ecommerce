@@ -10,6 +10,26 @@
   }
 },
 {
+  "model": "account.emailaddress",
+  "pk": 2,
+  "fields": {
+    "user": 3,
+    "email": "saroj@gmail.com",
+    "verified": false,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 3,
+  "fields": {
+    "user": 4,
+    "email": "aryalmanju670@gmail.com",
+    "verified": true,
+    "primary": true
+  }
+},
+{
   "model": "products.category",
   "pk": 1,
   "fields": {
@@ -19,7 +39,7 @@
     "slug": "clothes",
     "lft": 1,
     "rght": 6,
-    "tree_id": 3,
+    "tree_id": 4,
     "level": 0
   }
 },
@@ -33,7 +53,7 @@
     "slug": "womens-wear",
     "lft": 4,
     "rght": 5,
-    "tree_id": 3,
+    "tree_id": 4,
     "level": 1
   }
 },
@@ -47,7 +67,7 @@
     "slug": "mens-wear",
     "lft": 2,
     "rght": 3,
-    "tree_id": 3,
+    "tree_id": 4,
     "level": 1
   }
 },
@@ -75,7 +95,7 @@
     "slug": "books",
     "lft": 1,
     "rght": 2,
-    "tree_id": 2,
+    "tree_id": 3,
     "level": 0
   }
 },
@@ -89,192 +109,120 @@
     "slug": "food",
     "lft": 1,
     "rght": 2,
-    "tree_id": 4,
+    "tree_id": 7,
     "level": 0
   }
 },
 {
-  "model": "products.tag",
-  "pk": 1,
-  "fields": {
-    "name": "Dress",
-    "slug": "dress"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 2,
-  "fields": {
-    "name": "Shirt",
-    "slug": "shirt"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 3,
-  "fields": {
-    "name": "Trousers",
-    "slug": "trousers"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 4,
-  "fields": {
-    "name": "Shacket",
-    "slug": "shacket"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 5,
-  "fields": {
-    "name": "Boots",
-    "slug": "boots"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 6,
-  "fields": {
-    "name": "Side Bag",
-    "slug": "side-bag"
-  }
-},
-{
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 7,
   "fields": {
-    "name": "Hand Bag",
-    "slug": "hand-bag"
+    "name": "Electronics",
+    "parent": null,
+    "image": "categories/Electronics_slug.jpg",
+    "slug": "electronics",
+    "lft": 1,
+    "rght": 4,
+    "tree_id": 5,
+    "level": 0
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 8,
   "fields": {
-    "name": "Skirt",
-    "slug": "skirt"
+    "name": "Smartphones",
+    "parent": 7,
+    "image": "categories/smartphone.jpg",
+    "slug": "Phones",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 5,
+    "level": 1
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 9,
   "fields": {
-    "name": "Shorts",
-    "slug": "shorts"
+    "name": "Beauty & Personal Care",
+    "parent": null,
+    "image": "categories/download_2_I6eWBTX.jpg",
+    "slug": "beauty",
+    "lft": 1,
+    "rght": 6,
+    "tree_id": 2,
+    "level": 0
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 10,
   "fields": {
-    "name": "Coat",
-    "slug": "coat"
+    "name": "Makeup",
+    "parent": 9,
+    "image": "categories/download_2.jpg",
+    "slug": "makeup",
+    "lft": 4,
+    "rght": 5,
+    "tree_id": 2,
+    "level": 1
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 11,
   "fields": {
-    "name": "Jacket",
-    "slug": "jacket"
+    "name": "Haircare",
+    "parent": 9,
+    "image": "categories/download_6.jpg",
+    "slug": "haircare",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 2,
+    "level": 1
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 12,
   "fields": {
-    "name": "Sando",
-    "slug": "sando"
+    "name": "Stationery & Office Supplies",
+    "parent": null,
+    "image": "categories/download_8.jpg",
+    "slug": "stationery",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 8,
+    "level": 0
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 13,
   "fields": {
-    "name": "Fiction & Literature",
-    "slug": "fiction-and-literature"
+    "name": "Flowers",
+    "parent": null,
+    "image": "categories/download_11.jpg",
+    "slug": "flowers",
+    "lft": 1,
+    "rght": 4,
+    "tree_id": 6,
+    "level": 0
   }
 },
 {
-  "model": "products.tag",
+  "model": "products.category",
   "pk": 14,
   "fields": {
-    "name": "Mystery",
-    "slug": "mystery"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 15,
-  "fields": {
-    "name": "Thriller",
-    "slug": "thriller"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 16,
-  "fields": {
-    "name": "Suspense",
-    "slug": "suspense"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 17,
-  "fields": {
-    "name": "Crime",
-    "slug": "crime"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 18,
-  "fields": {
-    "name": "Historical Fiction",
-    "slug": "historical-fiction"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 19,
-  "fields": {
-    "name": "Classics",
-    "slug": "classics"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 20,
-  "fields": {
-    "name": "Brownies",
-    "slug": "brownies"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 21,
-  "fields": {
-    "name": "Ice Cream",
-    "slug": "ice-cream"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 22,
-  "fields": {
-    "name": "Donuts",
-    "slug": "donuts"
-  }
-},
-{
-  "model": "products.tag",
-  "pk": 23,
-  "fields": {
-    "name": "Fast Food",
-    "slug": "fast-food"
+    "name": "Crochet Flowers",
+    "parent": 13,
+    "image": "categories/download_13.jpg",
+    "slug": "crochet",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 6,
+    "level": 1
   }
 },
 {
@@ -466,9 +414,7 @@
     "headline": null,
     "seller": 2,
     "sku": "WOMEN'SWEAR-001-STRIPEDSHIRT",
-    "tags": [
-      2
-    ],
+    "tags": [],
     "colors": [
       1,
       2,
@@ -495,9 +441,7 @@
     "headline": null,
     "seller": 2,
     "sku": "WOMEN'SWEAR-000-DENIMDRESS",
-    "tags": [
-      1
-    ],
+    "tags": [],
     "colors": [
       1,
       5
@@ -522,9 +466,7 @@
     "headline": null,
     "seller": null,
     "sku": "WOMEN'SWEAR-000-EMBROIDEREDDRESS",
-    "tags": [
-      1
-    ],
+    "tags": [],
     "colors": [
       6
     ]
@@ -538,7 +480,7 @@
     "modified": "2025-08-24T08:06:06.844Z",
     "name": "Eyelet Knit Shirt",
     "price": "2500.00",
-    "stock": 5,
+    "stock": 0,
     "category": 3,
     "slug": "eyelet-knit-shirt",
     "is_featured": false,
@@ -548,9 +490,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-EYELETKNITSHIRT",
-    "tags": [
-      2
-    ],
+    "tags": [],
     "colors": [
       2,
       3,
@@ -576,9 +516,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-HENLEYSHIRT",
-    "tags": [
-      2
-    ],
+    "tags": [],
     "colors": [
       1,
       2,
@@ -595,7 +533,7 @@
     "modified": "2025-08-24T12:13:51.835Z",
     "name": "Plain Trousers",
     "price": "2700.00",
-    "stock": 10,
+    "stock": 8,
     "category": 3,
     "slug": "plain-trousers",
     "is_featured": false,
@@ -605,9 +543,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-PLAINTROUSERS",
-    "tags": [
-      3
-    ],
+    "tags": [],
     "colors": [
       1,
       2,
@@ -634,9 +570,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-NOTCHEDCOLLAREDSHIRT",
-    "tags": [
-      2
-    ],
+    "tags": [],
     "colors": [
       2,
       6,
@@ -664,9 +598,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-PLAINSHACKET",
-    "tags": [
-      4
-    ],
+    "tags": [],
     "colors": [
       5,
       10
@@ -691,9 +623,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-CHELSEABOOTS",
-    "tags": [
-      5
-    ],
+    "tags": [],
     "colors": [
       8
     ]
@@ -717,9 +647,7 @@
     "headline": null,
     "seller": null,
     "sku": "BAG-000-SIDEBAG",
-    "tags": [
-      6
-    ],
+    "tags": [],
     "colors": [
       2,
       5,
@@ -745,9 +673,7 @@
     "headline": null,
     "seller": null,
     "sku": "BAG-000-REPTILEEMBOSSEDHANDBAG",
-    "tags": [
-      7
-    ],
+    "tags": [],
     "colors": [
       5,
       8,
@@ -774,9 +700,7 @@
     "headline": null,
     "seller": null,
     "sku": "WOMEN'SWEAR-000-LACETRIMSKIRT",
-    "tags": [
-      8
-    ],
+    "tags": [],
     "colors": [
       5,
       6
@@ -791,7 +715,7 @@
     "modified": "2025-08-24T12:34:46.329Z",
     "name": "Plissé Pleated Skirt",
     "price": "2000.00",
-    "stock": 5,
+    "stock": 4,
     "category": 2,
     "slug": "plisse-pleated-skirt",
     "is_featured": false,
@@ -801,9 +725,7 @@
     "headline": null,
     "seller": null,
     "sku": "WOMEN'SWEAR-000-PLISSÉPLEATEDSKIRT",
-    "tags": [
-      1
-    ],
+    "tags": [],
     "colors": [
       5,
       8,
@@ -829,10 +751,7 @@
     "headline": null,
     "seller": null,
     "sku": "WOMEN'SWEAR-000-MOCK-NECKTOP/SKIRTSET",
-    "tags": [
-      8,
-      1
-    ],
+    "tags": [],
     "colors": [
       5,
       11
@@ -857,9 +776,7 @@
     "headline": null,
     "seller": null,
     "sku": "WOMEN'SWEAR-000-BASICSHORTS",
-    "tags": [
-      9
-    ],
+    "tags": [],
     "colors": [
       5,
       14,
@@ -877,7 +794,7 @@
     "modified": "2025-08-24T12:41:34.627Z",
     "name": "Mélange Shorts",
     "price": "1800.00",
-    "stock": 5,
+    "stock": 3,
     "category": 2,
     "slug": "melange-shorts",
     "is_featured": false,
@@ -887,9 +804,7 @@
     "headline": null,
     "seller": null,
     "sku": "WOMEN'SWEAR-000-MÉLANGESHORTS",
-    "tags": [
-      9
-    ],
+    "tags": [],
     "colors": [
       5,
       6,
@@ -905,7 +820,7 @@
     "modified": "2025-08-24T12:42:54.235Z",
     "name": "Plain Coat",
     "price": "7500.00",
-    "stock": 1,
+    "stock": 0,
     "category": 3,
     "slug": "plain-coat",
     "is_featured": false,
@@ -915,9 +830,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-PLAINCOAT",
-    "tags": [
-      10
-    ],
+    "tags": [],
     "colors": [
       1
     ]
@@ -941,9 +854,7 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-HOODEDWINDCHEATER",
-    "tags": [
-      11
-    ],
+    "tags": [],
     "colors": [
       3,
       5,
@@ -972,14 +883,12 @@
     "headline": null,
     "seller": null,
     "sku": "MEN'SWEAR-000-TANKTOP",
-    "tags": [
-      12
-    ],
+    "tags": [],
     "colors": [
-      8,
       3,
       5,
-      6
+      6,
+      8
     ]
   }
 },
@@ -1001,12 +910,7 @@
     "headline": null,
     "seller": null,
     "sku": "BOOKS-000-AGOODGIRL'SGUIDETOMURDER",
-    "tags": [
-      16,
-      13,
-      14,
-      15
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1018,7 +922,7 @@
     "modified": "2025-08-24T13:03:48.213Z",
     "name": "The Silent Patient",
     "price": "638.00",
-    "stock": 2,
+    "stock": 1,
     "category": 5,
     "slug": "the-silent-patient",
     "is_featured": false,
@@ -1028,13 +932,7 @@
     "headline": null,
     "seller": null,
     "sku": "BOOKS-000-THESILENTPATIENT",
-    "tags": [
-      13,
-      14,
-      15,
-      16,
-      17
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1056,11 +954,7 @@
     "headline": null,
     "seller": null,
     "sku": "BOOKS-000-THEKITERUNNER",
-    "tags": [
-      18,
-      19,
-      13
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1082,9 +976,7 @@
     "headline": null,
     "seller": null,
     "sku": "FOOD-000-SETOF6PCSWALNUBROWNIES",
-    "tags": [
-      20
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1106,9 +998,7 @@
     "headline": null,
     "seller": null,
     "sku": "FOOD-000-WHITECHOCOLATECAKESICLES",
-    "tags": [
-      21
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1130,9 +1020,7 @@
     "headline": null,
     "seller": null,
     "sku": "FOOD-000-DARKCHOCOLATECAKESICLES",
-    "tags": [
-      21
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1154,9 +1042,7 @@
     "headline": null,
     "seller": null,
     "sku": "FOOD-000-SETOF9DELICIOUSDONUTSPACK",
-    "tags": [
-      22
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1178,9 +1064,7 @@
     "headline": null,
     "seller": null,
     "sku": "FOOD-000-8PCSDELICIOUSDONUTSWITHSPRINKLE",
-    "tags": [
-      22
-    ],
+    "tags": [],
     "colors": []
   }
 },
@@ -1202,9 +1086,227 @@
     "headline": null,
     "seller": null,
     "sku": "FOOD-000-SAMOSA",
-    "tags": [
-      23
-    ],
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 30,
+  "fields": {
+    "created": "2025-08-25T06:15:10.577Z",
+    "modified": "2025-08-25T06:15:10.577Z",
+    "name": "I7 TWS",
+    "price": "800.00",
+    "stock": 3,
+    "category": 7,
+    "slug": "earpods",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/airpods.jpg",
+    "is_header_banner": false,
+    "discount": 10,
+    "headline": "I7s Tws Earbuds",
+    "seller": 2,
+    "sku": "ELECTRONICS-000-I7TWS",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 31,
+  "fields": {
+    "created": "2025-08-25T06:24:55.432Z",
+    "modified": "2025-08-25T06:24:55.432Z",
+    "name": "Apple iPhone 16",
+    "price": "152500.00",
+    "stock": 5,
+    "category": 8,
+    "slug": "iphone",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/Iphone_16.jpg",
+    "is_header_banner": true,
+    "discount": 15,
+    "headline": "Apple iPhone 16 | 6.1 inch Super Retina XDR OLED Display | A18 chip | Advanced Dual-Camera System",
+    "seller": 2,
+    "sku": "PHN-APP-N1",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 32,
+  "fields": {
+    "created": "2025-08-25T06:32:37.005Z",
+    "modified": "2025-08-25T06:32:37.005Z",
+    "name": "SAMSUNG Galaxy S24 Ultra Cell Phone",
+    "price": "199999.00",
+    "stock": 2,
+    "category": 8,
+    "slug": "samsung",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/samsung_galaxy.jpg",
+    "is_header_banner": false,
+    "discount": 10,
+    "headline": "SAMSUNG Galaxy S24 Ultra Cell Phone, 256GB AI Smartphone, Unlocked Android, 200MP, 100x Zoom Cameras, Long Battery Life, S Pen, Global Version, 2024 - Titanium Black",
+    "seller": 2,
+    "sku": "SAM-PH-L2",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 33,
+  "fields": {
+    "created": "2025-08-25T06:42:48.161Z",
+    "modified": "2025-08-25T06:42:48.161Z",
+    "name": "LAKMÉ 9 To 5 Primer + Matte Perfect Cover Liquid Full Coverage Foundation",
+    "price": "800.00",
+    "stock": 2,
+    "category": 10,
+    "slug": "foundation",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/download_3.jpg",
+    "is_header_banner": false,
+    "discount": 0,
+    "headline": "LAKMÉ 9 To 5 Primer + Matte Perfect Cover Liquid Full Coverage Foundation For Oily Skin & 9 To 5 Cc Cream Mini Combo, Pack Of 1",
+    "seller": 2,
+    "sku": "MK-02",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 34,
+  "fields": {
+    "created": "2025-08-25T06:56:35.242Z",
+    "modified": "2025-08-25T06:57:05.855Z",
+    "name": "LIVON Hair Serum Damage Protect - 100 ml",
+    "price": "400.00",
+    "stock": 1,
+    "category": 11,
+    "slug": "haircare",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/download_7.jpg",
+    "is_header_banner": false,
+    "discount": 2,
+    "headline": "LIVON HAIR SERUM 100ML",
+    "seller": 2,
+    "sku": "LI-01",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 35,
+  "fields": {
+    "created": "2025-08-25T07:05:25.946Z",
+    "modified": "2025-08-25T07:06:22.423Z",
+    "name": "Double A a4 Paper 80gsm",
+    "price": "800.00",
+    "stock": 2,
+    "category": 12,
+    "slug": "A401_1",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/download_9.jpg",
+    "is_header_banner": false,
+    "discount": 2,
+    "headline": "Double A a4 Paper 80gsm",
+    "seller": 2,
+    "sku": "a4 printing paper double a",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 36,
+  "fields": {
+    "created": "2025-08-25T07:12:35.646Z",
+    "modified": "2025-08-25T07:17:14.630Z",
+    "name": "Centella Madagascar Tone Brightening",
+    "price": "2000.00",
+    "stock": 2,
+    "category": 10,
+    "slug": "beauty",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/download_10.jpg",
+    "is_header_banner": false,
+    "discount": 20,
+    "headline": "Centella Madagascar Tone Brightening Capsule Ampoule 100 mL SKIN1004",
+    "seller": 2,
+    "sku": "MAKEUP-000-CENTELLAMADAGASCARTONEBRIGHTENING",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 37,
+  "fields": {
+    "created": "2025-08-25T08:30:53.041Z",
+    "modified": "2025-08-25T08:31:37.622Z",
+    "name": "Red Rose Bouquet",
+    "price": "3450.00",
+    "stock": 3,
+    "category": 13,
+    "slug": "flower",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/download_12.jpg",
+    "is_header_banner": true,
+    "discount": 2,
+    "headline": "Red Rose Bouquet ( 30 Roses )",
+    "seller": 2,
+    "sku": "RS-01",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 38,
+  "fields": {
+    "created": "2025-08-25T08:34:41.992Z",
+    "modified": "2025-08-25T08:34:41.992Z",
+    "name": "White Lilly Bouquet",
+    "price": "2850.00",
+    "stock": 3,
+    "category": 13,
+    "slug": "lili",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/39431_passionate-of-bonds.jpeg",
+    "is_header_banner": false,
+    "discount": 0,
+    "headline": "White Lilly Bouquet",
+    "seller": 2,
+    "sku": "Li-02",
+    "tags": [],
+    "colors": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 39,
+  "fields": {
+    "created": "2025-08-25T08:37:25.738Z",
+    "modified": "2025-08-25T08:37:25.738Z",
+    "name": "Crochet Tulips Bouquet",
+    "price": "2000.00",
+    "stock": 1,
+    "category": 14,
+    "slug": "tulip",
+    "is_featured": true,
+    "thumbnail": "products/thumbnails/download_14.jpg",
+    "is_header_banner": true,
+    "discount": 0,
+    "headline": "Crochet Flower",
+    "seller": 2,
+    "sku": "TU-03",
+    "tags": [],
     "colors": []
   }
 },
@@ -1404,6 +1506,69 @@
     "product": 24,
     "title": "Ingredients of Brownies",
     "description": "<p style=\"margin-left:0px;\">You can make brownies in your home also. You should follow the pattern of baking brownies. The main ingredients are chocolates, eggs, butter, flour, cocoa powder, chocolate chips, and sugar. Happy baking 🙂</p><p style=\"margin-left:0px;\">Brownies can be of any flavor. Brownies cake is one of the most popular cakes among cake lovers. It comes with a different test. Not so sweet like ordinary chocolate cake, but tests sweet.&nbsp;</p><p style=\"margin-left:0px;\">Brownies are best for any occasion like birthdays, anniversaries, Christmas, valentines day, etc.&nbsp;</p>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 23,
+  "fields": {
+    "product": 31,
+    "title": "Product details of Apple iPhone 16 | 6.1 inch Super Retina XDR OLED Display | A18 chip | Advanced Dual-Camera System",
+    "description": "<ul><li><p style=\"margin-left:0px;\">Display: Super Retina XDR display</p></li><li><p style=\"margin-left:0px;\">Size: 6.1‑inch (diagonal) all‑screen OLED display</p></li><li><p style=\"margin-left:0px;\">Resolution: 2556‑by‑1179-pixel at 460 ppi</p></li><li><p style=\"margin-left:0px;\">contrast ratio: 2,000,000:1 (typical)</p></li><li><p style=\"margin-left:0px;\">brightness: 1000 nits max (typical); 1600 nits peak</p></li><li><p style=\"margin-left:0px;\">Features: Dynamic Island, HDR display, True Tone, Wide color (P3), Haptic Touch</p></li><li><p style=\"margin-left:0px;\">Splash, Water, and Dust Resistant: Rated IP68 (maximum depth of 6 meters up to 30 minutes) under IEC standard 60529</p></li><li><p style=\"margin-left:0px;\">Apple Intelligence:Built into your iPhone, Apple Intelligence is the personal intelligence system that helps you write, express yourself, and get things done effortlessly.</p></li><li><p style=\"margin-left:0px;\">Chip: A18 chip</p></li><li><p style=\"margin-left:0px;\">CPU: New 6‑core CPU with 2 performance and 4 efficiency cores</p></li><li><p style=\"margin-left:0px;\">GPU: New 5‑core GPU</p></li><li><p style=\"margin-left:0px;\">Neural Engine: New 16‑core</p></li><li><p style=\"margin-left:0px;\">Operating System: iOS 18</p></li><li><p style=\"margin-left:0px;\">Camera: Advanced dual-camera system: 48MP Fusion: 26 mm, ƒ/1.6 aperture, sensor‑shift optical image stabilization, 100% Focus Pixels, support for super-high-resolution photos (24MP and 48MP) + Also enables 12MP 2x Telephoto: 52 mm, ƒ/1.6 aperture, sensor-shift optical image stabilization, 100% Focus Pixels + 12MP Ultra Wide: 13 mm, ƒ/2.2 aperture and 120° field of view, 100% Focus Pixels</p></li><li><p style=\"margin-left:0px;\">2x optical zoom in, 2x optical zoom out; 4x optical zoom range</p></li><li><p style=\"margin-left:0px;\">Digital zoom up to 10x</p></li><li><p style=\"margin-left:0px;\">Camera Control</p></li><li><p style=\"margin-left:0px;\">Video Recording</p></li><li><p style=\"margin-left:0px;\">4K Dolby Vision video recording at 24 fps, 25 fps, 30 fps, or 60 fps</p></li><li><p style=\"margin-left:0px;\">1080p Dolby Vision video recording at 25 fps, 30 fps, or 60 fps</p></li><li><p style=\"margin-left:0px;\">720p Dolby Vision video recording at 30 fps</p></li><li><p style=\"margin-left:0px;\">Cinematic mode up to 4K Dolby Vision at 30 fps, Action mode up to 2.8K Dolby Vision at 60 fps, Slo mo video support for 1080p at 120 fps or 240 fps, Time lapse video with stabilization, Night mode Time-lapse, Digital zoom up to 6x,Audio zoom, True Tone flash, Cinematic video stabilization (4K, 1080p, and 720p),Continuous autofocus video, Wind noise reduction, Audio Mix</p></li><li><p style=\"margin-left:0px;\">TrueDepth Camera: 12MP camera, ƒ/1.9 aperture, Autofocus with Focus Pixels, Retina Flash, Photonic Engine, Deep Fusion, Smart HDR 5, Next-generation portraits with Focus and Depth Control, Portrait Lighting with six effects</p></li><li><p style=\"margin-left:0px;\">Face ID: Enabled by TrueDepth camera for facial recognition</p></li><li><p style=\"margin-left:0px;\">Peace of Mind: Emergency SOS via satellite9, Crash Detection10, Roadside Assistance via satellite9, Messages via satellite9, Find My via satellite9</p></li><li><p style=\"margin-left:0px;\">Location: GPS, GLONASS, Galileo, QZSS, and BeiDou, Digital compass, Wi‑Fi, Cellular, iBeacon micro location</p></li><li><p style=\"margin-left:0px;\">Charging and Expansion: USB-C connector, Charging, DisplayPort, USB 2 (up to 480Mb/s)</p></li><li><p style=\"margin-left:0px;\">Sensors: Face ID, Barometer, High dynamic range gyro, High-g accelerometer, Proximity sensor, Dual ambient light sensors</p></li></ul>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 24,
+  "fields": {
+    "product": 32,
+    "title": "SAMSUNG Galaxy S24 Ultra Cell Phone, 256GB AI Smartphone, Unlocked Android, 200MP, 100x Zoom Cameras, Long Battery Life, S Pen, Global Version, 2024 - Titanium Black",
+    "description": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(51,51,51);\">Fantastic camera, captures special moments. This phone contains artificial intelligent processing that allows you to capture images with an unsurpassed level of detail. Its quad rear camera is made up of a wide-angle HP2SX main sensor with 2x optical zoom, its improved ProVisual Engine technology recognizes objects, improves colors, reduces noise and highlights details, while the latest Super HDR update allows you to capture photos Super sharp and true to reality, with the new editing options suggested by AI you can get the photo you were looking for. Incredible screen that resists splashes. Its fantastic 6.8-inch Dynamic AMOLED 2x display, Corning Gorilla Armor glass reduces reflections and improves visual clarity and protects the screen from scratches, even in direct sunlight. Vision Booster technology enhances contrast and color, with QHD+ resolution, 2600 nits of maximum brightness and 120 Hz refresh rate. The IP68 certification for water and dust resistance adds extra robustness.</span></p>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 25,
+  "fields": {
+    "product": 33,
+    "title": "About this item",
+    "description": "<h2 style=\"margin-left:0px;\">About this item</h2><ul><li><p style=\"margin-left:18px;\"><span style=\"color:rgb(15,17,17);\">Product 1: BUILT-IN PRIMER: Lakme 9To5 Primer + Matte Perfect Cover Foundation has a built-in primer which minimises visible fine lines and wrinkles. This foundation for oily skin gives a breezy matte finish, perfect for professional looks. The primer in the foundation prevents the matte look from drying out.</span></p></li><li><p style=\"margin-left:18px;\"><span style=\"color:rgb(15,17,17);\">Product 1: SPF 20 PROTECTION FOUNDATION: This SPF 20 infused Lakme foundation cream is formulated to protect the skin from various harmful external elements, especially the harmful sun rays. It protects the skin against sunburn, redness, inflammation, early signs of ageing, external signs of dehydration and many more.</span></p></li><li><p style=\"margin-left:18px;\"><span style=\"color:rgb(15,17,17);\">Product 1: SMOOTH FLAWLESS FINISH: Lakme's foundation for face makeup has the evenness of a matte finish. The built-in primer in this foundation cream enables a smooth application for an even tone look along with full coverage.</span></p></li><li><p style=\"margin-left:18px;\"><span style=\"color:rgb(15,17,17);\">Product 1: LONG-WEAR FOUNDATION FORMULA: Lakme foundation for dry skin is developed with a long-wear matte formula without drying out the skin or causing cracks in the makeup. Since this foundation is enriched with primer, it perfectly covers skin imperfections such as spots, blemishes, fine lines, wrinkles and more.</span></p></li><li><p style=\"margin-left:18px;\"><span style=\"color:rgb(15,17,17);\">Product 2: Provides uv protection</span></p></li><li><p style=\"margin-left:18px;\"><span style=\"color:rgb(15,17,17);\">Product 2: Moisturizes</span></p></li></ul><p>&nbsp;</p><h2 style=\"margin-left:0px;\">&nbsp;</h2><p style=\"margin-left:0px;\"><strong>Explore all face make-up from Lakme, Maybelline, Colorbar etc</strong></p>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 26,
+  "fields": {
+    "product": 34,
+    "title": "This product is not sold individually.",
+    "description": "<p><span style=\"background-color:rgb(253,220,116);color:rgb(0,0,0);\">The mentioned price is inclusive of delivery charges for deliveries inside Kathmandu Valley and Banepa as well as transaction handling charges.</span></p>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 27,
+  "fields": {
+    "product": 35,
+    "title": "a4 printing paper double a",
+    "description": "<p style=\"margin-left:0px;\">With the Double A Paper A4 Paper White 500 Sheets, you get yourself a stock of quality A4 paper. Thanks to its size and 80grams/m2 weight, this paper is suitable for most printing tasks, such as reports, text documents, and spreadsheets.&nbsp; On top of that, this paper is thick enough for duplex printing, without shining through.</p><p style=\"margin-left:0px;\">Papierformaat</p><p style=\"margin-left:0px;\">A4</p><p style=\"margin-left:0px;\">&nbsp;</p><p style=\"margin-left:0px;\">Print technology</p><p style=\"margin-left:0px;\">Laser</p><p style=\"margin-left:0px;\">&nbsp;</p><p style=\"margin-left:0px;\">Papiersoort</p><p style=\"margin-left:0px;\">Normaal papier</p><p style=\"margin-left:0px;\">&nbsp;</p><p style=\"margin-left:0px;\">Type papier</p><p style=\"margin-left:0px;\">Standard</p><p style=\"margin-left:0px;\">&nbsp;</p><p style=\"margin-left:0px;\">Paper weight/thickness</p><p style=\"margin-left:0px;\">80 g/m2</p><p style=\"margin-left:0px;\">Aantal vellen</p><p style=\"margin-left:0px;\">2500</p><p style=\"margin-left:0px;\">Suitable for model</p><p style=\"margin-left:0px;\">Inkjetprinter A3, Inkjetprinter A4, Laserprinter A3, Laserprinter A4</p>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 28,
+  "fields": {
+    "product": 37,
+    "title": "Red Rose Bouquet ( 30 Roses )",
+    "description": "<p><span style=\"background-color:rgb(255,255,255);color:rgb(119,119,119);\">A rose bouquet is a timeless symbol of love, elegance, and beauty. Each rose, with its soft petals and vibrant colors, carries its own meaning, whether it’s the passionate red, the pure white, or the cheerful yellow. This classic arrangement can be used to express a variety of emotions, from romantic affection to admiration or sympathy. The scent of fresh roses enhances the bouquet’s appeal, making it a popular choice for celebrations like weddings, anniversaries, or birthdays. Whether wrapped delicately in paper or displayed in a vase, a rose bouquet is sure to leave a lasting impression.</span></p>"
+  }
+},
+{
+  "model": "products.productdescription",
+  "pk": 29,
+  "fields": {
+    "product": 38,
+    "title": "White Lilly Bouquet",
+    "description": "<p style=\"margin-left:0px;\"><strong>Includes:</strong></p><ul><li><p style=\"margin-left:0px;\">5 White lilies</p></li><li><p style=\"margin-left:0px;\">Pink paper packing with fillers</p></li></ul>"
   }
 },
 {
@@ -2313,6 +2478,46 @@
   }
 },
 {
+  "model": "products.productimage",
+  "pk": 81,
+  "fields": {
+    "name": "Serum",
+    "product": 34,
+    "image": "media/products/download_7.jpg"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 82,
+  "fields": {
+    "name": "Centella",
+    "product": 36,
+    "image": "media/products/download_10.jpg"
+  }
+},
+{
+  "model": "products.productreview",
+  "pk": 1,
+  "fields": {
+    "created": "2025-08-25T03:00:16.499Z",
+    "modified": "2025-08-25T03:00:16.499Z",
+    "rating": 4,
+    "feedback": "Testing Nice",
+    "review_from": 2,
+    "product": 1
+  }
+},
+{
+  "model": "products.wishlist",
+  "pk": 1,
+  "fields": {
+    "created": "2025-08-26T02:05:19.014Z",
+    "modified": "2025-08-26T02:05:19.014Z",
+    "user": 2,
+    "products": []
+  }
+},
+{
   "model": "products.bestdeals",
   "pk": 1,
   "fields": {
@@ -2337,15 +2542,590 @@
   }
 },
 {
+  "model": "orders.order",
+  "pk": 10,
+  "fields": {
+    "created": "2025-08-26T04:31:37.289Z",
+    "modified": "2025-08-26T04:31:37.289Z",
+    "uuid": "560ef427-20b2-4bf6-83c7-983cafdbb5f6",
+    "customer": 4,
+    "first_name": "Vanna",
+    "last_name": "Holloway",
+    "email": "hakipiry@mailinator.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "Cupiditate quis ulla",
+    "products": {
+      "5": {
+        "name": "Eyelet Knit Shirt",
+        "price": 2500.0,
+        "stock": 4,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/111766-_0005_7-111766-L1.jpg",
+        "vat_amount": 308.75,
+        "total_price": 2375.0,
+        "discounted_price": 2375.0
+      },
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 10,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "5582.00",
+    "tax_amount": "642.00",
+    "status": "placed",
+    "use_billing_address": false,
+    "shipping_street": "Accusamus voluptate deleniti illo et vero et ea eaque qui aliquid",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "lalitpur",
+    "shipping_zip_code": "65504"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 11,
+  "fields": {
+    "created": "2025-08-26T04:32:06.552Z",
+    "modified": "2025-08-26T04:32:06.552Z",
+    "uuid": "0399ae1d-4a57-4326-b860-71c146e6480d",
+    "customer": 4,
+    "first_name": "Dominic",
+    "last_name": "Valdez",
+    "email": "kepynyzy@mailinator.com",
+    "ph_number": "9761849725",
+    "payment_option": "cod",
+    "note": "In numquam quia volu",
+    "products": {
+      "5": {
+        "name": "Eyelet Knit Shirt",
+        "price": 2500.0,
+        "stock": 3,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/111766-_0005_7-111766-L1.jpg",
+        "vat_amount": 308.75,
+        "total_price": 2375.0,
+        "discounted_price": 2375.0
+      }
+    },
+    "total_amount": "2684.00",
+    "tax_amount": "308.00",
+    "status": "placed",
+    "use_billing_address": false,
+    "shipping_street": "Consequatur assumenda veniam anim amet et nostrud debitis aliquid repudiandae omnis accusamus voluptate animi qui",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "bhaktapur",
+    "shipping_zip_code": "68715"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 12,
+  "fields": {
+    "created": "2025-08-26T04:36:37.079Z",
+    "modified": "2025-08-26T04:36:37.079Z",
+    "uuid": "fae1f9a6-d86b-4d24-bd1f-ff43c8e3da16",
+    "customer": 4,
+    "first_name": "Kadeem",
+    "last_name": "Vargas",
+    "email": "rukicocu@mailinator.com",
+    "ph_number": "9761849725",
+    "payment_option": "khalti",
+    "note": "Quis non ut illum lvc",
+    "products": {
+      "5": {
+        "name": "Eyelet Knit Shirt",
+        "price": 2500.0,
+        "stock": 2,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/111766-_0005_7-111766-L1.jpg",
+        "vat_amount": 308.75,
+        "total_price": 2375.0,
+        "discounted_price": 2375.0
+      }
+    },
+    "total_amount": "2684.00",
+    "tax_amount": "308.00",
+    "status": "placed",
+    "use_billing_address": true,
+    "shipping_street": "Iusto duis mollit sit minim est maiores hic quidem sint quisquam",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "lalitpur",
+    "shipping_zip_code": "48677"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 13,
+  "fields": {
+    "created": "2025-08-26T04:43:10.644Z",
+    "modified": "2025-08-26T04:43:10.644Z",
+    "uuid": "23357eab-b6c0-4d7f-9821-a44ca9b1b7ea",
+    "customer": 4,
+    "first_name": "Uriah",
+    "last_name": "Wiley",
+    "email": "jetujodih@mailinator.com",
+    "ph_number": "9761849725",
+    "payment_option": "khalti",
+    "note": "Numquam et earum sim",
+    "products": {
+      "5": {
+        "name": "Eyelet Knit Shirt",
+        "price": 2500.0,
+        "stock": 1,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/111766-_0005_7-111766-L1.jpg",
+        "vat_amount": 308.75,
+        "total_price": 2375.0,
+        "discounted_price": 2375.0
+      }
+    },
+    "total_amount": "2684.00",
+    "tax_amount": "308.00",
+    "status": "placed",
+    "use_billing_address": false,
+    "shipping_street": "Obcaecati ipsum commodo asperiores qui excepteur omnis pariatur Quos est sed delectus",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "66542"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 14,
+  "fields": {
+    "created": "2025-08-26T04:44:49.449Z",
+    "modified": "2025-08-26T04:44:49.449Z",
+    "uuid": "79d3cc91-32b7-4a7c-88a4-afe1b9753d53",
+    "customer": 4,
+    "first_name": "Clare",
+    "last_name": "Wise",
+    "email": "qyxasa@mailinator.com",
+    "ph_number": "9761849725",
+    "payment_option": "qr",
+    "note": "Eius voluptate eius",
+    "products": {
+      "22": {
+        "name": "The Silent Patient",
+        "price": 638.0,
+        "stock": 2,
+        "category": "Books",
+        "discount": 0,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/image.webp",
+        "vat_amount": 82.94,
+        "total_price": 638.0,
+        "discounted_price": 638.0
+      },
+      "39": {
+        "name": "Crochet Tulips Bouquet",
+        "price": 2000.0,
+        "stock": 3,
+        "category": "Crochet Flowers",
+        "discount": 0,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/download_14.jpg",
+        "vat_amount": 260.0,
+        "total_price": 2000.0,
+        "discounted_price": 2000.0
+      }
+    },
+    "total_amount": "2981.00",
+    "tax_amount": "342.00",
+    "status": "placed",
+    "use_billing_address": true,
+    "shipping_street": "Pariatur Quo porro omnis natus sed labore expedita qui cupiditate voluptatem quo corrupti repudiandae nemo praesentium sunt ut",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "bhaktapur",
+    "shipping_zip_code": "33978"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 15,
+  "fields": {
+    "created": "2025-08-26T04:45:34.544Z",
+    "modified": "2025-08-26T04:45:34.544Z",
+    "uuid": "7e9ad849-d40e-4a59-b77a-ae931a26bd9e",
+    "customer": 4,
+    "first_name": "Colton",
+    "last_name": "Bolton",
+    "email": "wigy@mailinator.com",
+    "ph_number": "9761849725",
+    "payment_option": "qr",
+    "note": "Tenetur Nam velit a",
+    "products": {
+      "39": {
+        "name": "Crochet Tulips Bouquet",
+        "price": 2000.0,
+        "stock": 2,
+        "category": "Crochet Flowers",
+        "discount": 0,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/download_14.jpg",
+        "vat_amount": 260.0,
+        "total_price": 2000.0,
+        "discounted_price": 2000.0
+      }
+    },
+    "total_amount": "2260.00",
+    "tax_amount": "260.00",
+    "status": "placed",
+    "use_billing_address": false,
+    "shipping_street": "Iste voluptas sunt veritatis corrupti molestiae explicabo Fuga Numquam minima similique praesentium eaque quia non assumenda velit quis id nihil",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "69679"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 16,
+  "fields": {
+    "created": "2025-08-26T04:46:25.318Z",
+    "modified": "2025-08-26T04:46:25.318Z",
+    "uuid": "6b5393c2-1612-446d-b94c-d1aca693d2a3",
+    "customer": 4,
+    "first_name": "Elmo",
+    "last_name": "Mejia",
+    "email": "virokal@mailinator.com",
+    "ph_number": "9761849725",
+    "payment_option": "qr",
+    "note": "Voluptatem ipsum a a",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 9,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.00",
+    "tax_amount": "333.00",
+    "status": "placed",
+    "use_billing_address": false,
+    "shipping_street": "Veniam quia magni ut eiusmod ut animi ex sit dolorum accusantium distinctio Incididunt alias itaque id dolorem quae nostrum",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "39005"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 17,
+  "fields": {
+    "created": "2025-08-26T04:48:50.639Z",
+    "modified": "2025-08-26T04:48:50.639Z",
+    "uuid": "e64bea7b-000a-4c9e-8b36-22d81d77746b",
+    "customer": 4,
+    "first_name": "Maite",
+    "last_name": "Fulton",
+    "email": "aryalmanju670@gmail.com",
+    "ph_number": "9823558350",
+    "payment_option": "khalti",
+    "note": "Sint at cumque enim",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 5,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      }
+    },
+    "total_amount": "2147.00",
+    "tax_amount": "247.00",
+    "status": "placed",
+    "use_billing_address": false,
+    "shipping_street": "Exercitation sequi temporibus praesentium modi laboriosam voluptatem Aliquip",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "59007"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 18,
+  "fields": {
+    "created": "2025-08-26T04:56:02.085Z",
+    "modified": "2025-08-26T05:06:30.400Z",
+    "uuid": "94d3c1ee-90d5-4d13-8270-2204be698fa1",
+    "customer": 2,
+    "first_name": "Teagan",
+    "last_name": "Nguyen",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "Totam atque sed earu",
+    "products": {
+      "17": {
+        "name": "Mélange Shorts",
+        "price": 1800.0,
+        "stock": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/111508-_0004_DSC05406.jpg",
+        "vat_amount": 222.3,
+        "total_price": 1710.0,
+        "discounted_price": 1710.0
+      }
+    },
+    "total_amount": "1932.00",
+    "tax_amount": "222.00",
+    "status": "delivered",
+    "use_billing_address": false,
+    "shipping_street": "Et dolor amet magna eum doloribus quod impedit sit non quia est ab ratione nihil duis quia",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "32551"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 4,
+  "fields": {
+    "created": "2025-08-26T05:04:39.277Z",
+    "modified": "2025-08-26T05:04:39.277Z",
+    "order": 18,
+    "status": "out_for_delivery",
+    "updated_by": 1,
+    "note": "Status changed from placed to out_for_delivery"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 5,
+  "fields": {
+    "created": "2025-08-26T05:06:30.397Z",
+    "modified": "2025-08-26T05:06:30.397Z",
+    "order": 18,
+    "status": "delivered",
+    "updated_by": 1,
+    "note": "Status changed from out_for_delivery to delivered"
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 10,
+  "fields": {
+    "created": "2025-08-26T04:31:37.300Z",
+    "modified": "2025-08-26T04:31:37.300Z",
+    "order": 10,
+    "uuid": "33ed1d4e-f9cc-4a2d-ae79-9eec72be22e8",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 11,
+  "fields": {
+    "created": "2025-08-26T04:32:06.563Z",
+    "modified": "2025-08-26T04:32:06.563Z",
+    "order": 11,
+    "uuid": "b6ccf3ec-a11a-4781-8cf1-2da063e2f1bb",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 12,
+  "fields": {
+    "created": "2025-08-26T04:36:37.088Z",
+    "modified": "2025-08-26T04:37:31.433Z",
+    "order": 12,
+    "uuid": "3db91040-37bf-4d0f-8975-d6a03d091dba",
+    "is_payment_success": true,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 13,
+  "fields": {
+    "created": "2025-08-26T04:43:10.653Z",
+    "modified": "2025-08-26T04:43:41.103Z",
+    "order": 13,
+    "uuid": "fdbbba59-86f8-46fb-a827-f1022284b931",
+    "is_payment_success": true,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 14,
+  "fields": {
+    "created": "2025-08-26T04:44:49.462Z",
+    "modified": "2025-08-26T04:44:49.462Z",
+    "order": 14,
+    "uuid": "6b66788d-4cde-47d3-b625-cca0345f3de3",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 15,
+  "fields": {
+    "created": "2025-08-26T04:45:34.554Z",
+    "modified": "2025-08-26T04:45:34.554Z",
+    "order": 15,
+    "uuid": "d4d0d90c-ab97-49be-937b-3f1003c86c0e",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 16,
+  "fields": {
+    "created": "2025-08-26T04:46:25.328Z",
+    "modified": "2025-08-26T04:46:25.328Z",
+    "order": 16,
+    "uuid": "1f1ddb35-c906-44b3-b513-475aa31cd834",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 17,
+  "fields": {
+    "created": "2025-08-26T04:48:50.651Z",
+    "modified": "2025-08-26T04:49:10.053Z",
+    "order": 17,
+    "uuid": "d07a702d-190e-40cc-a60f-86ff1d53469c",
+    "is_payment_success": true,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 18,
+  "fields": {
+    "created": "2025-08-26T04:56:02.091Z",
+    "modified": "2025-08-26T04:56:02.091Z",
+    "order": 18,
+    "uuid": "79003a4a-8e3b-4e09-9ffe-309014aa3e2c",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.khaltitransaction",
+  "pk": 6,
+  "fields": {
+    "created": "2025-08-26T04:36:37.497Z",
+    "modified": "2025-08-26T04:37:31.436Z",
+    "transaction": 12,
+    "pidx": "XxGWLZZFZnuRDwR2ZPnfck",
+    "tidx": "vkam9jWpt7NadRGmW74vP8",
+    "status": "completed",
+    "total_amount": "2684.00",
+    "purchase_order_id": "fae1f9a6-d86b-4d24-bd1f-ff43c8e3da16",
+    "purchase_order_name": "#Kadeem Vargas_1756182997",
+    "mobile": "98XXXXX001"
+  }
+},
+{
+  "model": "orders.khaltitransaction",
+  "pk": 7,
+  "fields": {
+    "created": "2025-08-26T04:43:11.440Z",
+    "modified": "2025-08-26T04:43:41.106Z",
+    "transaction": 13,
+    "pidx": "GNpR8BJ6SMghwziXPrAn9P",
+    "tidx": "VJf4rG36UTDaHBVPsvtAdP",
+    "status": "completed",
+    "total_amount": "2684.00",
+    "purchase_order_id": "23357eab-b6c0-4d7f-9821-a44ca9b1b7ea",
+    "purchase_order_name": "#Uriah Wiley_1756183390",
+    "mobile": "98XXXXX001"
+  }
+},
+{
+  "model": "orders.khaltitransaction",
+  "pk": 8,
+  "fields": {
+    "created": "2025-08-26T04:48:51.459Z",
+    "modified": "2025-08-26T04:49:10.056Z",
+    "transaction": 17,
+    "pidx": "VEsuPc2dupn2retZgp44UR",
+    "tidx": "4Kv7vDbfJoEv5oa9wC92rL",
+    "status": "completed",
+    "total_amount": "2147.00",
+    "purchase_order_id": "e64bea7b-000a-4c9e-8b36-22d81d77746b",
+    "purchase_order_name": "#Maite Fulton_1756183730",
+    "mobile": "98XXXXX001"
+  }
+},
+{
   "model": "blogs.blog",
   "pk": 1,
   "fields": {
+    "created": "2025-08-26T02:00:18.726Z",
+    "modified": "2025-08-26T02:34:16.645Z",
     "name": "How to Build a Successful Multi-Vendor E-Commerce Platform",
     "description": "Thinking about launching a marketplace? It’s not just about hosting multiple sellers—it’s about creating a seamless experience for everyone.\r\n\r\nCore features to implement: vendor dashboards, commission systems, product approval.\r\n\r\nChoosing the right tech stack.\r\n\r\nExamples of successful marketplaces.",
     "status": true,
-    "created_at": "2025-08-24T14:54:42Z",
     "author": 2,
-    "image": ""
+    "image": "",
+    "category": null,
+    "views": 0,
+    "slug": "blog"
+  }
+},
+{
+  "model": "blogs.blog",
+  "pk": 2,
+  "fields": {
+    "created": "2025-08-26T02:00:18.726Z",
+    "modified": "2025-08-26T02:34:40.394Z",
+    "name": "The Birth of Islington Marketplace: By the Students, For the Students",
+    "description": "In the heart of Islington, something remarkable has begun to take shape—a marketplace built not by big corporations or established retailers, but by students themselves. The Islington Marketplace is a digital-first initiative created by the students, for the students, with one clear mission: to make buying, selling, and exchanging goods easier, more affordable, and more accessible within the student community.\r\n\r\nThe idea emerged from a simple observation: students often struggle with limited budgets, unused items piling up in hostels and apartments, and the constant need for affordable study materials, electronics, and daily essentials. Instead of relying on external platforms that do not truly reflect student life, a group of determined learners from Islington decided to build their own solution. Thus, Islington Marketplace was born.\r\n\r\nWhat sets this marketplace apart is its community-driven nature. Every feature, every category, and every design decision was made with the needs of students in mind. Categories include books, electronics, bags, food, and more, ensuring that the most essential items for student life are always within reach. Beyond that, the platform provides an opportunity for budding entrepreneurs among students to test their ideas and products in a safe, supportive environment.\r\n\r\nAt its core, the Islington Marketplace is more than just a buying-and-selling platform. It is a collaborative ecosystem that fosters sustainability through reusing and recycling, promotes financial independence by allowing students to earn, and builds a stronger sense of connection within the Islington community. Instead of throwing away old textbooks or gadgets, students can now pass them on to someone who truly needs them, often at a fraction of the price.\r\n\r\nThe marketplace also embodies the spirit of innovation and digital transformation. By leveraging technology to solve real problems, the students of Islington are setting an example of how youth-driven solutions can make an impact. It reflects not just commerce, but creativity, responsibility, and empowerment.\r\n\r\nAs the platform continues to grow, its vision is clear: to become a self-sustaining hub where students can support each other, find what they need, and make student life easier and more affordable. The Islington Marketplace is proof that when young people come together, they can create something powerful and lasting.\r\n\r\nThis isn’t just a marketplace. It’s a movement of students helping students—a legacy that will shape the way the Islington community thrives for years to come.",
+    "status": true,
+    "author": 2,
+    "image": "blogs/download_5.jpg",
+    "category": null,
+    "views": 0,
+    "slug": "islington"
   }
 },
 {
@@ -2363,7 +3143,11 @@
     "facebook": "https://www.facebook.com/profile.php?id=100091368216746",
     "instagram": "https://www.instagram.com/youknowmedi",
     "twitter": null,
-    "youtube": null
+    "youtube": null,
+    "merchant_name": null,
+    "merchant_bank_name": null,
+    "merchant_bank_account_number": null,
+    "merchant_bank_branch_name": null
   }
 },
 {
@@ -2371,7 +3155,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$UqnlKEcl3Ov2YpUNmC0jVa$SzPYNkxSVKYaTUBn3yqI2Ug0fLkpm4O0xIkUq8hcd5c=",
-    "last_login": "2025-08-23T21:27:47.443Z",
+    "last_login": "2025-08-27T06:07:12.693Z",
     "is_superuser": true,
     "username": "",
     "first_name": "",
@@ -2383,6 +3167,7 @@
     "ph_number": "",
     "profile_picture": "",
     "user_type": "user",
+    "seller_shop_logo": "",
     "seller_qr_code": "",
     "seller_bank_name": null,
     "seller_bank_account_number": null,
@@ -2398,26 +3183,111 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xf0drtW6LvUdr5VjveYFm2$g8Ld3hPZ+TGFQPHpj/dKGfwjnBN8jYDcMk4D2U8Muug=",
-    "last_login": "2025-08-23T21:48:39.316Z",
+    "last_login": "2025-08-26T04:50:35.379Z",
     "is_superuser": false,
     "username": "medinee",
     "first_name": "Medinee",
     "last_name": "Aryal",
-    "is_staff": false,
+    "is_staff": true,
     "is_active": true,
     "date_joined": "2025-08-23T21:47:59.395Z",
     "email": "medineearyal@gmail.com",
     "ph_number": "9761849725",
     "profile_picture": "user/profile/IMG_1219.JPG",
     "user_type": "seller",
+    "seller_shop_logo": "",
     "seller_qr_code": "user/profile/QR.svg",
     "seller_bank_name": "Global IME Bank Limited",
     "seller_bank_account_number": "1234567890",
     "seller_bank_branch_name": "Tarkeshwor",
     "seller_bank_account_name": "Medinee Aryal",
+    "is_verified_seller": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.authuser",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$CXFMkBOhyCmm3vOFuMk2k3$Y5F5i8jW4xCx53JjBdbNqCAznHW0lbTk3IwgsOo7o2Y=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "saroj",
+    "first_name": "Saroj",
+    "last_name": "Yadav",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-08-26T02:24:06.235Z",
+    "email": "saroj@gmail.com",
+    "ph_number": "9761849725",
+    "profile_picture": "user/profile/download_14.jpg",
+    "user_type": "user",
+    "seller_shop_logo": "",
+    "seller_qr_code": "",
+    "seller_bank_name": null,
+    "seller_bank_account_number": null,
+    "seller_bank_branch_name": null,
+    "seller_bank_account_name": null,
     "is_verified_seller": false,
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "users.authuser",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$OKyAj0QOq1Zg8mNiTeDRAN$8OGD/VEkuYImPc7WF0nD0Sq7V2p2RFqtIXKIaVlD5wM=",
+    "last_login": "2025-08-26T04:16:21.129Z",
+    "is_superuser": false,
+    "username": "medi",
+    "first_name": "Medi",
+    "last_name": "Koirala",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-08-26T04:15:50.768Z",
+    "email": "aryalmanju670@gmail.com",
+    "ph_number": "9761849725",
+    "profile_picture": "user/profile/download_14_aodlwvC.jpg",
+    "user_type": "user",
+    "seller_shop_logo": "",
+    "seller_qr_code": "",
+    "seller_bank_name": null,
+    "seller_bank_account_number": null,
+    "seller_bank_branch_name": null,
+    "seller_bank_account_name": null,
+    "is_verified_seller": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "common.notices",
+  "pk": 1,
+  "fields": {
+    "created": "2025-08-26T02:42:17.200Z",
+    "modified": "2025-08-26T02:45:27.351Z",
+    "name": "Islington Marketplace",
+    "slug": "display",
+    "header_text": "From Islington, For Islington",
+    "description": "One Stop For All Your Essentials",
+    "is_active": true,
+    "image": "notices/img-10.png"
+  }
+},
+{
+  "model": "common.notices",
+  "pk": 2,
+  "fields": {
+    "created": "2025-08-26T02:46:29.898Z",
+    "modified": "2025-08-26T02:46:29.898Z",
+    "name": "Shop Today",
+    "slug": "shop",
+    "header_text": "Easy Access To All Your Favs",
+    "description": "Shopping made easy",
+    "is_active": true,
+    "image": "notices/kumari-four.jpg"
   }
 }
 ]

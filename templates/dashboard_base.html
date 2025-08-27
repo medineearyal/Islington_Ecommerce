@@ -10,7 +10,7 @@
 
         <div class="container mx-auto mt-10 mb-18 grid grid-cols-4 gap-18">
             <div class="col-span-1">
-                <ul class="list bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md py-4">
+                <ul class="list bg-[var(--clr-gray-00)] shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-sm backdrop-blur-md py-4 sticky top-6">
                     <li>
                         <a href="{% url 'users:dashboard' %}"
                            class="flex gap-3 dash-nav-link py-2.5 px-6 text-[var(--clr-gray-600)] text-sm items-center {% if active_nav == "dashboard" %}active-nav{% endif %}"

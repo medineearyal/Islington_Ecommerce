@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
 from django.utils.html import format_html
-from apps.users.models import AuthUser
+from apps.users.models import AuthUser, UserRedeemProfile
 from django.urls import reverse, path
 from django.shortcuts import redirect
 
@@ -106,3 +106,4 @@ class AuthUserAdmin(UserAdmin):
         return redirect(request.META.get("HTTP_REFERER"))
 
 admin.site.register(AuthUser, AuthUserAdmin)
+admin.site.register(UserRedeemProfile)

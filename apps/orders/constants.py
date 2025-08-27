@@ -41,3 +41,11 @@ class OrderStatusEnum(TextChoices):
     SHIPPED = "shipped", "Shipped"
     OUT_FOR_DELIVERY = "out_for_delivery", "Out For Delivery"
     DELIVERED = "delivered", "Delivered"
+    CANCELED = "canceled", "Canceled"
+
+class OrderStatusDescription(TextChoices):
+    PLACED = "placed", "Your order has been placed."
+    SHIPPED = "shipped", "Your order has been shipped."
+    OUT_FOR_DELIVERY = "out_for_delivery", "Your order has been sent out for delivery."
+    DELIVERED = "delivered", "Thank You! for your patience, your order has been successfully delivered."
+    CANCELED = "canceled", "Your Delivery has been canceled."

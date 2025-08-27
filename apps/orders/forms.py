@@ -1,7 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.forms.widgets import TextInput, EmailInput, Select, CheckboxInput, RadioSelect, Textarea
-from .models import Order
+from .models import Order, OrderCancellation
+
 
 class OrderForm(ModelForm):
     class Meta:
@@ -74,3 +75,27 @@ class OrderForm(ModelForm):
         return cleaned_data
 
 
+class UserShopOrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ["status"]
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["status"].widget.attrs.update({
+            "class": "border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]",
+            "onchange": "this.form.submit()",
+        })
+
+
+class OrderCancellationForm(ModelForm):
+    class Meta:
+        model = OrderCancellation
+        fields = ["reason"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["reason"].widget.attrs.update({
+            "class":"border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
+        })
