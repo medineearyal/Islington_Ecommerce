@@ -205,12 +205,28 @@ class CartPageView(TemplateView):
 
         total_sum, vat_amount, dst_amount, no_of_sellers = process_cart_totals(cart)
 
+        if self.request.GET.get("redeem"):
+            #TODO: Deduct the Amount with the Rs. Calculate Per the Redeem Points the buyer has.
+            pass
+
+        discount_for_redeem_points = 0
+        redeem_points = 0
+
+        if self.request.user.is_authenticated:
+            redeem_points = self.request.user.redeem_points.redeem_points
+            discount_for_redeem_points = self.request.user.redeem_points.get_discount
+            context.update({
+                "redeem_points": redeem_points,
+                "redeem_discount_amount": discount_for_redeem_points
+            })
+
         context.update({
             "cart": cart,
             "sub_total": total_sum,
-            "final_sum": total_sum + vat_amount + dst_amount,
+            "final_sum": total_sum + vat_amount + dst_amount - discount_for_redeem_points,
             "vat_amount": vat_amount,
             "dst_amount": dst_amount,
+            "redeem_points": redeem_points,
         })
 
         return context
