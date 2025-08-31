@@ -88,6 +88,5 @@ local_settings.py
 db.sqlite3
 .idea/
 
-media/
 local.py
 prod.py
