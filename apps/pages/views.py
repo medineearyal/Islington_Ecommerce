@@ -293,7 +293,7 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
             order.redeemed_amount = context.get("redeem_discount_amount")
             cart = context.get("cart")
             order.products = cart
-            order.multiple_sellers = context.get("multi_seller")
+            order.multiple_sellers = context.get("multi_seller") or False
             order.save()
 
             whens = [

@@ -128,8 +128,8 @@ class ManualPayQrView(LoginRequiredMixin, TemplateView):
 
         order = context.get("order")
 
-        if not order.multiple_sellers:
-            return redirect(reverse_lazy("orders:success"))
+        # if not order.multiple_sellers:
+        #     return redirect(reverse_lazy("orders:success"))
 
         recipient_list = []
 
