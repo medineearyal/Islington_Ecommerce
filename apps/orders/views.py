@@ -6,6 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -23,6 +24,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from apps.products.models import Product
+from apps.users.constants import UserTypeEnum
 
 # Create your views here.
 User = get_user_model()
@@ -182,16 +184,46 @@ def distribute_seller_payments(request):
         form = SellerPaymentForm()
 
     # Fetch only multi-seller orders
-    orders = Order.objects.filter(multiple_sellers=True).prefetch_related("transaction_set")
+    orders = Order.objects.filter(multiple_sellers=True).prefetch_related("transaction_set").order_by("-created")
     for order in orders:
         for pid, item in order.products.items():
             item["seller"] = get_object_or_404(User, pk=item["seller"])
             item["seller_payment"] = SellerPayment.objects.filter(transaction=order.transaction_set.first(), seller=item["seller"]).exists()
 
+    # seller = request.GET.get("seller")
+    # status = request.GET.get("status") == "True"
+
+    # sellers = User.objects.filter(user_type=UserTypeEnum.SELLER)
+    #
+    # filtered_orders = []
+    #
+    # if seller:
+    #     for order in orders:
+    #         orders = orders.filter(products__icontains=seller)
+    #         for pid, item in order.products.items():
+    #             if item["seller"].email == seller:
+    #                 filtered_orders.append(order)
+    #
+    # if status:
+    #     for order in orders:
+    #         orders = orders.filter(products__icontains=seller)
+    #         for pid, item in order.products.items():
+    #             if item["seller_payment"] == status:
+    #                 filtered_orders.append(order)
+    #
+    # print(filtered_orders)
+    #
+    # orders = filtered_orders
+
+    paginator = Paginator(orders, 10)
+    page_number = request.GET.get("page")
+    orders = paginator.get_page(page_number)
+
     context = {
         "title": "Distribute Money to Sellers",
         "orders": orders,
-        "form": form
+        "form": form,
+        # "sellers": sellers
     }
     context.update(admin_site.each_context(request))
     return render(request, "admin/distribute_seller_amounts.html", context)

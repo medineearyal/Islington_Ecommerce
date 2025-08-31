@@ -73,7 +73,15 @@ class UserOrdersView(LoginRequiredMixin, TemplateView):
         context = self.get_context_data(**kwargs)
         form = OrderCancellationForm(request.POST)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.order.status = OrderStatusEnum.CANCELED
+            instance.order.save()
+            instance.save()
+            messages.success(request, f"Order {instance.order} successfully cancelled.")
+        else:
+            print(form.errors)
+            messages.error(request, f"Order failed to cancel.")
+
         return self.render_to_response(context)
 
 class UserOrderDetailView(LoginRequiredMixin, DetailView):

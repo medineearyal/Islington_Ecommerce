@@ -135,12 +135,15 @@ class UserShopOrderForm(ModelForm):
 class OrderCancellationForm(ModelForm):
     class Meta:
         model = OrderCancellation
-        fields = ["reason"]
+        fields = ["order", "reason"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["order"].widget = HiddenInput()
+        self.fields["reason"].label = "Reason for Cancellation"
         self.fields["reason"].widget.attrs.update({
-            "class":"border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
+            "class":"border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]",
+            "rows": 4
         })
 
 
@@ -157,6 +160,10 @@ class SellerPaymentForm(ModelForm):
                field.widget.attrs.update({
                    "readonly": "readonly",
                })
+            if name in ["seller", "transaction"]:
+                field.widget.attrs.update({
+                    "style": "pointer-events: none;"
+                })
             if name == "remarks":
                 field.widget.attrs.update({
                     "rows": "4"

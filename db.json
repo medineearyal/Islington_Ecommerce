@@ -404,7 +404,7 @@
     "modified": "2025-08-24T07:56:05.788Z",
     "name": "Striped Shirt",
     "price": "1900.00",
-    "stock": 10,
+    "stock": 9,
     "category": 2,
     "slug": "striped-shirt",
     "is_featured": false,
@@ -538,7 +538,7 @@
     "modified": "2025-08-24T12:13:51.835Z",
     "name": "Plain Trousers",
     "price": "2700.00",
-    "stock": 8,
+    "stock": 0,
     "category": 3,
     "slug": "plain-trousers",
     "is_featured": false,
@@ -724,10 +724,10 @@
   "pk": 14,
   "fields": {
     "created": "2025-08-24T12:34:46.329Z",
-    "modified": "2025-08-24T12:34:46.329Z",
+    "modified": "2025-08-31T07:19:42.472Z",
     "name": "Plissé Pleated Skirt",
     "price": "2000.00",
-    "stock": 4,
+    "stock": 0,
     "category": 2,
     "slug": "plisse-pleated-skirt",
     "is_featured": false,
@@ -735,10 +735,12 @@
     "is_header_banner": false,
     "discount": 5,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "WOMEN'SWEAR-000-PLISSÉPLEATEDSKIRT",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": [
       5,
       8,
@@ -777,10 +779,10 @@
   "pk": 16,
   "fields": {
     "created": "2025-08-24T12:39:29.388Z",
-    "modified": "2025-08-24T12:39:29.388Z",
+    "modified": "2025-08-31T07:41:45.735Z",
     "name": "Basic Shorts",
     "price": "1600.00",
-    "stock": 5,
+    "stock": -1,
     "category": 2,
     "slug": "basic-shorts",
     "is_featured": false,
@@ -788,10 +790,12 @@
     "is_header_banner": false,
     "discount": 5,
     "headline": null,
-    "seller": null,
+    "seller": 3,
     "sku": "WOMEN'SWEAR-000-BASICSHORTS",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": [
       5,
       14,
@@ -806,10 +810,10 @@
   "pk": 17,
   "fields": {
     "created": "2025-08-24T12:41:34.627Z",
-    "modified": "2025-08-24T12:41:34.627Z",
+    "modified": "2025-08-31T16:10:17.389Z",
     "name": "Mélange Shorts",
     "price": "1800.00",
-    "stock": 2,
+    "stock": 1,
     "category": 2,
     "slug": "melange-shorts",
     "is_featured": false,
@@ -817,10 +821,12 @@
     "is_header_banner": false,
     "discount": 5,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "WOMEN'SWEAR-000-MÉLANGESHORTS",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": [
       5,
       6,
@@ -985,7 +991,7 @@
   "pk": 24,
   "fields": {
     "created": "2025-08-24T13:10:49.951Z",
-    "modified": "2025-08-24T13:27:06.030Z",
+    "modified": "2025-08-30T15:30:41.262Z",
     "name": "Set of 6 Pcs Walnut Brownies",
     "price": "950.00",
     "stock": 5,
@@ -996,10 +1002,12 @@
     "is_header_banner": false,
     "discount": 0,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "FOOD-000-SETOF6PCSWALNUBROWNIES",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": []
   }
 },
@@ -1008,7 +1016,7 @@
   "pk": 25,
   "fields": {
     "created": "2025-08-24T13:12:21.656Z",
-    "modified": "2025-08-24T13:12:21.656Z",
+    "modified": "2025-08-30T15:30:32.205Z",
     "name": "White Chocolate Cake Sicles",
     "price": "750.00",
     "stock": 5,
@@ -1019,10 +1027,12 @@
     "is_header_banner": false,
     "discount": 0,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "FOOD-000-WHITECHOCOLATECAKESICLES",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": []
   }
 },
@@ -1031,7 +1041,7 @@
   "pk": 26,
   "fields": {
     "created": "2025-08-24T13:12:55.352Z",
-    "modified": "2025-08-24T13:12:55.352Z",
+    "modified": "2025-08-30T15:30:21.897Z",
     "name": "Dark Chocolate Cake Sicles",
     "price": "750.00",
     "stock": 5,
@@ -1042,10 +1052,12 @@
     "is_header_banner": false,
     "discount": 0,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "FOOD-000-DARKCHOCOLATECAKESICLES",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": []
   }
 },
@@ -1054,7 +1066,7 @@
   "pk": 27,
   "fields": {
     "created": "2025-08-24T13:13:48.847Z",
-    "modified": "2025-08-24T13:13:48.847Z",
+    "modified": "2025-08-30T15:30:12.506Z",
     "name": "Set of 9 Delicious Donuts Pack",
     "price": "650.00",
     "stock": 5,
@@ -1065,10 +1077,12 @@
     "is_header_banner": false,
     "discount": 0,
     "headline": null,
-    "seller": null,
+    "seller": 3,
     "sku": "FOOD-000-SETOF9DELICIOUSDONUTSPACK",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": []
   }
 },
@@ -1077,10 +1091,10 @@
   "pk": 28,
   "fields": {
     "created": "2025-08-24T13:14:21.606Z",
-    "modified": "2025-08-27T06:14:05.216Z",
+    "modified": "2025-08-30T15:29:20.815Z",
     "name": "8 pcs Delicious Donuts with Sprinkle",
     "price": "550.00",
-    "stock": 5,
+    "stock": 4,
     "category": 6,
     "slug": "8-pcs-delicious-donuts-with-sprinkle",
     "is_featured": false,
@@ -1088,10 +1102,12 @@
     "is_header_banner": false,
     "discount": 0,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "FOOD-000-8PCSDELICIOUSDONUTSWITHSPRINKLE",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": []
   }
 },
@@ -1100,10 +1116,10 @@
   "pk": 29,
   "fields": {
     "created": "2025-08-24T13:16:34.840Z",
-    "modified": "2025-08-27T06:14:03.525Z",
+    "modified": "2025-08-30T15:29:08.347Z",
     "name": "Samosa",
     "price": "35.00",
-    "stock": 25,
+    "stock": 23,
     "category": 6,
     "slug": "samosa",
     "is_featured": false,
@@ -1111,10 +1127,12 @@
     "is_header_banner": false,
     "discount": 0,
     "headline": null,
-    "seller": null,
+    "seller": 4,
     "sku": "FOOD-000-SAMOSA",
     "is_verified": true,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": []
   }
 },
@@ -2554,7 +2572,9 @@
     "created": "2025-08-26T02:05:19.014Z",
     "modified": "2025-08-26T02:05:19.014Z",
     "user": 2,
-    "products": []
+    "products": [
+      16
+    ]
   }
 },
 {
@@ -2585,7 +2605,7 @@
   "model": "orders.order",
   "pk": 10,
   "fields": {
-    "created": "2025-08-26T04:31:37.289Z",
+    "created": "2025-07-26T04:31:37.289Z",
     "modified": "2025-08-26T04:31:37.289Z",
     "uuid": "560ef427-20b2-4bf6-83c7-983cafdbb5f6",
     "customer": 4,
@@ -2622,8 +2642,10 @@
       }
     },
     "total_amount": "5582.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "642.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Accusamus voluptate deleniti illo et vero et ea eaque qui aliquid",
     "shipping_country": "np",
@@ -2636,7 +2658,7 @@
   "model": "orders.order",
   "pk": 11,
   "fields": {
-    "created": "2025-08-26T04:32:06.552Z",
+    "created": "2025-07-26T04:32:06.552Z",
     "modified": "2025-08-26T04:32:06.552Z",
     "uuid": "0399ae1d-4a57-4326-b860-71c146e6480d",
     "customer": 4,
@@ -2661,8 +2683,10 @@
       }
     },
     "total_amount": "2684.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "308.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Consequatur assumenda veniam anim amet et nostrud debitis aliquid repudiandae omnis accusamus voluptate animi qui",
     "shipping_country": "np",
@@ -2675,7 +2699,7 @@
   "model": "orders.order",
   "pk": 12,
   "fields": {
-    "created": "2025-08-26T04:36:37.079Z",
+    "created": "2025-07-26T04:36:37.079Z",
     "modified": "2025-08-26T04:36:37.079Z",
     "uuid": "fae1f9a6-d86b-4d24-bd1f-ff43c8e3da16",
     "customer": 4,
@@ -2700,8 +2724,10 @@
       }
     },
     "total_amount": "2684.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "308.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": true,
     "shipping_street": "Iusto duis mollit sit minim est maiores hic quidem sint quisquam",
     "shipping_country": "np",
@@ -2714,7 +2740,7 @@
   "model": "orders.order",
   "pk": 13,
   "fields": {
-    "created": "2025-08-26T04:43:10.644Z",
+    "created": "2025-06-26T04:43:10.644Z",
     "modified": "2025-08-26T04:43:10.644Z",
     "uuid": "23357eab-b6c0-4d7f-9821-a44ca9b1b7ea",
     "customer": 4,
@@ -2739,8 +2765,10 @@
       }
     },
     "total_amount": "2684.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "308.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Obcaecati ipsum commodo asperiores qui excepteur omnis pariatur Quos est sed delectus",
     "shipping_country": "np",
@@ -2753,7 +2781,7 @@
   "model": "orders.order",
   "pk": 14,
   "fields": {
-    "created": "2025-08-26T04:44:49.449Z",
+    "created": "2025-06-26T04:44:49.449Z",
     "modified": "2025-08-27T20:27:01.788Z",
     "uuid": "79d3cc91-32b7-4a7c-88a4-afe1b9753d53",
     "customer": 4,
@@ -2790,8 +2818,10 @@
       }
     },
     "total_amount": "2981.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "342.00",
     "status": "delivered",
+    "multiple_sellers": false,
     "use_billing_address": true,
     "shipping_street": "Pariatur Quo porro omnis natus sed labore expedita qui cupiditate voluptatem quo corrupti repudiandae nemo praesentium sunt ut",
     "shipping_country": "np",
@@ -2804,7 +2834,7 @@
   "model": "orders.order",
   "pk": 15,
   "fields": {
-    "created": "2025-08-26T04:45:34.544Z",
+    "created": "2025-06-26T04:45:34.544Z",
     "modified": "2025-08-28T05:43:47.598Z",
     "uuid": "7e9ad849-d40e-4a59-b77a-ae931a26bd9e",
     "customer": 4,
@@ -2829,8 +2859,10 @@
       }
     },
     "total_amount": "2260.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "260.00",
     "status": "canceled",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Iste voluptas sunt veritatis corrupti molestiae explicabo Fuga Numquam minima similique praesentium eaque quia non assumenda velit quis id nihil",
     "shipping_country": "np",
@@ -2843,7 +2875,7 @@
   "model": "orders.order",
   "pk": 16,
   "fields": {
-    "created": "2025-08-26T04:46:25.318Z",
+    "created": "2025-06-26T04:46:25.318Z",
     "modified": "2025-08-26T04:46:25.318Z",
     "uuid": "6b5393c2-1612-446d-b94c-d1aca693d2a3",
     "customer": 4,
@@ -2868,8 +2900,10 @@
       }
     },
     "total_amount": "2898.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "333.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Veniam quia magni ut eiusmod ut animi ex sit dolorum accusantium distinctio Incididunt alias itaque id dolorem quae nostrum",
     "shipping_country": "np",
@@ -2882,7 +2916,7 @@
   "model": "orders.order",
   "pk": 17,
   "fields": {
-    "created": "2025-08-26T04:48:50.639Z",
+    "created": "2025-05-26T04:48:50.639Z",
     "modified": "2025-08-26T04:48:50.639Z",
     "uuid": "e64bea7b-000a-4c9e-8b36-22d81d77746b",
     "customer": 4,
@@ -2907,8 +2941,10 @@
       }
     },
     "total_amount": "2147.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "247.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Exercitation sequi temporibus praesentium modi laboriosam voluptatem Aliquip",
     "shipping_country": "np",
@@ -2946,8 +2982,10 @@
       }
     },
     "total_amount": "1932.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "222.00",
     "status": "delivered",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "Et dolor amet magna eum doloribus quod impedit sit non quia est ab ratione nihil duis quia",
     "shipping_country": "np",
@@ -2985,14 +3023,1127 @@
       }
     },
     "total_amount": "1932.00",
+    "redeemed_amount": "0.00",
     "tax_amount": "222.00",
     "status": "placed",
+    "multiple_sellers": false,
     "use_billing_address": false,
     "shipping_street": "In ut harum eveniet animi impedit proident voluptas quasi ut ad ex repudiandae pariatur Neque anim",
     "shipping_country": "np",
     "shipping_region": "bagmati",
     "shipping_city": "kathmandu",
     "shipping_zip_code": "28957"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 25,
+  "fields": {
+    "created": "2025-08-30T10:10:45.046Z",
+    "modified": "2025-08-30T10:10:45.046Z",
+    "uuid": "299f3423-0807-493d-b2af-bdaabfa72003",
+    "customer": 2,
+    "first_name": "Grace",
+    "last_name": "Fischer",
+    "email": "zatomanu@mailinator.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "Quidem ut eum aut di",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 8,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "333.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Vel molestiae iste odit ipsum quae et iusto unde excepteur",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "lalitpur",
+    "shipping_zip_code": "51136"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 26,
+  "fields": {
+    "created": "2025-08-30T10:12:59.934Z",
+    "modified": "2025-08-30T10:12:59.934Z",
+    "uuid": "dbb378e3-74dc-4554-8f09-f3c5d4b3cc48",
+    "customer": 2,
+    "first_name": "Raymond",
+    "last_name": "Thompson",
+    "email": "pefalo@mailinator.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "Earum ipsum occaeca",
+    "products": {
+      "28": {
+        "name": "8 pcs Delicious Donuts with Sprinkle",
+        "price": 550.0,
+        "stock": 5,
+        "category": "Food",
+        "discount": 0,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/8a080b88d62326cfd09f4cabec5f2f35.jpg",
+        "vat_amount": 71.5,
+        "total_price": 550.0,
+        "discounted_price": 550.0
+      },
+      "29": {
+        "name": "Samosa",
+        "price": 35.0,
+        "stock": 25,
+        "category": "Food",
+        "discount": 0,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/Best-Indian-Punjabi-Samosa-Recipe.jpg",
+        "vat_amount": 4.55,
+        "total_price": 35.0,
+        "discounted_price": 35.0
+      }
+    },
+    "total_amount": "661.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "76.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Non unde rerum qui cumque numquam reprehenderit do",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "lalitpur",
+    "shipping_zip_code": "90108"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 27,
+  "fields": {
+    "created": "2025-08-30T10:15:01.475Z",
+    "modified": "2025-08-30T10:15:01.475Z",
+    "uuid": "92df6325-04e2-4ccd-97e6-f2eb5702458b",
+    "customer": 2,
+    "first_name": "easd",
+    "last_name": "asdas",
+    "email": "nedajag@mailinator.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "Perferendis aut mole",
+    "products": {
+      "29": {
+        "name": "Samosa",
+        "price": 35.0,
+        "stock": 24,
+        "category": "Food",
+        "discount": 0,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/Best-Indian-Punjabi-Samosa-Recipe.jpg",
+        "vat_amount": 4.55,
+        "total_price": 35.0,
+        "discounted_price": 35.0
+      }
+    },
+    "total_amount": "40.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "4.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": null,
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "lalitpur",
+    "shipping_zip_code": null
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 28,
+  "fields": {
+    "created": "2025-08-30T10:15:20.367Z",
+    "modified": "2025-08-30T10:15:20.367Z",
+    "uuid": "b4753438-6a92-462f-947c-7e68440a8546",
+    "customer": 2,
+    "first_name": "easd",
+    "last_name": "asdas",
+    "email": "nedajag@mailinator.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "Perferendis aut mole",
+    "products": {},
+    "total_amount": "40.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "4.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": null,
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "lalitpur",
+    "shipping_zip_code": null
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 29,
+  "fields": {
+    "created": "2025-08-30T10:57:11.726Z",
+    "modified": "2025-08-30T10:57:11.726Z",
+    "uuid": "b41540bf-55e0-40dc-9476-24ea54c58197",
+    "customer": 2,
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "ph_number": "",
+    "payment_option": "cod",
+    "note": "",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 7,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "333.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": null,
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": null
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 30,
+  "fields": {
+    "created": "2025-08-30T10:59:59.920Z",
+    "modified": "2025-08-30T11:48:57.077Z",
+    "uuid": "6c957ba5-0e25-40fa-9c3d-c5ececec7106",
+    "customer": 2,
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "ph_number": "",
+    "payment_option": "cod",
+    "note": "Test",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 6,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "333.00",
+    "status": "canceled",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": null,
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": null
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 31,
+  "fields": {
+    "created": "2025-08-30T11:01:13.788Z",
+    "modified": "2025-08-30T11:18:18.881Z",
+    "uuid": "652630b5-fb38-4765-bf84-7dd22ec6bf4e",
+    "customer": 2,
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "ph_number": "",
+    "payment_option": "cod",
+    "note": "Test 1",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 5,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "333.00",
+    "status": "canceled",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": null,
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": null
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 32,
+  "fields": {
+    "created": "2025-08-30T11:02:38.754Z",
+    "modified": "2025-08-30T11:17:55.690Z",
+    "uuid": "2d7aec3f-4f2d-4137-8c5b-1e53dcb0e583",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "Test 2",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 4,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "333.00",
+    "status": "canceled",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 33,
+  "fields": {
+    "created": "2025-08-30T11:41:25.666Z",
+    "modified": "2025-08-30T11:41:25.666Z",
+    "uuid": "c5787c0a-f550-4ac9-8c9a-d06b72388995",
+    "customer": 1,
+    "first_name": "Hu",
+    "last_name": "Carey",
+    "email": "cogome@mailinator.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "Earum asperiores ea",
+    "products": {
+      "1": {
+        "name": "Striped Shirt",
+        "price": 1900.0,
+        "stock": 10,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110337ms-1.jpg",
+        "vat_amount": 234.65,
+        "total_price": 1805.0,
+        "discounted_price": 1805.0
+      }
+    },
+    "total_amount": "2040.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "234.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": false,
+    "shipping_street": "Consequatur minima culpa velit commodo et exercitationem aliqua Sint doloribus placeat neque in sed",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "bhaktapur",
+    "shipping_zip_code": "89072"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 34,
+  "fields": {
+    "created": "2025-08-30T15:19:21.203Z",
+    "modified": "2025-08-30T15:19:21.203Z",
+    "uuid": "fdd9d14e-0cf8-4608-805f-849cc271db59",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 3,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "0.00",
+    "redeemed_amount": "0.00",
+    "tax_amount": "0.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 39,
+  "fields": {
+    "created": "2025-08-30T15:24:01.812Z",
+    "modified": "2025-08-30T15:24:01.812Z",
+    "uuid": "6bba6589-435b-4d75-b1fa-ced9d876605d",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 2,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": null,
+    "redeemed_amount": null,
+    "tax_amount": "333.45",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 40,
+  "fields": {
+    "created": "2025-08-30T15:25:45.504Z",
+    "modified": "2025-08-30T15:25:45.504Z",
+    "uuid": "62c6858b-543c-4b63-9d35-7befbc1b007e",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "",
+    "products": {
+      "7": {
+        "name": "Plain Trousers",
+        "price": 2700.0,
+        "stock": 1,
+        "category": "Men's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110345-_0006_DSC06851.jpg",
+        "vat_amount": 333.45,
+        "total_price": 2565.0,
+        "discounted_price": 2565.0
+      }
+    },
+    "total_amount": "2898.45",
+    "redeemed_amount": "0.00",
+    "tax_amount": "333.45",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 41,
+  "fields": {
+    "created": "2025-08-30T15:27:49.585Z",
+    "modified": "2025-08-30T15:27:49.585Z",
+    "uuid": "6bfb2f76-7528-4168-934e-fabcd446b208",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      }
+    },
+    "total_amount": "2127.00",
+    "redeemed_amount": "20.00",
+    "tax_amount": "247.00",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 42,
+  "fields": {
+    "created": "2025-08-31T06:57:49.506Z",
+    "modified": "2025-08-31T06:57:49.506Z",
+    "uuid": "959884e7-be3c-4b9d-b29e-0511bd839c8c",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 3,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 5,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 43,
+  "fields": {
+    "created": "2025-08-31T07:13:20.621Z",
+    "modified": "2025-08-31T07:13:20.621Z",
+    "uuid": "d76152cf-d29a-4468-8ba8-80e5fb934889",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 2,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 4,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "placed",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 44,
+  "fields": {
+    "created": "2025-08-31T07:15:34.765Z",
+    "modified": "2025-08-31T15:15:37.214Z",
+    "uuid": "037373f2-4dc5-49c3-a0b1-929701f16fa3",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 1,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 3,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "delivered",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 45,
+  "fields": {
+    "created": "2025-08-31T07:19:56.968Z",
+    "modified": "2025-08-31T15:24:07.336Z",
+    "uuid": "0a1af1b0-dab2-4230-9573-4d65a84fa79e",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 5,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 2,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "delivered",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 46,
+  "fields": {
+    "created": "2025-08-31T07:40:57.537Z",
+    "modified": "2025-08-31T18:01:14.920Z",
+    "uuid": "9decaf24-e870-4bf3-948a-e25c66b7c3e8",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "cod",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 4,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 1,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "delivered",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 47,
+  "fields": {
+    "created": "2025-08-31T07:41:58.943Z",
+    "modified": "2025-08-31T07:41:58.943Z",
+    "uuid": "b3f2abe3-14f5-4a2d-8d8e-3319ed52d2f0",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "khalti",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 3,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 5,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "placed",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 48,
+  "fields": {
+    "created": "2025-08-31T07:42:24.630Z",
+    "modified": "2025-08-31T07:42:24.630Z",
+    "uuid": "f4e2f504-3774-4ef8-9694-6943b1796e7d",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "khalti",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 3,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 5,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "placed",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 49,
+  "fields": {
+    "created": "2025-08-31T07:42:45.477Z",
+    "modified": "2025-08-31T19:04:57.465Z",
+    "uuid": "7d753dc3-418e-4643-aa80-e9faa2e05797",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "khalti",
+    "note": "",
+    "products": {
+      "14": {
+        "name": "Plissé Pleated Skirt",
+        "price": 2000.0,
+        "stock": 3,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/104935_ms_a_DSC00791-Edit.jpg",
+        "vat_amount": 247.0,
+        "total_price": 1900.0,
+        "discounted_price": 1900.0
+      },
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 5,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "3864.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "444.60",
+    "status": "canceled",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 51,
+  "fields": {
+    "created": "2025-08-31T16:10:34.347Z",
+    "modified": "2025-08-31T19:03:44.032Z",
+    "uuid": "3945ec1b-0ac1-4ce0-b4b0-82aacf9ae08b",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 2,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      },
+      "17": {
+        "name": "Mélange Shorts",
+        "price": 1800.0,
+        "stock": 2,
+        "seller": 4,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/111508-_0004_DSC05406.jpg",
+        "vat_amount": 222.3,
+        "total_price": 1710.0,
+        "discounted_price": 1710.0
+      }
+    },
+    "total_amount": "3649.90",
+    "redeemed_amount": "0.00",
+    "tax_amount": "419.90",
+    "status": "canceled",
+    "multiple_sellers": true,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 52,
+  "fields": {
+    "created": "2025-08-31T16:10:54.967Z",
+    "modified": "2025-08-31T19:03:19.072Z",
+    "uuid": "1b24b018-3763-4489-8f62-cb8506dd7eb1",
+    "customer": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 1,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "1717.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "197.60",
+    "status": "canceled",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Lambagar, Tarkeshwor",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 53,
+  "fields": {
+    "created": "2025-08-31T16:32:29.353Z",
+    "modified": "2025-08-31T16:32:29.353Z",
+    "uuid": "618f3907-6021-4c64-aa58-9d5b6036fcfe",
+    "customer": 1,
+    "first_name": "Admin",
+    "last_name": "Admin Last",
+    "email": "admin@admin.com",
+    "ph_number": "9863784674",
+    "payment_option": "qr",
+    "note": "",
+    "products": {
+      "16": {
+        "name": "Basic Shorts",
+        "price": 1600.0,
+        "stock": 2,
+        "seller": 3,
+        "category": "Women's Wear",
+        "discount": 5,
+        "quantity": 1,
+        "thumbnail": "/media/products/thumbnails/110342-_0006_DSC06896.jpg",
+        "vat_amount": 197.6,
+        "total_price": 1520.0,
+        "discounted_price": 1520.0
+      }
+    },
+    "total_amount": "1717.60",
+    "redeemed_amount": "0.00",
+    "tax_amount": "197.60",
+    "status": "placed",
+    "multiple_sellers": false,
+    "use_billing_address": true,
+    "shipping_street": "Test Street",
+    "shipping_country": "np",
+    "shipping_region": "bagmati",
+    "shipping_city": "kathmandu",
+    "shipping_zip_code": "747"
   }
 },
 {
@@ -3248,6 +4399,114 @@
   }
 },
 {
+  "model": "orders.orderstatuslog",
+  "pk": 25,
+  "fields": {
+    "created": "2025-08-30T11:17:55.674Z",
+    "modified": "2025-08-30T11:17:55.674Z",
+    "order": 32,
+    "status": "canceled",
+    "updated_by": 2,
+    "note": "Status changed from placed to canceled"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 26,
+  "fields": {
+    "created": "2025-08-30T11:18:18.867Z",
+    "modified": "2025-08-30T11:18:18.867Z",
+    "order": 31,
+    "status": "canceled",
+    "updated_by": 2,
+    "note": "Status changed from placed to canceled"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 27,
+  "fields": {
+    "created": "2025-08-30T11:48:57.070Z",
+    "modified": "2025-08-30T11:48:57.070Z",
+    "order": 30,
+    "status": "canceled",
+    "updated_by": 2,
+    "note": "Status changed from placed to canceled"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 28,
+  "fields": {
+    "created": "2025-08-31T15:15:36.879Z",
+    "modified": "2025-08-31T15:15:36.880Z",
+    "order": 44,
+    "status": "delivered",
+    "updated_by": 1,
+    "note": "Status changed from placed to delivered"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 29,
+  "fields": {
+    "created": "2025-08-31T15:24:07.311Z",
+    "modified": "2025-08-31T15:24:07.311Z",
+    "order": 45,
+    "status": "delivered",
+    "updated_by": 1,
+    "note": "Status changed from placed to delivered"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 30,
+  "fields": {
+    "created": "2025-08-31T18:01:14.615Z",
+    "modified": "2025-08-31T18:01:14.615Z",
+    "order": 46,
+    "status": "delivered",
+    "updated_by": 1,
+    "note": "Status changed from placed to delivered"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 31,
+  "fields": {
+    "created": "2025-08-31T19:03:19.058Z",
+    "modified": "2025-08-31T19:03:19.058Z",
+    "order": 52,
+    "status": "canceled",
+    "updated_by": 2,
+    "note": "Status changed from placed to canceled"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 32,
+  "fields": {
+    "created": "2025-08-31T19:03:44.016Z",
+    "modified": "2025-08-31T19:03:44.016Z",
+    "order": 51,
+    "status": "canceled",
+    "updated_by": 2,
+    "note": "Status changed from placed to canceled"
+  }
+},
+{
+  "model": "orders.orderstatuslog",
+  "pk": 33,
+  "fields": {
+    "created": "2025-08-31T19:04:57.458Z",
+    "modified": "2025-08-31T19:04:57.458Z",
+    "order": 49,
+    "status": "canceled",
+    "updated_by": 2,
+    "note": "Status changed from placed to canceled"
+  }
+},
+{
   "model": "orders.transaction",
   "pk": 10,
   "fields": {
@@ -3368,6 +4627,294 @@
   }
 },
 {
+  "model": "orders.transaction",
+  "pk": 20,
+  "fields": {
+    "created": "2025-08-30T10:10:45.073Z",
+    "modified": "2025-08-30T10:10:45.073Z",
+    "order": 25,
+    "uuid": "27f2c4f2-bb09-42b3-a239-c70f7689c7c8",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 21,
+  "fields": {
+    "created": "2025-08-30T10:12:59.962Z",
+    "modified": "2025-08-30T10:12:59.962Z",
+    "order": 26,
+    "uuid": "16968b5f-0944-42a6-bb8e-5dc7e5738d5c",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 22,
+  "fields": {
+    "created": "2025-08-30T10:15:01.491Z",
+    "modified": "2025-08-30T10:15:01.491Z",
+    "order": 27,
+    "uuid": "d1db67f0-65e9-4b28-9fb9-be50a2aa1863",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 23,
+  "fields": {
+    "created": "2025-08-30T10:15:20.380Z",
+    "modified": "2025-08-30T10:15:20.380Z",
+    "order": 28,
+    "uuid": "5aadb917-196e-4119-8042-1b7b991d56d7",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 24,
+  "fields": {
+    "created": "2025-08-30T10:57:11.748Z",
+    "modified": "2025-08-30T10:57:11.748Z",
+    "order": 29,
+    "uuid": "0ac3170e-80f1-4b30-a38b-7fe6f98589a9",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 25,
+  "fields": {
+    "created": "2025-08-30T10:59:59.929Z",
+    "modified": "2025-08-30T10:59:59.929Z",
+    "order": 30,
+    "uuid": "f1ae18d2-b369-46b4-97d5-9ec4c95f8fc5",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 26,
+  "fields": {
+    "created": "2025-08-30T11:01:13.809Z",
+    "modified": "2025-08-30T11:01:13.809Z",
+    "order": 31,
+    "uuid": "a7aaeb14-942e-4855-a940-52fc7065e02d",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 27,
+  "fields": {
+    "created": "2025-08-30T11:02:38.777Z",
+    "modified": "2025-08-30T11:04:14.898Z",
+    "order": 32,
+    "uuid": "7c454332-a4f5-46e1-b53d-808aa6076272",
+    "is_payment_success": true,
+    "remarks": "Test 1"
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 28,
+  "fields": {
+    "created": "2025-08-30T11:41:25.676Z",
+    "modified": "2025-08-30T11:41:25.676Z",
+    "order": 33,
+    "uuid": "ad3b382f-ac18-41cc-a33f-781fba25062d",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 29,
+  "fields": {
+    "created": "2025-08-30T15:19:21.231Z",
+    "modified": "2025-08-30T15:19:21.231Z",
+    "order": 34,
+    "uuid": "7370aed2-46d6-4912-bd25-fe8ff6e8e34c",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 30,
+  "fields": {
+    "created": "2025-08-30T15:24:01.828Z",
+    "modified": "2025-08-30T15:24:01.829Z",
+    "order": 39,
+    "uuid": "508a5f26-caba-4650-85af-4852271de02b",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 31,
+  "fields": {
+    "created": "2025-08-30T15:25:45.521Z",
+    "modified": "2025-08-30T15:26:26.192Z",
+    "order": 40,
+    "uuid": "7b7c5f1f-ee51-4922-8c2a-99eeeac755aa",
+    "is_payment_success": true,
+    "remarks": "Test 1"
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 32,
+  "fields": {
+    "created": "2025-08-30T15:27:49.595Z",
+    "modified": "2025-08-30T15:27:49.595Z",
+    "order": 41,
+    "uuid": "d857b431-c816-40a8-bd50-ce531a3004dc",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 33,
+  "fields": {
+    "created": "2025-08-31T06:57:49.531Z",
+    "modified": "2025-08-31T06:57:49.531Z",
+    "order": 42,
+    "uuid": "d400953b-f058-40de-8e2a-a850cb437de8",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 34,
+  "fields": {
+    "created": "2025-08-31T07:13:20.639Z",
+    "modified": "2025-08-31T14:59:35.441Z",
+    "order": 43,
+    "uuid": "2f660ee6-e18c-4bfa-8ef1-f6404ad29b2c",
+    "is_payment_success": true,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 35,
+  "fields": {
+    "created": "2025-08-31T07:15:34.781Z",
+    "modified": "2025-08-31T15:15:37.203Z",
+    "order": 44,
+    "uuid": "6df33557-2e3c-4b1e-a865-c68f20605c67",
+    "is_payment_success": true,
+    "remarks": "Test 3"
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 36,
+  "fields": {
+    "created": "2025-08-31T07:19:56.998Z",
+    "modified": "2025-08-31T15:24:07.332Z",
+    "order": 45,
+    "uuid": "82c517b8-b4b8-4e7b-8693-01980a12a3ed",
+    "is_payment_success": true,
+    "remarks": "Test 5"
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 37,
+  "fields": {
+    "created": "2025-08-31T07:40:57.563Z",
+    "modified": "2025-08-31T18:01:14.917Z",
+    "order": 46,
+    "uuid": "f36b8308-913c-4ebd-9bcb-f4c31dbfea91",
+    "is_payment_success": true,
+    "remarks": "Test with QR"
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 38,
+  "fields": {
+    "created": "2025-08-31T07:41:58.953Z",
+    "modified": "2025-08-31T07:41:58.953Z",
+    "order": 47,
+    "uuid": "8b8d6d48-5eff-4254-8736-b4975976537e",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 39,
+  "fields": {
+    "created": "2025-08-31T07:42:24.644Z",
+    "modified": "2025-08-31T07:42:24.644Z",
+    "order": 48,
+    "uuid": "2a73e596-dbaf-4dba-b411-015355ee654f",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 40,
+  "fields": {
+    "created": "2025-08-31T07:42:45.488Z",
+    "modified": "2025-08-31T07:43:16.053Z",
+    "order": 49,
+    "uuid": "3d6a42f6-2995-4196-8bf0-76fb537bf92f",
+    "is_payment_success": true,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 41,
+  "fields": {
+    "created": "2025-08-31T16:10:34.376Z",
+    "modified": "2025-08-31T16:10:34.376Z",
+    "order": 51,
+    "uuid": "b4fe0308-2d53-4344-8535-0d112259f53d",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 42,
+  "fields": {
+    "created": "2025-08-31T16:10:54.976Z",
+    "modified": "2025-08-31T16:10:54.976Z",
+    "order": 52,
+    "uuid": "bd84fefb-65ff-40a4-b2d7-58474f16da04",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
+  "model": "orders.transaction",
+  "pk": 43,
+  "fields": {
+    "created": "2025-08-31T16:32:29.368Z",
+    "modified": "2025-08-31T16:32:29.368Z",
+    "order": 53,
+    "uuid": "b2babf30-b597-4abc-ba78-7f27ce6d8efb",
+    "is_payment_success": false,
+    "remarks": null
+  }
+},
+{
   "model": "orders.khaltitransaction",
   "pk": 6,
   "fields": {
@@ -3416,6 +4963,196 @@
   }
 },
 {
+  "model": "orders.khaltitransaction",
+  "pk": 9,
+  "fields": {
+    "created": "2025-08-31T07:42:45.870Z",
+    "modified": "2025-08-31T07:43:16.059Z",
+    "transaction": 40,
+    "pidx": "LuMkh4bL22woCvfQRZxuyW",
+    "tidx": "ChW6XhizPrTks9YDSZnaN8",
+    "status": "completed",
+    "total_amount": "3864.60",
+    "purchase_order_id": "7d753dc3-418e-4643-aa80-e9faa2e05797",
+    "purchase_order_name": "#Medinee Aryal_1756626165",
+    "mobile": "98XXXXX001"
+  }
+},
+{
+  "model": "orders.ordercancellation",
+  "pk": 1,
+  "fields": {
+    "created": "2025-08-31T19:03:19.079Z",
+    "modified": "2025-08-31T19:03:19.079Z",
+    "order": 52,
+    "reason": "Test Cancelation"
+  }
+},
+{
+  "model": "orders.ordercancellation",
+  "pk": 2,
+  "fields": {
+    "created": "2025-08-31T19:03:44.037Z",
+    "modified": "2025-08-31T19:03:44.037Z",
+    "order": 51,
+    "reason": "Test 2"
+  }
+},
+{
+  "model": "orders.ordercancellation",
+  "pk": 3,
+  "fields": {
+    "created": "2025-08-31T19:04:57.471Z",
+    "modified": "2025-08-31T19:04:57.471Z",
+    "order": 49,
+    "reason": "Test 3"
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 4,
+  "fields": {
+    "created": "2025-08-31T14:56:30.994Z",
+    "modified": "2025-08-31T14:56:30.994Z",
+    "transaction": 34,
+    "seller": 4,
+    "remarks": "Test",
+    "product_name": "Plissé Pleated Skirt",
+    "product_price": "1900.00",
+    "product_quantity": 1,
+    "total_amount": "1615.00",
+    "commission": 15
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 5,
+  "fields": {
+    "created": "2025-08-31T14:59:35.411Z",
+    "modified": "2025-08-31T14:59:35.412Z",
+    "transaction": 34,
+    "seller": 3,
+    "remarks": "Test 2",
+    "product_name": "Basic Shorts",
+    "product_price": "1520.00",
+    "product_quantity": 1,
+    "total_amount": "1292.00",
+    "commission": 15
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 6,
+  "fields": {
+    "created": "2025-08-31T15:15:12.164Z",
+    "modified": "2025-08-31T15:15:12.164Z",
+    "transaction": 35,
+    "seller": 4,
+    "remarks": "Test 1",
+    "product_name": "Plissé Pleated Skirt",
+    "product_price": "1900.00",
+    "product_quantity": 1,
+    "total_amount": "1615.00",
+    "commission": 15
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 7,
+  "fields": {
+    "created": "2025-08-31T15:15:36.849Z",
+    "modified": "2025-08-31T15:15:36.849Z",
+    "transaction": 35,
+    "seller": 3,
+    "remarks": "Test 3",
+    "product_name": "Basic Shorts",
+    "product_price": "1520.00",
+    "product_quantity": 1,
+    "total_amount": "1292.00",
+    "commission": 15
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 8,
+  "fields": {
+    "created": "2025-08-31T15:23:55.881Z",
+    "modified": "2025-08-31T15:23:55.882Z",
+    "transaction": 36,
+    "seller": 4,
+    "remarks": "Test 4",
+    "product_name": "Plissé Pleated Skirt",
+    "product_price": "1900.00",
+    "product_quantity": 1,
+    "total_amount": "1615.00",
+    "commission": 15
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 9,
+  "fields": {
+    "created": "2025-08-31T15:24:07.276Z",
+    "modified": "2025-08-31T15:24:07.276Z",
+    "transaction": 36,
+    "seller": 3,
+    "remarks": "Test 5",
+    "product_name": "Basic Shorts",
+    "product_price": "1520.00",
+    "product_quantity": 1,
+    "total_amount": "1444.00",
+    "commission": 5
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 10,
+  "fields": {
+    "created": "2025-08-31T17:59:55.509Z",
+    "modified": "2025-08-31T17:59:55.509Z",
+    "transaction": 37,
+    "seller": 4,
+    "remarks": "Test With QR",
+    "product_name": "Plissé Pleated Skirt",
+    "product_price": "1900.00",
+    "product_quantity": 1,
+    "total_amount": "1615.00",
+    "commission": 15
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 11,
+  "fields": {
+    "created": "2025-08-31T18:00:34.038Z",
+    "modified": "2025-08-31T18:00:34.038Z",
+    "transaction": 17,
+    "seller": 3,
+    "remarks": "Test with QR",
+    "product_name": "Basic Shorts",
+    "product_price": "1520.00",
+    "product_quantity": 1,
+    "total_amount": "1216.00",
+    "commission": 20
+  }
+},
+{
+  "model": "orders.sellerpayment",
+  "pk": 12,
+  "fields": {
+    "created": "2025-08-31T18:01:14.582Z",
+    "modified": "2025-08-31T18:01:14.582Z",
+    "transaction": 37,
+    "seller": 3,
+    "remarks": "Test with QR",
+    "product_name": "Basic Shorts",
+    "product_price": "1520.00",
+    "product_quantity": 1,
+    "total_amount": "1292.00",
+    "commission": 15
+  }
+},
+{
   "model": "blogs.blog",
   "pk": 1,
   "fields": {
@@ -3455,7 +5192,7 @@
     "meta_description": "",
     "meta_keywords": null,
     "logo": "photos/logos/logo_LFe2h3n.PNG",
-    "favicon": "photos/favicons/logo_sAaPI2t.PNG",
+    "favicon": "photos/favicons/favicon.png",
     "email": "medineearyal@gmail.com",
     "phone": "9761849725",
     "location": "Seshmatipul, Tarkeshwor, Kathmandu",
@@ -3463,10 +5200,11 @@
     "instagram": "https://www.instagram.com/youknowmedi",
     "twitter": null,
     "youtube": null,
-    "merchant_name": null,
-    "merchant_bank_name": null,
-    "merchant_bank_account_number": null,
-    "merchant_bank_branch_name": null
+    "merchant_qr_code": "photos/merchant/qr_codes/QR.png",
+    "merchant_name": "Islington College",
+    "merchant_bank_name": "Global IME Bank Limited",
+    "merchant_bank_account_number": "123456789012",
+    "merchant_bank_branch_name": "Kamal Pokhari"
   }
 },
 {
@@ -3474,17 +5212,17 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$UqnlKEcl3Ov2YpUNmC0jVa$SzPYNkxSVKYaTUBn3yqI2Ug0fLkpm4O0xIkUq8hcd5c=",
-    "last_login": "2025-08-27T11:27:42.443Z",
+    "last_login": "2025-08-30T10:10:04.716Z",
     "is_superuser": true,
     "username": "admin@admin.com",
-    "first_name": "",
-    "last_name": "",
+    "first_name": "Admin",
+    "last_name": "Last",
     "is_staff": true,
     "is_active": true,
     "date_joined": "2025-08-23T21:06:49.087Z",
     "email": "admin@admin.com",
-    "ph_number": "",
-    "profile_picture": "",
+    "ph_number": "9863784674",
+    "profile_picture": "user/profile/Best-Indian-Punjabi-Samosa-Recipe.jpg",
     "user_type": "user",
     "seller_shop_logo": "",
     "seller_qr_code": "",
@@ -3502,7 +5240,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xf0drtW6LvUdr5VjveYFm2$g8Ld3hPZ+TGFQPHpj/dKGfwjnBN8jYDcMk4D2U8Muug=",
-    "last_login": "2025-08-28T05:43:25.204Z",
+    "last_login": "2025-08-30T20:59:05.616Z",
     "is_superuser": false,
     "username": "medinee",
     "first_name": "Medinee",
@@ -3516,13 +5254,14 @@
     "user_type": "seller",
     "seller_shop_logo": "",
     "seller_qr_code": "user/profile/QR.svg",
-    "seller_bank_name": "Global IME Bank Limited",
-    "seller_bank_account_number": "1234567890",
-    "seller_bank_branch_name": "Tarkeshwor",
-    "seller_bank_account_name": "Medinee Aryal",
+    "seller_bank_name": "test",
+    "seller_bank_account_number": "123456789012",
+    "seller_bank_branch_name": "test",
+    "seller_bank_account_name": "test",
     "is_verified_seller": true,
     "groups": [
-      1
+      1,
+      2
     ],
     "user_permissions": []
   }
@@ -3543,14 +5282,14 @@
     "email": "saroj@gmail.com",
     "ph_number": "9761849725",
     "profile_picture": "user/profile/download_14.jpg",
-    "user_type": "user",
-    "seller_shop_logo": "",
-    "seller_qr_code": "",
-    "seller_bank_name": null,
-    "seller_bank_account_number": null,
-    "seller_bank_branch_name": null,
-    "seller_bank_account_name": null,
-    "is_verified_seller": false,
+    "user_type": "seller",
+    "seller_shop_logo": "user/seller/profile/favicon.png",
+    "seller_qr_code": "user/profile/QR.png",
+    "seller_bank_name": "test",
+    "seller_bank_account_number": "123456790",
+    "seller_bank_branch_name": "test",
+    "seller_bank_account_name": "test",
+    "is_verified_seller": true,
     "groups": [],
     "user_permissions": []
   }
@@ -3571,14 +5310,14 @@
     "email": "aryalmanju670@gmail.com",
     "ph_number": "9761849725",
     "profile_picture": "user/profile/download_14_aodlwvC.jpg",
-    "user_type": "user",
-    "seller_shop_logo": "",
-    "seller_qr_code": "",
-    "seller_bank_name": null,
-    "seller_bank_account_number": null,
-    "seller_bank_branch_name": null,
-    "seller_bank_account_name": null,
-    "is_verified_seller": false,
+    "user_type": "seller",
+    "seller_shop_logo": "user/seller/profile/favicon_MYNpr6f.png",
+    "seller_qr_code": "user/profile/QR_nYjip6m.png",
+    "seller_bank_name": "Global IME",
+    "seller_bank_account_number": "123456789012",
+    "seller_bank_branch_name": "Lambagar",
+    "seller_bank_account_name": "Manju Aryal",
+    "is_verified_seller": true,
     "groups": [],
     "user_permissions": []
   }
@@ -3588,7 +5327,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$1000000$snPiaAYlt93nqurN0LCpiC$s/X1veEXHxvG76Sr7tEP+YM+vydVbhxT7KchtLbOC/k=",
-    "last_login": "2025-08-28T05:45:28.580Z",
+    "last_login": "2025-08-30T12:29:11.420Z",
     "is_superuser": false,
     "username": "test@staff.com",
     "first_name": "",
@@ -3618,8 +5357,8 @@
   "pk": 1,
   "fields": {
     "user": 2,
-    "orders_completed": 0,
-    "redeem_points": 0
+    "orders_completed": 10,
+    "redeem_points": 1600
   }
 },
 {
@@ -3629,6 +5368,70 @@
     "user": 4,
     "orders_completed": 2,
     "redeem_points": 400
+  }
+},
+{
+  "model": "common.addressmodel",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "first_name": "Medinee",
+    "last_name": "Aryal",
+    "street": "Lambagar, Tarkeshwor",
+    "country": "np",
+    "state": "bagmati",
+    "city": "kathmandu",
+    "zip_code": "747",
+    "email": "medineearyal@gmail.com",
+    "ph_number": "9863784674"
+  }
+},
+{
+  "model": "common.addressmodel",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "first_name": "Admin",
+    "last_name": "Admin Last",
+    "street": "Test Street",
+    "country": "np",
+    "state": "bagmati",
+    "city": "kathmandu",
+    "zip_code": "747",
+    "email": "admin@admin.com",
+    "ph_number": "9863784674"
+  }
+},
+{
+  "model": "common.addressmodel",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "first_name": "Saroj",
+    "last_name": "Test",
+    "street": "test",
+    "country": "np",
+    "state": "bagmati",
+    "city": "kathmandu",
+    "zip_code": "747",
+    "email": "saroj@gmail.com",
+    "ph_number": "9863784674"
+  }
+},
+{
+  "model": "common.addressmodel",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "first_name": "Manju",
+    "last_name": "Aryal",
+    "street": "Lambagar, Tarkeshwor",
+    "country": "np",
+    "state": "bagmati",
+    "city": "kathmandu",
+    "zip_code": "747",
+    "email": "aryalmanju670@gmail.com",
+    "ph_number": "9812345678"
   }
 },
 {

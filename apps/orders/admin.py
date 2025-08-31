@@ -1,5 +1,5 @@
 from apps.common.admin import admin_site
-from apps.orders.models import Order, Transaction, KhaltiTransaction, OrderStatusLog, SellerPayment
+from apps.orders.models import Order, Transaction, KhaltiTransaction, OrderStatusLog, SellerPayment, OrderCancellation
 from django.contrib import admin
 
 class OrderAdmin(admin.ModelAdmin):
@@ -20,3 +20,4 @@ admin_site.register(OrderStatusLog)
 admin_site.register(Transaction, TransactionAdmin)
 admin_site.register(KhaltiTransaction)
 admin_site.register(SellerPayment)
+admin_site.register(OrderCancellation)

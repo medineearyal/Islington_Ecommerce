@@ -38,7 +38,8 @@
                             </td>
                             <td>
                                 <div class="dropdown dropdown-end">
-                                    <label tabindex="0" class="btn btn-ghost btn-circle no-icon text-[var(--clr-gray-900)] hover:text-[var(--clr-gray-00)]">
+                                    <label tabindex="0"
+                                           class="btn btn-ghost btn-circle no-icon text-[var(--clr-gray-900)] hover:text-[var(--clr-gray-00)]">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
                                              viewBox="0 0 20 20">
                                             <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -53,9 +54,11 @@
                                                 View Detail
                                             </a>
                                         </li>
-                                        {% if order.status != "canceled" or order.status != "delivered" %}
+                                        {% if order.status != "canceled" and order.status != "delivered" %}
                                             <li>
-                                                <a href="{% url 'users:order-update' order.uuid %}?status=cancel" class="btn btn-outline btn-danger no-icon">Cancel</a>
+                                                <label for="cancel-order-modal" class="btn btn-error no-icon text-white cancel-btn" data-order="{{ order.pk }}">
+                                                    Cancel Order
+                                                </label>
                                             </li>
                                         {% endif %}
                                     </ul>
@@ -74,4 +77,42 @@
             {% include 'partials/pagination.html' with page_obj=orders %}
         {% endif %}
     </div>
+
+    <input type="checkbox" id="cancel-order-modal" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box max-w-lg bg-[var(--clr-gray-00)]">
+            <h3 class="font-bold text-xl text-[var(--clr-gray-900)] mb-4">Cancel Order</h3>
+
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+
+                {{ order_cancellation_form.order }}
+
+                <div class="text-[var(--clr-gray-900)]">
+                    {{ order_cancellation_form.reason.label_tag }}
+                    {{ order_cancellation_form.reason }}
+                    {% if order_cancellation_form.reason.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ order_cancellation_form.reason.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="modal-action">
+                    <label for="cancel-order-modal" class="btn btn-ghost no-icon text-[var(--clr-gray-00)] bg-[var(--clr-gray-700)]">Close</label>
+                    <button type="submit" class="btn btn-error text-white no-icon">Confirm Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const order = document.getElementById("id_order");
+        const cancelOrderBtns = document.querySelectorAll(".cancel-btn");
+        cancelOrderBtns.forEach(btn => {
+           btn.addEventListener("click", function() {
+               order.value = this.dataset.order
+           });
+        });
+    </script>
 {% endblock %}
