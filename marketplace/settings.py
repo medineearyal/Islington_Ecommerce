@@ -178,6 +178,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://medineearyal.com.np",
 ]
 
+CSRF_TRUSTED_ORIGINS += config("TRUSTED_ORIGIN", "http://localhost:8000").split(",")
+
 # Django-Ckeditor
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "any"
 customColorPalette = [
@@ -535,3 +537,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+ENV = config("ENV", "DEVELOPMENT")
