@@ -16,6 +16,7 @@ class SiteSetting(models.Model):
     twitter = models.URLField(blank=True, null=True)
     youtube = models.URLField(blank=True, null=True)
 
+    merchant_qr_code = models.ImageField(upload_to="photos/merchant/qr_codes/", blank=True, null=True)
     merchant_name = models.CharField(max_length=255, blank=True, null=True)
     merchant_bank_name = models.CharField(max_length=255, blank=True, null=True)
     merchant_bank_account_number = models.CharField(max_length=255, blank=True, null=True)
