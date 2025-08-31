@@ -90,6 +90,5 @@ db.sqlite3
 .idea/
 
 media/
-staticfiles/
 local.py
 prod.py
