@@ -420,13 +420,13 @@ def error_page(request, status_code, message="Something went wrong"):
     )
 
 def custom_404(request, exception):
-    return error_page(request, 404, str(exception) or "Something went wrong. It’s look that your requested could not be found. It’s look like the link is broken or the page is removed.")
+    return error_page(request, 404, "Something went wrong. It’s look that your requested could not be found. It’s look like the link is broken or the page is removed.")
 
 def custom_500(request):
     return error_page(request, 500, "Internal server error")
 
 def custom_403(request, exception):
-    return error_page(request, 403, str(exception) or "Permission denied")
+    return error_page(request, 403, "Permission denied")
 
 def custom_400(request, exception):
-    return error_page(request, 400, str(exception) or "Bad request")
+    return error_page(request, 400, "Bad request")
