@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-skcy1p9%nbv^w^-qui%=f+!^wb7r^$g0g^8a9w!65i+jzy1hyf"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", True)
 
 ALLOWED_HOSTS = [
     "summer-class.onrender.com",
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     "www.medineearyal.com.np",
     "medineearyal.com.np",
 ]
+ALLOWED_HOSTS += config("ALLOWED_HOST", "").split(",")
 
 # Application definition
 
@@ -362,7 +363,7 @@ MESSAGE_TAGS = {
 # Khalti
 KHALTI_BASE_URL = config("KHALTI_BASE_URL")
 KHALTI_API_KEY = config("KHALTI_API_KEY")
-WEBSITE_URL = "http://localhost:8000"
+WEBSITE_URL = config("WEBSITE_URL", "http://localhost:8000")
 
 # Jazzmin
 JAZZMIN_SETTINGS = {
