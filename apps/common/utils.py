@@ -6,6 +6,8 @@ from django.db.models.functions import Substr, Cast, Coalesce
 from django.utils.text import slugify
 from django.db.models import Q, IntegerField, Max, Case, When, Value, CharField
 import threading
+from django.utils import timezone
+from datetime import datetime
 
 
 def generate_unique_slug(instance, field_name="slug", from_name="name"):
@@ -95,3 +97,12 @@ def calculate_redeem_points(total_purchase_amount):
     elif total_purchase_amount >= 500:
         return 50
     return 0
+
+def months_ago(n):
+    today = timezone.now()
+    year = today.year
+    month = today.month - n
+    if month <= 0:
+        month += 12
+        year -= 1
+    return datetime(year, month, 1)

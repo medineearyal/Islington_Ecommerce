@@ -1,16 +1,29 @@
+from allauth.account.models import EmailAddress
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
 from django.utils.html import format_html
+
+from apps.common.admin import admin_site
 from apps.users.models import AuthUser, UserRedeemProfile
 from django.urls import reverse, path
 from django.shortcuts import redirect
-
+from apps.common.models import AddressModel
 
 # Register your models here.
 User = get_user_model()
+
+class AddressModelInlineAdmin(admin.StackedInline):
+    model = AddressModel
+    extra = 0
+    min_num = 1
+    max_num = 1
+    validate_max = True
+    validate_min = True
+    can_delete = False
+    verbose_name = "User's Billing Address"
 
 class AuthUserAdmin(UserAdmin):
     add_form = UserCreationForm
@@ -18,6 +31,7 @@ class AuthUserAdmin(UserAdmin):
     model = AuthUser
     list_display = ("email", "user_type", "is_verified_seller", "is_staff", "is_active", "verify_seller_btn")
     list_filter = ("email", "is_staff", "is_active")
+    inlines = [AddressModelInlineAdmin, ]
     fieldsets = (
         (
             "Personal Details",
@@ -105,5 +119,6 @@ class AuthUserAdmin(UserAdmin):
         self.message_user(request, f"Seller {seller} is successfully verified.")
         return redirect(request.META.get("HTTP_REFERER"))
 
-admin.site.register(AuthUser, AuthUserAdmin)
-admin.site.register(UserRedeemProfile)
+admin_site.register(AuthUser, AuthUserAdmin)
+admin_site.register(UserRedeemProfile)
+admin_site.register(EmailAddress)

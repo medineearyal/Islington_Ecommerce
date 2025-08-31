@@ -49,3 +49,10 @@ class OrderStatusDescription(TextChoices):
     OUT_FOR_DELIVERY = "out_for_delivery", "Your order has been sent out for delivery."
     DELIVERED = "delivered", "Thank You! for your patience, your order has been successfully delivered."
     CANCELED = "canceled", "Your Delivery has been canceled."
+
+class OrderStatusColors(TextChoices):
+    PLACED = "placed", "var(--clr-gray-700)"
+    SHIPPED = "shipped", "var(--clr-warning-500)"
+    OUT_FOR_DELIVERY = "out_for_delivery", "var(--clr-secondary-500)"
+    DELIVERED = "delivered", "var(--clr-success-500)"
+    CANCELED = "canceled", "var(--clr-danger-500)"

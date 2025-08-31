@@ -3,7 +3,7 @@
 
 <a href="{% url 'products:detail' product.slug %}" class="card bg-[var(--clr-gray-00)] shadow-sm flex-row items-center p-3 gap-3 w-[312px]">
     <figure class="rounded-none">
-        <img class="w-[80px] h-[80px]"
+        <img class="w-[80px] h-[80px] object-contain"
              {% if product.thumbnail %}
                  src="{{ product.thumbnail.url }}"
              {% else %}

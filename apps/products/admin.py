@@ -7,6 +7,8 @@ from django.urls import path, reverse
 from apps.common.mixins import VerifiedProductMixin
 from .models import Category, Product, Tag, ProductImage, Badge, ProductBanner, BestDeals, ProductReview, Attribute, \
     ProductAttributeValue, ProductColors, ProductDescription, WishList
+from ..common.admin import admin_site
+
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
@@ -93,16 +95,16 @@ class WishListAdmin(VerifiedProductMixin, admin.ModelAdmin):
     product_field_name = "products"
     pass
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Tag)
-admin.site.register(Badge)
-admin.site.register(ProductBanner, ProductBannerAdmin)
-admin.site.register(ProductImage)
-admin.site.register(Attribute)
-admin.site.register(ProductDescription)
-admin.site.register(ProductAttributeValue)
-admin.site.register(ProductColors)
-admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductReview)
-admin.site.register(BestDeals, BestDealsAdmin)
-admin.site.register(WishList, WishListAdmin)
+admin_site.register(Category, CategoryAdmin)
+admin_site.register(Tag)
+admin_site.register(Badge)
+admin_site.register(ProductBanner, ProductBannerAdmin)
+admin_site.register(ProductImage)
+admin_site.register(Attribute)
+admin_site.register(ProductDescription)
+admin_site.register(ProductAttributeValue)
+admin_site.register(ProductColors)
+admin_site.register(Product, ProductAdmin)
+admin_site.register(ProductReview)
+admin_site.register(BestDeals, BestDealsAdmin)
+admin_site.register(WishList, WishListAdmin)

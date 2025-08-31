@@ -482,7 +482,7 @@ button.htmx-request::after {
 }
 
 .product-detail-modal[open] {
-    background-color: oklch(0% 0 0/ 0.9);
+    background-color: oklch(0% 0 0/ 0.5);
 }
 
 .icon-before::before {

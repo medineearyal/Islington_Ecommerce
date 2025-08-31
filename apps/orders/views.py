@@ -1,5 +1,8 @@
+from itertools import product
+
 from allauth.core.internal.httpkit import redirect
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
@@ -9,12 +12,21 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 from rest_framework.generics import get_object_or_404
 
+from apps.common.admin import admin_site
+from apps.common.utils import send_async_email
 from apps.orders.constants import PaymentStatusEnum
-from apps.orders.models import Order, KhaltiTransaction, Transaction
+from apps.orders.forms import SellerPaymentForm
+from apps.orders.models import Order, KhaltiTransaction, Transaction, SellerPayment
 from apps.orders.signals import payment_successful
+from django.contrib import messages
+from django.shortcuts import render
+from django.urls import reverse
+
+from apps.products.models import Product
 
 # Create your views here.
 User = get_user_model()
+
 
 class SuccessView(LoginRequiredMixin, TemplateView):
     template_name = "pages/success_failure.html"
@@ -49,7 +61,7 @@ class SuccessView(LoginRequiredMixin, TemplateView):
                 recipient_list.append(order.email)
 
             if pidx:
-                khalti_transaction = get_object_or_404(KhaltiTransaction, pidx= pidx, transaction=transaction)
+                khalti_transaction = get_object_or_404(KhaltiTransaction, pidx=pidx, transaction=transaction)
 
                 # modified field suggests at what time the actual Khalti Transaction Succeeed or Failed
                 if status == PaymentStatusEnum.COMPLETED.label:
@@ -68,8 +80,28 @@ class SuccessView(LoginRequiredMixin, TemplateView):
                     "khalti_transaction": khalti_transaction,
                     "success": True if status == PaymentStatusEnum.COMPLETED.label else False,
                 })
-
             payment_successful.send(sender=order.__class__, recipient_list=recipient_list, order=order)
+            if order.multiple_sellers:
+                sellers = User.objects.filter(pk__in=order.sellers.all())
+                sellers_emails = set([seller.email for seller in sellers])
+
+                for email in sellers_emails:
+                    html_content = render_to_string("partials/email/seller_product_ordered.html", {
+                        "order": order,
+                        "seller": email
+                    })
+                    send_async_email([email], html_content, subject="One of your products has been purchased!")
+            else:
+                seller_id = order.sellers.first()
+                seller = get_object_or_404(User, pk=seller_id)
+                html_content = render_to_string("partials/email/seller_product_ordered.html", {
+                    "order": order,
+                    "seller": seller
+                })
+                send_async_email([seller.email], html_content, subject="One of your products has been purchased!")
+                context.update({
+                    "seller": seller,
+                })
         else:
             context.update({
                 "success": False
@@ -94,29 +126,72 @@ class ManualPayQrView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
 
-        query = request.GET.get("multi-seller")
+        order = context.get("order")
 
-        if not query:
+        if not order.multiple_sellers:
             return redirect(reverse_lazy("orders:success"))
 
-        multi_seller = request.GET.get("multi-seller") == "True"
         recipient_list = []
-        order = context.get("order")
 
         if order.use_billing_address and order.customer.billing_address:
             recipient_list.append(order.customer.billing_address.email)
         else:
             recipient_list.append(order.email)
 
-        if not multi_seller:
-            if order.sellers.count() == 1:
-                seller_id = order.sellers.first()
-                print(order.sellers)
-                seller = get_object_or_404(User, pk=seller_id)
-                recipient_list.append(seller.email)
-                context.update({
-                    "seller": seller,
+        if not order.multiple_sellers:
+            seller_id = order.sellers.first()
+            seller = get_object_or_404(User, pk=seller_id)
+            html_content = render_to_string("partials/email/seller_product_ordered.html", {
+                "order": order,
+                "seller": seller
+            })
+            send_async_email([seller.email], html_content, subject="One of your products has been purchased!")
+            context.update({
+                "seller": seller,
+            })
+        else:
+            sellers = User.objects.filter(pk__in=order.sellers.all())
+            sellers_emails = set([seller.email for seller in sellers])
+
+            for email in sellers_emails:
+                html_content = render_to_string("partials/email/seller_product_ordered.html", {
+                    "order": order,
+                    "seller": email
                 })
+                send_async_email([email], html_content, subject="One of your products has been purchased!")
 
         payment_successful.send(sender=order.__class__, recipient_list=recipient_list, order=order)
         return self.render_to_response(context)
+
+
+# Admin
+@staff_member_required
+def distribute_seller_payments(request):
+    if request.method == "POST":
+        form = SellerPaymentForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            messages.success(request,f"Paid {instance.total_amount} to {instance.seller}.")
+        else:
+            print(form.errors)
+            messages.error(request,"Failed To Pay to The Seller")
+
+        return redirect(reverse("orders:distribute-seller-amount"))
+    else:
+        form = SellerPaymentForm()
+
+    # Fetch only multi-seller orders
+    orders = Order.objects.filter(multiple_sellers=True).prefetch_related("transaction_set")
+    for order in orders:
+        for pid, item in order.products.items():
+            item["seller"] = get_object_or_404(User, pk=item["seller"])
+            item["seller_payment"] = SellerPayment.objects.filter(transaction=order.transaction_set.first(), seller=item["seller"]).exists()
+
+    context = {
+        "title": "Distribute Money to Sellers",
+        "orders": orders,
+        "form": form
+    }
+    context.update(admin_site.each_context(request))
+    return render(request, "admin/distribute_seller_amounts.html", context)

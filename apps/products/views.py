@@ -11,6 +11,7 @@ from django.contrib import messages
 import json
 from .forms import ProductForm, ImageFormSet, DescriptionFormSet, CategoryForm, ProductColorsForm
 from .models import Product, Category, ProductColors
+from django.urls import reverse
 
 
 # Create your views here.
@@ -115,10 +116,23 @@ class CartView(TemplateView):
                 return response
 
             if str(product_id) in cart:
+                current_cart_qty = cart[str(product_id)]["quantity"]
                 if quantity:
-                    cart[str(product_id)]["quantity"] += int(quantity)
+                    if current_cart_qty + int(quantity) > product.stock:
+                        toast_message["text"] = "Quantity Exceeds the stock amount."
+                        toast_message["tag"] = "alert-error"
+                    else:
+                        cart[str(product_id)]["quantity"] += int(quantity)
+                        toast_message["text"] = "Product Successfully Added To The Cart."
+                        toast_message["tag"] = "alert-success"
                 else:
-                    cart[str(product_id)]["quantity"] += 1
+                    if current_cart_qty + 1 > product.stock:
+                        toast_message["text"] = "Quantity Exceeds the stock amount."
+                        toast_message["tag"] = "alert-error"
+                    else:
+                        cart[str(product_id)]["quantity"] += 1
+                        toast_message["text"] = "Product Successfully Added To The Cart."
+                        toast_message["tag"] = "alert-success"
             else:
                 cart[str(product_id)] = {
                     "name": product.name,
@@ -129,10 +143,11 @@ class CartView(TemplateView):
                     "thumbnail": product.thumbnail.url,
                     "stock": product.stock,
                     "category": product.category.name,
+                    "seller": product.seller.pk
                 }
+                toast_message["text"] = "Product Successfully Added To The Cart."
+                toast_message["tag"] = "alert-success"
             request.session["cart"] = cart
-            toast_message["text"] = "Product Successfully Added To The Cart."
-            toast_message["tag"] = "alert-success"
         elif action == "remove":
             cart = request.session.get("cart")
             cart.pop(str(product_id), None)
@@ -142,9 +157,11 @@ class CartView(TemplateView):
         elif action == "update":
             if str(product_id) in cart:
                 if cart[str(product_id)]["quantity"] != quantity:
-                    cart[str(product_id)]["quantity"] = quantity
+                    cart[str(product_id)]["quantity"] = int(quantity)
+                    request.session["cart"] = cart
                     toast_message["text"] = "Product Successfully Updated In The Cart."
                     toast_message["tag"] = "alert-success"
+                    return redirect(reverse("pages:cart"))
 
         total_price = sum(
             [int(item["quantity"]) * float(item["price"] if not item["discount"] else item["discounted_price"]) for item

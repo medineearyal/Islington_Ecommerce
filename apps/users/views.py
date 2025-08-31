@@ -7,8 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404, render
-from django.views.generic import TemplateView, DetailView, UpdateView, ListView
-from django.urls import reverse
+from django.views.generic import TemplateView, DetailView, UpdateView, ListView, View
+from django.urls import reverse, reverse_lazy
 
 from apps.common.forms import AddressForm
 from apps.common.models import AddressModel
@@ -35,7 +35,7 @@ class UserDashboardView(LoginRequiredMixin, TemplateView):
         orders = Order.objects.filter(customer=self.request.user).order_by('-created')
         recent_orders = orders[:7]
         total_orders = orders.count()
-        pending_orders = orders.filter(transaction__is_payment_success=False).count()
+        pending_orders = orders.filter(transaction__is_payment_success=False).exclude(status__in=[OrderStatusEnum.CANCELED, OrderStatusEnum.DELIVERED]).count()
         completed_orders = orders.filter(transaction__is_payment_success=True).count()
 
         context.update({
@@ -149,6 +149,20 @@ class UserOrderDetailView(LoginRequiredMixin, DetailView):
         return self.render_to_response(context)
 
 
+class UserOrderUpdateView(LoginRequiredMixin, View):
+    model = Order
+    success_url = reverse_lazy("users:orders")
+
+    def get(self, request, *args, **kwargs):
+        uuid = kwargs.get("uuid")
+        order = get_object_or_404(Order, uuid=uuid)
+        status = request.GET.get("status")
+
+        if status == "cancel":
+            order.status = OrderStatusEnum.CANCELED
+            order.save()
+        return redirect(self.success_url)
+
 class UserOrderTrack(LoginRequiredMixin, TemplateView):
     template_name = "dashboard/track_orders.html"
 
@@ -205,8 +219,12 @@ AddressFormSet = inlineformset_factory(
     User,
     AddressModel,
     form=AddressForm,
-    extra=1,
-    can_delete=True,
+    extra=0,
+    can_delete=False,
+    max_num=1,
+    min_num=1,
+    validate_max=True,
+    validate_min=True,
 )
 
 

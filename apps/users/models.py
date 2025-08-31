@@ -33,14 +33,16 @@ class AuthUser(AbstractUser):
 
     @property
     def full_name(self):
-        return f"{self.first_name} {self.last_name}"
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.email
 
     @property
     def billing_address(self):
         from apps.common.models import AddressModel
 
         try:
-            address = AddressModel.objects.get(pk=self.pk)
+            address = AddressModel.objects.get(user=self)
             return address
         except AddressModel.DoesNotExist:
             return None

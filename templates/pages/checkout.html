@@ -159,12 +159,19 @@
                             </div>
                         </div>
 
-                        <div class="text-[var(--clr-gray-900)] text-sm flex gap-2 items-center">
-                            {{ form.use_billing_address }}
+                        <div class="text-[var(--clr-gray-900)] text-sm">
+                            <div class="flex gap-2 items-center">
+                                {{ form.use_billing_address }}
 
-                            <label class="inline-block" for="{{ form.use_billing_address.id_for_label }}">
-                                Use Your Billing Address
-                            </label>
+                                <label class="inline-block" for="{{ form.use_billing_address.id_for_label }}">
+                                    Use Your Billing Address
+                                </label>
+                            </div>
+                            {% if form.use_billing_address.errors %}
+                                 <p class="text-[var(--clr-danger-500)] text-sm mt-2">
+                                     {{ form.use_billing_address.errors.0 }}
+                                 </p>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -310,15 +317,15 @@
                                 </p>
                                 <p class="flex justify-between items-center">
                                     <span class="text-sm text-[var(--clr-gray-600)]">Shipping</span>
-                                    <span class="text-[var(--clr-gray-900)] text-sm">Free</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">Can be added by the seller.</span>
                                 </p>
                                 <p class="flex justify-between items-center">
                                     <span class="text-sm text-[var(--clr-gray-600)]">Discount</span>
-                                    <span class="text-[var(--clr-gray-900)] text-sm">0</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">(-) {{ redeem_discount_amount }}</span>
                                 </p>
                                 <p class="flex justify-between items-center">
                                     <span class="text-sm text-[var(--clr-gray-600)]">Tax</span>
-                                    <span class="text-[var(--clr-gray-900)] text-sm">{{ vat_amount|nepali_currency }}</span>
+                                    <span class="text-[var(--clr-gray-900)] text-sm">(+) {{ vat_amount|nepali_currency }}</span>
                                 </p>
 
                                 {% if dst_amount != 0 %}
@@ -333,8 +340,6 @@
                                 <p class="flex justify-between items-center text-[var(--clr-gray-900)] text-sm pb-6">
                                     <span>Total</span>
                                     <span>{{ final_sum|nepali_currency }}</span>
-                                    <input type="hidden" name="total_amount" value="{{ final_sum }}" />
-                                    <input type="hidden" name="tax_amount" value="{{ vat_amount|add:dst_amount }}" />
                                 </p>
 
                                 <button class="btn btn-primary uppercase h-[56px]">Place Order</button>

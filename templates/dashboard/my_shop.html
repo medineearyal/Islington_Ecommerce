@@ -29,7 +29,7 @@
 
     <div class="stats flex gap-6 justify-between mb-5">
         <div class="stat bg-[var(--clr-secondary-50)] rounded-sm grid-cols-4">
-            <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+            <div class="stat-value col-start-2 text-[var(--clr-secondary-500)] font-semibold text-2xl">
                 {{ total_products }}
             </div>
             <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Products
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="stat bg-[var(--clr-primary-50)] rounded-sm grid-cols-4">
-            <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+            <div class="stat-value col-start-2 text-[var(--clr-primary-500)] font-semibold text-2xl">
                 {{ total_products_sold }}
             </div>
             <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Sales
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="stat bg-[var(--clr-success-50)] rounded-sm grid-cols-4">
-            <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+            <div class="stat-value col-start-2 text-[var(--clr-success-500)] font-semibold text-2xl">
                 {{ total_shipping_completed }}
             </div>
             <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Shipping Completed
@@ -76,7 +76,7 @@
     </div>
 
     <div class="collapse collapse-arrow">
-        <input type="radio" name="user-shop-accordion" id="products" value="products" />
+        <input type="radio" name="user-shop-accordion" id="products" value="products"/>
         <h2 class="collapse-title text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Your Products</h2>
         <div class="collapse-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for product in products %}
@@ -120,7 +120,7 @@
 
     <!-- Sales Snapshot -->
     <div class="mt-5 collapse collapse-arrow">
-        <input type="radio" name="user-shop-accordion" id="recent-orders" value="recent-orders" />
+        <input type="radio" name="user-shop-accordion" id="recent-orders" value="recent-orders"/>
         <h2 class="collapse-title text-xl font-semibold mb-4 text-[var(--clr-gray-900)]">Recent Orders</h2>
         <table class="collapse-content table w-full border text-[var(--clr-gray-900)] border-[var(--clr-gray-100)] rounded-sm">
             <thead>
@@ -136,7 +136,9 @@
             {% for order in orders %}
                 <tr>
                     <td>{{ order.uuid }}</td>
-                    <td>{{ order.customer.full_name }}</td>
+                    <td>
+                        {{ order.customer.full_name }}
+                    </td>
                     <td>{{ order.total_amount|nepali_currency }}</td>
                     <td>{{ order.created|date:"M d, Y" }}</td>
                     <td>
@@ -173,7 +175,7 @@
         if (saved) {
             const radio = document.querySelector(`input[name="user-shop-accordion"][value="${saved}"]`);
             if (radio) radio.checked = true;
-        }else{
+        } else {
             radios[0].checked = true;
         }
 

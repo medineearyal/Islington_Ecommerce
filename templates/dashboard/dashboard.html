@@ -11,7 +11,8 @@
     <p class="text-[var(--clr-gray-700)]">
         From your account dashboard. you can easily check & view your <a href="{% url 'users:orders' %}"
                                                                          class="text-[var(--clr-secondary-500)]">Recent
-        Orders</a>, and edit your <a href="{% url 'users:profile' request.user.pk %}" class="text-[var(--clr-secondary-500)]">Account
+        Orders</a>, and edit your <a href="{% url 'users:profile' request.user.pk %}"
+                                     class="text-[var(--clr-secondary-500)]">Account
         Details</a>.
     </p>
 
@@ -46,12 +47,11 @@
                     </p>
                 </div>
 
-                <a href=""
+                <a href="{% url 'users:profile' request.user.pk %}"
                    class="btn btn-outline no-icon text-[var(--clr-secondary-500)] border-[var(--clr-secondary-100)] uppercase rounded-0">Edit
                     Account</a>
             </div>
         </div>
-
         {% if request.user.shipping_address %}
             <div class="bg-[var(--clr-gray-00) flex flex-col]">
                 <h3 class="uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
@@ -71,7 +71,7 @@
                         </p>
                     </div>
 
-                    <a href=""
+                    <a href="{% url 'users:profile' request.user.pk %}"
                        class="btn btn-outline no-icon text-[var(--clr-secondary-500)] border-[var(--clr-secondary-100)] uppercase rounded-0">Edit
                         Address</a>
                 </div>
@@ -92,7 +92,7 @@
                         </p>
                     </div>
 
-                    <a href=""
+                    <a href="{% url 'users:profile' request.user.pk %}"
                        class="btn btn-outline no-icon text-[var(--clr-secondary-500)] border-[var(--clr-secondary-100)] uppercase rounded-0">Add
                         Address</a>
                 </div>
@@ -102,7 +102,7 @@
         <div class="bg-[var(--clr-gray-00)] flex flex-col">
             <div class="stats flex flex-col gap-6 justify-between">
                 <div class="stat bg-[var(--clr-secondary-50)] rounded-sm grid-cols-4">
-                    <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                    <div class="stat-value col-start-2 text-[var(--clr-secondary-500)] font-semibold text-2xl">
                         {{ total_orders }}
                     </div>
                     <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Total Orders
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <div class="stat bg-[var(--clr-primary-50)] rounded-sm grid-cols-4">
-                    <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                    <div class="stat-value col-start-2 text-[var(--clr-primary-500)] font-semibold text-2xl">
                         {{ pending_orders }}
                     </div>
                     <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Pending Orders
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="stat bg-[var(--clr-success-50)] rounded-sm grid-cols-4">
-                    <div class="stat-value col-start-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+                    <div class="stat-value col-start-2 text-[var(--clr-success-500)] font-semibold text-2xl">
                         {{ completed_orders }}
                     </div>
                     <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Completed Orders
@@ -146,48 +146,62 @@
                         </div>
                     </div>
                 </div>
+                <div class="stat bg-[var(--clr-warning-50)] rounded-sm grid-cols-4">
+                    <div class="stat-value col-start-2 text-[var(--clr-danger-500)] font-semibold text-2xl">
+                        {{ request.user.redeem_points.redeem_points }}
+                    </div>
+                    <div class="stat-title col-start-2 text-[var(--clr-gray-700)] text-sm">Redeem Points</div>
+                    <div class="stat-figure text-secondary col-start-1 justify-self-start">
+                        <div class="avatar">
+                            <div class="w-14 rounded-xs bg-[var(--clr-gray-00)]">
+                                <img src="{% static 'images/icons/Reward.svg' %}"
+                                     class="w-8 aspect-square p-3" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="bg-[var(--clr-gray-00)]py-4">
         <h2 class="flex justify-between items-center uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
-            Recent Orders <a
+            Recent Orders <a href="{% url 'users:orders' %}"
                 class="btn bg-transparent text-[var(--clr-primary-500)] border-0 shadow-none nav-icon"
                 style="--nav-img-url: url({% static 'images/icons/ArrowRight.svg' %})">View All</a>
         </h2>
-        
+
         {% if recent_orders %}
-        <div class="overflow-x-auto rounded-b-sm">
-            <table class="table border border-[var(--clr-gray-100)]">
-                <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
-                <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
-                    <th class="uppercase">Order ID</th>
-                    <th class="uppercase">Status</th>
-                    <th class="uppercase">Date</th>
-                    <th class="uppercase">Sub-Total</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for order in recent_orders %}
-                    <tr class="text-sm">
-                        <td class="text-[var(--clr-gray-900)] font-medium">
-                            {{ order.uuid }}
-                        </td>
-                        <td>
-                            <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
-                        </td>
-                        <td class="text-[var(--clr-gray-600)]">
-                            {{ order.created }}
-                        </td>
-                        <td class="text-[var(--clr-gray-700)]">
-                            {{ order.total_amount|nepali_currency }}
-                        </td>
+            <div class="overflow-x-auto rounded-b-sm">
+                <table class="table border border-[var(--clr-gray-100)]">
+                    <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                    <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                        <th class="uppercase">Order ID</th>
+                        <th class="uppercase">Status</th>
+                        <th class="uppercase">Date</th>
+                        <th class="uppercase">Sub-Total</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                    {% for order in recent_orders %}
+                        <tr class="text-sm">
+                            <td class="text-[var(--clr-gray-900)] font-medium">
+                                {{ order.uuid }}
+                            </td>
+                            <td>
+                                <span class="text-[{{ order.status_with_colors.color }}] uppercase font-semibold">{{ order.status_with_colors.text }}</span>
+                            </td>
+                            <td class="text-[var(--clr-gray-600)]">
+                                {{ order.created }}
+                            </td>
+                            <td class="text-[var(--clr-gray-700)]">
+                                {{ order.total_amount|nepali_currency }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% else %}
             {% include "partials/empty_item.html" with item_name="Orders" %}
         {% endif %}

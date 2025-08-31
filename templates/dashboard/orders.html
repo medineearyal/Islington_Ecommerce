@@ -28,11 +28,7 @@
                                 {{ order.uuid }}
                             </td>
                             <td>
-                                {% if order.status == "Completed" %}
-                                    <span class="text-[var(--clr-secondary-500)] uppercase font-semibold">{{ order.status }}</span>
-                                {% else %}
-                                    <span class="text-[var(--clr-primary-500)] uppercase font-semibold">{{ order.status }}</span>
-                                {% endif %}
+                                <span class="text-[{{ order.status_with_colors.color }}] uppercase font-semibold">{{ order.status_with_colors.text }}</span>
                             </td>
                             <td class="text-[var(--clr-gray-600)]">
                                 {{ order.created }}
@@ -57,9 +53,11 @@
                                                 View Detail
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#" class="btn btn-outline btn-danger no-icon">Cancel</a>
-                                        </li>
+                                        {% if order.status != "canceled" or order.status != "delivered" %}
+                                            <li>
+                                                <a href="{% url 'users:order-update' order.uuid %}?status=cancel" class="btn btn-outline btn-danger no-icon">Cancel</a>
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </td>

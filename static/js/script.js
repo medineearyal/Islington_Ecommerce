@@ -205,8 +205,8 @@ window.addEventListener("DOMContentLoaded", function () {
 document.body.addEventListener("showMessage", function (event) {
     const container = document.getElementById("message-container");
     let toastMessage = `
-        <div class="toast toast-top toast-end z-10">
-            <div class="relative alert alert-info ${event.detail.tag} fade-out" role="alert">
+        <div class="toast toast-top toast-end z-9">
+            <div class="relative alert ${event.detail.tag} fade-out" role="alert">
                 <span id="toast-message">${event.detail.text}</span>
                 <div class="absolute bottom-0 left-0 h-1 bg-current progress-bar"></div>
             </div>
@@ -227,8 +227,9 @@ function decreaseStock(elem) {
     const stockElem = elem.parentElement.parentElement.querySelector("input[type=number]");
     const currentValue = Number(stockElem.value);
 
-    if (currentValue < Number(elem.getAttribute("min"))) {
+    if (currentValue > Number(stockElem.getAttribute("min"))) {
         stockElem.value = currentValue - 1;
+        stockElem.dispatchEvent(new Event("change", {bubbles: true}));
     }
 }
 
@@ -236,8 +237,9 @@ function increaseStock(elem) {
     const stockElem = elem.parentElement.parentElement.querySelector("input[type=number]");
     const currentValue = Number(stockElem.value);
 
-    if (currentValue < Number(elem.getAttribute("max"))) {
+    if (currentValue < Number(stockElem.getAttribute("max"))) {
         stockElem.value = currentValue + 1;
+        stockElem.dispatchEvent(new Event("change", {bubbles: true}));
     }
 }
 
@@ -251,13 +253,26 @@ function checkForStockOverflow(elem) {
         stockError.classList.remove("hidden");
         cartBtn.setAttribute("disabled", "disabled");
     } else {
-        stockError.classList.add("hidden");
-        cartBtn.removeAttribute("disabled");
+        if (stockError && cartBtn) {
+            stockError.classList.add("hidden");
+            cartBtn.removeAttribute("disabled");
 
-        const addToCartBtn = document.querySelector("#add-to-cart");
-        const hxGet = addToCartBtn.getAttribute("hx-get");
-        const newHxGet = `${hxGet}&quantity=${currentValue}`;
-        addToCartBtn.setAttribute("hx-get", newHxGet);
+            const addToCartBtn = document.querySelector("#add-to-cart");
+            const hxGet = addToCartBtn.getAttribute("hx-get");
+            let urlParams = new URLSearchParams(hxGet.split("?")[1]);
+            urlParams.set("quantity", currentValue);
+            const newHxGet = hxGet.split("?")[0] + "?" + urlParams.toString();
+            addToCartBtn.setAttribute("hx-get", newHxGet);
+            htmx.process(addToCartBtn);
+        }
+
+        const priceElem = document.getElementById(elem.getAttribute("data-price-container"));
+        const price = Number(elem.getAttribute("data-price"));
+        if (priceElem && price) {
+            priceElem.innerHTML = `Rs. ${currentValue * price}`;
+            const updateUrl = `${elem.getAttribute("data-url")}&quantity=${currentValue}`;
+            window.location.href = updateUrl;
+        }
     }
 }
 

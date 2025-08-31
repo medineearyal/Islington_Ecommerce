@@ -205,25 +205,30 @@ class CartPageView(TemplateView):
 
         total_sum, vat_amount, dst_amount, no_of_sellers = process_cart_totals(cart)
 
-        if self.request.GET.get("redeem"):
-            #TODO: Deduct the Amount with the Rs. Calculate Per the Redeem Points the buyer has.
-            pass
+        final_sum = total_sum + vat_amount + dst_amount
 
-        discount_for_redeem_points = 0
+        print(no_of_sellers)
+
         redeem_points = 0
-
         if self.request.user.is_authenticated:
             redeem_points = self.request.user.redeem_points.redeem_points
-            discount_for_redeem_points = self.request.user.redeem_points.get_discount
+
+            if self.request.GET.get("redeem"):
+                discount_for_redeem_points = self.request.user.redeem_points.get_discount
+                final_sum -= discount_for_redeem_points
+                context.update({
+                    "redeem_discount_amount": discount_for_redeem_points
+                })
+                redeem_points = 0
+
             context.update({
                 "redeem_points": redeem_points,
-                "redeem_discount_amount": discount_for_redeem_points
             })
 
         context.update({
             "cart": cart,
             "sub_total": total_sum,
-            "final_sum": total_sum + vat_amount + dst_amount - discount_for_redeem_points,
+            "final_sum": final_sum,
             "vat_amount": vat_amount,
             "dst_amount": dst_amount,
             "redeem_points": redeem_points,
@@ -248,13 +253,20 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 "multi_seller": True
             })
 
+        final_sum = total_sum + vat_amount + dst_amount
+        redeemed_discount_amount = 0
+        if self.request.GET.get("redeemed"):
+            redeemed_discount_amount =self.request.user.redeem_points.get_discount
+            final_sum -= redeemed_discount_amount
+
         context.update({
             "form": order_form,
             "cart": cart,
             "sub_total": total_sum,
-            "final_sum": round(total_sum + vat_amount + dst_amount),
+            "final_sum": final_sum,
             "vat_amount": vat_amount,
             "dst_amount": dst_amount,
+            "redeem_discount_amount": redeemed_discount_amount,
         })
 
         return context
@@ -268,7 +280,7 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        form = OrderForm(request.POST)
+        form = OrderForm(request.POST, user=request.user)
         context = self.get_context_data(**kwargs)
 
         if form.is_valid():
@@ -276,8 +288,12 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
             payment_method = form.cleaned_data.get("payment_option")
             order = form.save(commit=False)
             order.customer = user
+            order.total_amount = context.get("final_sum")
+            order.tax_amount = float(context.get("vat_amount")) + float(context.get("dst_amount"))
+            order.redeemed_amount = context.get("redeem_discount_amount")
             cart = context.get("cart")
             order.products = cart
+            order.multiple_sellers = context.get("multi_seller")
             order.save()
 
             whens = [
@@ -295,10 +311,12 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 order=order,
             )
 
-            multiple_seller = context.get("multi_seller", False)
+            if self.request.GET.get("redeemed"):
+                self.request.user.redeem_points.redeem_points = 0
+                self.request.user.redeem_points.save()
 
             if payment_method == PaymentOptions.QR:
-                return redirect(f"{reverse_lazy("orders:manual-pay", kwargs={"uuid": order.uuid})}?multi-seller={multiple_seller}")
+                return redirect(f"{reverse_lazy("orders:manual-pay", kwargs={"uuid": order.uuid})}")
             elif payment_method == PaymentOptions.KHALTI:
                 messages.success(request, "Your Order Has Been Placed Successfully... Happy Shopping!!")
                 url = f"{settings.KHALTI_BASE_URL}epayment/initiate/"
@@ -310,7 +328,7 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 payload = json.dumps({
                     "return_url": f"{settings.WEBSITE_URL}{reverse("orders:success")}?tid={transaction.uuid}",
                     "website_url": f"{settings.WEBSITE_URL}{reverse("pages:home")}",
-                    "amount": f"{order.total_amount}",
+                    "amount": f"{int(order.total_amount)}",
                     "purchase_order_id": f"{order.uuid}",
                     "purchase_order_name": f"{order}",
                     "customer_info": {
@@ -324,6 +342,8 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                     headers=headers,
                     data=payload
                 ).json()
+
+                print(response)
 
                 pidx = response["pidx"]
                 KhaltiTransaction.objects.create(
@@ -339,7 +359,6 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 messages.success(request, "Your Order Has Been Placed Successfully... Happy Shopping!!")
                 return redirect(f"{reverse_lazy("orders:success")}?tid={transaction.uuid}")
         else:
-            print(form.errors)
             context.update({
                 "form": form,
             })

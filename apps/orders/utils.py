@@ -15,7 +15,7 @@ def process_cart_totals(cart):
 
     for pid, item in cart.items():
         product = get_object_or_404(Product, pk=int(pid))
-        sellers.add(product.seller_id)
+        sellers.add(item["seller"])
 
         if item["discount"]:
             item["total_price"] = item["discounted_price"] * item["quantity"]
@@ -32,8 +32,6 @@ def process_cart_totals(cart):
 
     total_sum = sum(item["total_price"] for _, item in cart.items())
     # TODO: VAT Amount Might Change
-    # TODO: Need to Handle Coupon To Give Certain Discount On The Overall Total
     vat_amount = sum(item["vat_amount"] for _, item in cart.items())
     dst_amount = sum(item["digital_service_tax"] for _, item in cart.items() if hasattr(item, "digital_service_tax"))
-
     return total_sum, vat_amount, dst_amount, len(sellers)

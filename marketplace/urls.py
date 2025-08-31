@@ -18,6 +18,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+
+from apps.common.admin import admin_site
 from apps.pages.views import custom_400, custom_403, custom_404, custom_500
 
 handler404 = custom_404
@@ -26,7 +28,7 @@ handler403 = custom_403
 handler400 = custom_400
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin/", admin_site.urls),
     path("", include("apps.pages.urls")),
     path("accounts/", include("allauth.urls")),
     path("users/", include("apps.users.urls")),
