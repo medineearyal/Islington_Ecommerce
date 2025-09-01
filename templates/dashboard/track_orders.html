@@ -54,9 +54,8 @@
             e.preventDefault();
 
             const orderId = form.querySelector("[name='orderId']").value;
-            const email = form.querySelector("[name='shippingEmail']").value;
 
-            form.action = "/users/orders/track/" + encodeURIComponent(orderId) + "?email=" + encodeURIComponent(email);
+            form.action = "/users/orders/track/" + encodeURIComponent(orderId);
             form.submit();
         });
     </script>
