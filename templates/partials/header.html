@@ -1,10 +1,10 @@
 {% load static %}
 
 <header id="header" class="main-header bg-[var(--clr-secondary-650)]">
-    <div class="container flex flex-row justify-between items-center mx-auto py-4">
+    <div class="px-2 xl:px-0 container flex flex-row justify-between items-center mx-auto py-4">
         <span class="text-sm font-light ">Welcome to Islington Ecommerce</span>
 
-        <div class="flex gap-2 items-center">
+        <div class="flex flex-col md:flex-row gap-2 items-center">
             <span class="text-sm font-light">Follow Us:</span>
             <ul role="list" class="flex flex-row justify-center gap-2 border-r-1 border-[var(--clr-gray-00)] pr-2">
                 {% if setting.facebook %}
@@ -41,21 +41,21 @@
 
     <div class="divider m-0"></div>
 
-    <div class="container flex justify-between items-center py-5 m-auto">
+    <div class="px-2 xl:px-0 container md:flex-row justify-between items-center py-5 m-auto flex flex-col gap-2">
         <a href="{% url 'pages:home' %}">
             <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
         </a>
 
-        <form method="get" class="" action="{% url 'pages:shop' %}">
-            <label class="input w-[100%] bg-[var(--clr-gray-00)]">
-                <input type="search" class="grow text-black w-100" name="query" placeholder="Search For Anything"/>
+        <form method="get" class="w-full" action="{% url 'pages:shop' %}">
+            <label class="input bg-[var(--clr-gray-00)] w-full md:w-fit">
+                <input type="search" class="sm:grow text-black w-100" name="query" placeholder="Search For Anything"/>
                 <img src="{% static 'images/icons/Search.svg' %}" alt="Search Icon"/>
             </label>
         </form>
 
         <ul role="list" class="flex gap-2 items-center">
-            <li>
-                <button class="relative popover-cart cursor-pointer" popovertarget="popover-cart">
+            <li class="flex">
+                <button class="hidden md:block relative popover-cart cursor-pointer" popovertarget="popover-cart">
                     <svg class="stroke-[var(--clr-gray-00)]" width="32" height="32"
                          viewBox="0 0 21 20"
                          fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,17 +72,39 @@
                         {{ request.session.cart|length }}
                     </span>
                 </button>
+
+                <a href="{% url 'pages:cart' %}" class="inline md:hidden">
+                    <svg class="stroke-[var(--clr-gray-00)]" width="32" height="32"
+                         viewBox="0 0 21 20"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75 16.375C7.02614 16.375 7.25 16.5989 7.25 16.875C7.25 17.1511 7.02614 17.375 6.75 17.375C6.47386 17.375 6.25 17.1511 6.25 16.875C6.25 16.5989 6.47386 16.375 6.75 16.375Z"
+                              fill="white" stroke="" stroke-width="1.5"/>
+                        <path d="M14.875 18.125C15.5654 18.125 16.125 17.5654 16.125 16.875C16.125 16.1846 15.5654 15.625 14.875 15.625C14.1846 15.625 13.625 16.1846 13.625 16.875C13.625 17.5654 14.1846 18.125 14.875 18.125Z"
+                              fill="white"/>
+                        <path d="M3.80469 5.625H17.8203L15.7578 12.8438C15.6842 13.1057 15.5266 13.3363 15.3093 13.5C15.0919 13.6638 14.8268 13.7516 14.5547 13.75H7.07031C6.79819 13.7516 6.53308 13.6638 6.31572 13.5C6.09836 13.3363 5.94078 13.1057 5.86719 12.8438L3.03906 2.95313C3.00169 2.82246 2.92275 2.70754 2.8142 2.62578C2.70565 2.54401 2.5734 2.49986 2.4375 2.5H1.125"
+                              stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    <span id="cart-count"
+                          class="absolute -top-1 -right-1 bg-[var(--clr-gray-00)] text-[var(--clr-secondary-700)] text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                        {{ request.session.cart|length }}
+                    </span>
+                </a>
             </li>
-            <li>
-                <a href="{% url 'pages:wishlist' %}">
+            <li class="flex">
+                <a href="{% url 'pages:wishlist' %}" class="h-[32px] w-[32px] inline-flex">
                     <img src="{% static 'images/icons/Heart.svg' %}" alt="Favorites">
                 </a>
             </li>
-            <li class="user-menu">
+            <li class="user-menu flex">
                 {% if not request.user.is_authenticated %}
-                    <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login">
+                    <button class="hidden md:flex popover-login outline-none cursor-pointer h-[32px] w-[32px]" popovertarget="popover-login" >
                         <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
                     </button>
+                    
+                    <a href="{% url 'account_login' %}" class="flex md:hidden popover-login" >
+                        <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                    </a>
                 {% else %}
                     <ul
                             tabindex="0"
@@ -101,20 +123,19 @@
                         </li>
                     </ul>
                 {% endif %}
-
             </li>
         </ul>
     </div>
 
     <div class="bg-[var(--clr-gray-00)]">
-        <div class="container mx-auto navbar">
-            <div class="navbar">
+        <div class="container mx-auto navbar justify-between p-0 block md:flex">
+            <div class="navbar w-fit">
                 <!-- TODO: Need To Create Category Detail Page -->
 
                 <ul class="menu menu-horizontal px-1 text-[var(--clr-gray-600)] font-normal items-center">
-                    <li>
+                    <li class="w-fit">
                         <details
-                                class="z-2 text-[var(--clr-gray-800)] text-sm font-medium bg-[var(--clr-gray-50)] py-3.5 px-6 [&[open]]:bg-[var(--clr-primary-500)] [&[open]]:text-[var(--clr-gray-00)]">
+                                class="z-2 text-[var(--clr-gray-800)] text-sm font-medium bg-[var(--clr-gray-50)] py-3.5 px-2 [&[open]]:bg-[var(--clr-primary-500)] [&[open]]:text-[var(--clr-gray-00)]">
                             <summary class="">All Category</summary>
                             <ul class="bg-[var(--clr-gray-00)] text-[var(--clr-gray-600)] rounded-sm w-[240px] left-0 border border-[var(--clr-gray-100)]"
                                 style="padding: 12px 0;">
@@ -129,10 +150,11 @@
                                             <details
                                                     class="[&[open]]:bg-[var(--clr-gray-50)] [&[open]]:text-[var(--clr-gray-900)]">
                                                 <summary class="px-4 py-2">
-                                                    <a class="justify-between">{{ category }}</a>
+                                                    <a class="justify-between hidden xl:inline">{{ category }}</a>
+                                                    <a href="{% url 'pages:shop' %}?category={{ category.slug }}" class="justify-between xl:hidden">{{ category }}</a>
                                                 </summary>
 
-                                                <div class="flex gap-6 p-5 absolute left-full top-0 bg-[var(--clr-gray-00)] rounded-sm py-3 border border-[var(--clr-gray-100)] ml-3">
+                                                <div class="hidden xl:flex gap-6 p-5 absolute left-full top-0 bg-[var(--clr-gray-00)] rounded-sm py-3 border border-[var(--clr-gray-100)] ml-3">
                                                     <div class="tabs flex-column w-[164px] content-start"
                                                          role="tablist">
                                                         <a class="tab px-4 py-2 tab-active"
@@ -195,13 +217,13 @@
                             </ul>
                         </details>
                     </li>
-                    <li>
+                    <li class="w-fit">
                         <a href="{% url 'users:order-track' %}">
                             <img src="{% static 'images/icons/MapPinLine.svg' %}" alt=""/>
                             Track Order
                         </a>
                     </li>
-                    <li>
+                    <li class="w-fit">
                         <a href="{% url 'products:compare_products' %}">
                             <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
                             Compare
@@ -222,7 +244,7 @@
                 </ul>
             </div>
 
-            <div class="navbar-end text-[var(--clr-gray-900)]">
+            <div class="px-6 navbar-end text-[var(--clr-gray-900)] w-fit">
                 <span class="flex items-center gap-2">
                     <img src="{% static 'images/icons/Call.svg' %}" alt=""/>
                     {{ setting.phone }}

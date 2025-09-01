@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-skcy1p9%nbv^w^-qui%=f+!^wb7r^$g0g^8a9w!65i+jzy1hyf"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG") == "True"
+DEBUG = config("DEBUG_STATUS", False) == "True"
 
 ALLOWED_HOSTS = [
     "summer-class.onrender.com",

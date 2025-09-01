@@ -1,8 +1,8 @@
 {% load static %}
 {% load currency %}
 
-<div class="card rounded-none border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] h-[296px]">
-    <figure class="relative indicator w-full group/outer">
+<div class="card rounded-none border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] h-[296px] mb-4 md:mb-0">
+    <figure tabindex="0" class="relative indicator w-full group/outer focus:outline-none">
         <img
                 {% if product.thumbnail %}
                     src="{{ product.thumbnail.url }}"

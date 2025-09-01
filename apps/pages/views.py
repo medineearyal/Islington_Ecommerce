@@ -31,7 +31,7 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
 
-        banners = ProductBanner.objects.filter(is_display=True)[:3]
+        banners = ProductBanner.objects.filter(is_display=True)[:4]
         categories = Category.objects.annotate(product_count=Count("product_category", distinct=True)).filter(parent__isnull=True, product_count__gt=0)
 
         products = Product.objects.all().filter(is_verified=True)

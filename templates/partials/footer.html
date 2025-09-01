@@ -2,7 +2,7 @@
 
 <footer class="bg-[var(--clr-secondary-650)] pt-18">
     <div class="container mx-auto">
-        <div class="grid grid-cols-3 gap-6">
+        <div class="block text-center md:text-left p-4 md:grid md:grid-cols-3 gap-6">
             <div>
                 <img src="{% static 'images/logo.PNG' %}" alt=""/>
 
@@ -21,8 +21,8 @@
                 <p class="text-base font-medium">{{ setting.email }}</p>
             </div>
 
-            <div class="flex gap-6">
-                <div>
+            <div class="md:flex gap-6">
+                <div class="mb-4 md:mb-0">
                     <h3 class="text-base font-medium]">TOP CATEGORY</h3>
 
                     <ul role="list" class="text-[var(--clr-gray-400)] text-sm font-medium">
@@ -35,7 +35,7 @@
                         {% endfor %}
                     </ul>
 
-                    <span class="flex items-center gap-2 font-medium text-sm">
+                    <span class="justify-center md:justify-normal flex items-center gap-2 font-medium text-sm">
                         <span class="divider bg-[var(--clr-warning-500)] w-[10%]" style="height: 2px;"></span>
                         Accessories
                     </span>
@@ -83,10 +83,10 @@
                 </div>
             </div>
 
-            <div>
+            <div class="">
                 <h3 class="text-base font-medium] mb-4.5">POPULAR TAG</h3>
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-center md:justify-normal">
                     {% for category in categories %}
                         <a href="{% url 'pages:shop' %}?category={{ category.slug }}" class="btn no-icon text-sm bg-transparent px-3 py-1.5 shadow-none hover:border-[var(--clr-gray-00)] hover:bg-[var(--clr-gray-800)]">{{ category }}</a>
                     {% endfor %}

@@ -5,15 +5,16 @@
 
 {% block content %}
     <section class="mx-auto py-6">
-        <div class="grid grid-cols-3 gap-6">
+        <div class="lg:grid md:grid-cols-3 block gap-6">
             <div class="col-span-2 rounded-md bg-[var(--clr-gray-50)]">
                 <div class="swiper-banner overflow-hidden relative">
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         {% for banner in banners %}
+                            {% if forloop.counter < 4 %}
                             <div class="swiper-slide">
-                                <div id="main-banner-{{ banner.pk }}" class="carousel-item p-13 items-center gap-9">
-                                    <div class="w-[356px]">
+                                <div id="main-banner-{{ banner.pk }}" class="block lg:carousel-item p-4 md:p-13 items-center gap-9 justify-center md:justify-normal">
+                                    <div class="mb-4 xl:mb-0 lg:w-[356px] w-full h-[308px]">
                                         <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
                                             <div class="divider bg-[var(--clr-secondary-600)] w-[10%]"
                                                  style="height: 2px;"></div>
@@ -40,23 +41,24 @@
                                                 class="w-[368px] h-[408px] object-center object-cover"/>
                                 </div>
                             </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <!-- If we need pagination -->
-                    <div class="swiper-pagination left-0 w-fit"></div>
+                    <div class="swiper-pagination left-0 w-full md:w-fit md:left-[105px]"></div>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4 items-center justify-between">
+            <div class="md:flex lg:flex-col md:flex-row gap-4 items-center justify-between p-4 xl:p-0">
                 {% include 'partials/banner/banner_small_1.html' with product=best_deals.products.all.0 %}
 
                 {% include 'partials/banner/banner_small_2.html' with product=best_deals.products.all.1 %}
             </div>
         </div>
 
-        <div class="p-4 rounded-md border border-[var(--clr-gray-00)] mt-6 flex justify-between">
-            <div class="feature-card">
-                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+        <div class="p-4 rounded-md border border-[var(--clr-gray-00)] mt-6 block md:flex justify-between">
+            <div class="feature-card w-fit">
+                <img src="{% static 'images/icons/Package.svg' %}" alt="" class="w-10 aspect-square" />
 
                 <div>
                     <p>FASTEST DELIVERY</p>
@@ -66,8 +68,8 @@
 
             <div class="feature-divider"></div>
 
-            <div class="feature-card">
-                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+            <div class="feature-card w-fit">
+                <img src="{% static 'images/icons/Package.svg' %}" alt="" class="w-10 aspect-square"/>
 
                 <div>
                     <p>24 Hours Return</p>
@@ -77,8 +79,8 @@
 
             <div class="feature-divider"></div>
 
-            <div class="feature-card">
-                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+            <div class="feature-card w-fit">
+                <img src="{% static 'images/icons/Package.svg' %}" alt="" class="w-10 aspect-square" />
 
                 <div>
                     <p>Secure Payment</p>
@@ -88,8 +90,8 @@
 
             <div class="feature-divider"></div>
 
-            <div class="feature-card">
-                <img src="{% static 'images/icons/Package.svg' %}" alt=""/>
+            <div class="feature-card w-fit">
+                <img src="{% static 'images/icons/Package.svg' %}" alt="" class="w-10 aspect-square" />
 
                 <div>
                     <p>Support 24/7</p>
@@ -100,11 +102,11 @@
     </section>
 
     {% if best_deals %}
-        <section class="mx-auto py-18">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
+        <section class="p-4 xl:p-0 mx-auto py-18">
+            <div class="block md:flex justify-between items-center mb-6">
+                <h2 class="md:flex items-center gap-2 text-[var(--clr-gray-900)] font-semibold text-2xl">
                     Best Deals
-                    <span class="text-sm">
+                    <span class="mt-4 md:mt-0 text-sm block md:inline">
                                 Deal ends in
                                 <span id="best-deal-remaining-time"
                                       class="text-base px-3 py-2 bg-[var(--clr-warning-300)]"
@@ -118,56 +120,56 @@
 
             {% with first_prod=best_deals.products.all.0 %}
                 {% if first_prod %}
-                <div class="grid grid-cols-12">
-                <div class="lg:col-span-3 md:col-span-5 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-fit pt-0">
-                    <figure class="mb-6">
-                        {% if first_prod.thumbnail %}
-                            <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}"
-                                 class="h-full w-[280px] object-cover object-center"/>
-                        {% else %}
-                            <img src="{% static 'images/products/product_2.png' %}" alt=""/>
-                        {% endif %}
-                    </figure>
+                <div class="md:grid grid-cols-12">
+                    <div class="mb-4 md:mb-0 lg:col-span-3 md:col-span-5 border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] p-6 h-fit pt-0">
+                        <figure class="mb-6">
+                            {% if first_prod.thumbnail %}
+                                <img src="{{ first_prod.thumbnail.url }}" alt="{{ first_prod }}"
+                                     class="h-full w-[280px] object-cover object-center justify-self-center"/>" />
+                            {% else %}
+                                <img src="{% static 'images/products/product_2.png' %}" alt=""/>
+                            {% endif %}
+                        </figure>
 
-                    {% include "partials/products/ratings.html" with rating=products.average_ratings %}
+                        {% include "partials/products/ratings.html" with rating=products.average_ratings %}
 
-                    <div class="mb-6">
-                        <h3 class="text-[var(--clr-gray-900)]">{{ first_prod.name }}</h3>
+                        <div class="mb-6">
+                            <h3 class="text-[var(--clr-gray-900)]">{{ first_prod.name }}</h3>
 
-                        <p class="my-3">
-                            <span class="line-through text-[var(--clr-gray-300)]">Rs. {{ first_prod.price }}</span>
-                            <span class="text-[var(--clr-secondary-500)]">Rs. {{ first_prod.discounted_price }}</span>
-                        </p>
+                            <p class="my-3">
+                                <span class="line-through text-[var(--clr-gray-300)]">Rs. {{ first_prod.price }}</span>
+                                <span class="text-[var(--clr-secondary-500)]">Rs. {{ first_prod.discounted_price }}</span>
+                            </p>
 
-                        <p class="text-[var(--clr-gray-600)]">
-                            {{ first_prod.description }}
-                        </p>
+                            <p class="text-[var(--clr-gray-600)]">
+                                {{ first_prod.description }}
+                            </p>
+                        </div>
+
+                        <div class="flex gap-2 items-center">
+                            <a href="{% url 'pages:wishlist' %}?action=add&product_slug={{ first_prod.slug }}" class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                                <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
+                            </a>
+
+                            <a
+                                    hx-get="{% url 'products:cart' first_prod.pk %}?action=add"
+                                    hx-target="#cart-list"
+                                    hx-swap="innerHTML"
+                                    class="btn btn-primary no-icon rounded-[2px] h-12"
+                            >
+                                <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
+                                ADD TO CART
+                            </a>
+
+                            <a href="{% url 'products:detail' first_prod.slug %}"
+                               class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
+                                <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
+                            </a>
+                        </div>
                     </div>
-
-                    <div class="flex gap-2 items-center">
-                        <a href="{% url 'pages:wishlist' %}?action=add&product_slug={{ first_prod.slug }}" class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
-                            <img src="{% static 'images/icons/Heart_Dark.svg' %}" alt=""/>
-                        </a>
-
-                        <a
-                                hx-get="{% url 'products:cart' first_prod.pk %}?action=add"
-                                hx-target="#cart-list"
-                                hx-swap="innerHTML"
-                                class="btn btn-primary no-icon rounded-[2px] h-12"
-                        >
-                            <img src="{% static 'images/icons/Cart.svg' %}" alt=""/>
-                            ADD TO CART
-                        </a>
-
-                        <a href="{% url 'products:detail' first_prod.slug %}"
-                           class="flex items-center justify-center bg-[var(--clr-primary-100)] w-12 aspect-square">
-                            <img src="{% static 'images/icons/Eye.svg' %}" alt=""/>
-                        </a>
-                    </div>
-                </div>
                 {% endif %}
             {% endwith %}
-            
+
             <div class="lg:col-span-9 md:col-span-7">
                 <div class="grid lg:grid-cols-4 md:grid-cols-2">
                     {% for product in best_deals.products.all|slice:"1:" %}
@@ -179,7 +181,7 @@
         </section>
     {% endif %}
 
-    <section class="mx-auto">
+    <section class="px-4 xl:px-0 mx-auto">
         <h2 class="text-[var(--clr-gray-900)] text-center text-[2rem] font-semibold mb-10">Shop With Categorys</h2>
 
         <div class="main-category-swiper-wrapper relative w-full">
@@ -199,24 +201,20 @@
     </section>
 
     <section class="section-featured mx-auto py-18">
-        <div class="grid grid-cols-12">
-            <div class="lg:col-span-3 md:col-span-5">
-                {% include 'partials/banner/banner_large_1.html' %}
+        <div class="md:grid grid-cols-12">
+            <div class="lg:col-span-4 md:col-span-5">
+                {% include 'partials/banner/banner_large_1.html' with product=banners.all.3 %}
             </div>
 
-            <div class="lg:col-span-9 md:col-span-7">
-                <div class="flex justify-between items-center mb-6.5">
-                    <h2 class="text-[var(--clr-gray-900)] font-semibold text-2xl inline">
+            <div class="lg:col-span-8 md:col-span-7 p-4 xl:p-0">
+                <div class="block md:flex justify-between items-center mb-6.5">
+                    <h2 class="block text-[var(--clr-gray-900)] font-semibold text-2xl md:inline">
                         New Arrivals
                     </h2>
 
-                    <div class="flex justify-between items-center">
+                    <div class="block md:flex justify-between items-center">
                         <div role="tablist" class="tabs tabs-border text-[var(--clr-gray-600)] text-sm mr-2">
                             <a role="tab" class="tab tab-active">All Product</a>
-                            {#                            <a role="tab" class="tab">Smart Phone</a>#}
-                            {#                            <a role="tab" class="tab">Laptop</a>#}
-                            {#                            <a role="tab" class="tab">Headphone</a>#}
-                            {#                            <a role="tab" class="tab">TV</a>#}
                         </div>
 
                         <a href="{% url 'pages:shop' %}"
@@ -236,7 +234,7 @@
                     </div>
                 </div>
 
-                <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
+                <div class="md:grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 gap-4">
                     {% for product in new_arrivals.all %}
                         <div class="h-full flex">
                             {% include 'partials/products/card_regular_rating.html' with product=product %}
@@ -246,13 +244,13 @@
                         </div>
                     {% endfor %}
 
-                    <div class="col-span-2">
+                    <div class="xl:col-span-2 md:col-span-full">
                         <div class="swiper featured-swiper border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]">
                             <div class="swiper-wrapper">
                                 {% for banner in banners %}
                                     <div class="swiper-slide">
                                         <div id="new-arrival-{{ banner.pk }}"
-                                             class="carousel-item p-13 items-center gap-9">
+                                             class="carousel-item p-4 md:p-13 items-center gap-9">
                                             <div class="w-fit">
                                                 <span class="flex items-center text-[var(--clr-secondary-600)] gap-2 font-semibold text-sm">
                                                     <div class="divider bg-[var(--clr-secondary-600)] w-[10%]"
@@ -283,11 +281,11 @@
         <div id="quick-view-container"></div>
     </section>
 
-    <section class="section-blogs py-18 bg-[var(--clr-gray-50)]">
+    <section class="p-4 xl:p-0 section-blogs py-18 bg-[var(--clr-gray-50)]">
         <div class="container mx-auto">
             <h2 class="text-[var(--clr-gray-900)] text-center font-semibold text-2xl mb-10">Latest Blogs</h2>
 
-            <div class="grid grid-cols-3 gap-6">
+            <div class="md:grid grid-cols-3 gap-6">
                 {% for blog in blogs %}
                     {% include 'partials/blog/blog_card.html' with blog=blog %}
                 {% endfor %}
