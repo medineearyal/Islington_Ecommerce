@@ -23,10 +23,10 @@
             {% include 'partials/products/card_hover_buttons.html' with product=product %}
         </div>
     </figure>
-    <div class="card-body">
-        <a href="{% url 'products:detail' product.slug %}">
+    <div class="card-body p-0">
+        <a href="{% url 'products:detail' product.slug %}" class="p-6">
             <h2 class="card-title text-[var(--clr-gray-900)] text-sm">{{ product.name }}</h2>
+            <span class="text-[var(--clr-secondary-500)]">{{ product.price|nepali_currency }}</span>
         </a>
-        <span class="text-[var(--clr-secondary-500)]">{{ product.price|nepali_currency }}</span>
     </div>
 </div>

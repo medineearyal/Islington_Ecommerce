@@ -46,14 +46,14 @@
             <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
         </a>
 
-        <form method="get" class="w-full" action="{% url 'pages:shop' %}">
+        <form method="get" class="sm:w-fit w-full" action="{% url 'pages:shop' %}">
             <label class="input bg-[var(--clr-gray-00)] w-full md:w-fit">
-                <input type="search" class="sm:grow text-black w-100" name="query" placeholder="Search For Anything"/>
+                <input type="search" class="text-black lg:w-100" name="query" placeholder="Search For Anything"/>
                 <img src="{% static 'images/icons/Search.svg' %}" alt="Search Icon"/>
             </label>
         </form>
 
-        <ul role="list" class="flex gap-2 items-center">
+        <ul role="list" class="flex gap-2 items-center flex-wrap">
             <li class="flex">
                 <button class="hidden md:block relative popover-cart cursor-pointer" popovertarget="popover-cart">
                     <svg class="stroke-[var(--clr-gray-00)]" width="32" height="32"
@@ -115,7 +115,7 @@
                                     <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
                                     {{ request.user }}
                                 </summary>
-                                <ul class="p-0 w-full bg-[var(--clr-gray-00)] text-[var(--gray-900)] rounded-none">
+                                <ul class="p-0 w-full bg-[var(--clr-gray-00)] text-[var(--gray-900)] rounded-none z-3">
                                     <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
                                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
                                 </ul>

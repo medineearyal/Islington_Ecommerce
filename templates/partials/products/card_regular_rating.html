@@ -2,9 +2,9 @@
 {% load currency %}
 
 <div class="mb-4 md:mb-0 card rounded-none border border-[var(--clr-gray-100)] bg-[var(--clr-gray-00)] w-full items-center">
-    <figure class="indicator group/outer">
+    <figure class="indicator group/outer w-full">
         <img
-                class="w-[202px] h-[172px] object-cover"
+                class="w-[202px] h-[172px] sm:w-full object-cover"
                 {% if product.thumbnail %}
                 src="{{ product.thumbnail.url }}"
                 {% else %}
@@ -23,10 +23,12 @@
             {% include 'partials/products/card_hover_buttons.html' with product=product %}
         </div>
     </figure>
-    <div class="card-body p-4">
-        {% include "partials/products/ratings.html" with rating=product.overall_ratings %}
+    <div class="card-body p-0">
+        <div class="px-4 pt-2">
+            {% include "partials/products/ratings.html" with rating=product.overall_ratings %}
+        </div>
 
-        <a href="{% url 'products:detail' product.slug %}">
+        <a href="{% url 'products:detail' product.slug %}" class="px-4 py-2">
             <h2 class="card-title text-[var(--clr-gray-900)] text-sm font-normal">
                 {% if product.name %}
                     {{ product.name }}
@@ -34,14 +36,14 @@
                     TOZO T6 True Wireless Earbuds Bluetooth Headphon...
                 {% endif %}
             </h2>
-        </a>
 
-        <span class="text-[var(--clr-secondary-500)]">
-            {% if product.price %}
-                {{ product.price|nepali_currency }}
-            {% else %}
-                Rs. 2,300
-            {% endif %}
-        </span>
+            <span class="text-[var(--clr-secondary-500)]">
+                {% if product.price %}
+                    {{ product.price|nepali_currency }}
+                {% else %}
+                    Rs. 2,300
+                {% endif %}
+            </span>
+        </a>
     </div>
 </div>

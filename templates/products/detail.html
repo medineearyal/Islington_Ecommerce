@@ -8,8 +8,8 @@
     <section class="section-with-breadcrumb">
         {% include "partials/breadcrumb.html" %}
 
-        <div class="container mx-auto">
-            <div class="grid grid-cols-2 justify-center gap-14 pt-8 pb-18">
+        <div class="p-4 lg:p-0 container mx-auto">
+            <div class="md:grid grid-cols-2 justify-center gap-14 pt-8 pb-18">
                 <div class="flex flex-col gap-4">
                     <div class="product-main-swiper overflow-hidden w-full h-[414px] rounded-sm border border-[var(--clr-gray-100)] text-center">
                         <div class="swiper-wrapper">
@@ -75,11 +75,11 @@
                     </div>
 
                     {% if product.discounted_price != product.price %}
-                        <p class="my-6 text-[var(--clr-secondary-500)] font-semibold text-2xl flex items-center">
+                        <p class="md:flex my-6 text-[var(--clr-secondary-500)] font-semibold text-2xl items-center">
                             {{ product.discounted_price|nepali_currency }} <span
                                 class="text-[var(--clr-gray-500)] text-lg line-through">{{ product.price|nepali_currency }}</span>
                             <span
-                                    class="badge rounded-xs ml-3 text-[var(--clr-gray-900)] bg-[var(--clr-warning-400)] font-semibold py-[5px] border-0">{{ product.discount }}% OFF</span>
+                                    class="badge rounded-xs md:ml-3 text-[var(--clr-gray-900)] bg-[var(--clr-warning-400)] font-semibold py-[5px] border-0">{{ product.discount }}% OFF</span>
                         </p>
                     {% else %}
                         <p class="my-6 text-[var(--clr-secondary-500)] font-semibold text-2xl">{{ product.price|nepali_currency }}</p>
@@ -216,7 +216,7 @@
                 </div>
 
                 <!-- Tab Content -->
-                <div class="p-10">
+                <div class="sm:p-10 p-4">
                     {% for description in product.descriptions.all %}
                         <div class="tab-panel p-4 text-[var(--clr-gray-600)] {% if not forloop.first %}hidden{% endif %}"
                              id="{{ description.title|slugify }}">
@@ -261,9 +261,9 @@
                 </div>
             </div>
 
-            <div class="py-18">
+            <div class="px-4 lg:px-0 py-18">
                 <h2 class="text-base font-semibold uppercase text-[var(--clr-gray-900)]">Related Products</h2>
-                <div class="grid grid-cols-4 gap-6">
+                <div class="md:grid md:grid-cols-2 lg:gird-cols-4 gap-6">
                     {% for related_product in related_products %}
                         {% include "partials/menu/product_card.html" with product=related_product %}
                     {% endfor %}

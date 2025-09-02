@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "www.medineearyal.com.np",
     "medineearyal.com.np",
+    "192.168.1.108"
 ]
 ALLOWED_HOSTS += config("ALLOWED_HOST", "").split(",")
 
@@ -539,3 +540,5 @@ REST_FRAMEWORK = {
 }
 
 ENV = config("ENV", "DEVELOPMENT")
+
+print(ALLOWED_HOSTS)
