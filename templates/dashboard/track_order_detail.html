@@ -16,7 +16,7 @@
         <span class="text-[var(--clr-secondary-500)] font-semibold text-3xl">{{ order.total_amount|nepali_currency }}</span>
     </div>
 
-    <p class="text-sm text-[var(--clr-gray-700)] my-6">Order Expected arrival <span class="text-[var(--clr-gray-900)]">23 Aug, 2025</span>
+    <p class="text-sm text-[var(--clr-gray-700)] my-6">Order Expected arrival <span class="text-[var(--clr-gray-900)]">{{ order.delivery_date }}</span>
     </p>
 
     <div class="text-[var(--clr-gray-900)]">

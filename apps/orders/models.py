@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.db import models
 import uuid
@@ -72,6 +74,10 @@ class Order(TimeStampedModel, models.Model):
             "text": self.status,
             "color": OrderStatusColors[self.status.upper()].label,
         }
+
+    @property
+    def delivery_date(self):
+        return (self.created + timedelta(days=2)).date()
 
 
 class OrderStatusLog(TimeStampedModel, models.Model):

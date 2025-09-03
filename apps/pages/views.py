@@ -328,7 +328,7 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                 payload = json.dumps({
                     "return_url": f"{settings.WEBSITE_URL}{reverse("orders:success")}?tid={transaction.uuid}",
                     "website_url": f"{settings.WEBSITE_URL}{reverse("pages:home")}",
-                    "amount": f"{int(order.total_amount)}",
+                    "amount": f"{int(order.total_amount)*100}",
                     "purchase_order_id": f"{order.uuid}",
                     "purchase_order_name": f"{order}",
                     "customer_info": {
@@ -337,13 +337,12 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                         "phone": "9800000001"
                     }
                 })
+                print(payload)
                 response = requests.post(
                     url=url,
                     headers=headers,
                     data=payload
                 ).json()
-
-                print(response)
 
                 pidx = response["pidx"]
                 KhaltiTransaction.objects.create(
