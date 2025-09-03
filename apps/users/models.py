@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.common.validators import validate_nepali_mobile
+from apps.common.validators import validate_nepali_mobile, validate_names
 from apps.users.constants import UserTypeEnum
 from apps.users.managers import AuthUserManager
 
@@ -17,10 +17,10 @@ class AuthUser(AbstractUser):
 
     seller_shop_logo = models.ImageField(upload_to="user/seller/profile/", null=True, blank=True)
     seller_qr_code = models.ImageField(upload_to="user/profile/", null=True, blank=True)
-    seller_bank_name = models.CharField(max_length=255, null=True, blank=True)
+    seller_bank_name = models.CharField(max_length=255, null=True, blank=True, validators=[validate_names])
     seller_bank_account_number = models.CharField(max_length=255, null=True, blank=True)
     seller_bank_branch_name = models.CharField(max_length=255, null=True, blank=True)
-    seller_bank_account_name = models.CharField(max_length=255, null=True, blank=True)
+    seller_bank_account_name = models.CharField(max_length=255, null=True, blank=True, validators=[validate_names])
     is_verified_seller = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"

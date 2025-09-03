@@ -4,7 +4,7 @@ from django import forms
 from .constants import UserTypeEnum
 from .models import AuthUser
 from apps.common.models import AddressModel
-from ..common.validators import validate_nepali_mobile
+from ..common.validators import validate_nepali_mobile, validate_names
 from ..orders.constants import NepalProvinceEnum, BagmatiCities, CountryEnum
 
 
@@ -43,29 +43,29 @@ class UserLoginForm(LoginForm):
 
 class UserSignupForm(SignupForm):
     first_name = forms.CharField(max_length=255, label="First Name",
-                                 error_messages={"required": "First Name is required"})
-    last_name = forms.CharField(max_length=255, label="Last Name", error_messages={"required": "Last Name is required"})
+                                 error_messages={"required": "First Name is required"}, validators=[validate_names, ])
+    last_name = forms.CharField(max_length=255, label="Last Name", error_messages={"required": "Last Name is required"}, validators=[validate_names, ])
     ph_number = forms.CharField(max_length=255, label="Phone Number",
                                 error_messages={"required": "Phone Number is required"},
                                 validators=[validate_nepali_mobile])
     profile_picture = forms.ImageField(required=False)
 
-    f_name = forms.CharField(max_length=255, label="First Name", required=False)
-    l_name = forms.CharField(max_length=255, label="Last Name", required=False)
+    f_name = forms.CharField(max_length=255, label="First Name", required=False, validators=[validate_names, ])
+    l_name = forms.CharField(max_length=255, label="Last Name", required=False, validators=[validate_names, ])
     street = forms.CharField(max_length=255, label="Street", required=False)
     city = forms.ChoiceField(choices=[("", "Select a city")] + BagmatiCities.choices, required=False)
     state = forms.ChoiceField(choices=[("", "Select a Province")] + NepalProvinceEnum.choices, required=False)
     country = forms.ChoiceField(choices=[("", "Select a Country")] + CountryEnum.choices, required=False)
     zip_code = forms.CharField(max_length=255, label="Zip Code", required=False)
     shipping_email = forms.EmailField(required=False, label="Email Address")
-    shipping_ph_number = forms.CharField(max_length=255, label="Phone Number", required=False)
+    shipping_ph_number = forms.CharField(max_length=255, label="Phone Number", required=False, validators=[validate_nepali_mobile])
 
     user_type = forms.ChoiceField(choices=UserTypeEnum.choices)
     seller_qr_code = forms.FileField(required=False)
-    seller_bank_name = forms.CharField(max_length=255, label="Bank Name", required=False)
+    seller_bank_name = forms.CharField(max_length=255, label="Bank Name", required=False, validators=[validate_names, ])
     seller_bank_account_number = forms.CharField(max_length=255, label="Account Number", required=False)
     seller_bank_branch_name = forms.CharField(max_length=255, label="Branch Name", required=False)
-    seller_bank_account_name = forms.CharField(max_length=255, label="Account Holder Name", required=False)
+    seller_bank_account_name = forms.CharField(max_length=255, label="Account Holder Name", required=False, validators=[validate_names, ])
 
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)

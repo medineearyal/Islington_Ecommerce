@@ -1,8 +1,9 @@
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, Form, IntegerField, HiddenInput
+from django.forms import ModelForm, Form, IntegerField, HiddenInput, CharField
 from django.forms.fields import DecimalField
 from django.forms.widgets import TextInput, EmailInput, Select, CheckboxInput, RadioSelect, Textarea
 from .models import Order, OrderCancellation, SellerPayment
+from ..common.validators import validate_names
 
 
 class OrderForm(ModelForm):

@@ -3,7 +3,7 @@ from django.db import models
 import uuid
 import json
 from apps.common.models import TimeStampedModel
-from apps.common.validators import validate_nepali_mobile
+from apps.common.validators import validate_nepali_mobile, validate_names
 from apps.orders.constants import CountryEnum, NepalDeliveryProvincesEnum, BagmatiCities, PaymentOptions, \
     PaymentStatusEnum, OrderStatusEnum, OrderStatusColors
 from apps.products.models import Product
@@ -16,8 +16,8 @@ User = get_user_model()
 class Order(TimeStampedModel, models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer")
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, validators=[validate_names])
+    last_name = models.CharField(max_length=100, validators=[validate_names])
     email = models.EmailField()
     ph_number = models.CharField(max_length=14, validators=[validate_nepali_mobile])
     payment_option = models.CharField(max_length=100, choices=PaymentOptions.choices, default=PaymentOptions.COD)

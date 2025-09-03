@@ -15,7 +15,7 @@
         </div>
 
         <div class="flex justify-center mb-4">
-            <a class="btn btn-primary">SHOP NOW</a>
+            <a href="{% url 'pages:shop' %}?category={{ product.product.category.slug }}" class="btn btn-primary">SHOP NOW</a>
         </div>
     </div>
 
