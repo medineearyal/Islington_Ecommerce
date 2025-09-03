@@ -19,16 +19,16 @@ class TimeStampedModel(models.Model):
 
 class AddressModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="address")
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    street = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    street = models.CharField(max_length=100, blank=True, null=True)
     country = models.CharField(max_length=100, choices=CountryEnum.choices, default=CountryEnum.NEPAL)
     state = models.CharField(max_length=100, choices=NepalDeliveryProvincesEnum.choices,
                              default=NepalDeliveryProvincesEnum.BAGMATI)
     city = models.CharField(max_length=100, choices=BagmatiCities.choices, default=BagmatiCities.KATHMANDU)
-    zip_code = models.CharField(max_length=9)
-    email = models.EmailField()
-    ph_number = models.CharField(max_length=20, validators=[validate_nepali_mobile, ])
+    zip_code = models.CharField(max_length=9, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    ph_number = models.CharField(max_length=20, blank=True, null=True, validators=[validate_nepali_mobile, ])
 
     def __str__(self):
         return f"{self.user}_shipping_address"
