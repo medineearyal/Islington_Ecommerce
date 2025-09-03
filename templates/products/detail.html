@@ -87,7 +87,7 @@
 
                     <div class="divider bg-[var(--clr-gray-100)] my-6"></div>
 
-                    {% with attributes=product.attribute_set.all %}
+                    {% with attributes=product.productattributevalue_set.all %}
                         <div class="grid grid-rows-2 gap-4 mb-6">
                             <div class="grid grid-cols-2 gap-6">
                                 {% if product.colors.exists %}
@@ -106,18 +106,20 @@
                                     </div>
                                 {% endif %}
 
-                                {% if attributes.0.attributes.exists %}
-                                    <div>
-                                        <p class="text-[var(--clr-gray-900)] text-sm mb-2">{{ attributes.0.name }}</p>
-                                        <select
-                                                class="focus:bg-transparent focus:text-[var(--clr-gray-700)] focus:border-[var(--clr-gray-100)] select select-ghost text-[var(--clr-gray-700)] bg-[var(--clr-gary-00)] rounded-sm border border-[var(--clr-gray-100)]"
-                                                name="{{ attributes.0.name|slugify }}"
-                                        >
-                                            {% for attribute in attributes.0.attributes.all %}
-                                                <option>{{ attribute.value }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
+                                {% if attributes.exists %}
+                                    {% for attribute in attributes.all %}
+                                        <div>
+                                            <p class="text-[var(--clr-gray-900)] text-sm mb-2">{{ attribute.attribute.name }}</p>
+                                            <select
+                                                    class="focus:bg-transparent focus:text-[var(--clr-gray-700)] focus:border-[var(--clr-gray-100)] select select-ghost text-[var(--clr-gray-700)] bg-[var(--clr-gary-00)] rounded-sm border border-[var(--clr-gray-100)]"
+                                                    name="{{ attribute.attribute.name|slugify }}"
+                                            >
+                                                {% for value in attribute.value %}
+                                                    <option>{{ value }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    {% endfor %}
                                 {% endif %}
                             </div>
 

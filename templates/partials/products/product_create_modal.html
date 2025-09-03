@@ -85,6 +85,11 @@
 
                             <label class="block mt-2 mb-2">Value</label>
                             {{ f.value }}
+                            {% if f.value.help_text %}
+                                <p class="text-xs text-[var(--clr-gray-800)] mt-1">
+                                    {{ f.value.help_text }}
+                                </p>
+                            {% endif %}
                             <div class="flex items-center mt-2 text-[var(--clr-danger-500)]">
                                 <span class="w-fit">{{ f.DELETE }}</span>
                                 <label for="{{ f.DELETE.id_for_label }}" class="ml-2 text-sm">Delete</label>

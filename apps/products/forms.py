@@ -103,6 +103,7 @@ class ProductAttributeValueForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["attribute"].required = False
         self.fields["value"].required = False
+        self.fields["value"].help_text = "Please Enter the values as Comma Separated Values, for Eg: X, XL, XXL"
 
 class ProductImageForm(forms.ModelForm):
     class Meta:

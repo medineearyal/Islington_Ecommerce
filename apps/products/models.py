@@ -1,6 +1,7 @@
 from datetime import timedelta
 from decimal import Decimal
 
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 
 from apps.common.models import Tag
@@ -163,7 +164,7 @@ class Attribute(models.Model):
 class ProductAttributeValue(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE, related_name="attributes")
-    value = models.TextField()
+    value = ArrayField(models.CharField(max_length=255), blank=True, default=list)
 
     def __str__(self):
         return f"{self.attribute.name}-{self.product}-{self.pk}"

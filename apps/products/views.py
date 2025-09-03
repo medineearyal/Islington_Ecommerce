@@ -69,7 +69,7 @@ class ProductDetailView(DetailView):
             Product.objects.prefetch_related(
                 "product_image",
                 "colors",
-                "attribute_set__attributes",
+                "productattributevalue_set__attribute",
                 "descriptions"
             ), slug=self.kwargs["slug"])
 
