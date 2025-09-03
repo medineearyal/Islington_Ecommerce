@@ -540,5 +540,3 @@ REST_FRAMEWORK = {
 }
 
 ENV = config("ENV", "DEVELOPMENT")
-
-print(ALLOWED_HOSTS)

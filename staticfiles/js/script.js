@@ -145,6 +145,31 @@ window.addEventListener("DOMContentLoaded", function () {
             nextEl: '.main-category-swiper-wrapper .swiper-button-next',
             prevEl: '.main-category-swiper-wrapper .swiper-button-prev',
         },
+
+        breakpoints: {
+            320: {
+                slidesPerView: 1.3,
+                spaceBetween: 16,
+            },
+            375: {
+                slidesPerView: 1.5,
+                spaceBetween: 16,
+            },
+            425: {
+                slidesPerView: 1.75,
+            },
+            640: {
+                slidesPerView: 3.5,
+                spaceBetween: 20
+            },
+            1024: {
+                slidesPerView: 4.75,
+                spaceBetween: 40
+            },
+            1440: {
+                slidesPerView: 6,
+            }
+        }
     });
 
     const featuredSwiper = new Swiper(".featured-swiper", {

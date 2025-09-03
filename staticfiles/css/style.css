@@ -32,7 +32,7 @@
     --clr-secondary-600: #2484C2;
     --clr-secondary-650: #41448b;
     --clr-secondary-700: #1B6392;
-    --clr-secondary-750: rgba(45,47,83,.92);
+    --clr-secondary-750: rgba(45, 47, 83, .92);
     --clr-secondary-800: #124261;
     --clr-secondary-900: #092131;
 
@@ -263,13 +263,19 @@ section {
 }
 
 .alert-secondary {
-
 }
 
 .swiper-banner .swiper-pagination {
     width: fit-content;
     left: 56px;
     bottom: 56px;
+}
+
+@media screen and (max-width: 40rem) {
+    .swiper-banner .swiper-pagination {
+        width: 100%;
+        left: 0;
+    }
 }
 
 .swiper-banner .swiper-pagination-bullet.swiper-pagination-bullet-active {
@@ -344,6 +350,7 @@ section {
     from {
         width: 100%;
     }
+
     to {
         width: 0%;
     }
@@ -386,6 +393,17 @@ section {
 .main-category-swiper-wrapper .swiper-button-next {
     right: 0;
     transform: translateX(20%);
+}
+
+@media screen and (max-width: 1024px) {
+    .main-category-swiper-wrapper .swiper-button-prev,
+    .thumb-container .swiper-button-prev {
+        transform: none;
+    }
+
+    .main-category-swiper-wrapper .swiper-button-next {
+        transform: none;
+    }
 }
 
 .cart-icon::after {
