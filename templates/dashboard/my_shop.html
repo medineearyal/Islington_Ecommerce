@@ -187,5 +187,28 @@
                 }
             });
         });
+
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function showStep(step) {
+            document.querySelectorAll(".step-content").forEach((el, i) => {
+                el.classList.toggle("hidden", i + 1 !== step);
+            });
+            document.querySelectorAll(".steps .step").forEach((el, i) => {
+                el.classList.toggle("step-primary", i + 1 <= step);
+            });
+
+            document.getElementById("prevBtn").style.display = step === 1 ? "none" : "inline-flex";
+            document.getElementById("nextBtn").style.display = step === totalSteps ? "none" : "inline-flex";
+            document.getElementById("submitBtn").classList.toggle("hidden", step !== totalSteps);
+        }
+
+        function closeModal(el) {
+            el.closest(".modal").classList.remove("modal-open");
+            if (currentStep) {
+                currentStep = 1;
+            }
+        }
     </script>
 {% endblock %}

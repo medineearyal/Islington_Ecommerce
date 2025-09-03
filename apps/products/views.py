@@ -1,17 +1,21 @@
+from allauth.headless.base.response import ForbiddenResponse
 from babel.numbers import format_decimal
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, DetailView, CreateView
 from django.contrib import messages
 import json
-from .forms import ProductForm, ImageFormSet, DescriptionFormSet, CategoryForm, ProductColorsForm
+from .forms import ProductForm, ImageFormSet, DescriptionFormSet, CategoryForm, ProductColorsForm, AttributeFormset, \
+    ProductAttributeForm
 from .models import Product, Category, ProductColors
 from django.urls import reverse
+from apps.products.models import Attribute
 
 
 # Create your views here.
@@ -72,7 +76,7 @@ class ProductDetailView(DetailView):
 
 def product_detail_modal(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    return TemplateResponse(request, "partials/products/product_detail_modal.html",{"product": product,})
+    return TemplateResponse(request, "partials/products/product_detail_modal.html", {"product": product, })
 
 
 class CartView(TemplateView):
@@ -234,58 +238,100 @@ def compare_products(request):
 
 @login_required
 def product_create(request):
-    product = Product(seller=request.user)
-    form = ProductForm(request.POST or None, request.FILES or None, instance=product)
-    image_fs = ImageFormSet(request.POST or None, request.FILES or None, instance=product, prefix="images")
-    description_fs = DescriptionFormSet(request.POST or None, instance=product, prefix="descriptions")
-
     data = request.GET.copy()
     action = data.get("action")
+    product_id = data.get("pk")
 
-    if request.method == "POST" and not action:
-        if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
+    # --- Fetch existing product for edit or create new ---
+    if action == "edit" and product_id:
+        product = get_object_or_404(Product, pk=product_id)
+        is_edit = True
+    else:
+        product = Product(seller=request.user)
+        is_edit = False
+
+    # --- Main product form ---
+    form = ProductForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=product
+    )
+
+    # --- Formsets ---
+    image_fs = ImageFormSet(
+        request.POST or None,
+        request.FILES or None,
+        instance=product,
+        prefix="images"
+    )
+    description_fs = DescriptionFormSet(
+        request.POST or None,
+        instance=product,
+        prefix="descriptions"
+    )
+    attribute_fs = AttributeFormset(
+        request.POST or None,
+        instance=product,
+        prefix="attributes"
+    )
+
+    # Separate form for creating new Attributes
+    attribute_create_form = ProductAttributeForm()
+
+    # --- Handle POST submission ---
+    if request.method == "POST":
+        # Validate all forms and formsets
+        if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid(), attribute_fs.is_valid()]):
             product = form.save(commit=False)
             product.seller = request.user
+            if is_edit:
+                product.is_verified = False
             product.save()
             form.save_m2m()
+
+            # Save formsets
             image_fs.instance = product
             description_fs.instance = product
+            attribute_fs.instance = product
+
             image_fs.save()
             description_fs.save()
-            messages.success(request, f"Product {product.name} has been successfully created.")
+            attribute_fs.save()
+
+            msg = f"Product {product.name} Successfully {'Edited' if is_edit else 'Created'}"
+            messages.success(request, msg)
             return redirect("users:seller_shop")
-    elif request.method == "POST" and action == "edit":
-        product_id = data.get("pk")
-        product = get_object_or_404(Product, pk=product_id)
-        form = ProductForm(request.POST or None, request.FILES or None, instance=product)
-        if all([form.is_valid(), image_fs.is_valid(), description_fs.is_valid()]):
-            product = form.save(commit=False)
-            product.is_verified = False
-            product.save()
-            form.save_m2m()
-            image_fs.save()
-            description_fs.save()
-            messages.success(request, f"Product {product.name} Successfully Edited")
-            return redirect("users:seller_shop")
-        
-    if action == "edit" and data.get("pk"):
-        product_id = data.get("pk")
-        product = get_object_or_404(Product, pk=product_id)
-        form = ProductForm(instance=product)
-        
-        return render (request, "partials/products/product_create_modal.html", {
-            "isEdit": True,
+        else:
+            # Debug errors
+            print("Form errors:", form.errors)
+            print("Image FS errors:", image_fs.errors)
+            print("Description FS errors:", description_fs.errors)
+            print("Attribute FS errors:", attribute_fs.errors)
+
+    return render(
+        request,
+        "partials/products/product_create_modal.html",
+        {
+            "isEdit": is_edit,
             "product": product,
             "form": form,
             "image_fs": image_fs,
-            "description_fs": description_fs
-        })
+            "description_fs": description_fs,
+            "attribute_fs": attribute_fs,
+            "attribute_create_form": attribute_create_form
+        }
+    )
 
-    return render(request, "partials/products/product_create_modal.html", {
-        "form": form,
-        "image_fs": image_fs,
-        "description_fs": description_fs,
-    })
+def create_attribute(request):
+    if request.method == "POST":
+        form = ProductAttributeForm(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            return JsonResponse({"id": instance.id, "name": instance.name})
+        else:
+            return JsonResponse({"errors": form.errors}, status=400)
+
+    return HttpResponseForbidden("Method not allowed")
 
 
 class CategoryView(CreateView):

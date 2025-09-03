@@ -391,18 +391,6 @@
         const progressBar = document.getElementById("progressBar");
         const stepName = document.getElementById("stepName");
 
-        function showStep(index) {
-            steps.forEach((step, i) => {
-                const el = document.getElementById(step.id);
-                if (i === index) el.classList.remove("hidden");
-                else el.classList.add("hidden");
-            });
-
-            stepName.textContent = steps[index].name;
-
-            progressBar.style.width = steps[index].percent + "%";
-        }
-
         showStep(currentStep);
 
         document.getElementById("nextBtn-1").addEventListener("click", () => {

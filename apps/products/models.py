@@ -155,7 +155,6 @@ class ProductDescription(models.Model):
 
 class Attribute(models.Model):
     name = models.CharField(max_length=50)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     datatype = models.CharField(max_length=20, choices=ProductAttributesEnum.choices)
 
     def __str__(self):

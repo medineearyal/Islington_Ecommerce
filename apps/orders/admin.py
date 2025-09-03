@@ -3,7 +3,7 @@ from apps.orders.models import Order, Transaction, KhaltiTransaction, OrderStatu
 from django.contrib import admin
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ["uuid", "status"]
+    list_display = ["uuid", "customer", "status"]
 
 
 class TransactionAdmin(admin.ModelAdmin):

@@ -189,6 +189,9 @@ class UserOrderTrackDetail(LoginRequiredMixin, DetailView):
     slug_url_kwarg = "uuid"
     slug_field = "uuid"
 
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = self.object.products

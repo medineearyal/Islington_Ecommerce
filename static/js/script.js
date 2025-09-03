@@ -225,6 +225,44 @@ window.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
     });
+
+    document.body.addEventListener("htmx:afterSwap", (e) => {
+        const form = e.target.querySelector("#product-attribute-form");
+        if (!form) return;
+
+        form.removeEventListener("submit", handleAttributeFormSubmit);
+        form.addEventListener("submit", handleAttributeFormSubmit);
+    });
+
+    async function handleAttributeFormSubmit(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData
+            });
+            const data = await response.json();
+
+            if (data.id) {
+                const select = document.querySelector("#attributes-formset select:last-of-type");
+                const option = new Option(data.name, data.id, true, true);
+                select.add(option);
+
+                const input = document.getElementById("new-attr-name");
+                if (input) input.value = "";
+                const toggle = document.getElementById("attr-modal-toggle");
+                if (toggle) toggle.checked = false;
+            } else if (data.errors) {
+                console.log("Validation errors:", data.errors);
+            }
+        } catch (err) {
+            console.error("AJAX error:", err);
+        }
+    }
 });
 
 document.body.addEventListener("showMessage", function (event) {
@@ -301,8 +339,16 @@ function checkForStockOverflow(elem) {
     }
 }
 
-function closeModal(el) {
-    el.closest(".modal").classList.remove("modal-open");
+function showStep(index) {
+    steps.forEach((step, i) => {
+        const el = document.getElementById(step.id);
+        if (i === index) el.classList.remove("hidden");
+        else el.classList.add("hidden");
+    });
+
+    stepName.textContent = steps[index].name;
+
+    progressBar.style.width = steps[index].percent + "%";
 }
 
 function setupDynamicFormset(opts) {

@@ -6,14 +6,17 @@
             {{ form.instance.pk|yesno:"Edit Product,Add Product" }}
         </h3>
 
-        <form method="post" {% if not isEdit %}action="{% url 'products:create' %}"{% else %} action = "{% url 'products:create' %}?action=edit&pk={{product.pk}}" {% endif %} enctype="multipart/form-data">
+        <form method="post" {% if not isEdit %}action="{% url 'products:create' %}"{% else %}
+              action="{% url 'products:create' %}?action=edit&pk={{ product.pk }}" {% endif %}
+              enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="flex justify-between items-center mb-6">
                 <ul class="steps w-full">
                     <li class="step step-primary" data-step="1">Product</li>
-                    <li class="step" data-step="2">Images</li>
-                    <li class="step" data-step="3">Descriptions</li>
+                    <li class="step step-primary" data-step="2">Attributes</li>
+                    <li class="step" data-step="3">Images</li>
+                    <li class="step" data-step="4">Descriptions</li>
                 </ul>
             </div>
 
@@ -22,18 +25,22 @@
                     {% for field in form %}
                         <div class="mb-4">
                             {% if field.name == "category" %}
-                                <label for="{{ field.id_for_label }}" class="mb-2 font-medium flex justify-between items-center">
+                                <label for="{{ field.id_for_label }}"
+                                       class="mb-2 font-medium flex justify-between items-center">
                                     {{ field.label }}
 
-                                    <a href="{% url 'products:create_category' %}" target="_blank" class="btn btn-primary no-icon">
+                                    <a href="{% url 'products:create_category' %}" target="_blank"
+                                       class="btn btn-primary no-icon">
                                         Create
                                     </a>
                                 </label>
                             {% elif field.name == "colors" %}
-                                <label for="{{ field.id_for_label }}" class="mb-2 font-medium flex justify-between items-center">
+                                <label for="{{ field.id_for_label }}"
+                                       class="mb-2 font-medium flex justify-between items-center">
                                     {{ field.label }}
 
-                                    <a href="{% url 'products:create_color' %}" target="_blank" class="btn btn-primary no-icon">
+                                    <a href="{% url 'products:create_color' %}" target="_blank"
+                                       class="btn btn-primary no-icon">
                                         Create
                                     </a>
                                 </label>
@@ -57,6 +64,59 @@
 
             <div class="hidden step-content" id="step-2">
                 <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
+                    Attributes
+
+                    <div class="flex gap-2">
+                        <button type="button" class="btn btn-sm btn-outline" id="add-attributes-btn">+ Add Attribute
+                        </button>
+                        <label for="attr-modal-toggle" class="btn btn-sm btn-primary no-icon">+ Create</label>
+                    </div>
+                </h4>
+
+                {{ attribute_fs.management_form }}
+                <div id="attributes-formset" class="space-y-4">
+                    {% for f in attribute_fs %}
+                        <div class="p-3 border rounded-lg bg-gray-50">
+                            <div class="">
+                                <label class="mb-2 w-full">Attribute</label>
+                            </div>
+                            {{ f.id }}
+                            {{ f.attribute }}
+
+                            <label class="block mt-2 mb-2">Value</label>
+                            {{ f.value }}
+                            <div class="flex items-center mt-2 text-[var(--clr-danger-500)]">
+                                <span class="w-fit">{{ f.DELETE }}</span>
+                                <label for="{{ f.DELETE.id_for_label }}" class="ml-2 text-sm">Delete</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <template id="attributes-empty-form">
+                    {% with form=attribute_fs.empty_form %}
+                        <div class="p-3 border rounded-lg bg-gray-50" data-formset-item>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">Attribute</span>
+                                <button type="button" class="btn btn-xs" data-action="remove-form">Remove</button>
+                            </div>
+
+                            <label class="block mb-2" for="{{ form.attribute.id_for_label }}">Attribute</label>
+                            {{ form.attribute }}
+
+                            <label class="block mt-2 mb-2" for="{{ form.value.id_for_label }}">Value</label>
+                            {{ form.value }}
+
+                            <label class="mt-2 inline-flex items-center gap-2 text-[var(--clr-danger-500)]">
+                                <span class="w-fit">{{ form.DELETE }}</span><span>Delete</span>
+                            </label>
+                        </div>
+                    {% endwith %}
+                </template>
+            </div>
+
+            <div class="hidden step-content" id="step-3">
+                <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
                     Images
                     <button type="button" class="btn btn-sm btn-outline" id="add-images-btn">+ Add Image</button>
                 </h4>
@@ -66,6 +126,7 @@
                     {% for f in image_fs %}
                         <div class="p-3 border rounded-lg bg-gray-50">
                             <label class="block mb-2">Image</label>
+                            {{ f.id }}
                             {{ f.image }}
                             <div class="flex items-center mt-2 text-[var(--clr-danger-500)]">
                                 <span class="w-fit">{{ f.DELETE }}</span>
@@ -92,7 +153,7 @@
                 </template>
             </div>
 
-            <div class="hidden step-content" id="step-3">
+            <div class="hidden step-content" id="step-4">
                 <h4 class="font-semibold mt-4 text-xl mb-4 flex justify-between items-center">
                     Descriptions
                     <button type="button" class="btn btn-sm btn-outline" id="add-descriptions-btn">+ Add Description
@@ -104,6 +165,7 @@
                     {% for f in description_fs %}
                         <div class="p-3 border rounded-lg bg-gray-50">
                             <label class="block mb-2">Title</label>
+                            {{ f.id }}
                             {{ f.title }}
                             <label class="block mt-2 mb-2">Description</label>
                             {{ f.description }}
@@ -147,26 +209,31 @@
                 <button type="button" class="btn no-icon" onclick="closeModal(this);">Cancel</button>
             </div>
         </form>
+
+        <!-- Attribute Creation Form -->
+        <input type="checkbox" id="attr-modal-toggle" class="modal-toggle"/>
+        <div class="modal">
+            <div class="modal-box bg-[var(--clr-gray-00)] text-[var(--clr-gray-900)]">
+                <h3 class="font-bold text-lg mb-4">Create Attribute</h3>
+
+                <form method="POST" action="{% url 'products:create_attribute' %}"
+                      id="product-attribute-form">
+
+                    {% csrf_token %}
+
+                    {{ attribute_create_form.as_div }}
+
+                    <div class="modal-action">
+                        <label for="attr-modal-toggle" class="btn">Cancel</label>
+                        <button type="submit" class="btn btn-primary" id="save-attr">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    let currentStep = 1;
-    const totalSteps = 3;
-
-    function showStep(step) {
-        document.querySelectorAll(".step-content").forEach((el, i) => {
-            el.classList.toggle("hidden", i + 1 !== step);
-        });
-        document.querySelectorAll(".steps .step").forEach((el, i) => {
-            el.classList.toggle("step-primary", i + 1 <= step);
-        });
-
-        document.getElementById("prevBtn").style.display = step === 1 ? "none" : "inline-flex";
-        document.getElementById("nextBtn").style.display = step === totalSteps ? "none" : "inline-flex";
-        document.getElementById("submitBtn").classList.toggle("hidden", step !== totalSteps);
-    }
-
     document.getElementById("prevBtn").addEventListener("click", () => {
         if (currentStep > 1) showStep(--currentStep);
     });
@@ -188,5 +255,12 @@
         addBtnId: "add-descriptions-btn",
         containerId: "descriptions-formset",
         templateId: "descriptions-empty-form",
+    });
+
+    setupDynamicFormset({
+        prefix: "attributes",
+        addBtnId: "add-attributes-btn",
+        containerId: "attributes-formset",
+        templateId: "attributes-empty-form",
     });
 </script>

@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import inlineformset_factory
 
-from apps.products.models import ProductReview, Product, ProductImage, ProductDescription, Category, ProductColors
+from apps.products.models import ProductReview, Product, ProductImage, ProductDescription, Category, ProductColors, \
+    ProductAttributeValue, Attribute
 
 
 class ProductReviewForm(forms.ModelForm):
@@ -72,5 +73,57 @@ class ProductColorsForm(forms.ModelForm):
                 "class": "border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
             })
 
-ImageFormSet = inlineformset_factory(Product, ProductImage, fields=["image"], extra=3, can_delete=True)
-DescriptionFormSet = inlineformset_factory(Product, ProductDescription, fields=["title", "description"], extra=2, can_delete=True)
+class ProductAttributeForm(forms.ModelForm):
+    class Meta:
+        model = Attribute
+        fields = ["name", "datatype"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs.update({
+                "class": "border rounded-xs border-[var(--clr-gray-100)] w-full text-base p-2 text-[var(--clr-gray-900)]"
+            })
+
+class ProductAttributeValueForm(forms.ModelForm):
+    class Meta:
+        model = ProductAttributeValue
+        fields = ["attribute", "value"]
+        widgets = {
+            "attribute": forms.Select(attrs={
+                "class": "ring ring-[var(--clr-gray-100)] rounded-xs px-4 py-3 w-full"
+            }),
+            "value": forms.TextInput(attrs={
+                "class": "ring ring-[var(--clr-gray-100)] rounded-xs px-4 py-3 w-full",
+                "placeholder": "Enter value"
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["attribute"].required = False
+        self.fields["value"].required = False
+
+class ProductImageForm(forms.ModelForm):
+    class Meta:
+        model = ProductImage
+        fields = ["image"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["image"].required = False
+
+class ProductDescriptionForm(forms.ModelForm):
+    class Meta:
+        model = ProductDescription
+        fields = ["title", "description"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["title"].required = False
+        self.fields["description"].required = False
+
+
+ImageFormSet = inlineformset_factory(Product, ProductImage, form=ProductImageForm, extra=0, can_delete=True)
+DescriptionFormSet = inlineformset_factory(Product, ProductDescription, form=ProductDescriptionForm, extra=0, can_delete=True)
+AttributeFormset = inlineformset_factory(Product, ProductAttributeValue, form=ProductAttributeValueForm, extra=0, can_delete=True, fk_name="product")

@@ -22,7 +22,7 @@ class ProductImageInline(admin.StackedInline):
 
 
 class ProductAttributeInline(admin.StackedInline):
-    model = Attribute
+    model = ProductAttributeValue
     extra = 0
 
 class ProductDescriptionInline(admin.StackedInline):
