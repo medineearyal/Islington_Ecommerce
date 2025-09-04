@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Product Status Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+        }
+
+        .header {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: #666;
+            margin: 2px 0;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .customer-info p {
+            margin: 2px 0;
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            font-weight: bold;
+            background: #f9fafb;
+        }
+
+        .status-box {
+            margin: 20px 0;
+            padding: 12px;
+            background-color: #f1f5f9;
+            border-left: 4px solid #2563eb;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <img src="cid:logo_image" alt="Company Logo" class="logo"/>
+        <div>
+            <h1>New Seller Has Joined The Platform</h1>
+            <p>Date: {{ date }}</p>
+        </div>
+    </div>
+
+    <div class="customer-info">
+        <p class="section-title">Hello Staff,</p>
+        <p>We wanted to let you know that a new user, {{ user.email }} has joined the platform as a seller, please check into the user for verification.</p>
+    </div>
+
+    <div class="footer">
+        Thank you for using Islington Ecommerce! <br>
+        Need help? Contact us at
+        <a href="mailto:medineearyal@gmail.com">medineearyal@gmail.com</a>
+    </div>
+</div>
+</body>
+</html>

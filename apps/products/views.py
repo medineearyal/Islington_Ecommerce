@@ -91,6 +91,7 @@ class CartView(TemplateView):
         quantity = request.GET.get("quantity")
 
         toast_message = {}
+        is_error = False
 
         if action == "add":
             product = get_object_or_404(Product, id=product_id)
@@ -98,59 +99,54 @@ class CartView(TemplateView):
             if product.stock <= 0:
                 toast_message["text"] = "Sorry, the item has been sold out."
                 toast_message["tag"] = "alert-info"
-                response = HttpResponse()
-                response["HX-Trigger"] = json.dumps({
-                    "showMessage": {
-                        "text": toast_message["text"],
-                        "tag": toast_message["tag"],
-                    }
-                })
-                return response
+                is_error = True
 
             if product.seller == request.user:
                 toast_message["text"] = "Sorry, you can't buy your own product"
                 toast_message["tag"] = "alert-info"
-                response = HttpResponse()
-                response["HX-Trigger"] = json.dumps({
-                    "showMessage": {
-                        "text": toast_message["text"],
-                        "tag": toast_message["tag"],
-                    }
-                })
-                return response
+                is_error = True
 
-            if str(product_id) in cart:
-                current_cart_qty = cart[str(product_id)]["quantity"]
-                if quantity:
-                    if current_cart_qty + int(quantity) > product.stock:
-                        toast_message["text"] = "Quantity Exceeds the stock amount."
-                        toast_message["tag"] = "alert-error"
+            try:
+                if int(quantity) <= 0:
+                    toast_message["text"] = "Quantity cannot be negative"
+                    toast_message["tag"] = "alert-error"
+                    is_error = True
+            except TypeError:
+                pass
+
+            if not is_error:
+                if str(product_id) in cart:
+                    current_cart_qty = cart[str(product_id)]["quantity"]
+                    if quantity:
+                        if current_cart_qty + int(quantity) > product.stock:
+                            toast_message["text"] = "Quantity Exceeds the stock amount."
+                            toast_message["tag"] = "alert-error"
+                        else:
+                            cart[str(product_id)]["quantity"] += int(quantity)
+                            toast_message["text"] = "Product Successfully Added To The Cart."
+                            toast_message["tag"] = "alert-success"
                     else:
-                        cart[str(product_id)]["quantity"] += int(quantity)
-                        toast_message["text"] = "Product Successfully Added To The Cart."
-                        toast_message["tag"] = "alert-success"
+                        if current_cart_qty + 1 > product.stock:
+                            toast_message["text"] = "Quantity Exceeds the stock amount."
+                            toast_message["tag"] = "alert-error"
+                        else:
+                            cart[str(product_id)]["quantity"] += 1
+                            toast_message["text"] = "Product Successfully Added To The Cart."
+                            toast_message["tag"] = "alert-success"
                 else:
-                    if current_cart_qty + 1 > product.stock:
-                        toast_message["text"] = "Quantity Exceeds the stock amount."
-                        toast_message["tag"] = "alert-error"
-                    else:
-                        cart[str(product_id)]["quantity"] += 1
-                        toast_message["text"] = "Product Successfully Added To The Cart."
-                        toast_message["tag"] = "alert-success"
-            else:
-                cart[str(product_id)] = {
-                    "name": product.name,
-                    "quantity": int(quantity) if quantity else 1,
-                    "price": float(product.price),
-                    "discounted_price": float(product.discounted_price),
-                    "discount": product.discount,
-                    "thumbnail": product.thumbnail.url,
-                    "stock": product.stock,
-                    "category": product.category.name,
-                    "seller": product.seller.pk
-                }
-                toast_message["text"] = "Product Successfully Added To The Cart."
-                toast_message["tag"] = "alert-success"
+                    cart[str(product_id)] = {
+                        "name": product.name,
+                        "quantity": int(quantity) if quantity else 1,
+                        "price": float(product.price),
+                        "discounted_price": float(product.discounted_price),
+                        "discount": product.discount,
+                        "thumbnail": product.thumbnail.url,
+                        "stock": product.stock,
+                        "category": product.category.name,
+                        "seller": product.seller.pk
+                    }
+                    toast_message["text"] = "Product Successfully Added To The Cart."
+                    toast_message["tag"] = "alert-success"
             request.session["cart"] = cart
         elif action == "remove":
             cart = request.session.get("cart")
@@ -161,10 +157,12 @@ class CartView(TemplateView):
         elif action == "update":
             if str(product_id) in cart:
                 if cart[str(product_id)]["quantity"] != quantity:
-                    cart[str(product_id)]["quantity"] = int(quantity)
-                    request.session["cart"] = cart
-                    toast_message["text"] = "Product Successfully Updated In The Cart."
-                    toast_message["tag"] = "alert-success"
+                    if not int(quantity) <= 0:
+                        cart[str(product_id)]["quantity"] = int(quantity)
+                        request.session["cart"] = cart
+                        messages.success(request, "Cart Updated Successfully.")
+                    else:
+                        messages.error(request, "Quantity Cannot be in Negative.")
                     return redirect(reverse("pages:cart"))
 
         total_price = sum(
@@ -302,11 +300,7 @@ def product_create(request):
             messages.success(request, msg)
             return redirect("users:seller_shop")
         else:
-            # Debug errors
-            print("Form errors:", form.errors)
-            print("Image FS errors:", image_fs.errors)
-            print("Description FS errors:", description_fs.errors)
-            print("Attribute FS errors:", attribute_fs.errors)
+            messages.error(request, "Something Went Wrong")
 
     return render(
         request,

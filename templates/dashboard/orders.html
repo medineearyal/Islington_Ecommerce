@@ -54,7 +54,7 @@
                                                 View Detail
                                             </a>
                                         </li>
-                                        {% if order.status != "canceled" and order.status != "delivered" %}
+                                        {% if order.status == "placed" %}
                                             <li>
                                                 <label for="cancel-order-modal" class="btn btn-error no-icon text-white cancel-btn" data-order="{{ order.pk }}">
                                                     Cancel Order

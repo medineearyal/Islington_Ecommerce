@@ -55,8 +55,6 @@ class HomePageView(TemplateView):
         best_deal_qs = best_deal_qs.prefetch_related(product_prefetch)
         new_arrivals = products.order_by("-created")[:6]
 
-        print(products, new_arrivals)
-
         blogs = Blog.objects.all()[:3]
         pages = Page.objects.all()[:3]
 
@@ -207,8 +205,6 @@ class CartPageView(TemplateView):
 
         final_sum = total_sum + vat_amount + dst_amount
 
-        print(no_of_sellers)
-
         redeem_points = 0
         if self.request.user.is_authenticated:
             redeem_points = self.request.user.redeem_points.redeem_points
@@ -337,7 +333,6 @@ class CheckoutPageView(LoginRequiredMixin, TemplateView):
                         "phone": "9800000001"
                     }
                 })
-                print(payload)
                 response = requests.post(
                     url=url,
                     headers=headers,

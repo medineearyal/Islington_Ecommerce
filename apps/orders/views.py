@@ -171,12 +171,10 @@ class ManualPayQrView(LoginRequiredMixin, TemplateView):
 def distribute_seller_payments(request):
     if request.method == "POST":
         form = SellerPaymentForm(request.POST)
-        print(request.POST)
         if form.is_valid():
             instance = form.save()
             messages.success(request,f"Paid {instance.total_amount} to {instance.seller}.")
         else:
-            print(form.errors)
             messages.error(request,"Failed To Pay to The Seller")
 
         return redirect(reverse("orders:distribute-seller-amount"))

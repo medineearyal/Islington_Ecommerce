@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 from django.utils.html import format_html
 
 from apps.common.admin import admin_site
+from apps.users.constants import UserTypeEnum
 from apps.users.models import AuthUser, UserRedeemProfile
 from django.urls import reverse, path
 from django.shortcuts import redirect
@@ -96,7 +97,7 @@ class AuthUserAdmin(UserAdmin):
             form.instance.groups.add(staff_group)
 
     def verify_seller_btn(self, obj):
-        if not obj.is_staff and not obj.is_superuser and not obj.is_verified_seller:
+        if not obj.is_staff and not obj.is_superuser and not obj.is_verified_seller and obj.user_type == UserTypeEnum.SELLER:
             return format_html(
                 '<a class="btn btn-success btn-sm" href="{}">Verify</a>',
                 reverse("admin:verify-seller", args=[obj.pk])

@@ -79,7 +79,6 @@ class UserOrdersView(LoginRequiredMixin, TemplateView):
             instance.save()
             messages.success(request, f"Order {instance.order} successfully cancelled.")
         else:
-            print(form.errors)
             messages.error(request, f"Order failed to cancel.")
 
         return self.render_to_response(context)
@@ -276,8 +275,6 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
         context = self.get_context_data()
         address_formset = context["address_formset"]
 
-        print("Form errors:", form.errors)
-        print("Formset errors:", address_formset.errors)
         return super().form_invalid(form)
 
 
@@ -295,8 +292,6 @@ class UserShopView( LoginRequiredMixin, GroupRequiredMixin, SellerIsVerifiedMixi
         q = Q()
         for pid in product_ids:
             q |= Q(**{"products__has_key": str(pid)})
-            print(Order.objects.filter(products__has_key=str(pid)))
-
 
         seller_products_order_qs = Order.objects.filter(q)
         for order in seller_products_order_qs:
