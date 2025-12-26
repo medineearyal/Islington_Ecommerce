@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Error - {{ status_code }}{% endblock %}
+
+{% block content %}
+    <section class="section-with-breadcrumb">
+        {% include 'partials/breadcrumb.html' %}
+
+        <div class="container mx-auto mb-38 text-center">
+            <figure>
+                <img src="{% static 'images/Error.png' %}" alt="Error" class="justify-self-center" />
+            </figure>
+
+            <h2 class="text-2xl text-[var(--clr-gray-900)] mb-6">{{ status_code }}</h2>
+            <p class="text-[var(--clr-gray-700)] mb-6">{{ message }}</p>
+
+            <div>
+                <a onclick="window.history.back();" class="btn btn-primary no-icon uppercase">Go Back</a>
+                <a href="{% url 'pages:home' %}" class="btn btn-outline btn-primary uppercase">Go to Home</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

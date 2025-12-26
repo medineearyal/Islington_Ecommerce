@@ -1,0 +1,245 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% load currency %}
+
+{% block title %}Islington Marketplace - User Profile{% endblock %}
+
+{% block dashboard_content %}
+    <div class="bg-[var(--clr-gray-00)]py-4">
+        <h2 class="flex justify-between items-center uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+            Account Settings
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data"
+              class="shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-b-sm">
+            {% csrf_token %}
+
+            <div class="grid grid-cols-5 p-6 gap-6">
+                <div class="col-span-2">
+                    {% if form.instance.profile_picture %}
+                        <div class="avatar">
+                            <div class="w-[176px] rounded-full">
+                                <img src="{{ form.instance.profile_picture.url }}" alt="Profile Picture"
+                                     class="w-[176px] aspect-square"/>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="avatar">
+                            <div class="w-[176px] rounded-full">
+                                <img src="{% static 'images/icons/User.svg' %}"
+                                     class="bg-[var(--clr-gray-600)] aspect-square" alt="Profile Picture"/>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-4 mt-4">
+                        <label for="{{ form.profile_picture.id_for_label }}"
+                               class="block validator text-[var(--clr-gray-700)]">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.profile_picture.label }}</span>
+
+                            {{ form.profile_picture }}
+                        </label>
+
+                        <p class="{% if not form.profile_picture.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.profile_picture.errors.0 }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-span-3">
+                    {% if form.non_field_errors %}
+                        <div class="error">
+                            {% for error in form.non_field_errors %}
+                                <p style="color:red;">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="flex gap-4 mb-4 ">
+                        <div class="flex-1">
+                            <label for="{{ form.first_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.first_name.label }}</span>
+
+                                {{ form.first_name }}
+                            </label>
+
+                            <p class="validator-hint {% if not form.first_name.errors %}hidden{% endif %} ">
+                                {{ form.first_name.errors.0 }}
+                            </p>
+                        </div>
+                        <div class="flex-1">
+                            <label for="{{ form.last_name.id_for_label }}"
+                                   class="block validator">
+                                <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.last_name.label }}</span>
+
+                                {{ form.last_name }}
+                            </label>
+
+                            <p class="validator-hint hidden">
+                                Cannot be Empty
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.ph_number.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.ph_number.label }}</span>
+
+                            {{ form.ph_number }}
+                        </label>
+
+                        <p class="{% if not form.ph_number.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                            {{ form.ph_number.errors.0 }}
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.email.id_for_label }}"
+                               class="block validator">
+                            <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ form.email.label }}</span>
+
+                            {{ form.email }}
+                        </label>
+
+                        <p class="validator-hint hidden">
+                            Enter valid email address
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 class="flex justify-between items-center uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+                    Shipping Address</h2>
+
+                <div class="p-6">
+                    <div class="">
+                        {{ address_formset.management_form }}
+
+                        {% for addr_form in address_formset %}
+                            <div class="flex gap-4 mb-4 ">
+                                <div class="flex-1">
+                                    <label for="{{ addr_form.first_name.id_for_label }}"
+                                           class="block validator">
+                                        <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.first_name.label }}</span>
+
+                                        {{ addr_form.first_name }}
+                                    </label>
+
+                                    <p class="validator-hint {% if not addr_form.first_name.errors %}hidden{% endif %} ">
+                                        {{ addr_form.f_name.errors.0 }}
+                                    </p>
+                                </div>
+                                <div class="flex-1">
+                                    <label for="{{ addr_form.last_name.id_for_label }}"
+                                           class="block validator">
+                                        <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.last_name.label }}</span>
+
+                                        {{ addr_form.last_name }}
+                                    </label>
+
+                                    <p class="validator-hint hidden">
+                                        Cannot be Empty
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="{{ addr_form.ph_number.id_for_label }}"
+                                       class="block validator">
+                                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.ph_number.label }}</span>
+
+                                    {{ addr_form.ph_number }}
+                                </label>
+
+                                <p class="{% if not addr_form.ph_number.errors %}validator-hint hidden{% else %}visible text-[var(--clr-danger-500)]{% endif %}">
+                                    {{ addr_form.ph_number.errors.0 }}
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="{{ addr_form.email.id_for_label }}"
+                                       class="block validator">
+                                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.email.label }}</span>
+
+                                    {{ addr_form.email }}
+                                </label>
+
+                                <p class="validator-hint hidden">
+                                    Enter valid email address
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="{{ addr_form.street.id_for_label }}"
+                                       class="block validator">
+                                    <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.street.label }}</span>
+
+                                    {{ addr_form.street }}
+                                </label>
+
+                                <p class="validator-hint hidden">
+                                    Cannot be Empty
+                                </p>
+                            </div>
+                            <div class="mb-4 flex gap-4 justify-between">
+                                <div>
+                                    <label for="{{ addr_form.country.id_for_label }}"
+                                           class="block validator">
+                                        <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.country.label }}</span>
+
+                                        {{ addr_form.country }}
+                                    </label>
+
+                                    <p class="validator-hint hidden">
+                                        Cannot be Empty
+                                    </p>
+                                </div>
+                                <div class="">
+                                    <label for="{{ addr_form.state.id_for_label }}"
+                                           class="block validator">
+                                        <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.state.label }}</span>
+
+                                        {{ addr_form.state }}
+                                    </label>
+
+                                    <p class="validator-hint hidden">
+                                        Cannot be Empty
+                                    </p>
+                                </div>
+                                <div class="">
+                                    <label for="{{ addr_form.city.id_for_label }}"
+                                           class="block validator">
+                                        <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.city.label }}</span>
+
+                                        {{ addr_form.city }}
+                                    </label>
+
+                                    <p class="validator-hint hidden">
+                                        Cannot be Empty
+                                    </p>
+                                </div>
+                                <div class="">
+                                    <label for="{{ addr_form.zip_code.id_for_label }}"
+                                           class="block validator">
+                                        <span class="block text-sm text-[var(--clr-gray-900)] mb-2 font-normal">{{ addr_form.zip_code.label }}</span>
+
+                                        {{ addr_form.zip_code }}
+                                    </label>
+
+                                    <p class="validator-hint hidden">
+                                        Cannot be Empty
+                                    </p>
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

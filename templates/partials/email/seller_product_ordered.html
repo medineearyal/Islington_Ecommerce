@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Order Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .notification-container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            padding: 24px;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: bold;
+        }
+        .header p {
+            font-size: 12px;
+            color: #666;
+            margin: 2px 0;
+        }
+        .logo {
+            height: 40px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        .product-info p {
+            margin: 2px 0;
+            font-size: 13px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            font-weight: bold;
+            background: #f9fafb;
+        }
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="notification-container">
+    <!-- Header -->
+    <div class="header">
+        <img src="cid:logo_image" alt="Store Logo" class="logo" style="width: fit-content" />
+
+        <div>
+            <h1>New Order Received</h1>
+            <p>Order: {{ order }}</p>
+            <p>Date: {{ order.created|date:"M d, Y" }}</p>
+        </div>
+    </div>
+
+    <!-- Seller Info -->
+    <div class="product-info">
+        <p class="section-title">Hello {{ seller }},</p>
+        <p>We’re excited to let you know that one of your products has been purchased!</p>
+        <p>Please visit your dashboard for full information.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        This is an automated notification. <br>
+        For any issues, please contact
+        <a href="mailto:support@medineearyal.com">support@medineearyal.com</a>
+    </div>
+</div>
+</body>
+</html>

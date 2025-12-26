@@ -22,9 +22,9 @@
             <div class="mb-5">
                 <label for="{{ form.password.id_for_label }}"
                        class="block validator mb-2">
-                    <span class="flex justify-between block text-sm text-[var(--clr-gray-900)] mb-2">
+                    <span class="flex justify-between text-sm text-[var(--clr-gray-900)] mb-2">
                         {{ header_form.password.label }}
-                        <a href="" class="text-[var(--clr-secondary-500)]">Forget Password</a>
+                        <a href="{% url 'account_reset_password' %}" class="text-[var(--clr-secondary-500)]">Forget Password</a>
                     </span>
 
                     {{ header_form.password }}

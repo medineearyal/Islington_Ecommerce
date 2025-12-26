@@ -13,3 +13,22 @@ class SlugMixin:
             )
             setattr(self, self.slug_field_name, self_slug)
         super().save(*args, **kwargs)
+        
+
+class VerifiedProductMixin:
+    product_field_name = "product"
+    
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):  
+        from apps.products.models import Product
+          
+        if db_field.name == self.product_field_name:
+            kwargs["queryset"] = Product.objects.filter(is_verified=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        from apps.products.models import Product
+        
+        if db_field.name == self.product_field_name:
+            kwargs["queryset"] = Product.objects.filter(is_verified=True)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)

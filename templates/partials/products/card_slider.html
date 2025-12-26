@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="card bg-[var(--clr-gray-00)] rounded-1 border border-[var(--clr-gray-100)] p-6 w-[205px] h-full aspect-3/4">
-    <a href="{% url 'shop' %}?category={{ category.pk }}">
+    <a href="{% url 'pages:shop' %}?category={{ category.slug }}" class="text-center">
         <img
                 {% if not category.image %}
                     src="{% static 'images/Slider/Slider_1.png' %}"
@@ -9,7 +9,7 @@
                     src="{{ category.image.url }}"
                 {% endif %}
                     alt="{{ category.name }}"
-                    class="w-[148px] aspect-square mb-4"
+                    class="w-[148px] aspect-square mb-4 object-center object-cover justify-self-center"
         />
         <div class="card-body p-0">
             <h2 class="card-title text-[var(--clr-gray-900)] font-medium text-base text-center">{{ category.name }}</h2>

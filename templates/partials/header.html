@@ -1,61 +1,52 @@
 {% load static %}
 
-<header id="header" class="main-header bg-[var(--clr-secondary-800)]">
+<header id="header" class="main-header bg-[var(--clr-secondary-650)]">
     <div class="container flex flex-row justify-between items-center mx-auto py-4">
         <span class="text-sm font-light ">Welcome to Islington Ecommerce</span>
 
         <div class="flex gap-2 items-center">
             <span class="text-sm font-light">Follow Us:</span>
             <ul role="list" class="flex flex-row justify-center gap-2 border-r-1 border-[var(--clr-gray-00)] pr-2">
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Facebook.svg' %}" alt="Facebook Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Instagram.svg' %}" alt="Instagram Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Pinterest.svg' %}" alt="Pinterest Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Reddit.svg' %}" alt="Reddit Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Twitter.svg' %}" alt="Twitter Link"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="{% static 'images/icons/Youtube.svg' %}" alt="Youtube Link"/>
-                    </a>
-                </li>
+                {% if setting.facebook %}
+                    <li>
+                        <a href="{{ setting.facebook }}">
+                            <img src="{% static 'images/icons/Facebook.svg' %}" alt="Facebook Link"/>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if setting.instagram %}
+                    <li>
+                        <a href="{{ setting.instagram }}">
+                            <img src="{% static 'images/icons/Instagram.svg' %}" alt="Facebook Link"/>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if setting.youtube %}
+                    <li>
+                        <a href="{{ setting.youtube }}">
+                            <img src="{% static 'images/icons/Youtube.svg' %}" alt="Youtube Link"/>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
 
-            <form>
-                <select class="select select-ghost pl-0" name="language-change">
-                    <option>Eng</option>
-                    <option>Nep</option>
-                </select>
-            </form>
+            {#            <form>#}
+            {#                <select class="select select-ghost pl-0" name="language-change">#}
+            {#                    <option>Eng</option>#}
+            {#                    <option>Nep</option>#}
+            {#                </select>#}
+            {#            </form>#}
         </div>
     </div>
 
     <div class="divider m-0"></div>
 
     <div class="container flex justify-between items-center py-5 m-auto">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'pages:home' %}">
             <img src="{% static 'images/logo.PNG' %}" alt="Logo" class="h-12"/>
         </a>
 
-        <form method="get" class="">
+        <form method="get" class="" action="{% url 'pages:shop' %}">
             <label class="input w-[100%] bg-[var(--clr-gray-00)]">
                 <input type="search" class="grow text-black w-100" name="query" placeholder="Search For Anything"/>
                 <img src="{% static 'images/icons/Search.svg' %}" alt="Search Icon"/>
@@ -64,23 +55,51 @@
 
         <ul role="list" class="flex gap-2 items-center">
             <li>
-                <button class="popover-cart flex-outline-none cursor-pointer" popovertarget="popover-cart">
-                    <img src="{% static 'images/icons/ShoppingCartSimple.svg' %}" alt="Cart"/>
+                <button class="relative popover-cart cursor-pointer" popovertarget="popover-cart">
+                    <svg class="stroke-[var(--clr-gray-00)]" width="32" height="32"
+                         viewBox="0 0 21 20"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75 16.375C7.02614 16.375 7.25 16.5989 7.25 16.875C7.25 17.1511 7.02614 17.375 6.75 17.375C6.47386 17.375 6.25 17.1511 6.25 16.875C6.25 16.5989 6.47386 16.375 6.75 16.375Z"
+                              fill="white" stroke="" stroke-width="1.5"/>
+                        <path d="M14.875 18.125C15.5654 18.125 16.125 17.5654 16.125 16.875C16.125 16.1846 15.5654 15.625 14.875 15.625C14.1846 15.625 13.625 16.1846 13.625 16.875C13.625 17.5654 14.1846 18.125 14.875 18.125Z"
+                              fill="white"/>
+                        <path d="M3.80469 5.625H17.8203L15.7578 12.8438C15.6842 13.1057 15.5266 13.3363 15.3093 13.5C15.0919 13.6638 14.8268 13.7516 14.5547 13.75H7.07031C6.79819 13.7516 6.53308 13.6638 6.31572 13.5C6.09836 13.3363 5.94078 13.1057 5.86719 12.8438L3.03906 2.95313C3.00169 2.82246 2.92275 2.70754 2.8142 2.62578C2.70565 2.54401 2.5734 2.49986 2.4375 2.5H1.125"
+                              stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    <span id="cart-count"
+                          class="absolute -top-1 -right-1 bg-[var(--clr-gray-00)] text-[var(--clr-secondary-700)] text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                        {{ request.session.cart|length }}
+                    </span>
                 </button>
             </li>
             <li>
-                <a>
+                <a href="{% url 'pages:wishlist' %}">
                     <img src="{% static 'images/icons/Heart.svg' %}" alt="Favorites">
                 </a>
             </li>
-            <li>
+            <li class="user-menu">
                 {% if not request.user.is_authenticated %}
                     <button class="popover-login flex outline-none cursor-pointer" popovertarget="popover-login">
                         <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
                     </button>
                 {% else %}
-                    {{ request.user }}
-                    <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                    <ul
+                            tabindex="0"
+                            class="menu menu-horizontal">
+                        <li>
+                            <details>
+                                <summary class="flex gap-2 items-center shadow-md">
+                                    <img src="{% static 'images/icons/User.svg' %}" alt="User Login"/>
+                                    {{ request.user }}
+                                </summary>
+                                <ul class="p-0 w-full bg-[var(--clr-gray-00)] text-[var(--gray-900)] rounded-none">
+                                    <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
                 {% endif %}
 
             </li>
@@ -102,7 +121,8 @@
                                 {% for category in header_categories %}
                                     {% if category.is_leaf_node %}
                                         <li>
-                                            <a href="{% url 'shop' %}?type={{ category.pk }}" class="px-4 py-2">{{ category }}</a>
+                                            <a href="{% url 'pages:shop' %}?category={{ category.slug }}"
+                                               class="px-4 py-2">{{ category }}</a>
                                         </li>
                                     {% else %}
                                         <li class="static group sub-menu">
@@ -176,36 +196,36 @@
                         </details>
                     </li>
                     <li>
-                        <a>
+                        <a href="{% url 'users:order-track' %}">
                             <img src="{% static 'images/icons/MapPinLine.svg' %}" alt=""/>
                             Track Order
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a href="{% url 'products:compare_products' %}">
                             <img src="{% static 'images/icons/ArrowsCounterClockwise.svg' %}" alt=""/>
                             Compare
                         </a>
                     </li>
-                    <li>
-                        <a>
-                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>
-                            Customer Support
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>
-                            Need Help
-                        </a>
-                    </li>
+                    {#                    <li>#}
+                    {#                        <a>#}
+                    {#                            <img src="{% static 'images/icons/Headphones.svg' %}" alt=""/>#}
+                    {#                            Customer Support#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a>#}
+                    {#                            <img src="{% static 'images/icons/Info.svg' %}" alt=""/>#}
+                    {#                            Need Help#}
+                    {#                        </a>#}
+                    {#                    </li>#}
                 </ul>
             </div>
 
             <div class="navbar-end text-[var(--clr-gray-900)]">
                 <span class="flex items-center gap-2">
                     <img src="{% static 'images/icons/Call.svg' %}" alt=""/>
-                    +1-202-555-0104
+                    {{ setting.phone }}
                 </span>
             </div>
         </div>

@@ -1,0 +1,29 @@
+<dialog id="welcomeModal" class="modal" open>
+    <div class="modal-box max-w-[60vw] p-0 overflow-hidden bg-transparent shadow-none">
+        <!-- Close button -->
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle absolute right-2 top-2 z-50 no-icon">✕</button>
+        </form>
+
+        <!-- Swiper -->
+        <div class="notice-swiper relative w-full h-[70vh]">
+            <div class="swiper-wrapper">
+                {% for notice in notices %}
+                    <div class="swiper-slide relative text-center"
+                         style="background-image: url('{{ notice.image.url }}'); background-size: cover; background-position: center;">
+                        <div class="flex items-center justify-center h-full ">
+                            <div class="relative z-10 px-6 py-6 max-w-2xl  bg-black/40 rounded-xl shadow-lg text-[var(--clr-gray-00)]">
+                                <h2 class="text-5xl font-extrabold mb-4 drop-shadow-lg">{{ notice.name }}</h2>
+                                <p class="mb-6 text-xl drop-shadow-lg">{{ notice.description }}</p>
+                                <a href="{% url 'pages:shop' %}" class="btn btn-primary btn-lg">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination (dots) -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</dialog>

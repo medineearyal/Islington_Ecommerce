@@ -16,6 +16,8 @@ django-tailwind = {extras = ["reload"], version = "*"}
 django-ckeditor-5 = "*"
 django-allauth = {extras = ["socialaccount"], version = "*"}
 django-mptt = "*"
+babel = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 pre-commit = "*"

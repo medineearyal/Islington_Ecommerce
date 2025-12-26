@@ -2,12 +2,26 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from apps.common.validators import validate_nepali_mobile
+from apps.users.constants import UserTypeEnum
 from apps.users.managers import AuthUserManager
 
 
 # Create your models here.
 class AuthUser(AbstractUser):
     email = models.EmailField(_("Email Address"), unique=True)
+    ph_number = models.CharField(max_length=20, validators=[validate_nepali_mobile])
+    profile_picture = models.ImageField(upload_to="user/profile/", null=True, blank=True)
+
+    user_type = models.CharField(choices=UserTypeEnum.choices, max_length=20, default=UserTypeEnum.USER)
+
+    seller_shop_logo = models.ImageField(upload_to="user/seller/profile/", null=True, blank=True)
+    seller_qr_code = models.ImageField(upload_to="user/profile/", null=True, blank=True)
+    seller_bank_name = models.CharField(max_length=255, null=True, blank=True)
+    seller_bank_account_number = models.CharField(max_length=255, null=True, blank=True)
+    seller_bank_branch_name = models.CharField(max_length=255, null=True, blank=True)
+    seller_bank_account_name = models.CharField(max_length=255, null=True, blank=True)
+    is_verified_seller = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -16,3 +30,35 @@ class AuthUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    @property
+    def full_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.email
+
+    @property
+    def billing_address(self):
+        from apps.common.models import AddressModel
+
+        try:
+            address = AddressModel.objects.get(user=self)
+            return address
+        except AddressModel.DoesNotExist:
+            return None
+
+
+class UserRedeemProfile(models.Model):
+    """
+    A User's Redeem Points that let them get some discount based on the amount of their purchase.
+    """
+    user = models.OneToOneField(AuthUser, on_delete=models.CASCADE, related_name="redeem_points")
+    orders_completed = models.PositiveIntegerField(default=0)
+    redeem_points = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user} redeem points"
+
+    @property
+    def get_discount(self):
+        return self.redeem_points/10

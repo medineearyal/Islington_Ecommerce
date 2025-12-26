@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Islington Ecommerce - Logout{% endblock %}
+
+{% block content %}
+    <section class="mx-auto p-12">
+        <div class="relative mx-auto w-[30%] aspect-square rounded-xl p-4 flex flex-col justify-center gap-3 bg-white/10 backdrop-blur-md">
+
+            <!-- Gradient border layer -->
+            <span class="z-[-1] absolute inset-0 rounded-xl p-[2px] bg-gradient-to-r from-[var(--clr-danger-500)] to-[var(--clr-danger-700)]"
+                  style="-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;">
+            </span>
+
+            <h2 class="text-2xl text-[var(--clr-gray-900)] font-semibold text-center pb-4">Log out</h2>
+            <p class="text-base text-center text-[var(--clr-danger-500)]">Are you sure you want to log out?</p>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-danger">Log Out</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="bg-[var(--clr-gray-50)]">
+    <div class="container mx-auto">
+        <div class="flex items-center gap-2 py-6.5 text-[var(--clr-gray-600)] text-sm">
+            {% for crumb in breadcrumbs %}
+                <span class="flex items-center gap-2 {% if forloop.last %}text-[var(--clr-secondary-500)]{% endif %}">
+                    {% if not forloop.first %}
+                        <img src="{% static 'images/icons/CaretRight.svg' %}" alt=""/>
+                    {% endif %}
+
+                    {% if forloop.first %}
+                        <img src="{% static 'images/icons/House.svg' %}" alt=""/>
+                    {% endif %}
+
+                    {% if crumb.url and not forloop.last %}
+                        <a href="{{ crumb.url }}">{{ crumb.name }}</a>
+                    {% else %}
+                        {{ crumb.name }}
+                    {% endif %}
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+</div>

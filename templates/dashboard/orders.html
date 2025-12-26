@@ -1,0 +1,118 @@
+{% extends "dashboard_base.html" %}
+{% load currency %}
+
+{% block title %}Islington Marketplace - Orders{% endblock %}
+
+{% block dashboard_content %}
+    <div class="bg-[var(--clr-gray-00)]py-4">
+        <h2 class="flex justify-between items-center uppercase text-[var(--clr-gray-900)] py-4 px-6 shadow-[0px_8px_40px_rgba(0_0_0_0.8)] border border-[var(--clr-gray-100)] rounded-t-sm backdrop-blur-md">
+            Orders History
+        </h2>
+
+        {% if orders %}
+            <div class="rounded-b-sm">
+                <table class="table border border-[var(--clr-gray-100)]">
+                    <thead class="bg-[var(--clr-gray-50)] ring-inset ring-1 ring-[var(--clr-gray-100)]">
+                    <tr class="text-[var(--clr-gray-700)] font-medium text-sm">
+                        <th class="uppercase">Order ID</th>
+                        <th class="uppercase">Status</th>
+                        <th class="uppercase">Date</th>
+                        <th class="uppercase">Sub-Total</th>
+                        <th class="uppercase">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr class="text-sm">
+                            <td class="text-[var(--clr-gray-900)] font-medium">
+                                {{ order.uuid }}
+                            </td>
+                            <td>
+                                <span class="text-[{{ order.status_with_colors.color }}] uppercase font-semibold">{{ order.status_with_colors.text }}</span>
+                            </td>
+                            <td class="text-[var(--clr-gray-600)]">
+                                {{ order.created }}
+                            </td>
+                            <td class="text-[var(--clr-gray-700)]">
+                                {{ order.total_amount|nepali_currency }}
+                            </td>
+                            <td>
+                                <div class="dropdown dropdown-end">
+                                    <label tabindex="0"
+                                           class="btn btn-ghost btn-circle no-icon text-[var(--clr-gray-900)] hover:text-[var(--clr-gray-00)]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                             viewBox="0 0 20 20">
+                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                        </svg>
+                                    </label>
+
+                                    <ul tabindex="0"
+                                        class="dropdown-content menu p-2 shadow border border-[var(--clr-gray-900)] rounded-box w-40 gap-2">
+                                        <li>
+                                            <a href="{% url 'users:order-detail' order.uuid %}"
+                                               class="btn btn-primary text-[var(--clr-gray-00)] no-icon">
+                                                View Detail
+                                            </a>
+                                        </li>
+                                        {% if order.status != "canceled" and order.status != "delivered" %}
+                                            <li>
+                                                <label for="cancel-order-modal" class="btn btn-error no-icon text-white cancel-btn" data-order="{{ order.pk }}">
+                                                    Cancel Order
+                                                </label>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            {% include 'partials/empty_item.html' with item_name="Orders" %}
+        {% endif %}
+
+        {% if orders.has_next or orders.has_previous %}
+            {% include 'partials/pagination.html' with page_obj=orders %}
+        {% endif %}
+    </div>
+
+    <input type="checkbox" id="cancel-order-modal" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box max-w-lg bg-[var(--clr-gray-00)]">
+            <h3 class="font-bold text-xl text-[var(--clr-gray-900)] mb-4">Cancel Order</h3>
+
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+
+                {{ order_cancellation_form.order }}
+
+                <div class="text-[var(--clr-gray-900)]">
+                    {{ order_cancellation_form.reason.label_tag }}
+                    {{ order_cancellation_form.reason }}
+                    {% if order_cancellation_form.reason.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ order_cancellation_form.reason.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="modal-action">
+                    <label for="cancel-order-modal" class="btn btn-ghost no-icon text-[var(--clr-gray-00)] bg-[var(--clr-gray-700)]">Close</label>
+                    <button type="submit" class="btn btn-error text-white no-icon">Confirm Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const order = document.getElementById("id_order");
+        const cancelOrderBtns = document.querySelectorAll(".cancel-btn");
+        cancelOrderBtns.forEach(btn => {
+           btn.addEventListener("click", function() {
+               order.value = this.dataset.order
+           });
+        });
+    </script>
+{% endblock %}

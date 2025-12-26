@@ -1,0 +1,20 @@
+#jazzy-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#jazzy-logo .img-circle {
+    border-radius: 0;
+    object-position: center;
+    object-fit: cover;
+    max-height: 50px;
+}
+
+.jazzmin-login-page .login-logo img {
+    width: 100%;
+}
+
+section#content > .row:first-child {
+    display: block;
+}
